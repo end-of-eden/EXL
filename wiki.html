@@ -42,6 +42,7 @@ body {
   max-width: 960px;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 2px;
   margin-bottom: 10px;
 }
@@ -208,6 +209,14 @@ body {
   background: #f0f1f3 !important;
   color: #8f969e !important;
 }
+
+/* 속성별 색상 */
+.member-attr[data-attr="Pyre"]    { background: #fdecea !important; color: #c0392b !important; }
+.member-attr[data-attr="Fulmen"]  { background: #fef9e7 !important; color: #b7950b !important; }
+.member-attr[data-attr="Aqua"]    { background: #e8f8f5 !important; color: #1a8a72 !important; }
+.member-attr[data-attr="Glacies"] { background: #eaf4fb !important; color: #1a6fa0 !important; }
+.member-attr[data-attr="Aero"]    { background: #e6f4fb !important; color: #1a7aaa !important; }
+.member-attr[data-attr="Verde"]   { background: #eaf3de !important; color: #3b6d11 !important; }
 </style>
 </head>
 <body>
@@ -345,7 +354,7 @@ function memberCard(m) {
     : '<i class="ti ti-user" aria-hidden="true"></i>';
   return '<div class="member-card"><div class="member-avatar">' + avatarInner + '</div>' +
     '<div class="member-info"><div class="member-name">' + m.name + '</div>' +
-    '<span class="member-attr">' + m.attr + '</span>' +
+    '<span class="member-attr" data-attr="' + m.attr + '">' + m.attr + '</span>' +
     '<div class="member-desc">' + m.desc + '</div></div></div>';
 }
 
