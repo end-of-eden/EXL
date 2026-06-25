@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>END OF EDEN — Log 001</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="../style.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --color-border-tertiary: rgba(160,190,220,0.20);
+  --color-border-secondary: rgba(140,175,210,0.30);
+  --color-text-primary: #2a2a35;
+  --color-text-secondary: #6b7280;
+  --color-text-tertiary: #a8b4c0;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.topnav {
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  margin-bottom: 10px;
+}
+.topnav a {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+  padding: 5px 14px;
+  border-radius: var(--border-radius-md);
+  transition: background 0.15s, color 0.15s;
+}
+.topnav a:hover { background: #f3f4f6; color: var(--color-text-secondary); }
+.topnav a.active { background: #f3f4f6; color: var(--color-text-primary); }
+.topnav-divider { width: 1px; height: 12px; background: var(--color-border-tertiary); margin: 0 4px; }
+
+.detail-wrap {
+  width: 100%;
+  max-width: 960px;
+  height: 580px;
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.detail-scroll {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 2.5rem 3rem;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.detail-scroll.dragging { cursor: grabbing; }
+.detail-scroll::-webkit-scrollbar { width: 3px; }
+.detail-scroll::-webkit-scrollbar-track { background: transparent; }
+.detail-scroll::-webkit-scrollbar-thumb { background: var(--color-border-secondary); border-radius: 99px; }
+
+.detail-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.detail-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  margin-bottom: 1.5rem;
+}
+
+.detail-quote {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding: 0 2rem;
+}
+.detail-quote .q-mark {
+  font-size: 24px;
+  color: var(--color-text-tertiary);
+  line-height: 1;
+  display: block;
+  margin-bottom: 4px;
+}
+.detail-quote p {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+.detail-img {
+  width: 100%;
+  border-radius: var(--border-radius-md);
+  margin-bottom: 1.75rem;
+  display: block;
+  object-fit: cover;
+  max-height: 400px;
+}
+
+.detail-body {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--color-text-secondary);
+  white-space: pre-wrap;
+  word-break: keep-all;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.15s;
+}
+.back-btn:hover { color: var(--color-text-secondary); }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="../wiki.html">Wiki</a>
+  <div class="topnav-divider"></div>
+  <a href="../gallery.html">Gallery</a>
+  <div class="topnav-divider"></div>
+  <a href="../log.html" class="active">Log</a>
+</nav>
+
+<div class="detail-wrap">
+  <div class="detail-scroll" id="detail-scroll">
+
+    <a class="back-btn" href="../log.html">← Back</a>
+
+    <div class="detail-title">로그 제목</div>
+    <div class="detail-meta">
+      <span>2026.06.26</span>
+      <span>·</span>
+      <span>Daily Log</span>
+    </div>
+
+    <div class="detail-quote">
+      <span class="q-mark">"</span>
+      <p>인용구 또는 부제목을 여기에</p>
+    </div>
+
+    <img class="detail-img" src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/log/001.jpg" alt="001">
+
+    <div class="detail-body">본문 내용을 여기에 작성하세요.</div>
+
+  </div>
+</div>
+
+<script>
+var scrollEl = document.getElementById('detail-scroll');
+var isDown = false, startY = 0, scrollTop = 0;
+scrollEl.addEventListener('mousedown', function(e) {
+  isDown = true; startY = e.pageY - scrollEl.offsetTop; scrollTop = scrollEl.scrollTop;
+  scrollEl.classList.add('dragging');
+});
+document.addEventListener('mouseup', function() { isDown = false; scrollEl.classList.remove('dragging'); });
+scrollEl.addEventListener('mousemove', function(e) {
+  if (!isDown) return;
+  e.preventDefault();
+  scrollEl.scrollTop = scrollTop - (e.pageY - scrollEl.offsetTop - startY);
+});
+</script>
+
+<script src="../sparkle.js"></script>
+</body>
+</html>
