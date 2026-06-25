@@ -222,8 +222,8 @@ body {
 <script>
 // ✏️ 이미지 추가할 때 여기에 한 줄씩 추가하면 됨
 var images = [
-  { src: '001.png', title: '제목' },
-  { src: '002.png', title: '제목' },
+  { src: '001.png', title: 'EDEN', color: 'rgba(135,206,235,0.9)' },
+  { src: '002.png', title: 'LILITH', color: 'rgba(255,182,193,0.9)' },
 ];
 
 var base = 'https://raw.githubusercontent.com/end-of-eden/EXL/main/';
@@ -231,7 +231,9 @@ var base = 'https://raw.githubusercontent.com/end-of-eden/EXL/main/';
 function render() {
   var grid = document.getElementById('gallery-grid');
   grid.innerHTML = images.map(function(img, i) {
-    return '<div class="gallery-item" onclick="openPopup(' + i + ')">' +
+    return '<div class="gallery-item" onclick="openPopup(' + i + ')"' +
+      ' onmouseover="this.querySelector(\'.gallery-item-title\').style.color=\'' + img.color + '\'"' +
+      ' onmouseout="this.querySelector(\'.gallery-item-title\').style.color=\'rgba(0,0,0,0)\'">' +
       '<img src="' + base + img.src + '" alt="' + img.title + '" loading="lazy">' +
       '<div class="gallery-item-overlay">' +
       '<div class="gallery-item-title">' + img.title + '</div>' +
