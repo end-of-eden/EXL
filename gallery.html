@@ -26,6 +26,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   min-height: 100vh;
   padding: 2rem;
 }
@@ -62,9 +63,22 @@ body {
   overflow: hidden;
   background: #ffffff;
   box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
-  padding: 1.75rem;
-  min-height: 580px;
+  height: 580px;
 }
+
+.gallery-scroll {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1.75rem;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.gallery-scroll.dragging { cursor: grabbing; }
+.gallery-scroll::-webkit-scrollbar { width: 3px; }
+.gallery-scroll::-webkit-scrollbar-track { background: transparent; }
+.gallery-scroll::-webkit-scrollbar-thumb { background: var(--color-border-secondary); border-radius: 99px; }
 
 .gallery-grid {
   display: grid;
@@ -189,7 +203,9 @@ body {
 </nav>
 
 <div class="gallery-wrap">
-  <div class="gallery-grid" id="gallery-grid"></div>
+  <div class="gallery-scroll" id="gallery-scroll">
+    <div class="gallery-grid" id="gallery-grid"></div>
+  </div>
 </div>
 
 <!-- 팝업 -->
@@ -239,6 +255,19 @@ document.addEventListener('keydown', function(e) {
 });
 
 render();
+
+var scrollEl = document.getElementById('gallery-scroll');
+var isDown = false, startY = 0, scrollTop = 0;
+scrollEl.addEventListener('mousedown', function(e) {
+  isDown = true; startY = e.pageY - scrollEl.offsetTop; scrollTop = scrollEl.scrollTop;
+  scrollEl.classList.add('dragging');
+});
+document.addEventListener('mouseup', function() { isDown = false; scrollEl.classList.remove('dragging'); });
+scrollEl.addEventListener('mousemove', function(e) {
+  if (!isDown) return;
+  e.preventDefault();
+  scrollEl.scrollTop = scrollTop - (e.pageY - scrollEl.offsetTop - startY);
+});
 </script>
 
 <script src="sparkle.js"></script>
