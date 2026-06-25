@@ -16,6 +16,8 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
+  opacity: 1;
+  transition: opacity 0.4s ease;
 }
 
 .main-card {
@@ -34,6 +36,11 @@ body {
   box-shadow: 0 16px 48px rgba(0,0,0,0.13), 0 4px 12px rgba(0,0,0,0.08);
 }
 
+body.fade-out {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
 .main-card img {
   width: 100%;
   height: 100%;
@@ -45,10 +52,17 @@ body {
 </head>
 <body>
 
-<div class="main-card" onclick="location.href='wiki.html'">
+<div class="main-card" onclick="fadeOut()">
   <img src="https://raw.githubusercontent.com/end-of-eden/EXL/main/main.png" alt="END OF EDEN">
 </div>
 
+<script>
+function fadeOut() {
+  document.body.style.transition = 'opacity 0.4s ease';
+  document.body.style.opacity = '0';
+  setTimeout(function() { location.href = 'wiki.html'; }, 400);
+}
+</script>
 <script src="sparkle.js"></script>
 </body>
 </html>
