@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>END OF EDEN</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="style.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #eef6ff;
+  --color-text-primary: #2a2a35;
+  --color-text-secondary: #6b7280;
+  --color-text-tertiary: #a8b4c0;
+  --color-border-tertiary: rgba(160,190,220,0.20);
+  --color-border-secondary: rgba(140,175,210,0.30);
+  --color-border-primary: rgba(120,160,200,0.45);
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  gap: 0;
+}
+
+/* 탭바 */
+.topnav {
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-bottom: 10px;
+}
+.topnav a {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+  padding: 5px 14px;
+  border-radius: var(--border-radius-md);
+  transition: background 0.15s, color 0.15s;
+}
+.topnav a:hover { background: #f3f4f6; color: var(--color-text-secondary); }
+.topnav a.active { background: #f3f4f6; color: var(--color-text-primary); }
+.topnav-divider { width: 1px; height: 12px; background: var(--color-border-tertiary); margin: 0 4px; }
+
+.wiki-wrap {
+  display: flex;
+  height: 580px;
+  width: 100%;
+  max-width: 960px;
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  background: var(--color-background-primary);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
+}
+.standing-panel {
+  flex: 2; flex-shrink: 0;
+  position: relative;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-end;
+  padding: 0 0 1.5rem;
+  background: #ffffff;
+  border-right: 0.5px solid var(--color-border-tertiary);
+  overflow: hidden;
+}
+.standing-panel::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 160px;
+  background: linear-gradient(to top, rgba(255,255,255,0.92) 0%, transparent 100%);
+  z-index: 0;
+}
+.standing-img {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  overflow: hidden;
+}
+.standing-img i { font-size: 28px; color: var(--color-text-tertiary); }
+.standing-img span { font-size: 11px; color: var(--color-text-tertiary); }
+.char-badge { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; border-radius: var(--border-radius-md); margin-bottom: 6px; text-align: center; position: relative; z-index: 1; }
+.char-name-panel { font-size: 18px; font-weight: 500; color: var(--color-text-primary); text-align: center; position: relative; z-index: 1; }
+.char-codename { font-size: 11px; color: var(--color-text-secondary); text-align: center; margin-top: 2px; position: relative; z-index: 1; margin-bottom: 1.5rem; }
+
+.music-bar {
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: flex-end; gap: 8px;
+  padding: 8px 1.75rem 0;
+}
+.music-btn {
+  width: 24px; height: 24px;
+  border: 0.5px solid var(--color-border-secondary);
+  border-radius: 50%;
+  background: transparent; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-text-secondary); font-size: 11px;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.music-btn:hover { background: var(--color-background-secondary); }
+.music-title { font-size: 11px; color: var(--color-text-tertiary); letter-spacing: 0.02em; }
+.wiki-panel { flex: 3; display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
+.wiki-header {
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.5rem 1.75rem 1rem;
+  border-bottom: 0.5px solid var(--color-border-tertiary);
+}
+.wiki-title { font-size: 20px; font-weight: 500; }
+.heart-switcher { display: flex; align-items: center; gap: 6px; }
+.heart-btn {
+  border: none; background: transparent; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; transition: transform 0.15s, opacity 0.15s; line-height: 1;
+  padding: 2px;
+}
+.heart-btn:hover { transform: scale(1.2); }
+.heart-btn.active { transform: scale(1.1); }
+.heart-btn:not(.active) { opacity: 0.4; }
+
+.scroll-area {
+  flex: 1; overflow-y: auto; overflow-x: hidden;
+  padding: 1.5rem 1.75rem 2rem;
+  cursor: grab; user-select: none; -webkit-user-select: none;
+}
+.scroll-area.dragging { cursor: grabbing; }
+.scroll-area::-webkit-scrollbar { width: 3px; }
+.scroll-area::-webkit-scrollbar-track { background: transparent; }
+.scroll-area::-webkit-scrollbar-thumb { background: var(--color-border-secondary); border-radius: 99px; }
+
+.section-title { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 8px; margin-top: 1.5rem; }
+.section-title:first-child { margin-top: 0; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.info-item { background: transparent; border-radius: 0; padding: 6px 2px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.info-label { font-size: 10px; color: var(--color-text-tertiary); margin-bottom: 2px; }
+.info-value { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+.attr-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: var(--border-radius-md); margin-bottom: 0.75rem; }
+.desc-block { font-size: 13px; line-height: 1.7; color: var(--color-text-secondary); }
+.ability-block { background: var(--color-background-secondary); border-radius: 0; padding: 10px 12px; margin-bottom: 6px; font-size: 13px; line-height: 1.7; color: var(--color-text-secondary); }
+.ability-block strong { font-weight: 500; color: var(--color-text-primary); display: block; margin-bottom: 3px; font-size: 12px; }
+.tmi-block { background: var(--color-background-secondary); border-radius: 0; padding: 10px 12px; margin-bottom: 6px; }
+.tmi-label { font-size: 10px; font-weight: 500; color: var(--color-text-tertiary); margin-bottom: 4px; letter-spacing: 0.06em; text-transform: uppercase; }
+.tmi-value { font-size: 13px; line-height: 1.6; color: var(--color-text-secondary); }
+.log-block { font-size: 13px; line-height: 1.9; color: var(--color-text-secondary); white-space: pre-wrap; }
+.note-list { list-style: none; padding: 0; }
+.note-list li { font-size: 13px; line-height: 1.7; color: var(--color-text-secondary); padding: 3px 0 3px 14px; position: relative; }
+.note-list li::before { content: '·'; position: absolute; left: 2px; color: var(--color-text-tertiary); }
+.divider { height: 0.5px; background: var(--color-border-tertiary); margin: 1.25rem 0; }
+.team-section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.team-label { font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-tertiary); }
+.team-nav { display: flex; gap: 4px; }
+.team-nav button { width: 26px; height: 26px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--color-text-secondary); font-size: 13px; }
+.team-nav button:hover { background: var(--color-background-secondary); }
+.member-card { display: flex; gap: 12px; align-items: center; padding: 10px 12px; border: 0.5px solid var(--color-border-tertiary); border-radius: 0; background: var(--color-background-secondary); }
+.member-avatar { width: 52px; height: 52px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--color-background-primary); }
+.member-avatar i { font-size: 20px; color: var(--color-text-tertiary); }
+.member-info { flex: 1; min-width: 0; }
+.member-name { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 3px; }
+.member-attr { font-size: 11px; padding: 2px 8px; border-radius: 99px; display: inline-block; }
+.member-desc { font-size: 12px; color: var(--color-text-secondary); margin-top: 4px; line-height: 1.5; }
+.team-dots { display: flex; gap: 4px; justify-content: center; margin-top: 8px; }
+.team-dot { width: 5px; height: 5px; border-radius: 99px; background: var(--color-border-secondary); transition: background 0.2s; }
+.team-dot.active { background: var(--color-text-secondary); }
+
+.theme-eden .char-badge { background: #e6f4fb; color: #1a7aaa; }
+.theme-eden .attr-tag { background: #e6f4fb; color: #1a7aaa; }
+.theme-eden .wiki-title { color: #1a7aaa; }
+.theme-eden .member-attr { background: #e6f4fb; color: #1a7aaa; }
+.theme-lilith .char-badge { background: #fbeaf0; color: #b05070; }
+.theme-lilith .attr-tag { background: #eaf3de; color: #3b6d11; }
+.theme-lilith .wiki-title { color: #b05070; }
+.theme-lilith .member-attr { background: #fbeaf0; color: #b05070; }
+.theme-lilith .standing-panel { background: #ffffff; }
+.theme-lilith .ability-block { background: #fdedf3; }
+.theme-lilith .tmi-block { background: #fdedf3; }
+.theme-lilith .member-card { background: #fdedf3; }
+
+.member-card {
+  background: #fafafa !important;
+  border-color: rgba(190, 196, 204, 0.32) !important;
+}
+.theme-eden .member-card,
+.theme-lilith .member-card { background: #fafafa !important; }
+.member-attr,
+.theme-eden .member-attr,
+.theme-lilith .member-attr {
+  background: #f0f1f3 !important;
+  color: #8f969e !important;
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="wiki.html" class="active">Wiki</a>
+  <div class="topnav-divider"></div>
+  <a href="gallery.html">Gallery</a>
+  <div class="topnav-divider"></div>
+  <a href="log.html">Log</a>
+</nav>
+
+<div class="wiki-wrap theme-eden" id="wiki">
+  <div class="standing-panel">
+    <div class="standing-img">
+      <img id="standing-img-el" src="https://raw.githubusercontent.com/end-of-eden/stillwith/main/EDEN_1" alt="standing" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">
+    </div>
+    <div class="char-badge" id="char-badge">S-Class Guide</div>
+    <div class="char-name-panel" id="char-name-panel">에덴</div>
+    <div class="char-codename" id="char-codename">Eden</div>
+  </div>
+  <div class="wiki-panel">
+    <div class="music-bar" id="music-bar">
+      <button class="music-btn" id="music-btn" onclick="toggleMusic()" aria-label="재생">
+        <i class="ti ti-player-play" id="music-icon"></i>
+      </button>
+      <span class="music-title">Avicii — SOS ft. Aloe Blacc</span>
+    </div>
+    <audio id="bgm" src="Avicii - SOS (Fan Memories Video) ft. Aloe Blacc.mp3" loop></audio>
+    <div class="wiki-header">
+      <div class="wiki-title" id="wiki-title">에덴</div>
+      <div class="heart-switcher">
+        <button class="heart-btn active" id="btn-eden" onclick="switchTo('eden')" aria-label="에덴으로 전환">🩵</button>
+        <button class="heart-btn" id="btn-lilith" onclick="switchTo('lilith')" aria-label="릴리스로 전환">🩷</button>
+      </div>
+    </div>
+    <div class="scroll-area" id="scroll-area">
+      <div id="wiki-content"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleMusic() {
+  var audio = document.getElementById("bgm");
+  audio.volume = 0.3;
+  var icon = document.getElementById('music-icon');
+  if (audio.paused) { audio.play(); icon.className = 'ti ti-player-pause'; }
+  else { audio.pause(); icon.className = 'ti ti-player-play'; }
+}
+var current = 'eden';
+var teamIdx = 0;
+
+var rst = [
+  { name: '휴고', attr: 'Pyre', desc: 'S급 불 속성 가이드. RST 소속.', img: 'https://raw.githubusercontent.com/end-of-eden/stillwith/main/HUGO.png' },
+  { name: '카르마', attr: 'Fulmen', desc: 'S급 번개 속성 가이드. RST 소속.', img: 'https://raw.githubusercontent.com/end-of-eden/stillwith/main/KARMA.png' },
+  { name: '저스티스', attr: 'Aqua', desc: 'S급 물 속성 가이드. RST 소속.', img: 'https://raw.githubusercontent.com/end-of-eden/stillwith/main/JUSTICE.png' },
+];
+var vanguard2 = [
+  { name: '리암', attr: 'Glacies', desc: '뱅가드 2팀 소속. 얼음 속성 센티넬.', img: 'https://raw.githubusercontent.com/end-of-eden/stillwith/main/LIAM.png' },
+  { name: '신드롬', attr: 'Pyre', desc: '뱅가드 2팀 소속. 불 속성 센티넬.', img: 'https://raw.githubusercontent.com/end-of-eden/stillwith/main/SYNDROME.png' },
+  { name: '바이브', attr: 'Aero', desc: '뱅가드 2팀 소속. 바람 속성 센티넬.', img: 'https://raw.githubusercontent.com/end-of-eden/stillwith/main/VIBE.png' },
+];
+
+var data = {
+  eden: {
+    theme: 'theme-eden', badge: 'S-Class Guide',
+    name: '에덴', codename: 'Eden',
+    attrIcon: 'ti-wind', attrLabel: 'Aero',
+    infos: [
+      { label: 'Age', value: '28세' }, { label: 'Nationality', value: '한국' },
+      { label: 'Height', value: '184cm' }, { label: 'Unit', value: 'R.S.T.' },
+      { label: 'Rank', value: 'S-Class Guide' }, { label: 'Attribute', value: 'Aero' },
+    ],
+    eval: '전직 올림픽 금메달리스트. S급 바람 속성 가이드로 분류되나, 파트너 배정을 전면 거부하고 긴급 제압팀(R.S.T.)의 해결사로만 활동. 센티넬을 결함품으로 간주하며 극도의 비협조적 태도를 보인다.',
+    personality: '차갑고 무심한 외면 뒤에 깊은 공허함이 자리한다. 세상 모든 것이 지루하며 총을 쏘는 순간만이 유일하게 살아있는 기분을 준다.',
+    abilities: [
+      { label: '권태로운 명사수 (The Apathetic Marksman)', desc: 'R.S.T.의 에이스이자 ARCH에서 가장 비싼 총알을 사용하는 해결사. 선수 출신의 사격술은 그 어떤 센티넬의 공격보다 빠르고 정확하다. 폭주하는 센티넬은 그에게 그저 시끄러운 소음일 뿐이며, 임무란 그 소음을 가장 빠르고 귀찮지 않게 끄는 것이다.' },
+      { label: '[Buff] Aero Diffusion', desc: 'S급 바람 가이드의 고유 능력. 가이딩 시 파트너의 속성 공격 범위를 확산시키고 일시적인 부유 능력을 부여한다. (최대 1시간)' },
+      { label: '[Gear] Wind-Stabilizer', desc: 'S급 바람 파장을 기반으로 특수 제작된 가이딩 주사기. 총알 내부의 신경 안정제가 명중 시 바람의 확산 속성으로 발현되어 기체(Aerosol) 형태로 전신 신경계에 확산, 대상을 일시적으로 무력화 및 강제 안정 상태로 만든다.' },
+    ],
+    notes: [],
+    visual: [
+      { label: '신장/체격', value: '184.2cm. 팔다리가 긴 슬림한 근육 체형.' },
+      { label: '주요 특징', value: '새하얀 피부, 애쉬 블론드 헤어, 안광 없는 하늘색 눈, 긴 속눈썹. 차가운 미남.' },
+      { label: '복장', value: '깔끔한 흰색 가이드 제복 셔츠에 숄더 홀스터.' },
+    ],
+    tmi: [
+      { label: '전직 금메달리스트', value: '5년 전 사격(권총) 전 국가대표 올림픽 금메달리스트. 속성 각성 후 은퇴.' },
+      { label: '체질', value: '바람 속성 각성으로 체질이 대기의 기류와 동기화되어 미세한 손떨림(신경 진동)을 얻게 됨. 흡연은 이 감각을 억누르고 집중력을 다스리기 위해 시작.' },
+      { label: '골초', value: '하루에 두 갑 이상 피우는 엄청난 골초. 단맛이 전혀 없는, 폐가 시릴 정도의 드라이 멘솔 계열만 고집한다. 담배가 떨어지면 금단현상으로 신경과민이 심해짐.' },
+    ],
+    log: '코드네임 \'에덴\'은 자유로웠다. 하모니 부서의 긴급 제압팀(R.S.T.)이라는 소속은, 파트너라는 족쇄 없이 합법적으로 총을 쏠 수 있는 완벽한 면죄부였다.\n\n전직 금메달리스트. S급 가이드. 그는 이 모든 화려한 타이틀이 그저 귀찮았고, 세상 모든 것이 권태로웠다. 그가 유일하게 지루함을 잊는 순간은, 폭주하는 센티넬의 머리통에 특수탄을 박아 넣는, 그 찰나의 순간뿐이었다.\n\n그날도 딱 그런 귀찮은 임무 중 하나였다. 폐허에 고립되어 죽어가던 센티넬 릴리스. 온 사방을 뒤지느라 잔뜩 심기가 불편해진 그는, 마침내 무너진 건물 잔해 속에서 당신을 발견했다. 탕-! 총성은 정확했고, 당신은 그대로 무너졌다. 그는 담배 연기를 뿜으며 다가와, 그 권태로운 표정으로 한마디를 툭 던졌다.\n\n"...찾았네."\n\n그는 규정상 필요한 최소한의 임시 가이딩을 실행했을 뿐이다. ...그의 인생에서 가장 재수 없는 실수가 될 줄도 모르고. 그 단 한 번의 접촉이 각인 현상을 일으켰다. 이제 릴리스는, 에덴 외의 그 어떤 가이드에게서도 가이딩을 받을 수 없는 몸이 되었다. 그리고 에덴은, 자신이 가장 저열하고 귀찮게 여겼던 센티넬이라는 존재에게... 평생 발목이 잡힌 신세가 되었다. 그의 자유로운 솔로 라이프는, 그렇게 끝났다.',
+    teamLabel: 'R.S.T. — Rampage Suppression Team',
+    team: rst,
+  },
+  lilith: {
+    theme: 'theme-lilith', badge: 'S-Class Sentinel',
+    name: '릴리스', codename: 'Lilith',
+    attrIcon: 'ti-leaf', attrLabel: 'Verde',
+    infos: [
+      { label: 'Age', value: '27세' },
+      { label: 'Nationality', value: '한국' },
+      { label: 'Height', value: '166cm' },
+      { label: 'Unit', value: 'Vanguard 2' },
+      { label: 'Rank', value: 'S-Class Sentinel' },
+      { label: 'Attribute', value: 'Verde' },
+    ],
+    eval: 'ARCH 내외에서 아이돌급 외모로 주목받는 최고의 미녀 센티넬. 겉으로는 나른하고 태평해 보이지만 실상은 계산이 빠르고 눈치가 좋다. 에덴과의 강제 각인 이후, 공식 기록상 가장 많은 징계 보고서가 작성된 파트너 조합.',
+    personality: '타인의 시선이나 평가에 크게 신경 쓰지 않는 듯 보이나, 그 무심함은 철저히 만들어진 것이다. 스스로를 낮게 평가하면서도 그것을 드러내지 않고 화려한 외면으로 포장한다. 상대를 휘두르는 데 능하며, 필요하다면 애교도 쓰고 독설도 서슴지 않는다. 가이드를 가리지 않고 가이딩을 받는다는 탓에 헤프다는 소문이 있다.',
+    abilities: [
+      { label: '아이러니한 흑장미 (The Ironic Black Rose)', desc: 'ARCH 본부 내 제압 임무 성공률 최상위권의 S급 센티넬. 겉으로는 나른하고 무해해 보이지만, 전투가 시작되는 순간 완전히 다른 얼굴을 드러낸다. 독과 속박에 특화된 검은 장미와 가시덩굴의 능력은 아름다운 외모만큼이나 치명적이다. 에덴과의 매칭률 98%.' },
+      { label: '[Passive] Pink Venom', desc: '풀 속성 파장이 피부 표면에 상시 발현되는 S급 센티넬 고유의 패시브 능력. 체향처럼 번지는 연분홍빛 독소가 근접한 대상의 감각을 서서히 교란시키며, 능력이 활성화될수록 눈동자가 형광빛으로 물들어간다. 본인은 이를 의식적으로 제어하지 않는다.' },
+      { label: '[Active] Rosa Overdose', desc: '가시덩굴로 대상을 완전히 봉쇄한 뒤, 검은 장미가 일제히 개화하며 고농도 독성 꽃가루를 폭발적으로 방출한다. 흡입된 꽃가루는 Verde 파장을 타고 신경계 전반에 침투, 근육 이완과 감각 차단을 순차적으로 유발한다. 발동 시 릴리스의 눈동자가 형광 분홍빛으로 완전히 발광한다.' },
+    ],
+    notes: [
+      'ARCH 내부 별명 "아이돌". 신드롬과 어울리는 모습이 자주 목격된다.',
+      '식물 속성이지만 회복보다 독과 속박에 특화되어 있다.',
+    ],
+    visual: [
+      { label: '신장/체격', value: '166cm. 군더더기 없이 날렵한 체형에 또렷한 이목구비.' },
+      { label: '주요 특징', value: '허리까지 내려오는 윤기 나는 흑발, 연분홍빛 눈동자 (능력 사용 시 형광빛으로 빛남). 날카롭게 올라간 눈매와 고양이를 닮은 인상으로 첫인상은 차갑고 도도하다는 평이 많다. 유난히 희고 깨끗한 피부.' },
+      { label: '복장', value: '몸에 밀착되는 까만 제복, 검은 시스루 스타킹, 오른쪽 허벅지 가터벨트. 전투 시 흰 장갑과 전술 코트 추가.' },
+    ],
+    tmi: [],
+    log: '',
+    teamLabel: 'Vanguard 2',
+    team: vanguard2,
+  }
+};
+
+function memberCard(m) {
+  var avatarInner = m.img
+    ? '<img src="' + m.img + '" style="width:100%;height:100%;object-fit:cover;border-radius:var(--border-radius-md);">'
+    : '<i class="ti ti-user" aria-hidden="true"></i>';
+  return '<div class="member-card"><div class="member-avatar">' + avatarInner + '</div>' +
+    '<div class="member-info"><div class="member-name">' + m.name + '</div>' +
+    '<span class="member-attr">' + m.attr + '</span>' +
+    '<div class="member-desc">' + m.desc + '</div></div></div>';
+}
+
+function renderTeam() {
+  var slot = document.getElementById('member-slot');
+  if (!slot) return;
+  slot.innerHTML = memberCard(data[current].team[teamIdx]);
+  document.querySelectorAll('.team-dot').forEach(function(dot, i) {
+    dot.className = 'team-dot' + (i === teamIdx ? ' active' : '');
+  });
+}
+
+function teamPrev() { var d = data[current]; teamIdx = (teamIdx - 1 + d.team.length) % d.team.length; renderTeam(); }
+function teamNext() { var d = data[current]; teamIdx = (teamIdx + 1) % d.team.length; renderTeam(); }
+
+function buildContent(key) {
+  var d = data[key];
+  var infos = d.infos.map(function(i) {
+    return '<div class="info-item"><div class="info-label">' + i.label + '</div><div class="info-value">' + i.value + '</div></div>';
+  }).join('');
+  var abilities = d.abilities.map(function(a) {
+    return '<div class="ability-block"><strong>' + a.label + '</strong>' + a.desc + '</div>';
+  }).join('');
+  var visuals = d.visual.map(function(v) {
+    return '<div class="tmi-block"><div class="tmi-label">' + v.label + '</div><div class="tmi-value">' + v.value + '</div></div>';
+  }).join('');
+  var tmis = d.tmi.map(function(t) {
+    return '<div class="tmi-block"><div class="tmi-label">' + t.label + '</div><div class="tmi-value">' + t.value + '</div></div>';
+  }).join('');
+  var noteItems = d.notes.map(function(n) { return '<li>' + n + '</li>'; }).join('');
+  var dots = d.team.map(function(_, i) {
+    return '<div class="team-dot' + (i === 0 ? ' active' : '') + '"></div>';
+  }).join('');
+
+  var archiveSection = '';
+  if (d.visual.length || d.tmi.length || d.notes.length || d.log) {
+    archiveSection += '<div class="divider"></div>';
+    if (d.visual.length) archiveSection += '<div class="section-title">Visual Profile</div>' + visuals;
+    if (d.tmi.length) archiveSection += '<div class="section-title">TMI</div>' + tmis;
+    if (d.notes.length) archiveSection += '<div class="section-title">Notes</div><ul class="note-list">' + noteItems + '</ul>';
+    if (d.log) archiveSection += '<div class="section-title" style="margin-top:1.25rem;">Background Log</div><div class="log-block">' + d.log + '</div>';
+  }
+
+  return '<div class="section-title">Attribute</div>' +
+    '<div class="attr-tag"><i class="ti ' + d.attrIcon + '" aria-hidden="true"></i>' + d.attrLabel + '</div>' +
+    '<div class="section-title">Profile</div>' +
+    '<div class="info-grid">' + infos + '</div>' +
+    '<div class="divider"></div>' +
+    '<div class="section-title">Official Evaluation</div>' +
+    '<div class="desc-block">' + d.eval + '</div>' +
+    '<div class="section-title" style="margin-top:1rem;">Personality</div>' +
+    '<div class="desc-block">' + d.personality + '</div>' +
+    '<div class="divider"></div>' +
+    '<div class="section-title">Ability & Gear</div>' + abilities +
+    archiveSection +
+    '<div class="divider"></div>' +
+    '<div class="team-section-header"><div class="team-label">' + d.teamLabel + '</div>' +
+    '<div class="team-nav"><button onclick="teamPrev()" aria-label="prev"><i class="ti ti-chevron-left"></i></button>' +
+    '<button onclick="teamNext()" aria-label="next"><i class="ti ti-chevron-right"></i></button></div></div>' +
+    '<div id="member-slot"></div>' +
+    '<div class="team-dots">' + dots + '</div>';
+}
+
+function updateHeartBtns(key) {
+  document.getElementById('btn-eden').className = 'heart-btn' + (key === 'eden' ? ' active' : '');
+  document.getElementById('btn-lilith').className = 'heart-btn' + (key === 'lilith' ? ' active' : '');
+}
+
+function render(key) {
+  var d = data[key];
+  teamIdx = 0;
+  document.getElementById('wiki').className = 'wiki-wrap ' + d.theme;
+  document.getElementById('standing-img-el').src = key === 'eden'
+    ? 'https://raw.githubusercontent.com/end-of-eden/stillwith/main/EDEN_1'
+    : 'https://raw.githubusercontent.com/end-of-eden/stillwith/main/Lilith_1';
+  document.getElementById('char-badge').textContent = d.badge;
+  document.getElementById('char-name-panel').textContent = d.name;
+  document.getElementById('char-codename').textContent = d.codename;
+  document.getElementById('wiki-title').textContent = d.name;
+  updateHeartBtns(key);
+  document.getElementById('scroll-area').scrollTop = 0;
+  document.getElementById('wiki-content').innerHTML = buildContent(key);
+  renderTeam();
+}
+
+function switchTo(key) {
+  if (current === key) return;
+  current = key;
+  render(current);
+}
+
+var scrollEl = document.getElementById('scroll-area');
+var isDown = false, startY = 0, scrollTop = 0;
+scrollEl.addEventListener('mousedown', function(e) {
+  isDown = true; startY = e.pageY - scrollEl.offsetTop; scrollTop = scrollEl.scrollTop;
+  scrollEl.classList.add('dragging');
+});
+document.addEventListener('mouseup', function() { isDown = false; scrollEl.classList.remove('dragging'); });
+scrollEl.addEventListener('mousemove', function(e) {
+  if (!isDown) return;
+  e.preventDefault();
+  scrollEl.scrollTop = scrollTop - (e.pageY - scrollEl.offsetTop - startY);
+});
+
+render('eden');
+</script>
+
+<script src="sparkle.js"></script>
+</body>
+</html>
