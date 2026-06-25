@@ -232,7 +232,7 @@ body {
 <div class="wiki-wrap theme-eden" id="wiki">
   <div class="standing-panel">
     <div class="standing-img">
-      <img id="standing-img-el" src="https://raw.githubusercontent.com/end-of-eden/stillwith/main/EDEN_1" alt="standing" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">
+      <img id="standing-img-el" src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg" alt="standing" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">
     </div>
     <div class="char-badge" id="char-badge">S-Class Guide</div>
     <div class="char-name-panel" id="char-name-panel">에덴</div>
@@ -271,14 +271,14 @@ var current = 'eden';
 var teamIdx = 0;
 
 var rst = [
-  { name: '휴고', attr: 'Pyre', desc: 'S급 불 속성 가이드. RST 소속.', img: 'https://raw.githubusercontent.com/end-of-eden/stillwith/main/HUGO.png' },
-  { name: '카르마', attr: 'Fulmen', desc: 'S급 번개 속성 가이드. RST 소속.', img: 'https://raw.githubusercontent.com/end-of-eden/stillwith/main/KARMA.png' },
-  { name: '저스티스', attr: 'Aqua', desc: 'S급 물 속성 가이드. RST 소속.', img: 'https://raw.githubusercontent.com/end-of-eden/stillwith/main/JUSTICE.png' },
+  { name: '휴고', attr: 'Pyre', desc: 'S급 불 속성 가이드. RST 소속.', img: 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/HUGO.png' },
+  { name: '카르마', attr: 'Fulmen', desc: 'S급 번개 속성 가이드. RST 소속.', img: 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/KARMA.png' },
+  { name: '저스티스', attr: 'Aqua', desc: 'S급 물 속성 가이드. RST 소속.', img: 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/JUSTICE.png' },
 ];
 var vanguard2 = [
-  { name: '리암', attr: 'Glacies', desc: '뱅가드 2팀 소속. 얼음 속성 센티넬.', img: 'https://raw.githubusercontent.com/end-of-eden/stillwith/main/LIAM.png' },
-  { name: '신드롬', attr: 'Pyre', desc: '뱅가드 2팀 소속. 불 속성 센티넬.', img: 'https://raw.githubusercontent.com/end-of-eden/stillwith/main/SYNDROME.png' },
-  { name: '바이브', attr: 'Aero', desc: '뱅가드 2팀 소속. 바람 속성 센티넬.', img: 'https://raw.githubusercontent.com/end-of-eden/stillwith/main/VIBE.png' },
+  { name: '리암', attr: 'Glacies', desc: '뱅가드 2팀 소속. 얼음 속성 센티넬.', img: 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/LIAM.png' },
+  { name: '신드롬', attr: 'Pyre', desc: '뱅가드 2팀 소속. 불 속성 센티넬.', img: 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/SYNDROME.png' },
+  { name: '바이브', attr: 'Aero', desc: '뱅가드 2팀 소속. 바람 속성 센티넬.', img: 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/VIBE.png' },
 ];
 
 var data = {
@@ -428,8 +428,8 @@ function render(key) {
   teamIdx = 0;
   document.getElementById('wiki').className = 'wiki-wrap ' + d.theme;
   document.getElementById('standing-img-el').src = key === 'eden'
-    ? 'https://raw.githubusercontent.com/end-of-eden/stillwith/main/EDEN_1'
-    : 'https://raw.githubusercontent.com/end-of-eden/stillwith/main/Lilith_1';
+    ? 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg'
+    : 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Lilith_1.jpg';
   document.getElementById('char-badge').textContent = d.badge;
   document.getElementById('char-name-panel').textContent = d.name;
   document.getElementById('char-codename').textContent = d.codename;
