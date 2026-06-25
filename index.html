@@ -48,12 +48,46 @@ body.fade-out {
   object-position: top;
   display: block;
 }
+
+.main-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  transition: background 0.4s ease;
+}
+
+.main-card-overlay p {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 2.2;
+  color: rgba(135,206,235,0);
+  text-align: center;
+  letter-spacing: 0.03em;
+  transition: color 0.4s ease 0.1s;
+  word-break: keep-all;
+}
+
+.main-card:hover .main-card-overlay {
+  background: rgba(20,20,30,0.65);
+}
+
+.main-card:hover .main-card-overlay p {
+  color: rgba(135,206,235,0.9);
+}
 </style>
 </head>
 <body>
 
 <div class="main-card" onclick="fadeOut()">
   <img src="https://raw.githubusercontent.com/end-of-eden/EXL/main/main.png" alt="END OF EDEN">
+  <div class="main-card-overlay">
+    <p>과거의 영광을, 현재의 상흔을,<br>그리고 앞으로 우리가 함께 만들어갈 미래의 약속을.</p>
+  </div>
 </div>
 
 <script>
