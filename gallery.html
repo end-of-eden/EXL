@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>END OF EDEN — Gallery</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="style.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --color-border-tertiary: rgba(160,190,220,0.20);
+  --color-border-secondary: rgba(140,175,210,0.30);
+  --color-text-primary: #2a2a35;
+  --color-text-secondary: #6b7280;
+  --color-text-tertiary: #a8b4c0;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.topnav {
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  margin-bottom: 10px;
+}
+.topnav a {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+  padding: 5px 14px;
+  border-radius: var(--border-radius-md);
+  transition: background 0.15s, color 0.15s;
+}
+.topnav a:hover { background: #f3f4f6; color: var(--color-text-secondary); }
+.topnav a.active { background: #f3f4f6; color: var(--color-text-primary); }
+.topnav-divider { width: 1px; height: 12px; background: var(--color-border-tertiary); margin: 0 4px; }
+
+.gallery-wrap {
+  width: 100%;
+  max-width: 960px;
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
+  padding: 1.75rem;
+  min-height: 580px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.gallery-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  background: #f3f4f6;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.04);
+}
+
+.gallery-item-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(20,20,30,0);
+  display: flex;
+  align-items: flex-end;
+  padding: 12px;
+  transition: background 0.3s ease;
+}
+
+.gallery-item:hover .gallery-item-overlay {
+  background: rgba(20,20,30,0.55);
+}
+
+.gallery-item-title {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(255,255,255,0);
+  letter-spacing: 0.03em;
+  transition: color 0.3s ease;
+  line-height: 1.4;
+}
+
+.gallery-item:hover .gallery-item-title {
+  color: rgba(255,255,255,0.9);
+}
+
+/* 팝업 */
+.popup-bg {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(20,20,30,0.75);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.popup-bg.open { display: flex; }
+
+.popup-inner {
+  position: relative;
+  max-width: 800px;
+  width: 90%;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+}
+
+.popup-inner img {
+  width: 100%;
+  display: block;
+  max-height: 85vh;
+  object-fit: contain;
+  background: #111;
+}
+
+.popup-title {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  padding: 12px 16px;
+  background: linear-gradient(to top, rgba(20,20,30,0.8) 0%, transparent 100%);
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.03em;
+}
+
+.popup-close {
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+.popup-close:hover { background: rgba(255,255,255,0.3); }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="wiki.html">Wiki</a>
+  <div class="topnav-divider"></div>
+  <a href="gallery.html" class="active">Gallery</a>
+  <div class="topnav-divider"></div>
+  <a href="log.html">Log</a>
+</nav>
+
+<div class="gallery-wrap">
+  <div class="gallery-grid" id="gallery-grid"></div>
+</div>
+
+<!-- 팝업 -->
+<div class="popup-bg" id="popup-bg" onclick="closePopup(event)">
+  <div class="popup-inner">
+    <img id="popup-img" src="" alt="">
+    <div class="popup-title" id="popup-title"></div>
+    <button class="popup-close" onclick="closePopup()">✕</button>
+  </div>
+</div>
+
+<script>
+// ✏️ 이미지 추가할 때 여기에 한 줄씩 추가하면 됨
+var images = [
+  { src: '001.png', title: '제목' },
+  { src: '002.png', title: '제목' },
+];
+
+var base = 'https://raw.githubusercontent.com/end-of-eden/EXL/main/';
+
+function render() {
+  var grid = document.getElementById('gallery-grid');
+  grid.innerHTML = images.map(function(img, i) {
+    return '<div class="gallery-item" onclick="openPopup(' + i + ')">' +
+      '<img src="' + base + img.src + '" alt="' + img.title + '" loading="lazy">' +
+      '<div class="gallery-item-overlay">' +
+      '<div class="gallery-item-title">' + img.title + '</div>' +
+      '</div></div>';
+  }).join('');
+}
+
+function openPopup(i) {
+  var img = images[i];
+  document.getElementById('popup-img').src = base + img.src;
+  document.getElementById('popup-title').textContent = img.title;
+  document.getElementById('popup-bg').classList.add('open');
+}
+
+function closePopup(e) {
+  if (!e || e.target === document.getElementById('popup-bg') || e.currentTarget.classList.contains('popup-close')) {
+    document.getElementById('popup-bg').classList.remove('open');
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePopup();
+});
+
+render();
+</script>
+
+<script src="sparkle.js"></script>
+</body>
+</html>
