@@ -58,10 +58,12 @@ body.fade-out {
 
 <script>
 function fadeOut() {
-  document.body.style.transition = 'opacity 0.4s ease';
   document.body.style.opacity = '0';
   setTimeout(function() { location.href = 'wiki.html'; }, 400);
 }
+window.addEventListener('pageshow', function(e) {
+  document.body.style.opacity = '1';
+});
 </script>
 <script src="sparkle.js"></script>
 </body>
