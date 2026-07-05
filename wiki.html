@@ -12,14 +12,15 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --color-background-primary: #ffffff;
-  --color-background-secondary: #eef6ff;
-  --color-text-primary: #2a2a35;
-  --color-text-secondary: #6b7280;
-  --color-text-tertiary: #a8b4c0;
-  --color-border-tertiary: rgba(160,190,220,0.20);
-  --color-border-secondary: rgba(140,175,210,0.30);
-  --color-border-primary: rgba(120,160,200,0.45);
+  --color-background-primary: #0f0f14;
+  --color-background-secondary: #1a1a22;
+  --color-background-tertiary: #22222c;
+  --color-text-primary: #f2f2f5;
+  --color-text-secondary: #b0b4bd;
+  --color-text-tertiary: #6f7380;
+  --color-border-tertiary: rgba(255,255,255,0.10);
+  --color-border-secondary: rgba(255,255,255,0.16);
+  --color-border-primary: rgba(255,255,255,0.24);
   --border-radius-md: 8px;
   --border-radius-lg: 12px;
   --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -27,7 +28,7 @@
 
 body {
   font-family: var(--font-sans);
-  background: #ffffff;
+  background: #0a0a0f;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,10 +44,11 @@ body {
   max-width: 960px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 2px;
+  justify-content: space-between;
   margin-bottom: 10px;
 }
+.topnav-links { display: flex; align-items: center; gap: 2px; }
+.topnav-music { display: flex; align-items: center; gap: 8px; }
 .topnav a {
   font-size: 11px;
   font-weight: 500;
@@ -58,8 +60,8 @@ body {
   border-radius: var(--border-radius-md);
   transition: background 0.15s, color 0.15s;
 }
-.topnav a:hover { background: #f3f4f6; color: var(--color-text-secondary); }
-.topnav a.active { background: #f3f4f6; color: var(--color-text-primary); }
+.topnav a:hover { background: rgba(255,255,255,0.06); color: var(--color-text-secondary); }
+.topnav a.active { background: rgba(255,255,255,0.08); color: var(--color-text-primary); }
 .topnav-divider { width: 1px; height: 12px; background: var(--color-border-tertiary); margin: 0 4px; }
 
 .wiki-wrap {
@@ -71,7 +73,7 @@ body {
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   background: var(--color-background-primary);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.30);
 }
 .standing-panel {
   flex: 2; flex-shrink: 0;
@@ -79,7 +81,7 @@ body {
   display: flex; flex-direction: column;
   align-items: center; justify-content: flex-end;
   padding: 0 0 1.5rem;
-  background: #ffffff;
+  background: var(--color-background-primary);
   border-right: 0.5px solid var(--color-border-tertiary);
   overflow: hidden;
 }
@@ -88,7 +90,7 @@ body {
   position: absolute;
   bottom: 0; left: 0; right: 0;
   height: 160px;
-  background: linear-gradient(to top, rgba(255,255,255,0.92) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(15,15,20,0.92) 0%, transparent 100%);
   z-index: 0;
 }
 .standing-img {
@@ -105,11 +107,6 @@ body {
 .char-name-panel { font-size: 18px; font-weight: 500; color: var(--color-text-primary); text-align: center; position: relative; z-index: 1; }
 .char-codename { font-size: 11px; color: var(--color-text-secondary); text-align: center; margin-top: 2px; position: relative; z-index: 1; margin-bottom: 1.5rem; }
 
-.music-bar {
-  flex-shrink: 0;
-  display: flex; align-items: center; justify-content: flex-end; gap: 8px;
-  padding: 8px 1.75rem 0;
-}
 .music-btn {
   width: 24px; height: 24px;
   border: 0.5px solid var(--color-border-secondary);
@@ -179,55 +176,45 @@ body {
 .member-avatar i { font-size: 20px; color: var(--color-text-tertiary); }
 .member-info { flex: 1; min-width: 0; }
 .member-name { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 3px; }
-.member-attr { font-size: 11px; padding: 2px 8px; border-radius: 99px; display: inline-block; }
+.member-attr { font-size: 11px; padding: 2px 8px; border-radius: 99px; display: inline-block; font-weight: 600; }
 .member-desc { font-size: 12px; color: var(--color-text-secondary); margin-top: 4px; line-height: 1.5; }
 .team-dots { display: flex; gap: 4px; justify-content: center; margin-top: 8px; }
 .team-dot { width: 5px; height: 5px; border-radius: 99px; background: var(--color-border-secondary); transition: background 0.2s; }
 .team-dot.active { background: var(--color-text-secondary); }
 
-.theme-eden .char-badge { background: #e6f4fb; color: #1a7aaa; }
-.theme-eden .attr-tag { background: #e6f4fb; color: #1a7aaa; }
-.theme-eden .wiki-title { color: #1a7aaa; }
-.theme-eden .member-attr { background: #e6f4fb; color: #1a7aaa; }
-.theme-lilith .char-badge { background: #fbeaf0; color: #b05070; }
-.theme-lilith .attr-tag { background: #eaf3de; color: #3b6d11; }
-.theme-lilith .wiki-title { color: #b05070; }
-.theme-lilith .member-attr { background: #fbeaf0; color: #b05070; }
-.theme-lilith .standing-panel { background: #ffffff; }
-.theme-lilith .ability-block { background: #fdedf3; }
-.theme-lilith .tmi-block { background: #fdedf3; }
-.theme-lilith .member-card { background: #fdedf3; }
+.theme-eden .char-badge { background: rgba(46,204,113,0.15); color: #6fe0a0; }
+.theme-eden .attr-tag { background: rgba(46,204,113,0.15); color: #6fe0a0; }
+.theme-eden .wiki-title { color: #6fe0a0; }
+.theme-lilith .char-badge { background: rgba(242,168,196,0.15); color: #f2a8c4; }
+.theme-lilith .attr-tag { background: rgba(106,170,100,0.18); color: #9fd398; }
+.theme-lilith .wiki-title { color: #f2a8c4; }
 
-.member-card {
-  background: #fafafa !important;
-  border-color: rgba(190, 196, 204, 0.32) !important;
-}
-.theme-eden .member-card,
-.theme-lilith .member-card { background: #fafafa !important; }
-.member-attr,
-.theme-eden .member-attr,
-.theme-lilith .member-attr {
-  background: #f0f1f3 !important;
-  color: #8f969e !important;
-}
-
-/* 속성별 색상 */
-.member-attr[data-attr="Pyre"]    { background: #fdecea !important; color: #c0392b !important; }
-.member-attr[data-attr="Fulmen"]  { background: #fef9e7 !important; color: #b7950b !important; }
-.member-attr[data-attr="Aqua"]    { background: #e8f8f5 !important; color: #1a8a72 !important; }
-.member-attr[data-attr="Glacies"] { background: #eaf4fb !important; color: #1a6fa0 !important; }
-.member-attr[data-attr="Aero"]    { background: #e6f4fb !important; color: #1a7aaa !important; }
-.member-attr[data-attr="Verde"]   { background: #eaf3de !important; color: #3b6d11 !important; }
+/* 속성별 색상 (공식 팔레트) */
+.member-attr[data-attr="Pyre"]    { background: #e74c3c; color: #ffffff; }
+.member-attr[data-attr="Fulmen"]  { background: #f1c40f; color: #1a1a1a; }
+.member-attr[data-attr="Aqua"]    { background: #3498db; color: #ffffff; }
+.member-attr[data-attr="Glacies"] { background: #8eccec; color: #12303f; }
+.member-attr[data-attr="Aero"]    { background: #2ecc71; color: #ffffff; }
+.member-attr[data-attr="Verde"]   { background: #6aaa64; color: #ffffff; }
 </style>
 </head>
 <body>
 
 <nav class="topnav">
-  <a href="wiki.html" class="active">Wiki</a>
-  <div class="topnav-divider"></div>
-  <a href="gallery.html">Gallery</a>
-  <div class="topnav-divider"></div>
-  <a href="log.html">Log</a>
+  <div class="topnav-music">
+    <button class="music-btn" id="music-btn" onclick="toggleMusic()" aria-label="재생">
+      <i class="ti ti-player-play" id="music-icon"></i>
+    </button>
+    <span class="music-title">Avicii — SOS ft. Aloe Blacc</span>
+    <audio id="bgm" src="Avicii - SOS (Fan Memories Video) ft. Aloe Blacc.mp3" loop></audio>
+  </div>
+  <div class="topnav-links">
+    <a href="wiki.html" class="active">Wiki</a>
+    <div class="topnav-divider"></div>
+    <a href="gallery.html">Gallery</a>
+    <div class="topnav-divider"></div>
+    <a href="log.html">Log</a>
+  </div>
 </nav>
 
 <div class="wiki-wrap theme-eden" id="wiki">
@@ -236,19 +223,12 @@ body {
       <img id="standing-img-el" src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg" alt="standing" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">
     </div>
     <div class="char-badge" id="char-badge">S-Class Guide</div>
-    <div class="char-name-panel" id="char-name-panel">에덴</div>
-    <div class="char-codename" id="char-codename">Eden</div>
+    <div class="char-name-panel" id="char-name-panel">Eden</div>
+    <div class="char-codename" id="char-codename">에덴</div>
   </div>
   <div class="wiki-panel">
-    <div class="music-bar" id="music-bar">
-      <button class="music-btn" id="music-btn" onclick="toggleMusic()" aria-label="재생">
-        <i class="ti ti-player-play" id="music-icon"></i>
-      </button>
-      <span class="music-title">Avicii — SOS ft. Aloe Blacc</span>
-    </div>
-    <audio id="bgm" src="Avicii - SOS (Fan Memories Video) ft. Aloe Blacc.mp3" loop></audio>
     <div class="wiki-header">
-      <div class="wiki-title" id="wiki-title">에덴</div>
+      <div class="wiki-title" id="wiki-title">Eden</div>
       <div class="heart-switcher">
         <button class="heart-btn active" id="btn-eden" onclick="switchTo('eden')" aria-label="에덴으로 전환">🩵</button>
         <button class="heart-btn" id="btn-lilith" onclick="switchTo('lilith')" aria-label="릴리스로 전환">🩷</button>
@@ -285,7 +265,7 @@ var vanguard2 = [
 var data = {
   eden: {
     theme: 'theme-eden', badge: 'S-Class Guide',
-    name: '에덴', codename: 'Eden',
+    name: 'Eden', codename: '에덴',
     attrIcon: 'ti-wind', attrLabel: 'Aero',
     infos: [
       { label: 'Age', value: '28세' }, { label: 'Nationality', value: '한국' },
@@ -316,7 +296,7 @@ var data = {
   },
   lilith: {
     theme: 'theme-lilith', badge: 'S-Class Sentinel',
-    name: '릴리스', codename: 'Lilith',
+    name: 'Lilith', codename: '릴리스',
     attrIcon: 'ti-leaf', attrLabel: 'Verde',
     infos: [
       { label: 'Age', value: '27세' },
