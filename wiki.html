@@ -245,9 +245,42 @@ function toggleMusic() {
   var audio = document.getElementById("bgm");
   audio.volume = 0.3;
   var icon = document.getElementById('music-icon');
-  if (audio.paused) { audio.play(); icon.className = 'ti ti-player-pause'; }
-  else { audio.pause(); icon.className = 'ti ti-player-play'; }
+  if (audio.paused) {
+    audio.play();
+    icon.className = 'ti ti-player-pause';
+    localStorage.setItem('bgm-playing', '1');
+  } else {
+    audio.pause();
+    icon.className = 'ti ti-player-play';
+    localStorage.setItem('bgm-playing', '0');
+  }
 }
+
+(function initBgm() {
+  var audio = document.getElementById('bgm');
+  var icon = document.getElementById('music-icon');
+  if (!audio) return;
+  audio.volume = 0.3;
+  var savedTime = parseFloat(localStorage.getItem('bgm-time') || '0');
+  var wasPlaying = localStorage.getItem('bgm-playing') === '1';
+  audio.addEventListener('loadedmetadata', function() {
+    if (savedTime && savedTime < audio.duration) audio.currentTime = savedTime;
+  });
+  if (wasPlaying) {
+    audio.play().then(function() {
+      icon.className = 'ti ti-player-pause';
+    }).catch(function() {
+      icon.className = 'ti ti-player-play';
+      localStorage.setItem('bgm-playing', '0');
+    });
+  }
+  audio.addEventListener('timeupdate', function() {
+    localStorage.setItem('bgm-time', audio.currentTime);
+  });
+  window.addEventListener('beforeunload', function() {
+    localStorage.setItem('bgm-time', audio.currentTime);
+  });
+})();
 var current = 'eden';
 var teamIdx = 0;
 
