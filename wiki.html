@@ -460,7 +460,10 @@ scrollEl.addEventListener('mousemove', function(e) {
   scrollEl.scrollTop = scrollTop - (e.pageY - scrollEl.offsetTop - startY);
 });
 
-render('eden');
+var params = new URLSearchParams(window.location.search);
+var initial = params.get('char') === 'lilith' ? 'lilith' : 'eden';
+current = initial;
+render(initial);
 </script>
 
 <script src="sparkle.js"></script>
