@@ -192,6 +192,92 @@ body {
   line-height: 1.8;
   color: var(--color-text-secondary);
 }
+
+.yt-thumb {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  background: #000;
+  cursor: pointer;
+}
+.yt-thumb img {
+  width: 100%;
+  display: block;
+  max-height: 400px;
+  object-fit: cover;
+}
+.yt-thumb::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.15);
+}
+.yt-play-btn {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px; height: 44px;
+  background: rgba(20,20,20,0.75);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.yt-play-btn::after {
+  content: '';
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 17px;
+  border-color: transparent transparent transparent #ffffff;
+  margin-left: 4px;
+}
+.yt-duration {
+  position: absolute;
+  right: 8px; bottom: 8px;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+.yt-progress {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 3px;
+  background: rgba(255,255,255,0.3);
+}
+.yt-progress::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 62%;
+  background: #ff0033;
+}
+.yt-info-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.75rem;
+}
+.yt-channel-icon {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2ecc71, #1a1a22);
+  flex-shrink: 0;
+}
+.yt-info-text { min-width: 0; }
+.yt-video-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+  margin-bottom: 2px;
+}
+.yt-channel-meta {
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+}
 </style>
 </head>
 <body>
@@ -221,7 +307,19 @@ body {
       <p>...시끄러운 건 별로니까, 조용한 바닷가에서... 둘만 있을 때 하는 게 낫겠네.</p>
     </div>
 
-    <img class="detail-img" src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/log/001.jpg" alt="001">
+    <div class="yt-thumb">
+      <img src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/log/001.jpg" alt="001">
+      <div class="yt-play-btn"></div>
+      <div class="yt-duration">15:42</div>
+      <div class="yt-progress"></div>
+    </div>
+    <div class="yt-info-row">
+      <div class="yt-channel-icon"></div>
+      <div class="yt-info-text">
+        <div class="yt-video-title">[ASMR] 극강의 부드러움, 프리미엄 꿀 스틱 립밤 10종 비교 리뷰 | No Talking</div>
+        <div class="yt-channel-meta">조회수 1.2만회 · 3일 전</div>
+      </div>
+    </div>
 
     <div class="log-divider-label">최근 시청한 동영상</div>
     <div class="video-block">
