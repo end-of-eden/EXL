@@ -5,6 +5,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩷</text></svg>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>END OF EDEN — Log 001</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="../style.css">
 <style>
@@ -39,10 +40,23 @@ body {
   max-width: 960px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 2px;
+  justify-content: space-between;
   margin-bottom: 10px;
 }
+.topnav-links { display: flex; align-items: center; gap: 2px; }
+.topnav-music { display: flex; align-items: center; gap: 8px; }
+.music-btn {
+  width: 24px; height: 24px;
+  border: 0.5px solid var(--color-border-secondary);
+  border-radius: 50%;
+  background: transparent; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-text-secondary); font-size: 11px;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.music-btn:hover { background: var(--color-background-secondary); }
+.music-title { font-size: 11px; color: var(--color-text-tertiary); letter-spacing: 0.02em; }
 .topnav a {
   font-size: 11px;
   font-weight: 500;
@@ -283,11 +297,20 @@ body {
 <body>
 
 <nav class="topnav">
-  <a href="../wiki.html">Wiki</a>
-  <div class="topnav-divider"></div>
-  <a href="../gallery.html">Gallery</a>
-  <div class="topnav-divider"></div>
-  <a href="../log.html" class="active">Log</a>
+  <div class="topnav-music">
+    <button class="music-btn" id="music-btn" onclick="toggleMusic()" aria-label="재생">
+      <i class="ti ti-player-play" id="music-icon"></i>
+    </button>
+    <span class="music-title">Avicii — SOS ft. Aloe Blacc</span>
+    <audio id="bgm" src="../Avicii - SOS (Fan Memories Video) ft. Aloe Blacc.mp3" loop></audio>
+  </div>
+  <div class="topnav-links">
+    <a href="../wiki.html">Wiki</a>
+    <div class="topnav-divider"></div>
+    <a href="../gallery.html">Gallery</a>
+    <div class="topnav-divider"></div>
+    <a href="../log.html" class="active">Log</a>
+  </div>
 </nav>
 
 <div class="detail-wrap">
@@ -381,6 +404,47 @@ scrollEl.addEventListener('mousemove', function(e) {
   e.preventDefault();
   scrollEl.scrollTop = scrollTop - (e.pageY - scrollEl.offsetTop - startY);
 });
+
+function toggleMusic() {
+  var audio = document.getElementById("bgm");
+  audio.volume = 0.3;
+  var icon = document.getElementById('music-icon');
+  if (audio.paused) {
+    audio.play();
+    icon.className = 'ti ti-player-pause';
+    localStorage.setItem('bgm-playing', '1');
+  } else {
+    audio.pause();
+    icon.className = 'ti ti-player-play';
+    localStorage.setItem('bgm-playing', '0');
+  }
+}
+
+(function initBgm() {
+  var audio = document.getElementById('bgm');
+  var icon = document.getElementById('music-icon');
+  if (!audio) return;
+  audio.volume = 0.3;
+  var savedTime = parseFloat(localStorage.getItem('bgm-time') || '0');
+  var wasPlaying = localStorage.getItem('bgm-playing') === '1';
+  audio.addEventListener('loadedmetadata', function() {
+    if (savedTime && savedTime < audio.duration) audio.currentTime = savedTime;
+  });
+  if (wasPlaying) {
+    audio.play().then(function() {
+      icon.className = 'ti ti-player-pause';
+    }).catch(function() {
+      icon.className = 'ti ti-player-play';
+      localStorage.setItem('bgm-playing', '0');
+    });
+  }
+  audio.addEventListener('timeupdate', function() {
+    localStorage.setItem('bgm-time', audio.currentTime);
+  });
+  window.addEventListener('beforeunload', function() {
+    localStorage.setItem('bgm-time', audio.currentTime);
+  });
+})();
 </script>
 
 <script src="../sparkle.js"></script>
