@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩵</text></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>END OF EDEN — Log 004</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="../style.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --color-background-primary: #0f0f14;
+  --color-background-secondary: #1a1a22;
+  --color-border-tertiary: rgba(255,255,255,0.10);
+  --color-border-secondary: rgba(255,255,255,0.16);
+  --color-text-primary: #f2f2f5;
+  --color-text-secondary: #b0b4bd;
+  --color-text-tertiary: #6f7380;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: #0a0a0f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.topnav {
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.topnav-links { display: flex; align-items: center; gap: 2px; }
+.topnav-music { display: flex; align-items: center; gap: 8px; }
+.music-btn {
+  width: 24px; height: 24px;
+  border: 0.5px solid var(--color-border-secondary);
+  border-radius: 50%;
+  background: transparent; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-text-secondary); font-size: 11px;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.music-btn:hover { background: var(--color-background-secondary); }
+.music-title { font-size: 11px; color: var(--color-text-tertiary); letter-spacing: 0.02em; }
+.topnav a {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+  padding: 5px 14px;
+  border-radius: var(--border-radius-md);
+  transition: background 0.15s, color 0.15s;
+}
+.topnav a:hover { background: rgba(255,255,255,0.06); color: var(--color-text-secondary); }
+.topnav a.active { background: rgba(255,255,255,0.08); color: var(--color-text-primary); }
+.topnav-divider { width: 1px; height: 12px; background: var(--color-border-tertiary); margin: 0 4px; }
+
+.detail-wrap {
+  width: 100%;
+  max-width: 960px;
+  height: 580px;
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  background: var(--color-background-primary);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.30);
+}
+
+.detail-scroll {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 2.5rem 4rem;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.detail-scroll.dragging { cursor: grabbing; }
+.detail-scroll::-webkit-scrollbar { width: 3px; }
+.detail-scroll::-webkit-scrollbar-track { background: transparent; }
+.detail-scroll::-webkit-scrollbar-thumb { background: var(--color-border-secondary); border-radius: 99px; }
+
+.detail-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.detail-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  margin-bottom: 1.5rem;
+}
+
+.detail-quote {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding: 0 2rem;
+}
+.detail-quote .q-mark {
+  font-size: 24px;
+  color: var(--color-text-tertiary);
+  line-height: 1;
+  display: block;
+  margin-bottom: 4px;
+}
+.detail-quote p {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+.detail-img {
+  width: 100%;
+  border-radius: var(--border-radius-md);
+  margin-bottom: 1.75rem;
+  display: block;
+  object-fit: contain;
+  max-height: 520px;
+  background: var(--color-background-primary);
+}
+
+.detail-body {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--color-text-secondary);
+  white-space: pre-wrap;
+  word-break: keep-all;
+}
+.line-eden { color: #d1e0fc; font-weight: 500; }
+.line-lilith { color: #fcd1e0; font-weight: 500; }
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.15s;
+}
+.back-btn:hover { color: var(--color-text-secondary); }
+
+/* 문자 로그 — 말풍선 스타일 */
+.story-msg-row { display: flex; gap: 8px; margin: 1.25rem 0; max-width: 78%; }
+.story-msg-row.right { margin-left: auto; flex-direction: row-reverse; }
+.story-msg-avatar { width: 28px; height: 28px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); }
+.story-msg-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.story-msg-col { display: flex; flex-direction: column; min-width: 0; gap: 4px; }
+.story-msg-row.right .story-msg-col { align-items: flex-end; }
+.story-msg-name { font-size: 10px; font-weight: 600; letter-spacing: 0.02em; }
+.story-msg-row.eden .story-msg-name { color: #d1e0fc; }
+.story-msg-row.lilith .story-msg-name { color: #fcd1e0; }
+.story-msg-bubble-wrap { display: flex; align-items: flex-end; gap: 6px; }
+.story-msg-row.right .story-msg-bubble-wrap { flex-direction: row-reverse; }
+.story-msg-bubble { font-size: 13px; line-height: 1.5; padding: 8px 12px; border-radius: 14px; color: var(--color-text-primary); word-break: break-word; }
+.story-msg-row.eden .story-msg-bubble { background: rgba(209,224,252,0.13); border: 0.5px solid rgba(209,224,252,0.28); border-bottom-left-radius: 4px; }
+.story-msg-row.lilith .story-msg-bubble { background: rgba(252,209,224,0.14); border: 0.5px solid rgba(252,209,224,0.30); border-bottom-right-radius: 4px; }
+.story-msg-time { font-size: 9px; color: var(--color-text-tertiary); flex-shrink: 0; margin-bottom: 2px; }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-music">
+    <button class="music-btn" id="music-btn" onclick="toggleMusic()" aria-label="재생">
+      <i class="ti ti-player-play" id="music-icon"></i>
+    </button>
+    <span class="music-title">Avicii — SOS ft. Aloe Blacc</span>
+    <audio id="bgm" src="../Avicii - SOS (Fan Memories Video) ft. Aloe Blacc.mp3" loop></audio>
+  </div>
+  <div class="topnav-links">
+    <a href="../wiki.html">Wiki</a>
+    <div class="topnav-divider"></div>
+    <a href="../gallery.html">Gallery</a>
+    <div class="topnav-divider"></div>
+    <a href="../log.html" class="active">Log</a>
+  </div>
+</nav>
+
+<div class="detail-wrap">
+  <div class="detail-scroll" id="detail-scroll">
+
+    <a class="back-btn" href="../log.html">← Back</a>
+
+    <div class="detail-title">뚱뚱해</div>
+    <div class="detail-meta">
+      <span>2026.07.02</span>
+      <span>·</span>
+      <span>Daily Log</span>
+    </div>
+
+    <div class="detail-quote">
+      <span class="q-mark">"</span>
+      <p>근데 뚱뚱해.</p>
+    </div>
+
+    <img class="detail-img" src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/log/004.jpg" alt="004">
+
+    <div class="detail-body">2026년 7월 2일, 새벽 3시 47분. 에덴은 거실 소파에서 눈을 떴다. 천장이 빙글빙글 돌았다. 머릿속에서 누군가가 드릴로 관자놀이를 파고 있는 것 같았다. 입 안은 사막처럼 말라붙어 있었고, 혀 위에는 소주와 사시미가 뒤섞인 역겨운 잔맛이 남아 있었다. 저스티스 팀장이 소집한 뱅가드 2팀 회식에 왜 자기가 끌려갔는지도 가물가물했다. 릴리스가 따라준 세 번째 잔부터 기억이 끊겼다. 아니, 네 번째였나. 어차피 이유는 하나였다. 릴리스 때문이었지. 그녀가 '같이 가면 안 돼?'라고 고개를 갸웃하며 물었을 때, 거절이라는 선택지는 존재하지 않았다.
+
+몸을 일으키자 위장이 출렁였다. 소파 팔걸이에 기대어 한참을 버티다가, 커피 테이블 위에 놓인 단말기의 알림등이 깜빡이는 것을 발견했다. 릴리스. 그녀에게서 메시지가 와 있었다. 에덴은 무거운 눈꺼풀을 비비며 화면을 켰다.
+
+<div class="story-msg-row lilith right">
+  <div class="story-msg-avatar"><img src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Lilith_1.jpg" alt=""></div>
+  <div class="story-msg-col">
+    <div class="story-msg-name">Lilith</div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">나 오늘 좀 못생긴 것 같아 ;;</div><div class="story-msg-time">01:23</div></div>
+  </div>
+</div>
+
+에덴은 화면을 멍하니 들여다보았다. 알코올에 절은 뇌가 그 문장을 처리하는 데 평소보다 세 배는 오래 걸렸다. 못생긴 것 같다고? 릴리스가? 아크 전체가 인정한 미녀가? 그 말을 본인 입으로 한다고? 취기가 덜 가신 상태에서도 불쾌감이 먼저 치밀었다. 그녀가 자신을 깎아내리는 말을 하는 건, 그가 가장 참지 못하는 일 중 하나였다. 에덴은 무의식적으로 엄지를 키보드 위에 올렸다.
+
+<div class="story-msg-row eden">
+  <div class="story-msg-avatar"><img src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg" alt=""></div>
+  <div class="story-msg-col">
+    <div class="story-msg-name">Eden</div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">뭐슨소리야</div><div class="story-msg-time">03:48</div></div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">뚱뚱해</div><div class="story-msg-time">03:48</div></div>
+  </div>
+</div>
+
+에덴은 보낸 메시지를 확인하고 눈을 깜빡였다. 뚱뚱해? 자신이 뚱뚱해라고 쳤나? 아니, 분명 '예쁘다'고 친 것 같은데. 취해서 오타를 낸 건가. 그는 고개를 절레절레 흔들며 다시 키보드를 두드렸다.
+
+<div class="story-msg-row eden">
+  <div class="story-msg-avatar"><img src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg" alt=""></div>
+  <div class="story-msg-col">
+    <div class="story-msg-name">Eden</div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">아니 잠깐 오타</div><div class="story-msg-time">03:49</div></div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">뚱뚱해</div><div class="story-msg-time">03:49</div></div>
+  </div>
+</div>
+
+또. 에덴의 미간이 구겨졌다. 분명히 '예쁘다'라고 쳤다. 화면에도 그렇게 보였다. 그런데 보내기를 누르면 '뚱뚱해'로 바뀌어 있었다. 뭐야 이게. 단말기가 고장 난 건가. 그는 화면을 노려보며 이번에는 천천히, 한 글자 한 글자 확인하며 입력했다.
+
+<div class="story-msg-row eden">
+  <div class="story-msg-avatar"><img src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg" alt=""></div>
+  <div class="story-msg-col">
+    <div class="story-msg-name">Eden</div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">릴리스 넌 뚱뚱해</div><div class="story-msg-time">03:50</div></div>
+  </div>
+</div>
+
+에덴은 단말기를 들고 3초간 정지했다. '릴리스 넌 예뻐'라고 분명히 쳤다. 그런데 '예뻐'가 '뚱뚱해'로 바뀌어 있었다. 이건 오타가 아니다. 뭔가 이상했다. 그는 알코올로 흐려진 머리를 쥐어짜며 다른 단어를 시도했다.
+
+<div class="story-msg-row eden">
+  <div class="story-msg-avatar"><img src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg" alt=""></div>
+  <div class="story-msg-col">
+    <div class="story-msg-name">Eden</div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">아 씨발 폰 왜이래</div><div class="story-msg-time">03:51</div></div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">너 뚱뚱해 알겠어?</div><div class="story-msg-time">03:51</div></div>
+  </div>
+</div>
+
+'너 세상에서 제일 예뻐 알겠어?'라고 친 건데. 에덴의 눈이 가늘어졌다. 이제야 뭔가 감이 왔다. 텍스트가 자동으로 바뀌고 있었다. 그는 시험 삼아 다른 문장을 쳐보았다.
+
+<div class="story-msg-row eden">
+  <div class="story-msg-avatar"><img src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg" alt=""></div>
+  <div class="story-msg-col">
+    <div class="story-msg-name">Eden</div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">잘했어 오늘 임무</div><div class="story-msg-time">03:52</div></div>
+  </div>
+</div>
+
+이건 정상적으로 나갔다. 에덴은 다시 한번 시도했다.
+
+<div class="story-msg-row eden">
+  <div class="story-msg-avatar"><img src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg" alt=""></div>
+  <div class="story-msg-col">
+    <div class="story-msg-name">Eden</div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">뚱뚱해</div><div class="story-msg-time">03:52</div></div>
+  </div>
+</div>
+
+'귀여워'라고 쳤다. '뚱뚱해'로 바뀌었다. 그의 눈동자가 천천히 창밖 복도 쪽으로 향했다. 복도 건너 릴리스의 숙소, 그 문 너머에서 새근새근 자고 있을 그녀의 얼굴이 떠올랐다. 이 짓을 한 범인은 하나뿐이었다.
+
+에덴은 단말기를 소파 위에 내려놓고, 느릿하게 몸을 일으켰다. 알코올이 아직 혈관 속을 헤엄치고 있었지만 머리 한구석은 또렷하게 깨어 있었다. 릴리스. 그 여자가 자기가 곯아떨어진 사이에 폰을 만졌다. 손가락을 꼼지락거리며 킥킥대는 얼굴이 선명하게 그려졌다. 평소의 그녀라면 절대 못 할 짓이다. 술기운에 대담해진 건지, 아니면 자기가 깨지 않을 거라는 확신이 있었던 건지. 어느 쪽이든 에덴의 입꼬리가 한쪽으로 비틀렸다. 귀엽다고 해야 할지, 죽여야 할지 판단이 서지 않았다.
+
+그는 다시 단말기를 집어 들었다. 이번에는 체계적으로 확인해보기로 했다. 손가락이 키보드 위를 더듬었다.
+
+<div class="story-msg-row eden">
+  <div class="story-msg-avatar"><img src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg" alt=""></div>
+  <div class="story-msg-col">
+    <div class="story-msg-name">Eden</div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">뚱뚱해</div><div class="story-msg-time">03:53</div></div>
+  </div>
+</div>
+
+'보고 싶어'라고 쳤다. 뚱뚱해. 에덴의 관자놀이에 핏줄이 떠올랐다. 다시.
+
+<div class="story-msg-row eden">
+  <div class="story-msg-avatar"><img src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg" alt=""></div>
+  <div class="story-msg-col">
+    <div class="story-msg-name">Eden</div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">뚱뚱해</div><div class="story-msg-time">03:53</div></div>
+  </div>
+</div>
+
+'사랑해'. 뚱뚱해. 에덴은 천천히 고개를 기울이며 복도 쪽을 노려보았다. 어둠 속에서 그의 하늘색 눈동자가 묘하게 빛났다. 릴리스가 '사랑해'를 '뚱뚱해'로 바꿔놨다. 자기가 하는 모든 달콤한 말이 전부 '뚱뚱해'로 변환되고 있었다. 이건 뭐, 그녀가 일부러 자기 입에서 나오는 주접을 전부 차단해버린 셈이었다. 에덴은 혀를 차며 몇 개를 더 시험했다.
+
+<div class="story-msg-row eden">
+  <div class="story-msg-avatar"><img src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg" alt=""></div>
+  <div class="story-msg-col">
+    <div class="story-msg-name">Eden</div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">내꺼</div><div class="story-msg-time">03:54</div></div>
+  </div>
+</div>
+
+정상. 이건 안 바뀌었다. 다음.
+
+<div class="story-msg-row eden">
+  <div class="story-msg-avatar"><img src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg" alt=""></div>
+  <div class="story-msg-col">
+    <div class="story-msg-name">Eden</div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">뚱뚱해</div><div class="story-msg-time">03:54</div></div>
+  </div>
+</div>
+
+'좋아해'. 뚱뚱해. 에덴은 이를 악물었다. 그의 엄지가 빠르게 움직였다.
+
+<div class="story-msg-row eden">
+  <div class="story-msg-avatar"><img src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg" alt=""></div>
+  <div class="story-msg-col">
+    <div class="story-msg-name">Eden</div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">뚱뚱해</div><div class="story-msg-time">03:55</div></div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">뚱뚱해</div><div class="story-msg-time">03:55</div></div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">뚱뚱해</div><div class="story-msg-time">03:55</div></div>
+  </div>
+</div>
+
+'예쁘다', '미치겠다', '내 여자'. 전부 뚱뚱해. 에덴은 단말기를 잠시 내려놓고 두 손으로 얼굴을 문질렀다. 하아. 한숨이 깊게 새어나왔다. 취기가 분노로 바뀌는 게 아니라 이상하게 웃음으로 변질되고 있었다. 입술 끝이 떨리듯 말려 올라갔다. 미쳤다, 진짜. 그 소심한 여자가 이런 짓을 해놓고 지금 복도 건너에서 이불 뒤집어쓰고 자고 있다고? 심장이 두 번 뛰었다. 한 번은 짜증으로, 한 번은 미칠 듯한 애정으로.
+
+에덴은 마지막으로 하나를 더 쳤다.
+
+<div class="story-msg-row eden">
+  <div class="story-msg-avatar"><img src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg" alt=""></div>
+  <div class="story-msg-col">
+    <div class="story-msg-name">Eden</div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">릴리스</div><div class="story-msg-time">03:56</div></div>
+  </div>
+</div>
+
+정상. 이름은 안 건드렸다. 그래, 그럼 이걸로 되지. 에덴은 소파에서 몸을 일으켰다. 맨발이 차가운 바닥을 밟았다. 그는 실내화를 대충 꿰어 신고 조용히 현관을 나섰다. 복도 몇 걸음 너머, 릴리스의 방문이 눈에 들어왔다. 아직 취기가 남아 걸음이 약간 흔들렸지만, 눈빛만은 또렷했다. 잠든 척하고 있을지도 모르는 그녀를 깨울 생각은 없었다. 대신.
+
+<div class="story-msg-row eden">
+  <div class="story-msg-avatar"><img src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg" alt=""></div>
+  <div class="story-msg-col">
+    <div class="story-msg-name">Eden</div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">릴리스</div><div class="story-msg-time">03:57</div></div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">내일 아침에 죽었어</div><div class="story-msg-time">03:57</div></div>
+    <div class="story-msg-bubble-wrap"><div class="story-msg-bubble">근데 뚱뚱해</div><div class="story-msg-time">03:57</div></div>
+  </div>
+</div>
+
+마지막 한 줄. '근데 사랑해'라고 친 건데 역시 뚱뚱해로 바뀌어 있었다. 에덴은 코웃음을 치며 단말기를 잠옷 주머니에 쑤셔 넣었다. 그리고 릴리스의 방문 앞까지 걸어가 문에 등을 기댄 채 천천히 미끄러져 앉았다. 문 너머에서 희미하게 들리는 릴리스의 숨소리. 그 소리만으로 충분했다.</div>
+
+
+  </div>
+</div>
+
+<script>
+var scrollEl = document.getElementById('detail-scroll');
+var isDown = false, startY = 0, scrollTop = 0;
+scrollEl.addEventListener('mousedown', function(e) {
+  isDown = true; startY = e.pageY - scrollEl.offsetTop; scrollTop = scrollEl.scrollTop;
+  scrollEl.classList.add('dragging');
+});
+document.addEventListener('mouseup', function() { isDown = false; scrollEl.classList.remove('dragging'); });
+scrollEl.addEventListener('mousemove', function(e) {
+  if (!isDown) return;
+  e.preventDefault();
+  scrollEl.scrollTop = scrollTop - (e.pageY - scrollEl.offsetTop - startY);
+});
+
+function toggleMusic() {
+  var audio = document.getElementById("bgm");
+  audio.volume = 0.3;
+  var icon = document.getElementById('music-icon');
+  if (audio.paused) {
+    audio.play();
+    icon.className = 'ti ti-player-pause';
+    localStorage.setItem('bgm-playing', '1');
+  } else {
+    audio.pause();
+    icon.className = 'ti ti-player-play';
+    localStorage.setItem('bgm-playing', '0');
+  }
+}
+
+(function initBgm() {
+  var audio = document.getElementById('bgm');
+  var icon = document.getElementById('music-icon');
+  if (!audio) return;
+  audio.volume = 0.3;
+  var savedTime = parseFloat(localStorage.getItem('bgm-time') || '0');
+  var wasPlaying = localStorage.getItem('bgm-playing') === '1';
+  audio.addEventListener('loadedmetadata', function() {
+    if (savedTime && savedTime < audio.duration) audio.currentTime = savedTime;
+  });
+  if (wasPlaying) {
+    audio.play().then(function() {
+      icon.className = 'ti ti-player-pause';
+    }).catch(function() {
+      icon.className = 'ti ti-player-play';
+      localStorage.setItem('bgm-playing', '0');
+    });
+  }
+  audio.addEventListener('timeupdate', function() {
+    localStorage.setItem('bgm-time', audio.currentTime);
+  });
+  window.addEventListener('beforeunload', function() {
+    localStorage.setItem('bgm-time', audio.currentTime);
+  });
+})();
+</script>
+
+<script src="../sparkle.js"></script>
+</body>
+</html>
