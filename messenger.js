@@ -2,7 +2,7 @@
   var style = document.createElement('style');
   style.textContent = `
   .msg-fab {
-    position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+    position: absolute; z-index: 9998;
     width: 40px; height: 40px; border-radius: 50%;
     background: var(--color-background-secondary, #1a1a22);
     border: 0.5px solid var(--color-border-secondary, rgba(255,255,255,0.16));
@@ -20,7 +20,7 @@
   @keyframes msgPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
 
   .msg-panel {
-    position: fixed; bottom: 72px; right: 24px; z-index: 9999;
+    position: absolute; z-index: 9999;
     width: min(360px, calc(100vw - 32px));
     height: min(520px, calc(100vh - 140px));
     background: var(--color-background-primary, #0f0f14);
@@ -208,5 +208,24 @@
     toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 1600);
   });
 
-  // 위치는 CSS의 고정 bottom/right 값을 그대로 사용 (카드 크기/스크롤에 영향받지 않도록)
+  var FAB_SIZE = 40, GAP_PANEL = 12;
+  function reposition() {
+    var host = document.querySelector('.wiki-wrap, .gallery-wrap, .log-wrap');
+    if (!host) return;
+    var r = host.getBoundingClientRect();
+    var scrollX = window.scrollX || window.pageXOffset;
+    var scrollY = window.scrollY || window.pageYOffset;
+    // 카드 우측 하단 모서리(문서 좌표)에 버튼 중심이 걸치도록
+    var cornerX = r.right + scrollX;
+    var cornerY = r.bottom + scrollY;
+    fab.style.left = (cornerX - FAB_SIZE / 2) + 'px';
+    fab.style.top = (cornerY - FAB_SIZE / 2) + 'px';
+    panel.style.left = (cornerX - FAB_SIZE / 2 - panel.offsetWidth + FAB_SIZE) + 'px';
+    panel.style.top = (cornerY - FAB_SIZE / 2 - FAB_SIZE - GAP_PANEL - panel.offsetHeight) + 'px';
+  }
+  window.addEventListener('resize', reposition);
+  window.addEventListener('load', reposition);
+  reposition();
+  // 이미지 로딩 등으로 레이아웃이 늦게 안정되는 경우 대비
+  setTimeout(reposition, 300);
 })();
