@@ -141,11 +141,12 @@
   var prevWho = null;
   log.forEach(function (m) {
     var follow = m.who === prevWho;
+    var alignClass = m.who === 'lilith' ? ' right' : '';
     var avatarHtml = follow
       ? '<div class="msg-avatar spacer"></div>'
       : '<div class="msg-avatar"><img src="' + AVA[m.who] + '" alt=""></div>';
     var nameHtml = follow ? '' : '<div class="msg-name">' + NAME[m.who] + '</div>';
-    rowsHtml += '<div class="msg-row ' + m.who + (follow ? ' follow' : '') + '">' +
+    rowsHtml += '<div class="msg-row ' + m.who + alignClass + (follow ? ' follow' : '') + '">' +
       avatarHtml +
       '<div class="msg-col">' + nameHtml +
       '<div class="msg-bubble-wrap"><div class="msg-bubble">' + m.text + '</div>' +
@@ -188,4 +189,20 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 1600);
   });
+
+  // 넓은 화면에서 버튼이 카드와 멀리 떨어지지 않도록, 카드(위키/갤러리/로그 wrap) 모서리에 붙여서 위치 계산
+  function reposition() {
+    var host = document.querySelector('.wiki-wrap, .gallery-wrap, .log-wrap');
+    if (!host) return;
+    var r = host.getBoundingClientRect();
+    var right = Math.max(12, window.innerWidth - r.right + 4);
+    var bottom = Math.max(12, window.innerHeight - r.bottom + 4);
+    fab.style.right = right + 'px';
+    fab.style.bottom = bottom + 'px';
+    panel.style.right = right + 'px';
+    panel.style.bottom = (bottom + 64) + 'px';
+  }
+  window.addEventListener('resize', reposition);
+  window.addEventListener('scroll', reposition, { passive: true });
+  reposition();
 })();
