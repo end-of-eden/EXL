@@ -14,7 +14,7 @@
   .msg-fab:hover { transform: scale(1.06); background: var(--color-background-tertiary, #22222c); }
   .msg-fab .dot {
     position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; border-radius: 50%;
-    background: #f2a8c4; box-shadow: 0 0 0 2px var(--color-background-secondary, #1a1a22);
+    background: #fcd1e0; box-shadow: 0 0 0 2px var(--color-background-secondary, #1a1a22);
     animation: msgPulse 2s infinite;
   }
   @keyframes msgPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
@@ -72,10 +72,14 @@
   }
   .msg-time { font-size: 9px; color: var(--color-text-tertiary, #6f7380); flex-shrink: 0; margin-bottom: 2px; }
 
-  .msg-row.eden .msg-name { color: #7cc9e8; }
-  .msg-row.eden .msg-bubble { background: rgba(124,201,232,0.13); border: 0.5px solid rgba(124,201,232,0.28); border-bottom-left-radius: 4px; }
-  .msg-row.lilith .msg-name { color: #f2a8c4; }
-  .msg-row.lilith .msg-bubble { background: rgba(242,168,196,0.14); border: 0.5px solid rgba(242,168,196,0.30); border-bottom-right-radius: 4px; }
+  .msg-row.eden .msg-name { color: #d1e0fc; }
+  .msg-row.eden .msg-bubble { background: rgba(209,224,252,0.13); border: 0.5px solid rgba(209,224,252,0.28); border-bottom-left-radius: 4px; }
+  .msg-row.lilith .msg-name { color: #fcd1e0; }
+  .msg-row.lilith .msg-bubble { background: rgba(252,209,224,0.14); border: 0.5px solid rgba(252,209,224,0.30); border-bottom-right-radius: 4px; }
+
+  .msg-divider { display: flex; align-items: center; gap: 8px; margin: 14px 0 6px; }
+  .msg-divider::before, .msg-divider::after { content: ''; flex: 1; height: 0.5px; background: var(--color-border-tertiary, rgba(255,255,255,0.10)); }
+  .msg-divider span { font-size: 10px; color: var(--color-text-tertiary, #6f7380); white-space: nowrap; }
 
   .msg-footer {
     flex-shrink: 0; display: flex; align-items: center; gap: 8px;
@@ -149,6 +153,11 @@
   var rowsHtml = '';
   var prevWho = null;
   log.forEach(function (m) {
+    if (m.divider) {
+      rowsHtml += '<div class="msg-divider"><span>' + m.divider + '</span></div>';
+      prevWho = null; // 구분선 다음엔 항상 아바타/이름 다시 표시
+      return;
+    }
     var follow = m.who === prevWho;
     var alignClass = m.who === 'lilith' ? ' right' : '';
     var avatarHtml = follow
