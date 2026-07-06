@@ -3,24 +3,24 @@
   style.textContent = `
   .msg-fab {
     position: fixed; bottom: 24px; right: 24px; z-index: 9998;
-    width: 52px; height: 52px; border-radius: 50%;
+    width: 40px; height: 40px; border-radius: 50%;
     background: var(--color-background-secondary, #1a1a22);
     border: 0.5px solid var(--color-border-secondary, rgba(255,255,255,0.16));
     box-shadow: 0 6px 20px rgba(0,0,0,0.45);
     display: flex; align-items: center; justify-content: center;
-    cursor: pointer; color: var(--color-text-primary, #f2f2f5); font-size: 22px;
+    cursor: pointer; color: var(--color-text-primary, #f2f2f5); font-size: 17px;
     transition: transform 0.15s, background 0.15s;
   }
   .msg-fab:hover { transform: scale(1.06); background: var(--color-background-tertiary, #22222c); }
   .msg-fab .dot {
-    position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; border-radius: 50%;
+    position: absolute; top: 4px; right: 4px; width: 7px; height: 7px; border-radius: 50%;
     background: #fcd1e0; box-shadow: 0 0 0 2px var(--color-background-secondary, #1a1a22);
     animation: msgPulse 2s infinite;
   }
   @keyframes msgPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
 
   .msg-panel {
-    position: fixed; bottom: 88px; right: 24px; z-index: 9999;
+    position: fixed; bottom: 72px; right: 24px; z-index: 9999;
     width: min(360px, calc(100vw - 32px));
     height: min(520px, calc(100vh - 140px));
     background: var(--color-background-primary, #0f0f14);
@@ -208,22 +208,5 @@
     toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 1600);
   });
 
-  // 넓은 화면에서 버튼이 카드와 멀리 떨어지지 않도록, 카드(위키/갤러리/로그 wrap) 바로 아래쪽에 붙여서 위치 계산
-  // (카드 모서리에 딱 붙이면 카드 안 콘텐츠와 겹치므로, 카드 아래로 살짝 내려서 겹침 방지)
-  var FAB_SIZE = 52, GAP_SIDE = 24, GAP_PANEL = 12;
-  function reposition() {
-    var host = document.querySelector('.wiki-wrap, .gallery-wrap, .log-wrap');
-    if (!host) return;
-    var r = host.getBoundingClientRect();
-    // 카드와 겹치지 않게 오른쪽으로 띄우되, 세로 위치는 카드 하단 테두리 라인 높이에 맞춤
-    var right = Math.max(12, window.innerWidth - r.right - GAP_SIDE - FAB_SIZE);
-    var bottom = Math.max(12, (window.innerHeight - r.bottom) - FAB_SIZE / 2);
-    fab.style.right = right + 'px';
-    fab.style.bottom = bottom + 'px';
-    panel.style.right = right + 'px';
-    panel.style.bottom = (bottom + FAB_SIZE + GAP_PANEL) + 'px';
-  }
-  window.addEventListener('resize', reposition);
-  window.addEventListener('scroll', reposition, { passive: true });
-  reposition();
+  // 위치는 CSS의 고정 bottom/right 값을 그대로 사용 (카드 크기/스크롤에 영향받지 않도록)
 })();
