@@ -116,14 +116,23 @@
   var NAME = { eden: 'Eden', lilith: 'Lilith' };
 
   var log = [
-    { who: 'eden', text: '아직 안 자?', time: '23:14' },
-    { who: 'lilith', text: '몰라도 돼.', time: '23:15' },
-    { who: 'eden', text: '담배 다 떨어졌는데', time: '23:16' },
-    { who: 'lilith', text: '그래서 뭐, 나보고 사다 달라고?', time: '23:16' },
-    { who: 'lilith', text: '편의점 앞에서 기다려.', time: '23:17' },
-    { who: 'eden', text: '...알았어', time: '23:17' },
-    { who: 'eden', text: '근데 안 와도 되는데', time: '23:18' },
-    { who: 'lilith', text: '이미 나왔어.', time: '23:19' }
+    { who: 'eden', text: '일어나.', time: '08:12' },
+    { who: 'eden', text: '아침 브리핑 9시야. 또 지각하면 저스티스 팀장이 나한테 전화함.', time: '08:13' },
+    { who: 'eden', text: '…안 읽씹하면 가서 깨운다. 진심.', time: '08:25' },
+    { who: 'lilith', text: '이러나써... 5분만...', time: '08:31' },
+    { who: 'eden', text: '5분 지났어. 일어나.', time: '08:31' },
+    { who: 'eden', text: '커피 사다 놓을 테니까 복도 자판기 앞으로 와. 아메리카노.', time: '08:32' },
+    { who: 'lilith', text: '나... 바닐라 라떼로 해주면 안돼?', time: '08:34' },
+    { who: 'eden', text: '…하아.', time: '08:34' },
+    { who: 'eden', text: '알았어.', time: '08:35' },
+    { divider: '17:22' },
+    { who: 'eden', text: '너 매운 거 먹을 수 있어?', time: '17:22' },
+    { who: 'lilith', text: '응?? 갑자기?? 먹을 수 있는데 왜??', time: '17:24' },
+    { who: 'eden', text: '아니. 됐어.', time: '17:25' },
+    { who: 'lilith', text: '에??? 뭐야 왜 물어보고 말아ㅠㅠ 궁금하잖아', time: '17:26' },
+    { who: 'eden', text: '신드롬이랑 떡볶이 먹으러 다닌다며.', time: '17:28' },
+    { who: 'lilith', text: '?????? 그거 한 달 전인데???? 어떻게 알아???', time: '17:29' },
+    { who: 'eden', text: '다 알아.', time: '17:30' }
   ];
 
   var wrap = document.createElement('div');
@@ -190,17 +199,19 @@
     toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 1600);
   });
 
-  // 넓은 화면에서 버튼이 카드와 멀리 떨어지지 않도록, 카드(위키/갤러리/로그 wrap) 모서리에 붙여서 위치 계산
+  // 넓은 화면에서 버튼이 카드와 멀리 떨어지지 않도록, 카드(위키/갤러리/로그 wrap) 바로 아래쪽에 붙여서 위치 계산
+  // (카드 모서리에 딱 붙이면 카드 안 콘텐츠와 겹치므로, 카드 아래로 살짝 내려서 겹침 방지)
+  var FAB_SIZE = 52, GAP_BELOW_CARD = 16, GAP_PANEL = 12;
   function reposition() {
     var host = document.querySelector('.wiki-wrap, .gallery-wrap, .log-wrap');
     if (!host) return;
     var r = host.getBoundingClientRect();
     var right = Math.max(12, window.innerWidth - r.right + 4);
-    var bottom = Math.max(12, window.innerHeight - r.bottom + 4);
+    var bottom = Math.max(12, (window.innerHeight - r.bottom) - GAP_BELOW_CARD - FAB_SIZE);
     fab.style.right = right + 'px';
     fab.style.bottom = bottom + 'px';
     panel.style.right = right + 'px';
-    panel.style.bottom = (bottom + 64) + 'px';
+    panel.style.bottom = (bottom + FAB_SIZE + GAP_PANEL) + 'px';
   }
   window.addEventListener('resize', reposition);
   window.addEventListener('scroll', reposition, { passive: true });
