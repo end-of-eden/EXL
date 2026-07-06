@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg">
+<link rel="preload" as="image" href="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Lilith_1.jpg">
 <meta charset="UTF-8">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩵</text></svg>">  
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -282,6 +284,16 @@ function toggleMusic() {
   });
 })();
 var current = 'eden';
+
+var STANDING_IMG = {
+  eden: 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg',
+  lilith: 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Lilith_1.jpg'
+};
+// 전환 클릭 시점에 이미 캐시돼 있도록 두 스탠딩 이미지를 미리 받아둠 (밀림현상 방지)
+Object.keys(STANDING_IMG).forEach(function (k) {
+  var pre = new Image();
+  pre.src = STANDING_IMG[k];
+});
 var teamIdx = 0;
 
 var rst = [
@@ -441,9 +453,7 @@ function render(key) {
   var d = data[key];
   teamIdx = 0;
   document.getElementById('wiki').className = 'wiki-wrap ' + d.theme;
-  document.getElementById('standing-img-el').src = key === 'eden'
-    ? 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg'
-    : 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Lilith_1.jpg';
+  document.getElementById('standing-img-el').src = STANDING_IMG[key];
   document.getElementById('char-badge').textContent = d.badge;
   document.getElementById('char-name-panel').textContent = d.name;
   document.getElementById('char-codename').textContent = d.codename;
