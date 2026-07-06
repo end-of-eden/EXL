@@ -219,7 +219,7 @@
     var cardBottom = r.bottom + scrollY;
     // 카드와 절대 겹치지 않도록 오른쪽으로 GAP_SIDE만큼 띄우고, 높이만 하단 라인에 맞춤
     var fabLeft = cardRight + GAP_SIDE;
-    var fabTop = cardBottom - FAB_SIZE / 2;
+    var fabTop = cardBottom - FAB_SIZE;
     fab.style.left = fabLeft + 'px';
     fab.style.top = fabTop + 'px';
     panel.style.left = (fabLeft - panel.offsetWidth + FAB_SIZE) + 'px';
