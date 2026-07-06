@@ -208,20 +208,22 @@
     toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 1600);
   });
 
-  var FAB_SIZE = 40, GAP_PANEL = 12;
+  var FAB_SIZE = 40, GAP_SIDE = 20, GAP_PANEL = 12;
   function reposition() {
     var host = document.querySelector('.wiki-wrap, .gallery-wrap, .log-wrap');
     if (!host) return;
     var r = host.getBoundingClientRect();
     var scrollX = window.scrollX || window.pageXOffset;
     var scrollY = window.scrollY || window.pageYOffset;
-    // 카드 우측 하단 모서리(문서 좌표)에 버튼 중심이 걸치도록
-    var cornerX = r.right + scrollX;
-    var cornerY = r.bottom + scrollY;
-    fab.style.left = (cornerX - FAB_SIZE / 2) + 'px';
-    fab.style.top = (cornerY - FAB_SIZE / 2) + 'px';
-    panel.style.left = (cornerX - FAB_SIZE / 2 - panel.offsetWidth + FAB_SIZE) + 'px';
-    panel.style.top = (cornerY - FAB_SIZE / 2 - FAB_SIZE - GAP_PANEL - panel.offsetHeight) + 'px';
+    var cardRight = r.right + scrollX;
+    var cardBottom = r.bottom + scrollY;
+    // 카드와 절대 겹치지 않도록 오른쪽으로 GAP_SIDE만큼 띄우고, 높이만 하단 라인에 맞춤
+    var fabLeft = cardRight + GAP_SIDE;
+    var fabTop = cardBottom - FAB_SIZE / 2;
+    fab.style.left = fabLeft + 'px';
+    fab.style.top = fabTop + 'px';
+    panel.style.left = (fabLeft - panel.offsetWidth + FAB_SIZE) + 'px';
+    panel.style.top = (fabTop - GAP_PANEL - panel.offsetHeight) + 'px';
   }
   window.addEventListener('resize', reposition);
   window.addEventListener('load', reposition);
