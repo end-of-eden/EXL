@@ -210,13 +210,13 @@
 
   // 넓은 화면에서 버튼이 카드와 멀리 떨어지지 않도록, 카드(위키/갤러리/로그 wrap) 바로 아래쪽에 붙여서 위치 계산
   // (카드 모서리에 딱 붙이면 카드 안 콘텐츠와 겹치므로, 카드 아래로 살짝 내려서 겹침 방지)
-  var FAB_SIZE = 52, GAP_SIDE = 20, RISE_FROM_BOTTOM = 40, GAP_PANEL = 12;
+  var FAB_SIZE = 52, RISE_FROM_BOTTOM = 40, GAP_PANEL = 12;
   function reposition() {
     var host = document.querySelector('.wiki-wrap, .gallery-wrap, .log-wrap');
     if (!host) return;
     var r = host.getBoundingClientRect();
-    // 카드 아래가 아니라, 카드 오른쪽 바깥 여백에 하단 모서리를 살짝 타고 올라간 배지처럼 배치
-    var right = Math.max(12, window.innerWidth - r.right - GAP_SIDE - FAB_SIZE);
+    // 버튼 중심이 카드 오른쪽 경계선에 걸치도록 (반은 카드 안, 반은 밖)
+    var right = Math.max(-FAB_SIZE / 2, window.innerWidth - r.right - FAB_SIZE / 2);
     var bottom = Math.max(12, (window.innerHeight - r.bottom) + RISE_FROM_BOTTOM);
     fab.style.right = right + 'px';
     fab.style.bottom = bottom + 'px';
