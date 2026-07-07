@@ -210,7 +210,7 @@
 
   var FAB_SIZE = 40, GAP_SIDE = 20, GAP_PANEL = 12;
   function reposition() {
-    var host = document.querySelector('.wiki-wrap, .gallery-wrap, .log-wrap');
+    var host = document.querySelector('.wiki-wrap, .gallery-wrap, .log-wrap, .detail-wrap');
     if (!host) return;
     var r = host.getBoundingClientRect();
     var scrollX = window.scrollX || window.pageXOffset;
