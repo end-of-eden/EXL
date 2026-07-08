@@ -9,8 +9,10 @@
     box-shadow: 0 6px 20px rgba(0,0,0,0.45);
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; color: var(--color-text-primary, #f2f2f5); font-size: 17px;
-    transition: transform 0.15s, background 0.15s;
+    transition: transform 0.15s, background 0.15s, opacity 0.25s ease;
+    opacity: 0; pointer-events: none;
   }
+  .msg-fab.ready { opacity: 1; pointer-events: auto; }
   .msg-fab:hover { transform: scale(1.06); background: var(--color-background-tertiary, #22222c); }
   .msg-fab .dot {
     position: absolute; top: 4px; right: 4px; width: 7px; height: 7px; border-radius: 50%;
@@ -210,7 +212,7 @@
 
   var FAB_SIZE = 40, GAP_SIDE = 20, GAP_PANEL = 12;
   function reposition() {
-    var host = document.querySelector('.wiki-wrap, .gallery-wrap, .log-wrap, .detail-wrap');
+    var host = document.querySelector('.wiki-wrap, .gallery-wrap, .log-wrap, .detail-wrap, .post-wrap');
     if (!host) return;
     var r = host.getBoundingClientRect();
     var scrollX = window.scrollX || window.pageXOffset;
@@ -226,8 +228,36 @@
     panel.style.top = (fabTop - GAP_PANEL - panel.offsetHeight) + 'px';
   }
   window.addEventListener('resize', reposition);
-  window.addEventListener('load', reposition);
   reposition();
-  // 이미지 로딩 등으로 레이아웃이 늦게 안정되는 경우 대비
-  setTimeout(reposition, 300);
+  // 카드 크기가 실제로 바뀔 때마다(이미지 로딩 등) 자동으로 재계산 — 타이머 땜빵 대신 정확하게 감지
+  var host = document.querySelector('.wiki-wrap, .gallery-wrap, .log-wrap, .detail-wrap, .post-wrap');
+  if (window.ResizeObserver && host) {
+    var ro = new ResizeObserver(reposition);
+    ro.observe(host);
+  }
+
+  // 위치가 확정되기 전까지는 숨겨뒀다가, 모든 이미지 로딩이 끝난 뒤 한 번에 자연스럽게 표시
+  var imgs = Array.prototype.slice.call(document.querySelectorAll('img'));
+  var pending = imgs.filter(function (img) { return !img.complete; });
+  function reveal() {
+    reposition();
+    requestAnimationFrame(function () { fab.classList.add('ready'); });
+  }
+  if (pending.length === 0) {
+    reveal();
+  } else {
+    var remaining = pending.length;
+    pending.forEach(function (img) {
+      img.addEventListener('load', function () {
+        remaining--;
+        if (remaining <= 0) reveal();
+      }, { once: true });
+      img.addEventListener('error', function () {
+        remaining--;
+        if (remaining <= 0) reveal();
+      }, { once: true });
+    });
+    // 혹시 이미지가 끝까지 로드 실패해도 무한정 숨겨져 있지 않도록 최소한의 안전장치
+    setTimeout(reveal, 1500);
+  }
 })();
