@@ -102,12 +102,38 @@ body.fade-out {
 <body>
 
 <div class="boot-wrap">
-  <div class="boot-loading"><span>NOW LOADING</span><span>95%</span></div>
-  <div class="boot-bar-track"><div class="boot-bar-fill"></div></div>
-  <a class="boot-line" href="https://end-of-eden.github.io/EXL/roster.html"><span class="boot-dot green"></span>CODE EL · SIGNAL CONNECT</a>
-  <a class="boot-line" href="https://end-of-eden.github.io/Synapse/roster.html"><span class="boot-dot red"></span>CODE SS · SIGNAL LOST</a>
+  <div class="boot-loading"><span>NOW LOADING</span><span id="boot-pct">95%</span></div>
+  <div class="boot-bar-track"><div class="boot-bar-fill" id="boot-bar-fill"></div></div>
+  <a class="boot-line" href="https://end-of-eden.github.io/EXL/roster.html" onclick="return bootThenGo(event, this.href)"><span class="boot-dot green"></span>CODE EL · SIGNAL CONNECT</a>
+  <a class="boot-line" href="https://end-of-eden.github.io/Synapse/roster.html" onclick="return bootThenGo(event, this.href)"><span class="boot-dot red"></span>CODE SS · SIGNAL LOST</a>
 </div>
 
+<script>
+function bootThenGo(e, url) {
+  e.preventDefault();
+  var fill = document.getElementById('boot-bar-fill');
+  var pct = document.getElementById('boot-pct');
+  var steps = [95, 97, 98, 99, 100];
+  var i = 1; // 이미 95%에서 시작
+  fill.style.animation = 'none';
+  fill.style.opacity = '1';
+
+  function step() {
+    if (i >= steps.length) {
+      document.body.classList.add('fade-out');
+      setTimeout(function () { location.href = url; }, 350);
+      return;
+    }
+    var v = steps[i];
+    fill.style.width = v + '%';
+    pct.textContent = v + '%';
+    i++;
+    setTimeout(step, 120 + Math.random() * 140);
+  }
+  step();
+  return false;
+}
+</script>
 <script src="sparkle.js"></script>
 </body>
 </html>
