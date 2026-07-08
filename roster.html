@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩵</text></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>END OF EDEN</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0a0a0f;
+  color: #ffffff;
+  min-height: 100vh;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+body.fade-out {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.roster-wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 80px 24px 100px;
+}
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 40px;
+}
+
+.status-bar .status-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 99px;
+  background: #4a9d8f;
+  margin-right: 6px;
+  box-shadow: 0 0 6px #4a9d8f;
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+.welcome-line {
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 6px;
+}
+
+.roster-title {
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-align: center;
+}
+
+.roster-subtitle {
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-align: center;
+  color: rgba(255,255,255,0.55);
+}
+
+.roster-divider {
+  margin: 40px 0 48px;
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.section-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.section-header .class-tag {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.5);
+}
+
+.section-line {
+  margin: 12px 0 32px;
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.char-card {
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 3 / 4;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.char-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.char-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+.char-card .dim-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  transition: background 0.3s ease;
+  z-index: 1;
+}
+
+.char-card:hover .dim-overlay {
+  background: rgba(0,0,0,0.45);
+}
+
+.char-card-info {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2;
+}
+
+.char-card::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 45%;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.char-card-info .char-name {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.6);
+}
+
+.char-card-info .attr-badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 4px;
+  color: #ffffff;
+}
+
+.attr-wind { background: #2ecc71; }
+.attr-verde { background: #6aaa64; }
+
+.file-no {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.55);
+  z-index: 2;
+}
+
+.view-more {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0);
+  margin-top: 10px;
+  transition: color 0.3s ease 0.05s;
+}
+
+.char-card:hover .view-more {
+  color: rgba(255,255,255,0.9);
+}
+
+.roster-footer {
+  margin-top: 60px;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.25);
+}
+</style>
+</head>
+<body>
+<div class="roster-wrap">
+  <div class="status-bar">
+    <span><span class="status-dot"></span>ARCHIVE STATUS · ACTIVE</span>
+    <span>CLEARANCE LEVEL REQUIRED: S</span>
+  </div>
+
+  <div class="welcome-line">WELCOME, OPERATOR. SELECT TARGET FILE TO PROCEED.</div>
+  <div class="roster-title">ARCH DATABASE</div>
+  <div class="roster-subtitle">PERSONNEL ON FILE</div>
+  <div class="roster-divider"></div>
+
+  <div class="section-header">
+    <h2>ARCH</h2>
+    <span class="class-tag">S CLASS</span>
+  </div>
+  <div class="section-line"></div>
+
+  <div class="card-grid">
+    <div class="char-card" onclick="goToWiki('eden')">
+      <img src="img/gallery/001.jpg" alt="EDEN">
+      <div class="dim-overlay"></div>
+      <div class="char-card-info">
+        <div class="char-name">EDEN</div>
+        <span class="attr-badge attr-wind">Aero</span>
+        <div class="view-more">VIEW FILE →</div>
+      </div>
+    </div>
+
+    <div class="char-card" onclick="goToWiki('lilith')">
+      <img src="img/gallery/002.jpg" alt="LILITH">
+      <div class="dim-overlay"></div>
+      <div class="char-card-info">
+        <div class="char-name">LILITH</div>
+        <span class="attr-badge attr-verde">Verde</span>
+        <div class="view-more">VIEW FILE →</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="roster-footer">ARCH INTERNAL DATABASE · UNAUTHORIZED ACCESS PROHIBITED</div>
+</div>
+
+<script>
+function goToWiki(character) {
+  document.body.classList.add('fade-out');
+  setTimeout(function() {
+    location.href = 'wiki.html?char=' + character;
+  }, 400);
+}
+window.addEventListener('pageshow', function(e) {
+  document.body.classList.remove('fade-out');
+});
+</script>
+<script src="sparkle.js"></script>
+</body>
+</html>
