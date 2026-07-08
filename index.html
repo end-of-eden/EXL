@@ -104,7 +104,7 @@ body.fade-out {
   letter-spacing: 0.02em;
   color: rgba(0,0,0,0.55);
   margin-bottom: 2px;
-  transition: color 0.15s;
+  transition: color 0.15s, font-weight 0.15s, transform 0.15s;
 }
 .boot-line-signal {
   font-size: 10px;
@@ -112,8 +112,14 @@ body.fade-out {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(0,0,0,0.5);
+  transition: color 0.15s;
 }
-.boot-line:hover .boot-line-names { color: #202020; }
+.boot-line:hover .boot-line-names {
+  color: #202020;
+  font-weight: 700;
+  transform: translateX(3px);
+}
+.boot-line:hover .boot-line-signal { color: #202020; }
 
 .boot-dot {
   width: 6px;
@@ -181,6 +187,9 @@ function bootThenGo(e, url) {
   step();
   return false;
 }
+window.addEventListener('pageshow', function (e) {
+  document.body.classList.remove('fade-out');
+});
 </script>
 <script src="sparkle.js"></script>
 </body>
