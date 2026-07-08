@@ -13,7 +13,7 @@
 body {
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
   background: #eef0f3;
-  color: #17171b;
+  color: #202020;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -29,27 +29,18 @@ body.fade-out {
 
 .boot-wrap {
   width: 100%;
-  max-width: 360px;
+  max-width: 420px;
   padding: 24px;
 }
 
-.boot-bar-track {
-  width: 100%;
-  height: 3px;
-  background: rgba(0,0,0,0.08);
-  border-radius: 99px;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-.boot-bar-fill {
-  height: 100%;
-  width: 90%;
-  background: #4a4a52;
-  animation: boot-bar-blink 1.4s ease-in-out infinite;
-}
-@keyframes boot-bar-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.25; }
+.boot-header {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.35);
+  margin-bottom: 6px;
+  white-space: nowrap;
 }
 
 .boot-loading {
@@ -58,54 +49,111 @@ body.fade-out {
   justify-content: space-between;
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(0,0,0,0.4);
   margin-bottom: 8px;
 }
 
+.boot-bar-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(0,0,0,0.08);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+.boot-bar-fill {
+  height: 100%;
+  width: 90%;
+  background: #202020;
+  animation: boot-bar-blink 1.4s ease-in-out infinite;
+}
+@keyframes boot-bar-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+.boot-select {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: rgba(0,0,0,0.8);
+  line-height: 1.2;
+}
+
+.boot-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
 .boot-line {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(0,0,0,0.5);
-  margin-bottom: 8px;
+  margin-bottom: 14px;
   text-decoration: none;
   cursor: pointer;
   width: fit-content;
-  transition: color 0.15s, opacity 0.15s;
 }
-.boot-line:hover {
-  color: rgba(0,0,0,0.9);
-  opacity: 0.8;
+.boot-line-names {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: rgba(0,0,0,0.55);
+  margin-bottom: 2px;
+  transition: color 0.15s;
 }
+.boot-line-signal {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.5);
+}
+.boot-line:hover .boot-line-names { color: #202020; }
 
+.boot-dot {
+  width: 6px;
+  height: 6px;
+  min-width: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+.boot-dot.green { background: #2ecc71; box-shadow: 0 0 4px rgba(46,204,113,0.6); }
+.boot-dot.red { background: #e63946; box-shadow: 0 0 4px rgba(230,57,70,0.6); animation: pulse-dot 1.4s ease-in-out infinite; }
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.25; }
 }
-.boot-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 99px;
-  flex-shrink: 0;
-  animation: pulse-dot 1.4s ease-in-out infinite;
-}
-.boot-dot.red { background: #e63946; box-shadow: 0 0 6px #e63946; }
-.boot-dot.green { background: #2ecc71; box-shadow: 0 0 6px #2ecc71; animation: none; }
 </style>
 </head>
 <body>
 
 <div class="boot-wrap">
-  <div class="boot-loading"><span>NOW LOADING</span><span id="boot-pct">95%</span></div>
+  <div class="boot-header">ARCH TERMINAL · RESTRICTED ACCESS</div>
+  <div class="boot-select">CHOOSE YOUR AGENT</div>
+  <div class="boot-loading"><span>NOW LOADING . . .</span><span id="boot-pct">95%</span></div>
   <div class="boot-bar-track"><div class="boot-bar-fill" id="boot-bar-fill"></div></div>
-  <a class="boot-line" href="https://end-of-eden.github.io/EXL/roster.html" onclick="return bootThenGo(event, this.href)"><span class="boot-dot green"></span>CODE EL · SIGNAL CONNECT</a>
-  <a class="boot-line" href="https://end-of-eden.github.io/Synapse/roster.html" onclick="return bootThenGo(event, this.href)"><span class="boot-dot red"></span>CODE SS · SIGNAL LOST</a>
+  <div class="boot-links">
+    <a class="boot-line" href="https://end-of-eden.github.io/EXL/roster.html" onclick="return bootThenGo(event, this.href)">
+      <span class="boot-dot green"></span>
+      <span>
+        <div class="boot-line-signal">SIGNAL CONNECT</div>
+        <div class="boot-line-names">▸ Lilith · Eden</div>
+      </span>
+    </a>
+    <a class="boot-line" href="https://end-of-eden.github.io/Synapse/roster.html" onclick="return bootThenGo(event, this.href)">
+      <span class="boot-dot red"></span>
+      <span>
+        <div class="boot-line-signal">SIGNAL LOST</div>
+        <div class="boot-line-names">▸ Syndrome · Seraph</div>
+      </span>
+    </a>
+  </div>
 </div>
 
 <script>
