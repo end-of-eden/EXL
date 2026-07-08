@@ -97,19 +97,6 @@ body.fade-out {
 }
 .boot-dot.red { background: #e63946; box-shadow: 0 0 6px #e63946; }
 .boot-dot.green { background: #2ecc71; box-shadow: 0 0 6px #2ecc71; animation: none; }
-
-.boot-select {
-  display: block;
-  margin-bottom: 18px;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  color: rgba(0,0,0,0.85);
-  text-decoration: none;
-  cursor: pointer;
-  transition: opacity 0.15s;
-}
-.boot-select:hover { opacity: 0.7; }
 </style>
 </head>
 <body>
@@ -117,21 +104,10 @@ body.fade-out {
 <div class="boot-wrap">
   <div class="boot-loading"><span>NOW LOADING</span><span>95%</span></div>
   <div class="boot-bar-track"><div class="boot-bar-fill"></div></div>
-  <a class="boot-select" href="https://end-of-eden.github.io/Synapse/roster.html" onclick="return goRoster(event)">SELECT YOUR TEAMMATE</a>
-  <a class="boot-line" href="https://end-of-eden.github.io/EXL/"><span class="boot-dot green"></span>CODE EL · SIGNAL CONNECT</a>
-  <a class="boot-line" href="https://end-of-eden.github.io/Synapse/"><span class="boot-dot red"></span>CODE SS · SIGNAL LOST</a>
+  <a class="boot-line" href="https://end-of-eden.github.io/EXL/roster.html"><span class="boot-dot green"></span>CODE EL · SIGNAL CONNECT</a>
+  <a class="boot-line" href="https://end-of-eden.github.io/Synapse/roster.html"><span class="boot-dot red"></span>CODE SS · SIGNAL LOST</a>
 </div>
 
-<script>
-function goRoster(e) {
-  e.preventDefault();
-  document.body.classList.add('fade-out');
-  setTimeout(function() {
-    location.href = 'https://end-of-eden.github.io/Synapse/roster.html';
-  }, 400);
-  return false;
-}
-</script>
 <script src="sparkle.js"></script>
 </body>
 </html>
