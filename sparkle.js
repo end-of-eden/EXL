@@ -71,7 +71,7 @@ function update_star(i) {
   if (starv[i]) {
     stary[i] += 1 + Math.random() * 3;
     starx[i] += (i % 5 - 2) / 5;
-    if (stary[i] < shigh + sdown) {
+    if (stary[i] < shigh) {
       star[i].style.top = stary[i] + "px";
       star[i].style.left = starx[i] + "px";
     } else {
@@ -100,7 +100,7 @@ function update_tiny(i) {
   if (tinyv[i]) {
     tinyy[i] += 1 + Math.random() * 3;
     tinyx[i] += (i % 5 - 2) / 5;
-    if (tinyy[i] < shigh + sdown) {
+    if (tinyy[i] < shigh) {
       tiny[i].style.top = tinyy[i] + "px";
       tiny[i].style.left = tinyx[i] + "px";
     } else {
@@ -114,8 +114,8 @@ function update_tiny(i) {
 document.onmousemove = mouse;
 function mouse(e) {
   if (e) {
-    y = e.pageY;
-    x = e.pageX;
+    y = e.clientY;
+    x = e.clientX;
   } else {
     set_scroll();
     y = event.y + sdown;
@@ -185,7 +185,7 @@ function set_width() {
 
 function createDiv(height, width) {
   var div = document.createElement("div");
-  div.style.position = "absolute";
+  div.style.position = "fixed";
   div.style.height = height + "px";
   div.style.width = width + "px";
   div.style.overflow = "hidden";
