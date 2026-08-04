@@ -212,7 +212,7 @@
 
   var FAB_SIZE = 40, GAP_SIDE = 20, GAP_PANEL = 12;
   function reposition() {
-    var host = document.querySelector('.wiki-wrap, .gallery-wrap, .log-wrap, .detail-wrap, .post-wrap');
+    var host = document.querySelector('.main-wrap, .wiki-wrap, .gallery-wrap, .log-wrap, .detail-wrap, .post-wrap');
     if (!host) return;
     var r = host.getBoundingClientRect();
     var scrollX = window.scrollX || window.pageXOffset;
@@ -230,7 +230,7 @@
   window.addEventListener('resize', reposition);
   reposition();
   // 카드 크기가 실제로 바뀔 때마다(이미지 로딩 등) 자동으로 재계산 — 타이머 땜빵 대신 정확하게 감지
-  var host = document.querySelector('.wiki-wrap, .gallery-wrap, .log-wrap, .detail-wrap, .post-wrap');
+  var host = document.querySelector('.main-wrap, .wiki-wrap, .gallery-wrap, .log-wrap, .detail-wrap, .post-wrap');
   if (window.ResizeObserver && host) {
     var ro = new ResizeObserver(reposition);
     ro.observe(host);
