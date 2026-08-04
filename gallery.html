@@ -189,6 +189,8 @@ body {
   color: rgba(255,255,255,0.9);
   letter-spacing: 0.03em;
 }
+.popup-song { font-weight: 700; }
+.popup-lyrics { margin-top: 4px; font-size: 12px; font-weight: 300; line-height: 1.6; }
 
 .popup-close {
   position: absolute;
@@ -247,7 +249,11 @@ body {
 var images = [
   { src: '001.jpg', title: 'EDEN', color: 'rgba(135,206,235,0.9)' },
   { src: '002.jpg', title: 'LILITH', color: 'rgba(255,182,193,0.9)' },
-  { src: '003.jpg', title: 'EDEN · LILITH', color: 'rgba(198,225,128,0.95)' },
+  {
+    src: '003.jpg', title: 'EDEN · LILITH', color: 'rgba(198,225,128,0.95)',
+    song: 'HAPPY DAY — 체리필터',
+    lyrics: '찬란하게 빛나던 내 모습은 어디로 날아갔을까 어느 별로'
+  },
 ];
 
 var base = 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/gallery/';
@@ -268,7 +274,21 @@ function render() {
 function openPopup(i) {
   var img = images[i];
   document.getElementById('popup-img').src = base + img.src;
-  document.getElementById('popup-title').textContent = img.title;
+  var popupTitle = document.getElementById('popup-title');
+  popupTitle.textContent = '';
+  if (img.song) {
+    var song = document.createElement('div');
+    song.className = 'popup-song';
+    song.textContent = img.song;
+    popupTitle.appendChild(song);
+
+    var lyrics = document.createElement('div');
+    lyrics.className = 'popup-lyrics';
+    lyrics.textContent = img.lyrics;
+    popupTitle.appendChild(lyrics);
+  } else {
+    popupTitle.textContent = img.title;
+  }
   document.getElementById('popup-bg').classList.add('open');
 }
 
