@@ -8,11 +8,11 @@ img {
 }
 
 ::selection {
-  background: #87ceeb;
+  background: #ff2d7a;
   color: #0a0a0f;
 }
 
 ::-moz-selection {
-  background: #87ceeb;
+  background: #ff2d7a;
   color: #0a0a0f;
 }
