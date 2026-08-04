@@ -1,205 +1,43 @@
-var sparkles = 50;
-var x = ox = 400;
-var y = oy = 300;
-var swide = 800;
-var shigh = 600;
-var sleft = sdown = 0;
-var tiny = new Array();
-var star = new Array();
-var starv = new Array();
-var starx = new Array();
-var stary = new Array();
-var tinyx = new Array();
-var tinyy = new Array();
-var tinyv = new Array();
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia('(pointer: coarse)').matches) return;
 
-window.onload = function () {
-  if (document.getElementById) {
-    var i, rats, rlef, rdow;
-    for (var i = 0; i < sparkles; i++) {
-      var rats = createDiv(3, 3);
-      rats.style.visibility = "hidden";
-      rats.style.zIndex = "999";
-      document.body.appendChild((tiny[i] = rats));
-      starv[i] = 0;
-      tinyv[i] = 0;
-      var rats = createDiv(5, 5);
-      rats.style.backgroundColor = "transparent";
-      rats.style.visibility = "hidden";
-      rats.style.zIndex = "999";
-      var rlef = createDiv(1, 5);
-      var rdow = createDiv(5, 1);
-      rats.appendChild(rlef);
-      rats.appendChild(rdow);
-      rlef.style.top = "2px";
-      rlef.style.left = "0px";
-      rdow.style.top = "0px";
-      rdow.style.left = "2px";
-      document.body.appendChild((star[i] = rats));
-    }
-    set_width();
-    sparkle();
-  }
-};
+  var HEART_COLORS = ['#ffb6c1', '#ffd1dc', '#87ceeb', '#b0e0e6'];
+  var SPAWN_INTERVAL_MS = 90;
+  var HEART_LIFETIME_MS = 900;
+  var HEART_SVG = '<svg viewBox="0 0 33 29" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M23.6 0c-3.4 0-6.3 2-7.6 4.9C14.7 2 11.8 0 8.4 0 3.8 0 0 3.8 0 8.4c0 9.3 15.3 17.6 15.9 17.9.2.1.4.2.6.2s.4-.1.6-.2c.6-.3 15.9-8.6 15.9-17.9C33 3.8 29.2 0 24.6 0z" fill="currentColor"/></svg>';
+  var lastHeartSpawn = 0;
 
-function sparkle() {
-  var c;
-  if (Math.abs(x - ox) > 1 || Math.abs(y - oy) > 1) {
-    ox = x;
-    oy = y;
-    for (c = 0; c < sparkles; c++)
-      if (!starv[c]) {
-        star[c].style.left = (starx[c] = x) + "px";
-        star[c].style.top = (stary[c] = y + 1) + "px";
-        star[c].style.clip = "rect(0px, 5px, 5px, 0px)";
-        star[c].childNodes[0].style.backgroundColor =
-          star[c].childNodes[1].style.backgroundColor = newColour();
-        star[c].style.visibility = "visible";
-        starv[c] = 50;
-        break;
-      }
-  }
-  for (c = 0; c < sparkles; c++) {
-    if (starv[c]) update_star(c);
-    if (tinyv[c]) update_tiny(c);
-  }
-  setTimeout("sparkle()", 40);
-}
+  var style = document.createElement('style');
+  style.textContent =
+    '.cursor-heart{' +
+      'position:fixed;pointer-events:none;width:17px;height:15px;' +
+      'z-index:9999;left:0;top:0;transform:translate(-50%,-50%);' +
+      'animation:cursor-heart-float 900ms ease-out forwards;' +
+      'will-change:transform,opacity' +
+    '}' +
+    '.cursor-heart svg{width:100%;height:100%;display:block}' +
+    '@keyframes cursor-heart-float{' +
+      '0%{transform:translate(-50%,-50%) scale(.6);opacity:.9}' +
+      '100%{transform:translate(-50%,-160%) scale(1.05);opacity:0}' +
+    '}';
+  document.head.appendChild(style);
 
-function update_star(i) {
-  if (--starv[i] == 25) star[i].style.clip = "rect(1px, 4px, 4px, 1px)";
-  if (starv[i]) {
-    stary[i] += 1 + Math.random() * 3;
-    starx[i] += (i % 5 - 2) / 5;
-    if (stary[i] < shigh) {
-      star[i].style.top = stary[i] + "px";
-      star[i].style.left = starx[i] + "px";
-    } else {
-      star[i].style.visibility = "hidden";
-      starv[i] = 0;
-      return;
-    }
-  } else {
-    tinyv[i] = 50;
-    tiny[i].style.top = (tinyy[i] = stary[i]) + "px";
-    tiny[i].style.left = (tinyx[i] = starx[i]) + "px";
-    tiny[i].style.width = "2px";
-    tiny[i].style.height = "2px";
-    tiny[i].style.backgroundColor =
-      star[i].childNodes[0].style.backgroundColor;
-    star[i].style.visibility = "hidden";
-    tiny[i].style.visibility = "visible";
-  }
-}
+  document.addEventListener('mousemove', function (event) {
+    var now = Date.now();
+    if (now - lastHeartSpawn < SPAWN_INTERVAL_MS) return;
+    lastHeartSpawn = now;
 
-function update_tiny(i) {
-  if (--tinyv[i] == 25) {
-    tiny[i].style.width = "1px";
-    tiny[i].style.height = "1px";
-  }
-  if (tinyv[i]) {
-    tinyy[i] += 1 + Math.random() * 3;
-    tinyx[i] += (i % 5 - 2) / 5;
-    if (tinyy[i] < shigh) {
-      tiny[i].style.top = tinyy[i] + "px";
-      tiny[i].style.left = tinyx[i] + "px";
-    } else {
-      tiny[i].style.visibility = "hidden";
-      tinyv[i] = 0;
-      return;
-    }
-  } else tiny[i].style.visibility = "hidden";
-}
+    var heart = document.createElement('span');
+    heart.className = 'cursor-heart';
+    heart.innerHTML = HEART_SVG;
+    heart.style.left = event.clientX + (Math.random() * 10 - 5) + 'px';
+    heart.style.top = event.clientY + (Math.random() * 10 - 5) + 'px';
+    heart.style.color = HEART_COLORS[Math.floor(Math.random() * HEART_COLORS.length)];
+    document.body.appendChild(heart);
 
-document.onmousemove = mouse;
-function mouse(e) {
-  if (e) {
-    y = e.clientY;
-    x = e.clientX;
-  } else {
-    set_scroll();
-    y = event.y + sdown;
-    x = event.x + sleft;
-  }
-}
-
-window.onscroll = set_scroll;
-function set_scroll() {
-  if (typeof self.pageYOffset == "number") {
-    sdown = self.pageYOffset;
-    sleft = self.pageXOffset;
-  } else if (
-    document.body &&
-    (document.body.scrollTop || document.body.scrollLeft)
-  ) {
-    sdown = document.body.scrollTop;
-    sleft = document.body.scrollLeft;
-  } else if (
-    document.documentElement &&
-    (document.documentElement.scrollTop ||
-      document.documentElement.scrollLeft)
-  ) {
-    sleft = document.documentElement.scrollLeft;
-    sdown = document.documentElement.scrollTop;
-  } else {
-    sdown = 0;
-    sleft = 0;
-  }
-}
-
-window.onresize = set_width;
-function set_width() {
-  var sw_min = 999999;
-  var sh_min = 999999;
-  if (
-    document.documentElement &&
-    document.documentElement.clientWidth
-  ) {
-    if (document.documentElement.clientWidth > 0)
-      sw_min = document.documentElement.clientWidth;
-    if (document.documentElement.clientHeight > 0)
-      sh_min = document.documentElement.clientHeight;
-  }
-  if (typeof self.innerWidth == "number" && self.innerWidth) {
-    if (self.innerWidth > 0 && self.innerWidth < sw_min)
-      sw_min = self.innerWidth;
-    if (self.innerHeight > 0 && self.innerHeight < sh_min)
-      sh_min = self.innerHeight;
-  }
-  if (document.body.clientWidth) {
-    if (document.body.clientWidth > 0 && document.body.clientWidth < sw_min)
-      sw_min = document.body.clientWidth;
-    if (
-      document.body.clientHeight > 0 &&
-      document.body.clientHeight < sh_min
-    )
-      sh_min = document.body.clientHeight;
-  }
-  if (sw_min == 999999 || sh_min == 999999) {
-    sw_min = 800;
-    sh_min = 600;
-  }
-  swide = sw_min;
-  shigh = sh_min;
-}
-
-function createDiv(height, width) {
-  var div = document.createElement("div");
-  div.style.position = "fixed";
-  div.style.height = height + "px";
-  div.style.width = width + "px";
-  div.style.overflow = "hidden";
-  return div;
-}
-
-function newColour() {
-  var colors = [
-    "rgb(255, 182, 193)", // 베이비핑크
-    "rgb(255, 209, 220)", // 라이트핑크
-    "rgb(255, 192, 203)", // 핑크
-    "rgb(173, 216, 230)", // 아이스블루
-    "rgb(176, 224, 230)", // 파우더블루
-    "rgb(135, 206, 235)"  // 스카이블루
-  ];
-  return colors[Math.floor(Math.random() * colors.length)];
-}
+    window.setTimeout(function () {
+      heart.remove();
+    }, HEART_LIFETIME_MS);
+  });
+})();
