@@ -137,14 +137,13 @@ body {
 
 .gallery-item-title {
   font-size: 12px;
-  font-weight: 300;
+  font-weight: 700;
   color: rgba(255,255,255,0);
   letter-spacing: 0.03em;
   transition: color 0.3s ease;
   line-height: 1.4;
   text-align: center;
 }
-.gallery-item-title.song { font-weight: 700; }
 .gallery-item-lyrics {
   margin-top: 5px; color: rgba(255,255,255,0); font-size: 10px;
   font-weight: 300; line-height: 1.5; text-align: center; transition: color 0.3s ease;
@@ -192,7 +191,7 @@ body {
   padding: 12px 16px;
   background: linear-gradient(to top, rgba(5,5,8,0.85) 0%, transparent 100%);
   font-size: 13px;
-  font-weight: 300;
+  font-weight: 700;
   color: rgba(255,255,255,0.9);
   letter-spacing: 0.03em;
 }
@@ -254,15 +253,15 @@ body {
 <script>
 // ✏️ 이미지 추가할 때 여기에 한 줄씩 추가하면 됨
 var images = [
-  { src: '001.jpg', title: 'EDEN', color: 'rgba(135,206,235,0.9)' },
-  { src: '002.jpg', title: 'LILITH', color: 'rgba(255,182,193,0.9)' },
+  { src: '001.jpg', title: 'EDEN' },
+  { src: '002.jpg', title: 'LILITH' },
   {
-    src: '003.jpg', title: 'HAPPY DAY — 체리필터', color: 'rgba(198,225,128,0.95)',
+    src: '003.jpg', title: 'HAPPY DAY — 체리필터',
     song: 'HAPPY DAY — 체리필터',
     lyrics: '찬란하게 빛나던 내 모습은 어디로 날아갔을까 어느 별로'
   },
   {
-    src: '004.jpg', title: '불꽃놀이 — 하현상', color: 'rgba(255,175,95,0.95)',
+    src: '004.jpg', title: '불꽃놀이 — 하현상',
     song: '불꽃놀이 — 하현상',
     lyrics: '가는 길에 다 두고 내릴까 더 멀리 더 멀리 말이야'
   },
@@ -273,12 +272,10 @@ var base = 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/gallery/'
 function render() {
   var grid = document.getElementById('gallery-grid');
   grid.innerHTML = images.map(function(img, i) {
-    return '<div class="gallery-item" onclick="openPopup(' + i + ')"' +
-      ' onmouseover="this.querySelector(\'.gallery-item-title\').style.color=\'' + img.color + '\'"' +
-      ' onmouseout="this.querySelector(\'.gallery-item-title\').style.color=\'rgba(0,0,0,0)\'">' +
+    return '<div class="gallery-item" onclick="openPopup(' + i + ')">' +
       '<img src="' + base + img.src + '" alt="' + img.title + '" loading="lazy">' +
       '<div class="gallery-item-overlay">' +
-      '<div class="gallery-item-title' + (img.song ? ' song' : '') + '">' + img.title + '</div>' +
+      '<div class="gallery-item-title">' + img.title + '</div>' +
       (img.lyrics ? '<div class="gallery-item-lyrics">' + img.lyrics + '</div>' : '') +
       '</div></div>';
   }).join('');
