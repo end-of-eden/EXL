@@ -142,9 +142,7 @@ body {
 .scroll-area {
   flex: 1; overflow-y: auto; overflow-x: hidden;
   padding: 1.5rem 1.75rem 2rem;
-  cursor: grab; user-select: none; -webkit-user-select: none;
 }
-.scroll-area.dragging { cursor: grabbing; }
 .scroll-area::-webkit-scrollbar { width: 3px; }
 .scroll-area::-webkit-scrollbar-track { background: transparent; }
 .scroll-area::-webkit-scrollbar-thumb { background: var(--color-border-secondary); border-radius: 99px; }
@@ -468,19 +466,6 @@ function switchTo(key) {
   current = key;
   render(current);
 }
-
-var scrollEl = document.getElementById('scroll-area');
-var isDown = false, startY = 0, scrollTop = 0;
-scrollEl.addEventListener('mousedown', function(e) {
-  isDown = true; startY = e.pageY - scrollEl.offsetTop; scrollTop = scrollEl.scrollTop;
-  scrollEl.classList.add('dragging');
-});
-document.addEventListener('mouseup', function() { isDown = false; scrollEl.classList.remove('dragging'); });
-scrollEl.addEventListener('mousemove', function(e) {
-  if (!isDown) return;
-  e.preventDefault();
-  scrollEl.scrollTop = scrollTop - (e.pageY - scrollEl.offsetTop - startY);
-});
 
 var params = new URLSearchParams(window.location.search);
 var initial = params.get('char') === 'lilith' ? 'lilith' : 'eden';

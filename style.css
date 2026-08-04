@@ -6,3 +6,13 @@ img {
   -webkit-user-drag: none;
   user-drag: none;
 }
+
+::selection {
+  background: #87ceeb;
+  color: #0a0a0f;
+}
+
+::-moz-selection {
+  background: #87ceeb;
+  color: #0a0a0f;
+}
