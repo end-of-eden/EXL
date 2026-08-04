@@ -1,4 +1,16 @@
 (function () {
+  ['copy', 'cut', 'paste', 'contextmenu'].forEach(function (eventName) {
+    document.addEventListener(eventName, function (event) {
+      event.preventDefault();
+    });
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if ((event.ctrlKey || event.metaKey) && ['c', 'v', 'x'].indexOf(event.key.toLowerCase()) !== -1) {
+      event.preventDefault();
+    }
+  });
+
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (window.matchMedia('(pointer: coarse)').matches) return;
 
