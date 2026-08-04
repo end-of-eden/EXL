@@ -84,6 +84,16 @@ h1 { margin-top: 12px; font-size: clamp(36px, 7vw, 64px); letter-spacing: 0.08em
 .banner-exchange { display: grid; grid-template-columns: 1fr 1.6fr; gap: 2.5rem; }
 .banner-list { display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; }
 .banner-list img { width: 200px; height: 40px; display: block; object-fit: cover; }
+.my-banner-list { flex-direction: column; align-items: flex-start; }
+.banner-notice { margin-bottom: 20px; }
+.banner-notice-title {
+  display: inline-block; min-width: 126px; padding: 5px 8px;
+  border: 0.5px solid var(--border); color: var(--text-3);
+  font-size: 10px; letter-spacing: 0.08em;
+}
+.banner-notice h2 { margin: 14px 0 22px; font-size: 24px; font-weight: 500; }
+.banner-notice p { color: var(--text-2); font-size: 12px; line-height: 1.9; }
+.banner-notice p:last-child { color: var(--pink); }
 .banner-empty {
   width: 100%; min-height: 90px; border: 0.5px dashed var(--border-strong);
   border-radius: 8px; display: flex; align-items: center; justify-content: center;
@@ -143,7 +153,14 @@ h1 { margin-top: 12px; font-size: clamp(36px, 7vw, 64px); letter-spacing: 0.08em
   <section class="banner-exchange">
     <div>
       <div class="section-label">MY BANNERS</div>
-      <div class="banner-list">
+      <div class="banner-notice">
+        <div class="banner-notice-title">NOTICE</div>
+        <h2>banner</h2>
+        <p>↑ 배너 교환은 편한 방법으로 연락 주세요.</p>
+        <p>↗ 배너 이미지는 저장 후 업로드해 주세요.</p>
+        <p>§ 이미지 직링크는 금지합니다.</p>
+      </div>
+      <div class="banner-list my-banner-list">
         <img src="img/banner.jpg" alt="END OF EDEN banner">
         <img src="img/banner2.jpg" alt="END OF EDEN banner alternate">
       </div>
