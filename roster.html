@@ -269,6 +269,10 @@ body.fade-out {
 </div>
 
 <script>
+if (window.location.hostname === 'assured.love' && /\/roster\.html$/.test(window.location.pathname)) {
+  window.history.replaceState(null, '', '/');
+}
+
 function goToWiki(character) {
   document.body.classList.add('fade-out');
   setTimeout(function() {
