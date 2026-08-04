@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50%25' y='54%25' font-size='70' text-anchor='middle' dominant-baseline='central'>💙</text></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>END OF EDEN — Main</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="style.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0a0a0f;
+  --surface: #0f0f14;
+  --surface-2: #1a1a22;
+  --border: rgba(255,255,255,0.10);
+  --border-strong: rgba(255,255,255,0.16);
+  --text: #f2f2f5;
+  --text-2: #b0b4bd;
+  --text-3: #6f7380;
+  --blue: #87ceeb;
+  --pink: #ff2d7a;
+  --radius: 12px;
+}
+
+body {
+  min-height: 100vh;
+  padding: 2rem;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.topnav {
+  width: 100%; max-width: 960px;
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.topnav-music, .topnav-links { display: flex; align-items: center; gap: 2px; }
+.topnav-music { gap: 8px; }
+.music-btn {
+  width: 24px; height: 24px; border: 0.5px solid var(--border-strong);
+  border-radius: 50%; background: transparent; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-2); font-size: 11px;
+}
+.music-btn:hover { background: var(--surface-2); }
+.music-title { font-size: 11px; color: var(--text-3); }
+.topnav a {
+  padding: 5px 14px; border-radius: 8px;
+  color: var(--text-3); text-decoration: none;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.topnav a:hover { background: rgba(255,255,255,0.06); color: var(--text-2); }
+.topnav a.active { background: rgba(255,255,255,0.08); color: var(--text); }
+.topnav-divider { width: 1px; height: 12px; background: var(--border); margin: 0 4px; }
+
+.main-wrap {
+  width: 100%; max-width: 960px; min-height: 580px;
+  padding: 3rem;
+  border: 0.5px solid var(--border); border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.3);
+}
+.eyebrow { color: var(--blue); font-size: 10px; letter-spacing: 0.18em; }
+h1 { margin-top: 12px; font-size: clamp(36px, 7vw, 64px); letter-spacing: 0.08em; }
+.subtitle { margin-top: 10px; color: var(--text-3); font-size: 13px; letter-spacing: 0.08em; }
+.line { height: 1px; margin: 2rem 0; background: var(--border); }
+
+.profile-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 2.5rem; }
+.section-label { margin-bottom: 14px; color: var(--text-3); font-size: 10px; letter-spacing: 0.15em; }
+.handle { font-size: 24px; font-weight: 700; }
+.status { display: flex; align-items: center; gap: 7px; margin-top: 9px; color: var(--text-2); font-size: 11px; }
+.status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink); box-shadow: 0 0 8px var(--pink); }
+.owner-note { color: var(--text-2); font-size: 14px; line-height: 1.8; }
+
+.quick-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.quick-link {
+  padding: 18px; border: 0.5px solid var(--border); border-radius: 8px;
+  color: var(--text-2); text-decoration: none; transition: 0.18s ease;
+}
+.quick-link:hover { transform: translateY(-2px); border-color: var(--border-strong); color: var(--text); }
+.quick-link i { display: block; margin-bottom: 18px; color: var(--blue); font-size: 18px; }
+.quick-link strong { display: block; font-size: 12px; letter-spacing: 0.1em; }
+.quick-link span { display: block; margin-top: 5px; color: var(--text-3); font-size: 10px; }
+
+@media (max-width: 680px) {
+  body { padding: 1rem; justify-content: flex-start; }
+  .topnav { margin-top: 1rem; align-items: flex-start; gap: 12px; }
+  .music-title { display: none; }
+  .topnav a { padding: 5px 7px; font-size: 10px; }
+  .main-wrap { min-height: auto; padding: 2rem 1.4rem; }
+  .profile-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .quick-links { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <div class="topnav-music">
+    <button class="music-btn" id="music-btn" onclick="toggleMusic()" aria-label="재생">
+      <i class="ti ti-player-play" id="music-icon"></i>
+    </button>
+    <span class="music-title">Avicii — SOS ft. Aloe Blacc</span>
+    <audio id="bgm" src="Avicii - SOS (Fan Memories Video) ft. Aloe Blacc.mp3" loop></audio>
+  </div>
+  <div class="topnav-links">
+    <a href="main.html" class="active">Main</a>
+    <div class="topnav-divider"></div>
+    <a href="wiki.html">Agents</a>
+    <div class="topnav-divider"></div>
+    <a href="gallery.html">Gallery</a>
+    <div class="topnav-divider"></div>
+    <a href="log.html">Log</a>
+  </div>
+</nav>
+
+<main class="main-wrap">
+  <div class="eyebrow">PERSONAL ARCHIVE · ONLINE</div>
+  <h1>END OF EDEN</h1>
+  <div class="subtitle">A PRIVATE RECORD OF EDEN AND LILITH</div>
+  <div class="line"></div>
+
+  <section class="profile-grid">
+    <div>
+      <div class="section-label">SITE OWNER</div>
+      <div class="handle">end-of-eden</div>
+      <div class="status"><span class="status-dot"></span>ARCHIVE ACTIVE</div>
+    </div>
+    <div>
+      <div class="section-label">ABOUT THIS SITE</div>
+      <p class="owner-note">에덴과 릴리스의 이야기를 기록하는 개인 홈페이지입니다.<br>캐릭터 소개와 이미지, 로그를 천천히 모으고 있습니다.</p>
+    </div>
+  </section>
+
+  <div class="line"></div>
+  <div class="section-label">ARCHIVE INDEX</div>
+  <section class="quick-links">
+    <a class="quick-link" href="wiki.html"><i class="ti ti-users"></i><strong>AGENTS</strong><span>Personnel files</span></a>
+    <a class="quick-link" href="gallery.html"><i class="ti ti-photo"></i><strong>GALLERY</strong><span>Visual records</span></a>
+    <a class="quick-link" href="log.html"><i class="ti ti-file-text"></i><strong>LOG</strong><span>Archived entries</span></a>
+  </section>
+</main>
+
+<script>
+function toggleMusic() {
+  var audio = document.getElementById('bgm');
+  var icon = document.getElementById('music-icon');
+  audio.volume = 0.3;
+  if (audio.paused) {
+    audio.play(); icon.className = 'ti ti-player-pause'; localStorage.setItem('bgm-playing', '1');
+  } else {
+    audio.pause(); icon.className = 'ti ti-player-play'; localStorage.setItem('bgm-playing', '0');
+  }
+}
+(function initBgm() {
+  var audio = document.getElementById('bgm');
+  var icon = document.getElementById('music-icon');
+  audio.volume = 0.3;
+  var savedTime = parseFloat(localStorage.getItem('bgm-time') || '0');
+  var wasPlaying = localStorage.getItem('bgm-playing') === '1';
+  audio.addEventListener('loadedmetadata', function () {
+    if (savedTime && savedTime < audio.duration) audio.currentTime = savedTime;
+  });
+  if (wasPlaying) {
+    audio.play().then(function () { icon.className = 'ti ti-player-pause'; }).catch(function () {
+      icon.className = 'ti ti-player-play'; localStorage.setItem('bgm-playing', '0');
+    });
+  }
+  audio.addEventListener('timeupdate', function () { localStorage.setItem('bgm-time', audio.currentTime); });
+})();
+</script>
+<script src="sparkle.js"></script>
+<script src="messenger.js"></script>
+</body>
+</html>
