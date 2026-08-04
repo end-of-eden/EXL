@@ -63,12 +63,17 @@ body {
 .topnav-divider { width: 1px; height: 12px; background: var(--border); margin: 0 4px; }
 
 .main-wrap {
-  width: 100%; max-width: 960px; min-height: 580px;
+  width: 100%; max-width: 960px; height: 580px;
   padding: 3rem;
   border: 0.5px solid var(--border); border-radius: var(--radius);
   background: var(--surface);
   box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.3);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
+.main-wrap::-webkit-scrollbar { width: 3px; }
+.main-wrap::-webkit-scrollbar-track { background: transparent; }
+.main-wrap::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 99px; }
 .eyebrow { color: var(--blue); font-size: 10px; letter-spacing: 0.18em; }
 h1 { margin-top: 12px; font-size: clamp(36px, 7vw, 64px); letter-spacing: 0.08em; }
 .subtitle { margin-top: 10px; color: var(--text-3); font-size: 13px; letter-spacing: 0.08em; }
@@ -105,7 +110,7 @@ h1 { margin-top: 12px; font-size: clamp(36px, 7vw, 64px); letter-spacing: 0.08em
   .topnav { margin-top: 1rem; align-items: flex-start; gap: 12px; }
   .music-title { display: none; }
   .topnav a { padding: 5px 7px; font-size: 10px; }
-  .main-wrap { min-height: auto; padding: 2rem 1.4rem; }
+  .main-wrap { height: calc(100vh - 86px); min-height: 520px; padding: 2rem 1.4rem; }
   .profile-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   .banner-exchange { grid-template-columns: 1fr; gap: 1.5rem; }
 }
