@@ -104,15 +104,31 @@ html[data-theme="light"] .roster-wrap {
   color: #20232a;
 }
 
-html[data-theme="light"] .agent-card {
+html[data-theme="light"] .status-bar,
+html[data-theme="light"] .welcome-line,
+html[data-theme="light"] .roster-subtitle,
+html[data-theme="light"] .section-header .class-tag,
+html[data-theme="light"] .roster-footer {
+  color: rgba(25,30,40,0.52);
+}
+
+html[data-theme="light"] .roster-divider,
+html[data-theme="light"] .section-line {
+  background: rgba(25,30,40,0.14);
+}
+
+html[data-theme="light"] .char-card {
   border-color: rgba(25,30,40,0.14);
   background-color: #fff;
 }
 
-html[data-theme="light"] .roster-footer,
-html[data-theme="light"] .welcome-line,
-html[data-theme="light"] .roster-subtitle {
-  color: rgba(25,30,40,0.48);
+html[data-theme="light"] .char-card:hover {
+  border-color: rgba(25,30,40,0.3);
+}
+
+html[data-theme="light"] .char-card-info,
+html[data-theme="light"] .file-no {
+  color: #fff;
 }
 
 html[data-theme="dark"] body:has(.boot-wrap) {
