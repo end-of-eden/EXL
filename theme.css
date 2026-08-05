@@ -30,6 +30,13 @@ html {
   outline-offset: 2px;
 }
 
+.standing-panel .char-badge,
+.standing-panel .char-name-panel,
+.standing-panel .char-codename {
+  color: #fff;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.9);
+}
+
 .theme-toggle-fixed {
   position: fixed;
   top: 18px;
