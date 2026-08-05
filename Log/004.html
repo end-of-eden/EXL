@@ -182,10 +182,10 @@ body {
 .story-msg-time { font-size: 9px; color: var(--color-text-tertiary); flex-shrink: 0; margin-bottom: 2px; }
 @media (max-width: 640px) {
   .detail-scroll { padding: 2rem 1.25rem; }
-  .detail-body { text-align: justify; text-justify: inter-character; }
+  .detail-body { text-align: justify; text-justify: inter-word; word-break: keep-all; overflow-wrap: break-word; }
   .story-msg-row { margin-left: 0; margin-right: 0; max-width: 92%; }
   .story-msg-row.right { margin-left: auto; margin-right: 0; }
-  .story-msg-row, .story-msg-bubble { text-align: left; text-justify: auto; }
+  .story-msg-row, .story-msg-bubble { text-align: left; }
 }
 </style>
 <script src="../theme.js"></script>
