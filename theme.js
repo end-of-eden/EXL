@@ -35,15 +35,8 @@
     var button = document.createElement('button');
     button.type = 'button';
     button.id = 'theme-toggle';
-    button.className = 'theme-toggle';
-
-    var music = document.querySelector('.topnav-music');
-    if (music) {
-      music.appendChild(button);
-    } else {
-      button.classList.add('theme-toggle-fixed');
-      document.body.appendChild(button);
-    }
+    button.className = 'theme-toggle theme-toggle-fixed';
+    document.body.appendChild(button);
 
     button.addEventListener('click', function () {
       var next = root.dataset.theme === 'light' ? 'dark' : 'light';
