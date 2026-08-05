@@ -154,6 +154,11 @@ body {
 }
 .gallery-item:hover .gallery-item-lyrics { color: rgba(255,255,255,0.88); }
 
+@media (max-width: 640px) {
+  .gallery-scroll { padding: 1.25rem; }
+  .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+}
+
 /* 팝업 */
 .popup-bg {
   display: none;
