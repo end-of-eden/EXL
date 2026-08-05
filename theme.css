@@ -138,6 +138,32 @@ html[data-theme="light"] .file-no {
   color: #fff;
 }
 
+html[data-theme="light"] .story-msg-row.eden .story-msg-name {
+  color: #456b9f;
+}
+
+html[data-theme="light"] .story-msg-row.lilith .story-msg-name {
+  color: #a9446c;
+}
+
+html[data-theme="light"] .story-msg-row .story-msg-bubble {
+  color: #20232a;
+}
+
+html[data-theme="light"] .story-msg-row.eden .story-msg-bubble {
+  background: #e8f0fc;
+  border-color: #b7c9e6;
+}
+
+html[data-theme="light"] .story-msg-row.lilith .story-msg-bubble {
+  background: #fbe8ef;
+  border-color: #e4b6c7;
+}
+
+html[data-theme="light"] .story-msg-time {
+  color: #737986;
+}
+
 html[data-theme="dark"] body:has(.boot-wrap) {
   background: #0a0a0f;
   color: #f2f2f5;
