@@ -182,3 +182,14 @@ html[data-theme="dark"] .boot-loading {
 @media (prefers-reduced-motion: reduce) {
   html, .theme-toggle { transition: none; }
 }
+
+@media (max-width: 640px) {
+  .topnav {
+    justify-content: center;
+    padding-right: 44px;
+  }
+
+  .topnav-music {
+    display: none;
+  }
+}
