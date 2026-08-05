@@ -185,8 +185,8 @@ html[data-theme="dark"] .boot-loading {
 
 @media (max-width: 640px) {
   .topnav {
-    justify-content: center;
-    padding-right: 44px;
+    justify-content: flex-end;
+    padding-right: 52px;
   }
 
   .topnav-music {
