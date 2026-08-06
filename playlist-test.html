@@ -76,7 +76,6 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
   flex-direction: column;
   justify-content: flex-end;
 }
-.player-label { color: rgba(255,255,255,0.58); font-size: 8px; letter-spacing: 0.16em; text-align: center; }
 .track-title {
   min-height: 18px;
   margin: 4px 22px 8px;
@@ -118,7 +117,7 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #d7d9df; background: transparent; text-align: center; cursor: pointer;
 }
 .queue-item:hover { color: #fff; background: rgba(255,255,255,0.06); }
-.queue-item.active { color: #10131b; background: var(--eden-blue); }
+.queue-item.active { color: #fff; background: var(--lilith-pink); }
 .queue-name { overflow: hidden; font-size: 10px; font-weight: 650; letter-spacing: 0.02em; text-overflow: ellipsis; white-space: nowrap; }
 .resize-zone {
   position: fixed;
@@ -139,7 +138,6 @@ html[data-theme="light"] .cover { filter: saturate(0.72) brightness(0.96) contra
 html[data-theme="light"] .cover-shade {
   background: linear-gradient(to bottom, rgba(247,248,251,0.02) 18%, rgba(247,248,251,0.18) 52%, rgba(247,248,251,0.94) 100%);
 }
-html[data-theme="light"] .player-label { color: rgba(38,44,56,0.6); text-shadow: 0 1px 3px rgba(255,255,255,0.8); }
 html[data-theme="light"] .track-title { color: var(--eden-blue); text-shadow: 0 1px 3px rgba(35,70,88,0.72); }
 html[data-theme="light"] .time { color: #4f5663; }
 html[data-theme="light"] .progress { background: rgba(35,42,55,0.25); }
@@ -150,7 +148,7 @@ html[data-theme="light"] .queue { background: #f7f8fb; border-top-color: rgba(25
 html[data-theme="light"] .queue-heading { color: #8b919d; }
 html[data-theme="light"] .queue-item { color: #4c525d; }
 html[data-theme="light"] .queue-item:hover { color: #20242c; background: rgba(25,30,40,0.05); }
-html[data-theme="light"] .queue-item.active { color: #17313c; background: var(--eden-blue); }
+html[data-theme="light"] .queue-item.active { color: #fff; background: var(--lilith-pink); }
 
 @media (max-width: 640px) {
   .playlist-window { left: 12px; right: 12px; top: 12px; width: auto; max-height: 65vh; }
@@ -165,7 +163,6 @@ html[data-theme="light"] .queue-item.active { color: #17313c; background: var(--
     <img class="cover" src="img/player/004.jpg" alt="Eden and Lilith playlist cover">
     <div class="cover-shade"></div>
     <div class="now-playing">
-      <div class="player-label">END OF EDEN · PLAYLIST</div>
       <div class="track-title" id="track-title">재생 버튼을 눌러 시작</div>
       <div class="progress-row">
         <span class="time" id="current-time">00:00</span>
@@ -182,7 +179,7 @@ html[data-theme="light"] .queue-item.active { color: #17313c; background: var(--
     </div>
   </div>
   <div class="queue">
-    <div class="queue-heading">YOUTUBE PLAYLIST</div>
+    <div class="queue-heading">PLAYLIST</div>
     <div id="queue-list"></div>
   </div>
   <div class="resize-zone" id="resize-zone" aria-hidden="true"></div>
