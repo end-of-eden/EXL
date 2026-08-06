@@ -45,7 +45,7 @@
   .msg-contact-avatar { width: 42px; height: 42px; margin-bottom: 5px; border-radius: 50%; object-fit: cover; object-position: top; }
   .msg-header-title { font-size: 11px; font-weight: 650; letter-spacing: 0.08em; color: var(--color-text-primary, #f2f2f5); }
   .msg-header-sub { display: flex; align-items: center; gap: 5px; margin-top: 3px; font-size: 9px; letter-spacing: 0.08em; color: var(--color-text-tertiary, #6f7380); }
-  .msg-online-dot { width: 6px; height: 6px; border-radius: 50%; background: #0a84ff; box-shadow: 0 0 7px rgba(10,132,255,0.85); }
+  .msg-online-dot { width: 6px; height: 6px; border-radius: 50%; background: #34c759; box-shadow: 0 0 7px rgba(52,199,89,0.85); }
   .msg-close {
     position: absolute; top: 12px; right: 12px; width: 26px; height: 26px; border-radius: 50%; border: none; background: transparent;
     color: var(--color-text-tertiary, #6f7380); cursor: pointer; font-size: 15px;
