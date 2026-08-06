@@ -88,6 +88,14 @@ html[data-theme="light"] .archive-frame { background: #eef0f3; }
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.playback-panel {
+  padding: 7px 9px 5px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  background: rgba(5,8,14,0.46);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.14);
+  backdrop-filter: blur(7px);
+}
 .progress-row { display: grid; grid-template-columns: 34px 1fr 34px; align-items: center; gap: 7px; }
 .time { color: rgba(255,255,255,0.72); font-size: 8px; font-variant-numeric: tabular-nums; }
 .time:last-child { text-align: right; }
@@ -156,6 +164,11 @@ html[data-theme="light"] .cover-shade {
   background: linear-gradient(to bottom, rgba(247,248,251,0.01) 18%, rgba(247,248,251,0.1) 54%, rgba(247,248,251,0.34) 100%);
 }
 html[data-theme="light"] .track-title { color: var(--eden-blue); text-shadow: 0 1px 3px rgba(35,70,88,0.72); }
+html[data-theme="light"] .playback-panel {
+  border-color: rgba(25,30,40,0.12);
+  background: rgba(255,255,255,0.62);
+  box-shadow: 0 3px 12px rgba(25,30,40,0.1);
+}
 html[data-theme="light"] .time { color: #4f5663; }
 html[data-theme="light"] .progress { background: rgba(35,42,55,0.25); }
 html[data-theme="light"] .progress-fill { background: var(--eden-blue); }
@@ -184,17 +197,19 @@ html[data-theme="light"] .queue-item:disabled { color: #4c525d; background: tran
     <div class="cover-shade"></div>
     <div class="now-playing">
       <div class="track-title" id="track-title">재생 버튼을 눌러 시작</div>
-      <div class="progress-row">
-        <span class="time" id="current-time">00:00</span>
-        <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
-        <span class="time" id="duration">00:00</span>
-      </div>
-      <div class="controls">
-        <button class="control menu" type="button" aria-label="재생목록"><i class="ti ti-menu-2"></i></button>
-        <button class="control" type="button" id="prev" aria-label="이전 곡"><i class="ti ti-player-skip-back"></i></button>
-        <button class="control play" type="button" id="play" aria-label="재생"><i class="ti ti-player-play"></i></button>
-        <button class="control" type="button" id="next" aria-label="다음 곡"><i class="ti ti-player-skip-forward"></i></button>
-        <button class="control volume" type="button" id="volume" aria-label="음소거"><i class="ti ti-volume"></i></button>
+      <div class="playback-panel">
+        <div class="progress-row">
+          <span class="time" id="current-time">00:00</span>
+          <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
+          <span class="time" id="duration">00:00</span>
+        </div>
+        <div class="controls">
+          <button class="control menu" type="button" aria-label="재생목록"><i class="ti ti-menu-2"></i></button>
+          <button class="control" type="button" id="prev" aria-label="이전 곡"><i class="ti ti-player-skip-back"></i></button>
+          <button class="control play" type="button" id="play" aria-label="재생"><i class="ti ti-player-play"></i></button>
+          <button class="control" type="button" id="next" aria-label="다음 곡"><i class="ti ti-player-skip-forward"></i></button>
+          <button class="control volume" type="button" id="volume" aria-label="음소거"><i class="ti ti-volume"></i></button>
+        </div>
       </div>
     </div>
   </div>
