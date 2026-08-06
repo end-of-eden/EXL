@@ -16,7 +16,7 @@
   .msg-fab:hover { transform: scale(1.06); background: var(--color-background-tertiary, #22222c); }
   .msg-fab .dot {
     position: absolute; top: 4px; right: 4px; width: 7px; height: 7px; border-radius: 50%;
-    background: #fcd1e0; box-shadow: 0 0 0 2px var(--color-background-secondary, #1a1a22);
+    background: #0a84ff; box-shadow: 0 0 0 2px var(--color-background-secondary, #1a1a22);
     animation: msgPulse 2s infinite;
   }
   @keyframes msgPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
@@ -45,7 +45,7 @@
   .msg-contact-avatar { width: 42px; height: 42px; margin-bottom: 5px; border-radius: 50%; object-fit: cover; object-position: top; }
   .msg-header-title { font-size: 11px; font-weight: 650; letter-spacing: 0.08em; color: var(--color-text-primary, #f2f2f5); }
   .msg-header-sub { display: flex; align-items: center; gap: 5px; margin-top: 3px; font-size: 9px; letter-spacing: 0.08em; color: var(--color-text-tertiary, #6f7380); }
-  .msg-online-dot { width: 6px; height: 6px; border-radius: 50%; background: #87ceeb; box-shadow: 0 0 7px rgba(135,206,235,0.9); }
+  .msg-online-dot { width: 6px; height: 6px; border-radius: 50%; background: #0a84ff; box-shadow: 0 0 7px rgba(10,132,255,0.85); }
   .msg-close {
     position: absolute; top: 12px; right: 12px; width: 26px; height: 26px; border-radius: 50%; border: none; background: transparent;
     color: var(--color-text-tertiary, #6f7380); cursor: pointer; font-size: 15px;
@@ -67,14 +67,22 @@
   .msg-row.right .msg-col { align-items: flex-end; }
   .msg-bubble-wrap { display: block; }
   .msg-bubble {
-    font-size: 13px; line-height: 1.5; padding: 8px 12px; border-radius: 14px;
+    position: relative; font-size: 13px; line-height: 1.5; padding: 8px 12px; border-radius: 18px;
     color: var(--color-text-primary, #f2f2f5); word-break: break-word;
   }
   .msg-time { margin-top: 4px; padding: 0 4px; font-size: 9px; color: var(--color-text-tertiary, #6f7380); }
   .msg-row.right .msg-time { text-align: right; }
 
-  .msg-row.eden .msg-bubble { background: var(--color-background-secondary, #1a1a22); border-bottom-left-radius: 4px; }
-  .msg-row.lilith .msg-bubble { background: #ff2d7a; color: #fff; border-bottom-right-radius: 4px; }
+  .msg-row.eden .msg-bubble { background: var(--color-background-secondary, #1a1a22); border-bottom-left-radius: 5px; }
+  .msg-row.eden .msg-bubble::after {
+    content: ''; position: absolute; left: -6px; bottom: 0; width: 12px; height: 12px;
+    background: var(--color-background-secondary, #1a1a22); clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  }
+  .msg-row.lilith .msg-bubble { background: #0a84ff; color: #fff; border-bottom-right-radius: 5px; }
+  .msg-row.lilith .msg-bubble::after {
+    content: ''; position: absolute; right: -6px; bottom: 0; width: 12px; height: 12px;
+    background: #0a84ff; clip-path: polygon(0 0, 100% 100%, 0 100%);
+  }
 
   .msg-divider { display: flex; align-items: center; gap: 8px; margin: 14px 0 6px; }
   .msg-divider::before, .msg-divider::after { content: ''; flex: 1; height: 0.5px; background: var(--color-border-tertiary, rgba(255,255,255,0.10)); }
@@ -86,7 +94,7 @@
   }
   .msg-footer-icon {
     width: 26px; height: 26px; border-radius: 50%; border: none; background: transparent;
-    color: var(--color-text-tertiary, #6f7380); font-size: 15px; cursor: pointer; flex-shrink: 0;
+    color: #0a84ff; font-size: 15px; cursor: pointer; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
   }
   .msg-input {
@@ -97,10 +105,10 @@
   }
   .msg-send {
     width: 30px; height: 30px; border-radius: 50%; border: none; flex-shrink: 0; cursor: pointer;
-    background: #ff2d7a; color: #fff;
+    background: #0a84ff; color: #fff;
     display: flex; align-items: center; justify-content: center; font-size: 13px; transition: background 0.15s;
   }
-  .msg-send:hover { background: #df1f67; }
+  .msg-send:hover { background: #0071df; }
 
   .msg-toast {
     position: absolute; left: 50%; bottom: 66px; transform: translateX(-50%) translateY(6px);
