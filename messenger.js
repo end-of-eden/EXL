@@ -112,6 +112,13 @@
     opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; white-space: nowrap;
   }
   .msg-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  html[data-theme="light"] .msg-fab {
+    box-shadow: 0 3px 10px rgba(25,30,40,0.1);
+  }
+  html[data-theme="light"] .msg-panel {
+    box-shadow: 0 5px 16px rgba(25,30,40,0.12);
+  }
   `;
   document.head.appendChild(style);
 
