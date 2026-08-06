@@ -2,6 +2,29 @@ html {
   transition: background-color 0.2s ease;
 }
 
+html[data-theme="dark"] {
+  --color-background-primary: #181a22;
+  --color-background-secondary: #222530;
+  --color-background-tertiary: #2a2e3a;
+  --color-text-primary: #f4f5f8;
+  --color-text-secondary: #c0c4ce;
+  --color-text-tertiary: #8c93a3;
+  --color-border-tertiary: rgba(210,220,240,0.12);
+  --color-border-secondary: rgba(210,220,240,0.19);
+  --bg: #11131a;
+  --surface: #181a22;
+  --surface-2: #222530;
+  --border: rgba(210,220,240,0.12);
+  --border-strong: rgba(210,220,240,0.19);
+  --text: #f4f5f8;
+  --text-2: #c0c4ce;
+  --text-3: #8c93a3;
+}
+
+html[data-theme="dark"] body {
+  background: #11131a;
+}
+
 .topnav-links {
   margin-left: auto;
 }
