@@ -206,8 +206,15 @@ h1 { margin-top: 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(32p
     button.addEventListener('click', function () {
       var imageUrl = new URL(button.dataset.bannerSrc, window.location.href).href;
       var label = button.querySelector('.banner-copy-label');
-      if (!navigator.clipboard || !navigator.clipboard.writeText) return;
-      navigator.clipboard.writeText(imageUrl).then(function () {
+      var copyAction;
+      try {
+        copyAction = window.parent !== window && typeof window.parent.copyArchiveText === 'function'
+          ? window.parent.copyArchiveText(imageUrl)
+          : navigator.clipboard.writeText(imageUrl);
+      } catch (_) {
+        return;
+      }
+      Promise.resolve(copyAction).then(function () {
         label.textContent = 'COPIED';
         button.classList.add('copied');
         clearTimeout(resetTimer);

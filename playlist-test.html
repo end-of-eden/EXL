@@ -282,6 +282,30 @@ html[data-theme="light"] .queue-item:disabled { color: #303743; background: tran
   document.getElementById('archive-frame').src = initialPage;
 })();
 </script>
+<script>
+window.copyArchiveText = function (text) {
+  var buffer = document.createElement('textarea');
+  buffer.value = text;
+  buffer.setAttribute('readonly', '');
+  buffer.style.position = 'fixed';
+  buffer.style.left = '-9999px';
+  buffer.style.opacity = '0';
+  document.body.appendChild(buffer);
+  buffer.focus();
+  buffer.select();
+  var copied = false;
+  try {
+    copied = document.execCommand('copy');
+  } finally {
+    buffer.remove();
+  }
+  if (copied) return Promise.resolve();
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    return navigator.clipboard.writeText(text);
+  }
+  return Promise.reject(new Error('Clipboard unavailable'));
+};
+</script>
 
 <aside class="playlist-window" aria-label="플레이리스트">
   <div class="player-head">
