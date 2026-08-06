@@ -202,10 +202,7 @@ h1 { margin-top: 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(32p
     button.addEventListener('click', function () {
       var imageUrl = new URL(button.dataset.bannerSrc, window.location.href).href;
       var label = button.querySelector('.banner-copy-label');
-      if (!navigator.clipboard || !navigator.clipboard.writeText) {
-        window.prompt('이미지 주소를 복사해 주세요.', imageUrl);
-        return;
-      }
+      if (!navigator.clipboard || !navigator.clipboard.writeText) return;
       navigator.clipboard.writeText(imageUrl).then(function () {
         label.textContent = 'COPIED';
         button.classList.add('copied');
@@ -214,9 +211,7 @@ h1 { margin-top: 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(32p
           label.textContent = 'COPY';
           button.classList.remove('copied');
         }, 1800);
-      }).catch(function () {
-        window.prompt('이미지 주소를 복사해 주세요.', imageUrl);
-      });
+      }).catch(function () {});
     });
   });
 })();
