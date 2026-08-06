@@ -73,15 +73,22 @@
   .msg-time { margin-top: 4px; padding: 0 4px; font-size: 9px; color: var(--color-text-tertiary, #6f7380); }
   .msg-row.right .msg-time { text-align: right; }
 
-  .msg-row.eden .msg-bubble { background: var(--color-background-secondary, #1a1a22); border-bottom-left-radius: 5px; }
-  .msg-row.eden .msg-bubble::after {
-    content: ''; position: absolute; left: -6px; bottom: 0; width: 12px; height: 12px;
-    background: var(--color-background-secondary, #1a1a22); clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  .msg-row.eden .msg-bubble { background: var(--color-background-secondary, #1a1a22); }
+  .msg-row.lilith .msg-bubble { background: #0a84ff; color: #fff; }
+  .msg-row.group-end .msg-bubble::before {
+    content: ''; position: absolute; bottom: 0; left: -7px; width: 18px; height: 18px;
+    background: var(--color-background-secondary, #1a1a22); border-bottom-right-radius: 15px;
   }
-  .msg-row.lilith .msg-bubble { background: #0a84ff; color: #fff; border-bottom-right-radius: 5px; }
-  .msg-row.lilith .msg-bubble::after {
-    content: ''; position: absolute; right: -6px; bottom: 0; width: 12px; height: 12px;
-    background: #0a84ff; clip-path: polygon(0 0, 100% 100%, 0 100%);
+  .msg-row.group-end .msg-bubble::after {
+    content: ''; position: absolute; bottom: -1px; left: -10px; width: 10px; height: 20px;
+    background: var(--color-background-primary, #0f0f14); border-bottom-right-radius: 10px;
+  }
+  .msg-row.lilith.group-end .msg-bubble::before {
+    right: -7px; left: auto; background: #0a84ff;
+    border-bottom-right-radius: 0; border-bottom-left-radius: 15px;
+  }
+  .msg-row.lilith.group-end .msg-bubble::after {
+    right: -10px; left: auto; border-bottom-right-radius: 0; border-bottom-left-radius: 10px;
   }
 
   .msg-divider { display: flex; align-items: center; gap: 8px; margin: 14px 0 6px; }
@@ -179,7 +186,7 @@
     var alignClass = m.who === 'lilith' ? ' right' : '';
     var next = log[index + 1];
     var showTime = !next || next.divider || next.who !== m.who;
-    rowsHtml += '<div class="msg-row ' + m.who + alignClass + (follow ? ' follow' : '') + '">' +
+    rowsHtml += '<div class="msg-row ' + m.who + alignClass + (follow ? ' follow' : '') + (showTime ? ' group-end' : '') + '">' +
       '<div class="msg-col"><div class="msg-bubble-wrap"><div class="msg-bubble">' + m.text + '</div>' +
       (showTime ? '<div class="msg-time">' + m.time + '</div>' : '') + '</div></div></div>';
     prevWho = m.who;
