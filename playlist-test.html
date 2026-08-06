@@ -18,7 +18,7 @@ try {
 :root { --eden-blue: #87ceeb; --lilith-pink: #ff2d7a; }
 html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #0a0a0f; }
 body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; }
-.archive-frame { width: 100%; height: 100%; border: 0; background: #0a0a0f; }
+.archive-frame { position: relative; z-index: 1; width: 100%; height: 100%; border: 0; background: #0a0a0f; }
 html[data-theme="light"],
 html[data-theme="light"] body,
 html[data-theme="light"] .archive-frame { background: #eef0f3; }
@@ -28,7 +28,7 @@ html[data-theme="light"] .archive-frame { background: #eef0f3; }
   left: auto;
   right: 7vw;
   top: 80px;
-  z-index: 10000;
+  z-index: 2;
   width: 340px;
   height: 224px;
   min-height: 224px;
@@ -58,6 +58,8 @@ html[data-theme="light"] .archive-frame { background: #eef0f3; }
   width: 100%; height: auto;
   object-fit: contain;
   filter: saturate(0.72) brightness(0.7) contrast(1.08);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 68%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 68%, transparent 100%);
 }
 .cover-shade {
   position: absolute;
@@ -229,6 +231,7 @@ html[data-theme="light"] .playlist-window {
   border-color: rgba(25,30,40,0.2);
   box-shadow: 0 8px 20px rgba(25,30,40,0.18);
 }
+html[data-theme="light"] .player-head { background: #f7f8fb; }
 html[data-theme="light"] .cover { filter: saturate(0.72) brightness(0.96) contrast(0.96); }
 html[data-theme="light"] .cover-shade {
   background: linear-gradient(to bottom, rgba(247,248,251,0.01) 18%, rgba(247,248,251,0.1) 54%, rgba(247,248,251,0.34) 100%);
@@ -265,6 +268,7 @@ html[data-theme="light"] .queue-item:disabled { color: #303743; background: tran
 @media (max-width: 640px) {
   .playlist-window { left: 12px; right: 12px; top: 12px; width: auto; max-height: 65vh; }
 }
+body.messenger-open .playlist-window { z-index: 0; }
 </style>
 </head>
 <body>
@@ -344,6 +348,14 @@ var resizeZone = document.getElementById('resize-zone');
 var archiveFrame = document.getElementById('archive-frame');
 var dragState = null;
 var resizeState = null;
+
+window.addEventListener('message', function (event) {
+  if (event.source !== archiveFrame.contentWindow || !event.data || event.data.type !== 'arch-messenger') return;
+  document.body.classList.toggle('messenger-open', event.data.open === true);
+});
+archiveFrame.addEventListener('load', function () {
+  document.body.classList.remove('messenger-open');
+});
 
 function applyShellTheme(theme) {
   document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';

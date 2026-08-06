@@ -197,8 +197,12 @@
   function openPanel() {
     panel.classList.add('open');
     body.scrollTop = body.scrollHeight;
+    if (window.parent !== window) window.parent.postMessage({ type: 'arch-messenger', open: true }, '*');
   }
-  function closePanel() { panel.classList.remove('open'); }
+  function closePanel() {
+    panel.classList.remove('open');
+    if (window.parent !== window) window.parent.postMessage({ type: 'arch-messenger', open: false }, '*');
+  }
 
   fab.addEventListener('click', function () {
     panel.classList.contains('open') ? closePanel() : openPanel();
