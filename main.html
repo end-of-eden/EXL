@@ -90,6 +90,12 @@ h1 { margin-top: 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(32p
 .banner-list { display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; }
 .banner-list img { width: 200px; height: 40px; display: block; object-fit: cover; }
 .my-banner-list { flex-direction: column; align-items: flex-start; }
+.banner-copy {
+  width: 200px; height: 40px; padding: 0; border: 0; background: transparent;
+  cursor: pointer; transition: opacity 0.15s;
+}
+.banner-copy:hover { opacity: 0.82; }
+.banner-copy:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
 .banner-guidance { margin-bottom: 20px; }
 .banner-guidance p { color: var(--text-2); font-size: 12px; line-height: 1.9; }
 .fellow-banner {
@@ -158,11 +164,15 @@ h1 { margin-top: 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(32p
       <div class="section-label">BANNERS</div>
       <div class="banner-guidance">
         <p>↑ 배너 교환은 편한 방법으로 연락 주세요.</p>
-        <p>↗ 배너 이미지는 저장 후 업로드해 주세요.</p>
+        <p id="banner-copy-status">↗ 배너를 클릭하면 이미지 주소가 복사됩니다.</p>
       </div>
       <div class="banner-list my-banner-list">
-        <img src="img/banner.jpg" alt="END OF EDEN banner">
-        <img src="img/banner2.jpg" alt="END OF EDEN banner alternate">
+        <button class="banner-copy" type="button" data-banner-src="img/banner.jpg" aria-label="첫 번째 배너 이미지 주소 복사">
+          <img src="img/banner.jpg" alt="END OF EDEN banner">
+        </button>
+        <button class="banner-copy" type="button" data-banner-src="img/banner2.jpg" aria-label="두 번째 배너 이미지 주소 복사">
+          <img src="img/banner2.jpg" alt="END OF EDEN banner alternate">
+        </button>
       </div>
     </div>
     <div>
@@ -177,6 +187,28 @@ h1 { margin-top: 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(32p
   </section>
 </main>
 
+<script>
+(function () {
+  var status = document.getElementById('banner-copy-status');
+  var resetTimer;
+  document.querySelectorAll('.banner-copy').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var imageUrl = new URL(button.dataset.bannerSrc, window.location.href).href;
+      if (!navigator.clipboard || !navigator.clipboard.writeText) {
+        window.prompt('이미지 주소를 복사해 주세요.', imageUrl);
+        return;
+      }
+      navigator.clipboard.writeText(imageUrl).then(function () {
+        status.textContent = '✓ 이미지 주소를 복사했습니다.';
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(function () {
+          status.textContent = '↗ 배너를 클릭하면 이미지 주소가 복사됩니다.';
+        }, 1800);
+      });
+    });
+  });
+})();
+</script>
 <script src="sparkle.js"></script>
 <script src="messenger.js"></script>
 </body>
