@@ -155,6 +155,22 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
 <div id="youtube-player" aria-hidden="true"></div>
 <script>
 var playlistId = 'PLKNbEhdi8XzI';
+var customTitles = [
+  '미안해 널 미워해',
+  'HAPPY DAY',
+  'SOS',
+  'ザムザ',
+  'はぐ',
+  '私は、私達は',
+  'light',
+  "We'll",
+  '大丈夫',
+  '야행성',
+  'cares',
+  '虚無さん',
+  'Darling',
+  'Whiskey and Morphine'
+];
 var player;
 var playlist = [];
 var playing = false;
@@ -197,8 +213,10 @@ function updatePlayer(event) {
 
   playlist = player.getPlaylist() || playlist;
   var index = player.getPlaylistIndex();
+  var displayIndex = index < 0 ? 0 : index;
   var data = player.getVideoData();
-  if (data && data.title) document.getElementById('track-title').textContent = data.title;
+  var displayTitle = customTitles[displayIndex] || (data && data.title);
+  if (displayTitle) document.getElementById('track-title').textContent = displayTitle;
   if (playlist.length) document.getElementById('track-count').textContent = (index + 1) + ' / ' + playlist.length;
   renderQueue(index);
 }
@@ -210,7 +228,8 @@ function renderQueue(activeIndex) {
     var item = document.createElement('button');
     item.type = 'button';
     item.className = 'queue-item' + (index === activeIndex ? ' active' : '');
-    item.innerHTML = '<span class="queue-no">' + String(index + 1).padStart(2, '0') + '</span><span class="queue-name">TRACK ' + String(index + 1).padStart(2, '0') + '</span>';
+    var title = customTitles[index] || ('TRACK ' + String(index + 1).padStart(2, '0'));
+    item.innerHTML = '<span class="queue-no">' + String(index + 1).padStart(2, '0') + '</span><span class="queue-name">' + title + '</span>';
     item.addEventListener('click', function () { player.playVideoAt(index); });
     list.appendChild(item);
   });
