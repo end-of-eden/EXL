@@ -14,27 +14,25 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
 
 .playlist-window {
   position: fixed;
-  left: 24px;
-  top: 24px;
+  left: auto;
+  right: 7vw;
+  top: 80px;
   z-index: 10000;
   width: 340px;
   height: 194px;
   min-height: 194px;
   max-height: min(620px, calc(100vh - 48px));
-  resize: vertical;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   color: #f2f2f5;
   background: #07080d;
   border: 1px solid rgba(135,206,235,0.48);
-  border-radius: 2px;
-  box-shadow: 0 18px 50px rgba(0,0,0,0.62);
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.2) transparent;
+  border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.32);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
-.playlist-window::-webkit-scrollbar { width: 3px; }
-.playlist-window::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
-.playlist-window::-webkit-scrollbar-track { background: transparent; }
-.playlist-window::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 99px; }
+.playlist-window::-webkit-scrollbar { display: none; width: 0; height: 0; }
 .player-head {
   position: sticky;
   top: 0;
@@ -115,10 +113,17 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
 .queue-item.active { color: #10131b; background: #a9c7ff; }
 .queue-no { font-size: 8px; font-variant-numeric: tabular-nums; opacity: 0.62; }
 .queue-name { overflow: hidden; font-size: 10px; font-weight: 650; letter-spacing: 0.02em; text-overflow: ellipsis; white-space: nowrap; }
+.resize-zone {
+  position: fixed;
+  z-index: 4;
+  height: 9px;
+  cursor: ns-resize;
+  touch-action: none;
+}
 #youtube-player { position: fixed; left: -10000px; top: -10000px; width: 200px; height: 200px; }
 
 @media (max-width: 640px) {
-  .playlist-window { left: 12px; right: 12px; top: 12px; width: auto; max-height: 65vh; resize: none; }
+  .playlist-window { left: 12px; right: 12px; top: 12px; width: auto; max-height: 65vh; }
 }
 </style>
 </head>
@@ -150,6 +155,7 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
     <div class="queue-heading" id="track-count">YOUTUBE PLAYLIST</div>
     <div id="queue-list"></div>
   </div>
+  <div class="resize-zone" id="resize-zone" aria-hidden="true"></div>
 </aside>
 
 <div id="youtube-player" aria-hidden="true"></div>
@@ -177,7 +183,9 @@ var playing = false;
 var muted = false;
 var playlistWindow = document.querySelector('.playlist-window');
 var playerHead = document.querySelector('.player-head');
+var resizeZone = document.getElementById('resize-zone');
 var dragState = null;
+var resizeState = null;
 
 function formatTime(seconds) {
   if (!isFinite(seconds)) return '00:00';
@@ -256,6 +264,7 @@ playerHead.addEventListener('pointerdown', function (event) {
     offsetX: event.clientX - rect.left,
     offsetY: event.clientY - rect.top
   };
+  playlistWindow.style.right = 'auto';
   playerHead.setPointerCapture(event.pointerId);
   playerHead.classList.add('dragging');
 });
@@ -268,6 +277,7 @@ playerHead.addEventListener('pointermove', function (event) {
   var top = Math.min(maxTop, Math.max(8, event.clientY - dragState.offsetY));
   playlistWindow.style.left = left + 'px';
   playlistWindow.style.top = top + 'px';
+  placeResizeZone();
 });
 
 function endDrag(event) {
@@ -278,6 +288,44 @@ function endDrag(event) {
 
 playerHead.addEventListener('pointerup', endDrag);
 playerHead.addEventListener('pointercancel', endDrag);
+
+function placeResizeZone() {
+  var rect = playlistWindow.getBoundingClientRect();
+  resizeZone.style.left = rect.left + 'px';
+  resizeZone.style.top = (rect.bottom - 9) + 'px';
+  resizeZone.style.width = rect.width + 'px';
+}
+
+resizeZone.addEventListener('pointerdown', function (event) {
+  if (event.button !== 0) return;
+  resizeState = {
+    pointerId: event.pointerId,
+    startY: event.clientY,
+    startHeight: playlistWindow.offsetHeight
+  };
+  resizeZone.setPointerCapture(event.pointerId);
+  event.preventDefault();
+});
+
+resizeZone.addEventListener('pointermove', function (event) {
+  if (!resizeState || event.pointerId !== resizeState.pointerId) return;
+  var rect = playlistWindow.getBoundingClientRect();
+  var maxHeight = Math.min(620, window.innerHeight - rect.top - 8);
+  var nextHeight = Math.min(maxHeight, Math.max(194, resizeState.startHeight + event.clientY - resizeState.startY));
+  playlistWindow.style.height = nextHeight + 'px';
+  placeResizeZone();
+});
+
+function endResize(event) {
+  if (!resizeState || event.pointerId !== resizeState.pointerId) return;
+  resizeState = null;
+  placeResizeZone();
+}
+
+resizeZone.addEventListener('pointerup', endResize);
+resizeZone.addEventListener('pointercancel', endResize);
+window.addEventListener('resize', placeResizeZone);
+placeResizeZone();
 
 setInterval(function () {
   if (!player || !player.getCurrentTime) return;
