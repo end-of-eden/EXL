@@ -91,11 +91,18 @@ h1 { margin-top: 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(32p
 .banner-list img { width: 200px; height: 40px; display: block; object-fit: cover; }
 .my-banner-list { flex-direction: column; align-items: flex-start; }
 .banner-copy {
-  width: 200px; height: 40px; padding: 0; border: 0; background: transparent;
-  cursor: pointer; transition: opacity 0.15s;
+  position: relative; width: 200px; height: 40px; padding: 0; border: 0;
+  overflow: hidden; background: transparent; cursor: pointer;
 }
-.banner-copy:hover { opacity: 0.82; }
 .banner-copy:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.banner-copy-label {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  background: rgba(0,0,0,0.34); color: #fff; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.14em; opacity: 0; pointer-events: none; transition: opacity 0.15s;
+}
+.banner-copy:hover .banner-copy-label,
+.banner-copy:focus-visible .banner-copy-label,
+.banner-copy.copied .banner-copy-label { opacity: 1; }
 .banner-guidance { margin-bottom: 20px; }
 .banner-guidance p { color: var(--text-2); font-size: 12px; line-height: 1.9; }
 .fellow-banner {
@@ -164,14 +171,15 @@ h1 { margin-top: 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(32p
       <div class="section-label">BANNERS</div>
       <div class="banner-guidance">
         <p>↑ 배너 교환은 편한 방법으로 연락 주세요.</p>
-        <p id="banner-copy-status">COPY</p>
       </div>
       <div class="banner-list my-banner-list">
         <button class="banner-copy" type="button" data-banner-src="img/banner.jpg" aria-label="첫 번째 배너 이미지 주소 복사">
           <img src="img/banner.jpg" alt="END OF EDEN banner">
+          <span class="banner-copy-label">COPY</span>
         </button>
         <button class="banner-copy" type="button" data-banner-src="img/banner2.jpg" aria-label="두 번째 배너 이미지 주소 복사">
           <img src="img/banner2.jpg" alt="END OF EDEN banner alternate">
+          <span class="banner-copy-label">COPY</span>
         </button>
       </div>
     </div>
@@ -189,21 +197,25 @@ h1 { margin-top: 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(32p
 
 <script>
 (function () {
-  var status = document.getElementById('banner-copy-status');
-  var resetTimer;
   document.querySelectorAll('.banner-copy').forEach(function (button) {
+    var resetTimer;
     button.addEventListener('click', function () {
       var imageUrl = new URL(button.dataset.bannerSrc, window.location.href).href;
+      var label = button.querySelector('.banner-copy-label');
       if (!navigator.clipboard || !navigator.clipboard.writeText) {
         window.prompt('이미지 주소를 복사해 주세요.', imageUrl);
         return;
       }
       navigator.clipboard.writeText(imageUrl).then(function () {
-        status.textContent = 'COPIED';
+        label.textContent = 'COPIED';
+        button.classList.add('copied');
         clearTimeout(resetTimer);
         resetTimer = setTimeout(function () {
-          status.textContent = 'COPY';
+          label.textContent = 'COPY';
+          button.classList.remove('copied');
         }, 1800);
+      }).catch(function () {
+        window.prompt('이미지 주소를 복사해 주세요.', imageUrl);
       });
     });
   });
