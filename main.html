@@ -202,8 +202,22 @@ h1 { margin-top: 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(32p
     button.addEventListener('click', function () {
       var imageUrl = new URL(button.dataset.bannerSrc, window.location.href).href;
       var label = button.querySelector('.banner-copy-label');
-      if (!navigator.clipboard || !navigator.clipboard.writeText) return;
-      navigator.clipboard.writeText(imageUrl).then(function () {
+      var buffer = document.createElement('textarea');
+      buffer.value = imageUrl;
+      buffer.setAttribute('readonly', '');
+      buffer.style.position = 'fixed';
+      buffer.style.opacity = '0';
+      document.body.appendChild(buffer);
+      buffer.select();
+      var copied = false;
+      try {
+        window.__allowProgrammaticCopy = true;
+        copied = document.execCommand('copy');
+      } finally {
+        window.__allowProgrammaticCopy = false;
+        buffer.remove();
+      }
+      if (copied) {
         label.textContent = 'COPIED';
         button.classList.add('copied');
         clearTimeout(resetTimer);
@@ -211,7 +225,7 @@ h1 { margin-top: 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(32p
           label.textContent = 'COPY';
           button.classList.remove('copied');
         }, 1800);
-      }).catch(function () {});
+      }
     });
   });
 })();
