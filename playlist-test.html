@@ -233,7 +233,7 @@ html[data-theme="light"] .cover { filter: saturate(0.72) brightness(0.96) contra
 html[data-theme="light"] .cover-shade {
   background: linear-gradient(to bottom, rgba(247,248,251,0.01) 18%, rgba(247,248,251,0.1) 54%, rgba(247,248,251,0.34) 100%);
 }
-html[data-theme="light"] .track-title { color: #2387ad; text-shadow: 0 1px 2px rgba(255,255,255,0.95); }
+html[data-theme="light"] .track-title { color: var(--eden-blue); text-shadow: 0 1px 3px rgba(20,45,60,0.8); }
 html[data-theme="light"] .time {
   color: #25303b;
   text-shadow: 0 1px 2px rgba(255,255,255,0.95), 0 0 4px rgba(255,255,255,0.85);
@@ -241,10 +241,10 @@ html[data-theme="light"] .time {
 html[data-theme="light"] .progress {
   background: rgba(35,42,55,0.3);
 }
-html[data-theme="light"] .progress-fill { background: #2387ad; }
+html[data-theme="light"] .progress-fill { background: var(--eden-blue); }
 html[data-theme="light"] .control {
-  color: #2387ad;
-  filter: drop-shadow(0 1px 1px rgba(255,255,255,0.9));
+  color: var(--eden-blue);
+  filter: drop-shadow(0 1px 2px rgba(20,45,60,0.75));
 }
 html[data-theme="light"] .volume-popover {
   background: transparent;
@@ -256,10 +256,10 @@ html[data-theme="light"] .control:hover { color: #156f92; }
 html[data-theme="light"] .queue {
   background: linear-gradient(to bottom, rgba(247,248,251,0) 0, rgba(247,248,251,0.2) 30%, rgba(247,248,251,0.64) 68%, #f7f8fb 100%);
 }
-html[data-theme="light"] .queue-heading { color: #626b79; text-shadow: 0 1px 2px rgba(255,255,255,0.95); }
+html[data-theme="light"] .queue-heading { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.85); }
 html[data-theme="light"] .queue-item { color: #303743; text-shadow: 0 1px 2px rgba(255,255,255,0.95); }
 html[data-theme="light"] .queue-item:not(.active):not(:disabled):hover { color: var(--lilith-pink); background: transparent; }
-html[data-theme="light"] .queue-item.active { color: #2387ad; background: transparent; }
+html[data-theme="light"] .queue-item.active { color: var(--eden-blue); background: transparent; }
 html[data-theme="light"] .queue-item:disabled { color: #303743; background: transparent; }
 
 @media (max-width: 640px) {
