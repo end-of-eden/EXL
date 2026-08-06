@@ -2,6 +2,10 @@ html {
   transition: background-color 0.2s ease;
 }
 
+.topnav-links {
+  margin-left: auto;
+}
+
 .theme-toggle {
   width: 28px;
   height: 28px;
@@ -189,7 +193,4 @@ html[data-theme="dark"] .boot-loading {
     padding-right: 0;
   }
 
-  .topnav-music {
-    display: none;
-  }
 }

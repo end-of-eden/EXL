@@ -476,16 +476,28 @@ playerHead.addEventListener('pointerdown', function (event) {
   var rect = playlistWindow.getBoundingClientRect();
   dragState = {
     pointerId: event.pointerId,
+    startX: event.clientX,
+    startY: event.clientY,
+    startLeft: rect.left,
+    startTop: rect.top,
     offsetX: event.clientX - rect.left,
-    offsetY: event.clientY - rect.top
+    offsetY: event.clientY - rect.top,
+    started: false
   };
-  playlistWindow.style.right = 'auto';
   playerHead.setPointerCapture(event.pointerId);
-  playerHead.classList.add('dragging');
 });
 
 playerHead.addEventListener('pointermove', function (event) {
   if (!dragState || event.pointerId !== dragState.pointerId) return;
+  if (!dragState.started) {
+    var distance = Math.hypot(event.clientX - dragState.startX, event.clientY - dragState.startY);
+    if (distance < 4) return;
+    dragState.started = true;
+    playlistWindow.style.left = dragState.startLeft + 'px';
+    playlistWindow.style.top = dragState.startTop + 'px';
+    playlistWindow.style.right = 'auto';
+    playerHead.classList.add('dragging');
+  }
   var maxLeft = Math.max(8, window.innerWidth - playlistWindow.offsetWidth - 8);
   var maxTop = Math.max(8, window.innerHeight - playlistWindow.offsetHeight - 8);
   var left = Math.min(maxLeft, Math.max(8, event.clientX - dragState.offsetX));

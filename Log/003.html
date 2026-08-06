@@ -302,13 +302,6 @@ body {
 <body>
 
 <nav class="topnav">
-  <div class="topnav-music">
-    <button class="music-btn" id="music-btn" onclick="toggleMusic()" aria-label="재생">
-      <i class="ti ti-player-play" id="music-icon"></i>
-    </button>
-    <span class="music-title">Avicii — SOS ft. Aloe Blacc</span>
-    <audio id="bgm" src="../Avicii - SOS (Fan Memories Video) ft. Aloe Blacc.mp3" loop></audio>
-  </div>
   <div class="topnav-links">
     <a href="../main.html">Main</a>
     <div class="topnav-divider"></div>
@@ -376,46 +369,6 @@ body {
 </div>
 
 <script>
-function toggleMusic() {
-  var audio = document.getElementById("bgm");
-  audio.volume = 0.3;
-  var icon = document.getElementById('music-icon');
-  if (audio.paused) {
-    audio.play();
-    icon.className = 'ti ti-player-pause';
-    localStorage.setItem('bgm-playing', '1');
-  } else {
-    audio.pause();
-    icon.className = 'ti ti-player-play';
-    localStorage.setItem('bgm-playing', '0');
-  }
-}
-
-(function initBgm() {
-  var audio = document.getElementById('bgm');
-  var icon = document.getElementById('music-icon');
-  if (!audio) return;
-  audio.volume = 0.3;
-  var savedTime = parseFloat(localStorage.getItem('bgm-time') || '0');
-  var wasPlaying = localStorage.getItem('bgm-playing') === '1';
-  audio.addEventListener('loadedmetadata', function() {
-    if (savedTime && savedTime < audio.duration) audio.currentTime = savedTime;
-  });
-  if (wasPlaying) {
-    audio.play().then(function() {
-      icon.className = 'ti ti-player-pause';
-    }).catch(function() {
-      icon.className = 'ti ti-player-play';
-      localStorage.setItem('bgm-playing', '0');
-    });
-  }
-  audio.addEventListener('timeupdate', function() {
-    localStorage.setItem('bgm-time', audio.currentTime);
-  });
-  window.addEventListener('beforeunload', function() {
-    localStorage.setItem('bgm-time', audio.currentTime);
-  });
-})();
 </script>
 
 <script src="../sparkle.js"></script>
