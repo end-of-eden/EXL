@@ -54,18 +54,19 @@ html[data-theme="light"] .archive-frame { background: #eef0f3; }
 .player-head button { cursor: pointer; }
 .cover {
   position: absolute;
-  left: 0; right: 0; top: 0;
-  width: 100%; height: auto;
+  left: -40%; right: auto; top: 0;
+  width: 180%; height: auto;
+  max-width: none;
   object-fit: contain;
   filter: saturate(0.72) brightness(0.7) contrast(1.08);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 68%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 68%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 38%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 38%, transparent 100%);
 }
 .cover-shade {
   position: absolute;
   left: 0; right: 0; top: 0;
-  height: 260px;
-  background: linear-gradient(to bottom, rgba(3,5,10,0.05) 18%, rgba(3,5,10,0.28) 56%, rgba(3,5,10,0.5) 100%);
+  height: 420px;
+  background: linear-gradient(to bottom, rgba(3,5,10,0.03) 18%, rgba(3,5,10,0.18) 48%, #07080d 100%);
 }
 .now-playing {
   position: relative;
@@ -234,7 +235,7 @@ html[data-theme="light"] .playlist-window {
 html[data-theme="light"] .player-head { background: #f7f8fb; }
 html[data-theme="light"] .cover { filter: saturate(0.72) brightness(0.96) contrast(0.96); }
 html[data-theme="light"] .cover-shade {
-  background: linear-gradient(to bottom, rgba(247,248,251,0.01) 18%, rgba(247,248,251,0.1) 54%, rgba(247,248,251,0.34) 100%);
+  background: linear-gradient(to bottom, rgba(247,248,251,0.01) 18%, rgba(247,248,251,0.08) 48%, #f7f8fb 100%);
 }
 html[data-theme="light"] .track-title { color: var(--eden-blue); text-shadow: 0 1px 3px rgba(20,45,60,0.8); }
 html[data-theme="light"] .time {
@@ -259,7 +260,7 @@ html[data-theme="light"] .control:hover { color: #156f92; }
 html[data-theme="light"] .queue {
   background: linear-gradient(to bottom, rgba(247,248,251,0) 0, rgba(247,248,251,0.2) 30%, rgba(247,248,251,0.64) 68%, #f7f8fb 100%);
 }
-html[data-theme="light"] .queue-heading { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.85); }
+html[data-theme="light"] .queue-heading { color: #236f91; font-weight: 700; text-shadow: 0 1px 2px rgba(255,255,255,0.95); }
 html[data-theme="light"] .queue-item { color: #303743; text-shadow: 0 1px 2px rgba(255,255,255,0.95); }
 html[data-theme="light"] .queue-item:not(.active):not(:disabled):hover { color: var(--lilith-pink); background: transparent; }
 html[data-theme="light"] .queue-item.active { color: var(--eden-blue); background: transparent; }
