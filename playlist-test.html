@@ -32,7 +32,7 @@ html[data-theme="light"] .archive-frame { background: #eef0f3; }
   width: 340px;
   height: 224px;
   min-height: 224px;
-  max-height: min(620px, calc(100vh - 48px));
+  max-height: min(430px, calc(100vh - 48px));
   overflow: hidden;
   color: #f2f2f5;
   background: #07080d;
@@ -385,7 +385,7 @@ resizeZone.addEventListener('pointerdown', function (event) {
 resizeZone.addEventListener('pointermove', function (event) {
   if (!resizeState || event.pointerId !== resizeState.pointerId) return;
   var rect = playlistWindow.getBoundingClientRect();
-  var maxHeight = Math.min(620, window.innerHeight - rect.top - 8);
+  var maxHeight = Math.min(430, window.innerHeight - rect.top - 8);
   var nextHeight = Math.min(maxHeight, Math.max(224, resizeState.startHeight + event.clientY - resizeState.startY));
   playlistWindow.style.height = nextHeight + 'px';
   placeResizeZone();
