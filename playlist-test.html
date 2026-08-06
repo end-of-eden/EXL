@@ -54,18 +54,18 @@ html[data-theme="light"] .archive-frame { background: #eef0f3; }
 .player-head button { cursor: pointer; }
 .cover {
   position: absolute;
-  left: -40%; right: auto; top: 0;
-  width: 180%; height: auto;
+  left: 0; right: auto; top: 0;
+  width: 100%; height: auto;
   max-width: none;
   object-fit: contain;
   filter: saturate(0.72) brightness(0.7) contrast(1.08);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 38%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 0%, #000 38%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 48%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 48%, transparent 100%);
 }
 .cover-shade {
   position: absolute;
   left: 0; right: 0; top: 0;
-  height: 420px;
+  height: 360px;
   background: linear-gradient(to bottom, rgba(10,12,18,0.03) 18%, rgba(10,12,18,0.16) 48%, #10131a 100%);
 }
 .now-playing {
@@ -276,7 +276,7 @@ html[data-theme="light"] .queue-item:disabled { color: #303743; background: tran
 
 <aside class="playlist-window" aria-label="YouTube playlist test player">
   <div class="player-head">
-    <img class="cover" src="img/gallery/004.jpg" alt="Eden and Lilith playlist cover">
+    <img class="cover" src="img/log/001.jpg" alt="Eden and Lilith playlist cover">
     <div class="cover-shade"></div>
     <div class="now-playing">
       <div class="track-title" id="track-title">재생 버튼을 눌러 시작</div>
