@@ -123,48 +123,46 @@ html[data-theme="light"] .archive-frame { background: #eef0f3; }
 .volume-control { position: relative; width: 28px; justify-self: start; }
 .volume-popover {
   position: absolute;
-  left: calc(100% + 10px);
-  bottom: 1px;
-  width: 20px;
-  height: 88px;
+  left: 25px;
+  bottom: 0;
+  width: 68px;
+  height: 24px;
   display: grid;
   place-items: center;
   border: 0;
   background: transparent;
   opacity: 0;
   visibility: hidden;
-  transform: translate(-50%, 5px);
+  transform: translateX(-5px);
   transition: opacity 0.15s, visibility 0.15s, transform 0.15s;
 }
 .volume-control:hover .volume-popover,
 .volume-control:focus-within .volume-popover {
   opacity: 1;
   visibility: visible;
-  transform: translate(-50%, 0);
+  transform: translateX(0);
 }
 .volume-slider {
   --volume-level: 60%;
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 76px;
+  width: 60px;
+  height: 18px;
   margin: 0;
-  writing-mode: vertical-lr;
-  direction: rtl;
   border-radius: 99px;
-  background: linear-gradient(to top, var(--eden-blue) 0 var(--volume-level), rgba(5,8,14,0.42) var(--volume-level) 100%) center / 4px 100% no-repeat;
+  background: linear-gradient(to right, var(--eden-blue) 0 var(--volume-level), rgba(5,8,14,0.42) var(--volume-level) 100%) center / 100% 4px no-repeat;
   cursor: pointer;
 }
-.volume-slider::-webkit-slider-runnable-track { width: 18px; height: 76px; background: transparent; }
+.volume-slider::-webkit-slider-runnable-track { width: 60px; height: 18px; background: transparent; }
 .volume-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 18px;
-  height: 1px;
+  width: 1px;
+  height: 18px;
   border: 0;
   background: transparent;
 }
-.volume-slider::-moz-range-track { width: 18px; background: transparent; }
-.volume-slider::-moz-range-thumb { width: 18px; height: 1px; border: 0; background: transparent; }
+.volume-slider::-moz-range-track { width: 60px; height: 18px; background: transparent; }
+.volume-slider::-moz-range-thumb { width: 1px; height: 18px; border: 0; background: transparent; }
 .volume-icon { width: 17px; height: 17px; display: block; }
 #volume.muted .volume-waves { display: none; }
 .control.loop { position: relative; justify-self: end; }
@@ -253,7 +251,7 @@ html[data-theme="light"] .volume-popover {
   background: transparent;
 }
 html[data-theme="light"] .volume-slider {
-  background: linear-gradient(to top, var(--eden-blue) 0 var(--volume-level), rgba(35,42,55,0.28) var(--volume-level) 100%) center / 4px 100% no-repeat;
+  background: linear-gradient(to right, var(--eden-blue) 0 var(--volume-level), rgba(35,42,55,0.28) var(--volume-level) 100%) center / 100% 4px no-repeat;
 }
 html[data-theme="light"] .control:hover { color: #182033; }
 html[data-theme="light"] .queue {
