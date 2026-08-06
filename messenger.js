@@ -222,9 +222,29 @@
   ];
   function syncPortalTheme() {
     if (portalDocument === document) return;
+    var isLight = document.documentElement.dataset.theme === 'light';
+    var themeValues = isLight ? {
+      '--color-background-primary': '#ffffff',
+      '--color-background-secondary': '#f2f3f6',
+      '--color-background-tertiary': '#e7e9ee',
+      '--color-border-secondary': 'rgba(25,30,40,0.18)',
+      '--color-border-tertiary': 'rgba(25,30,40,0.11)',
+      '--color-text-primary': '#20232a',
+      '--color-text-secondary': '#555b66',
+      '--color-text-tertiary': '#858b96'
+    } : {
+      '--color-background-primary': '#181a22',
+      '--color-background-secondary': '#222530',
+      '--color-background-tertiary': '#2a2e3a',
+      '--color-border-secondary': 'rgba(210,220,240,0.19)',
+      '--color-border-tertiary': 'rgba(210,220,240,0.12)',
+      '--color-text-primary': '#f4f5f8',
+      '--color-text-secondary': '#c0c4ce',
+      '--color-text-tertiary': '#8c93a3'
+    };
     var sourceStyle = getComputedStyle(document.documentElement);
     portalVariables.forEach(function (name) {
-      var value = sourceStyle.getPropertyValue(name);
+      var value = themeValues[name] || sourceStyle.getPropertyValue(name);
       if (value) wrap.style.setProperty(name, value);
     });
   }
