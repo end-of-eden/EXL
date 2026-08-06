@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>END OF EDEN — Archive Player Test</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+* { box-sizing: border-box; }
+html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #0a0a0f; }
+body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; }
+.archive-frame { width: 100%; height: 100%; border: 0; background: #0a0a0f; }
+
+.playlist-window {
+  position: fixed;
+  left: 24px;
+  top: 24px;
+  z-index: 10000;
+  width: 340px;
+  height: 194px;
+  min-height: 194px;
+  max-height: min(620px, calc(100vh - 48px));
+  resize: vertical;
+  overflow: auto;
+  color: #f2f2f5;
+  background: #07080d;
+  border: 1px solid rgba(135,206,235,0.48);
+  border-radius: 2px;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.62);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.2) transparent;
+}
+.playlist-window::-webkit-scrollbar { width: 3px; }
+.playlist-window::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+.playlist-window::-webkit-scrollbar-track { background: transparent; }
+.playlist-window::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 99px; }
+.player-head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  height: 192px;
+  overflow: hidden;
+  background: #08090e;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+.player-head.dragging { cursor: grabbing; }
+.player-head button { cursor: pointer; }
+.cover {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 50% 46%;
+  filter: saturate(0.72) brightness(0.7) contrast(1.08);
+}
+.cover-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(3,5,10,0.06) 18%, rgba(3,5,10,0.34) 55%, rgba(3,5,10,0.94) 100%);
+}
+.now-playing {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: 78px 15px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.player-label { color: rgba(255,255,255,0.58); font-size: 8px; letter-spacing: 0.16em; text-align: center; }
+.track-title {
+  min-height: 18px;
+  margin: 4px 22px 8px;
+  color: #a9c7ff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.9);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.progress-row { display: grid; grid-template-columns: 34px 1fr 34px; align-items: center; gap: 7px; }
+.time { color: rgba(255,255,255,0.72); font-size: 8px; font-variant-numeric: tabular-nums; }
+.time:last-child { text-align: right; }
+.progress { height: 3px; border-radius: 99px; background: rgba(255,255,255,0.38); overflow: hidden; }
+.progress-fill { width: 34%; height: 100%; background: #a9c7ff; }
+.controls { display: grid; grid-template-columns: 1fr auto auto auto 1fr; align-items: center; gap: 10px; margin-top: 8px; }
+.control {
+  width: 24px; height: 24px; padding: 0;
+  display: grid; place-items: center;
+  border: 0;
+  background: transparent;
+  color: #b9c8e8;
+  cursor: pointer;
+  font-size: 17px;
+}
+.control:hover { color: #fff; }
+.control.play { width: 25px; height: 25px; color: #c6d7ff; background: transparent; }
+.control.menu { justify-self: start; }
+.control.volume { justify-self: end; }
+.queue { min-height: 260px; padding: 9px 10px 18px; border-top: 1px solid rgba(135,206,235,0.22); background: #07080d; }
+.queue-heading { padding: 7px 8px 10px; color: #5f6573; font-size: 8px; letter-spacing: 0.16em; text-align: center; }
+.queue-item {
+  width: 100%; min-height: 30px; padding: 6px 10px;
+  display: grid; grid-template-columns: 25px 1fr; align-items: center; gap: 6px;
+  border: 0; border-radius: 3px;
+  color: #d7d9df; background: transparent; text-align: center; cursor: pointer;
+}
+.queue-item:hover { color: #fff; background: rgba(255,255,255,0.06); }
+.queue-item.active { color: #10131b; background: #a9c7ff; }
+.queue-no { font-size: 8px; font-variant-numeric: tabular-nums; opacity: 0.62; }
+.queue-name { overflow: hidden; font-size: 10px; font-weight: 650; letter-spacing: 0.02em; text-overflow: ellipsis; white-space: nowrap; }
+#youtube-player { position: fixed; left: -10000px; top: -10000px; width: 200px; height: 200px; }
+
+@media (max-width: 640px) {
+  .playlist-window { left: 12px; right: 12px; top: 12px; width: auto; max-height: 65vh; resize: none; }
+}
+</style>
+</head>
+<body>
+<iframe class="archive-frame" title="END OF EDEN archive" src="main.html"></iframe>
+
+<aside class="playlist-window" aria-label="YouTube playlist test player">
+  <div class="player-head">
+    <img class="cover" src="img/player/004.jpg" alt="Eden and Lilith playlist cover">
+    <div class="cover-shade"></div>
+    <div class="now-playing">
+      <div class="player-label">END OF EDEN · PLAYLIST</div>
+      <div class="track-title" id="track-title">재생 버튼을 눌러 시작</div>
+      <div class="progress-row">
+        <span class="time" id="current-time">00:00</span>
+        <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
+        <span class="time" id="duration">00:00</span>
+      </div>
+      <div class="controls">
+        <button class="control menu" type="button" aria-label="재생목록"><i class="ti ti-menu-2"></i></button>
+        <button class="control" type="button" id="prev" aria-label="이전 곡"><i class="ti ti-player-skip-back"></i></button>
+        <button class="control play" type="button" id="play" aria-label="재생"><i class="ti ti-player-play"></i></button>
+        <button class="control" type="button" id="next" aria-label="다음 곡"><i class="ti ti-player-skip-forward"></i></button>
+        <button class="control volume" type="button" id="volume" aria-label="음소거"><i class="ti ti-volume"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="queue">
+    <div class="queue-heading" id="track-count">YOUTUBE PLAYLIST</div>
+    <div id="queue-list"></div>
+  </div>
+</aside>
+
+<div id="youtube-player" aria-hidden="true"></div>
+<script>
+var playlistId = 'PLKNbEhdi8XzI';
+var customTitles = [
+  '미안해 널 미워해',
+  'HAPPY DAY',
+  'SOS',
+  'ザムザ',
+  'はぐ',
+  '私は、私達は',
+  'light',
+  "We'll",
+  '大丈夫',
+  '야행성',
+  'cares',
+  '虚無さん',
+  'Darling',
+  'Whiskey and Morphine'
+];
+var player;
+var playlist = [];
+var playing = false;
+var muted = false;
+var playlistWindow = document.querySelector('.playlist-window');
+var playerHead = document.querySelector('.player-head');
+var dragState = null;
+
+function formatTime(seconds) {
+  if (!isFinite(seconds)) return '00:00';
+  var minutes = Math.floor(seconds / 60);
+  var rest = Math.floor(seconds % 60);
+  return String(minutes).padStart(2, '0') + ':' + String(rest).padStart(2, '0');
+}
+
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('youtube-player', {
+    width: 200,
+    height: 200,
+    playerVars: {
+      listType: 'playlist',
+      list: playlistId,
+      playsinline: 1,
+      controls: 0,
+      rel: 0
+    },
+    events: {
+      onReady: function (event) {
+        event.target.cuePlaylist({ listType: 'playlist', list: playlistId });
+      },
+      onStateChange: updatePlayer
+    }
+  });
+}
+
+function updatePlayer(event) {
+  playing = event.data === YT.PlayerState.PLAYING;
+  document.querySelector('#play i').className = playing ? 'ti ti-player-pause' : 'ti ti-player-play';
+  document.getElementById('play').setAttribute('aria-label', playing ? '일시정지' : '재생');
+
+  playlist = player.getPlaylist() || playlist;
+  var index = player.getPlaylistIndex();
+  var displayIndex = index < 0 ? 0 : index;
+  var data = player.getVideoData();
+  var displayTitle = customTitles[displayIndex] || (data && data.title);
+  if (displayTitle) document.getElementById('track-title').textContent = displayTitle;
+  if (playlist.length) document.getElementById('track-count').textContent = (index + 1) + ' / ' + playlist.length;
+  renderQueue(index);
+}
+
+function renderQueue(activeIndex) {
+  var list = document.getElementById('queue-list');
+  list.innerHTML = '';
+  playlist.forEach(function (videoId, index) {
+    var item = document.createElement('button');
+    item.type = 'button';
+    item.className = 'queue-item' + (index === activeIndex ? ' active' : '');
+    var title = customTitles[index] || ('TRACK ' + String(index + 1).padStart(2, '0'));
+    item.innerHTML = '<span class="queue-no">' + String(index + 1).padStart(2, '0') + '</span><span class="queue-name">' + title + '</span>';
+    item.addEventListener('click', function () { player.playVideoAt(index); });
+    list.appendChild(item);
+  });
+}
+
+document.getElementById('play').addEventListener('click', function () {
+  if (!player || !player.playVideo) return;
+  if (playing) player.pauseVideo(); else player.playVideo();
+});
+document.getElementById('prev').addEventListener('click', function () { if (player) player.previousVideo(); });
+document.getElementById('next').addEventListener('click', function () { if (player) player.nextVideo(); });
+document.getElementById('volume').addEventListener('click', function () {
+  if (!player) return;
+  muted = !muted;
+  if (muted) player.mute(); else player.unMute();
+  document.querySelector('#volume i').className = muted ? 'ti ti-volume-off' : 'ti ti-volume';
+});
+
+playerHead.addEventListener('pointerdown', function (event) {
+  if (event.button !== 0 || event.target.closest('button')) return;
+  var rect = playlistWindow.getBoundingClientRect();
+  dragState = {
+    pointerId: event.pointerId,
+    offsetX: event.clientX - rect.left,
+    offsetY: event.clientY - rect.top
+  };
+  playerHead.setPointerCapture(event.pointerId);
+  playerHead.classList.add('dragging');
+});
+
+playerHead.addEventListener('pointermove', function (event) {
+  if (!dragState || event.pointerId !== dragState.pointerId) return;
+  var maxLeft = Math.max(8, window.innerWidth - playlistWindow.offsetWidth - 8);
+  var maxTop = Math.max(8, window.innerHeight - playlistWindow.offsetHeight - 8);
+  var left = Math.min(maxLeft, Math.max(8, event.clientX - dragState.offsetX));
+  var top = Math.min(maxTop, Math.max(8, event.clientY - dragState.offsetY));
+  playlistWindow.style.left = left + 'px';
+  playlistWindow.style.top = top + 'px';
+});
+
+function endDrag(event) {
+  if (!dragState || event.pointerId !== dragState.pointerId) return;
+  dragState = null;
+  playerHead.classList.remove('dragging');
+}
+
+playerHead.addEventListener('pointerup', endDrag);
+playerHead.addEventListener('pointercancel', endDrag);
+
+setInterval(function () {
+  if (!player || !player.getCurrentTime) return;
+  var current = player.getCurrentTime() || 0;
+  var duration = player.getDuration() || 0;
+  document.getElementById('current-time').textContent = formatTime(current);
+  document.getElementById('duration').textContent = formatTime(duration);
+  document.getElementById('progress-fill').style.width = duration ? ((current / duration) * 100) + '%' : '0%';
+}, 500);
+
+var youtubeApi = document.createElement('script');
+youtubeApi.src = 'https://www.youtube.com/iframe_api';
+document.head.appendChild(youtubeApi);
+</script>
+</body>
+</html>
