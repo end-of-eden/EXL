@@ -112,11 +112,11 @@ html[data-theme="light"] .archive-frame { background: #eef0f3; }
   z-index: 3;
   left: 0;
   right: 0;
-  top: 192px;
+  top: 222px;
   bottom: 0;
   min-height: 0;
   margin-top: 0;
-  padding: 40px 10px 18px;
+  padding: 24px 10px 18px;
   border-top: 0;
   background: linear-gradient(to bottom, rgba(7,8,13,0.08) 0, rgba(7,8,13,0.56) 58%, #07080d 100%);
   overflow-y: auto;
@@ -134,6 +134,7 @@ html[data-theme="light"] .archive-frame { background: #eef0f3; }
 }
 .queue-item:hover { color: #fff; background: rgba(255,255,255,0.06); }
 .queue-item.active { color: var(--lilith-pink); background: transparent; }
+.queue-item:disabled { color: inherit; opacity: 0.52; cursor: default; background: transparent; }
 .queue-name { overflow: hidden; font-size: 10px; font-weight: 650; letter-spacing: 0.02em; text-overflow: ellipsis; white-space: nowrap; }
 .resize-zone {
   position: fixed;
@@ -167,6 +168,7 @@ html[data-theme="light"] .queue-heading { color: #8b919d; }
 html[data-theme="light"] .queue-item { color: #4c525d; }
 html[data-theme="light"] .queue-item:hover { color: #20242c; background: rgba(25,30,40,0.05); }
 html[data-theme="light"] .queue-item.active { color: var(--lilith-pink); background: transparent; }
+html[data-theme="light"] .queue-item:disabled { color: #4c525d; background: transparent; }
 
 @media (max-width: 640px) {
   .playlist-window { left: 12px; right: 12px; top: 12px; width: auto; max-height: 65vh; }
@@ -206,21 +208,25 @@ html[data-theme="light"] .queue-item.active { color: var(--lilith-pink); backgro
 <div id="youtube-player" aria-hidden="true"></div>
 <script>
 var playlistId = 'PLKNbEhdi8XzI';
-var customTitlesByVideoId = {
-  'rBa4ZYxI4vM': '미안해 널 미워해',
-  '4i1wkzAlU5M': 'HAPPY DAY',
-  'CgiPuXwhhfY': 'SOS',
-  'q90SFMi8aUg': 'ザムザ',
-  'h1QTkwJnX0E': 'はぐ',
-  'p363yleNtGI': '私は、私達は',
-  'xt_IlpwNAFo': 'light',
-  'VcQIpQB4Fiw': "We'll",
-  'RvuWxiaPUqQ': '야행성',
-  'QW87DP4-elQ': 'cares',
-  'ACJyvx9XtAg': '虚無さん',
-  'oLu4n9HToG0': 'Darling',
-  'ACDf9fhpuqo': 'Whiskey and Morphine'
-};
+var displayTracks = [
+  { videoId: 'rBa4ZYxI4vM', title: '미안해 널 미워해' },
+  { videoId: '4i1wkzAlU5M', title: 'HAPPY DAY' },
+  { videoId: 'CgiPuXwhhfY', title: 'SOS' },
+  { videoId: 'q90SFMi8aUg', title: 'ザムザ' },
+  { videoId: 'h1QTkwJnX0E', title: 'はぐ' },
+  { videoId: 'p363yleNtGI', title: '私は、私達は' },
+  { videoId: 'xt_IlpwNAFo', title: 'light' },
+  { videoId: '', title: '大丈夫' },
+  { videoId: 'RvuWxiaPUqQ', title: '야행성' },
+  { videoId: 'QW87DP4-elQ', title: 'cares' },
+  { videoId: 'ACJyvx9XtAg', title: '虚無さん' },
+  { videoId: 'oLu4n9HToG0', title: 'Darling' },
+  { videoId: 'ACDf9fhpuqo', title: 'Whiskey and Morphine' }
+];
+var customTitlesByVideoId = {};
+displayTracks.forEach(function (track) {
+  if (track.videoId) customTitlesByVideoId[track.videoId] = track.title;
+});
 var player;
 var playlist = [];
 var playing = false;
@@ -283,27 +289,34 @@ function updatePlayer(event) {
   document.getElementById('play').setAttribute('aria-label', playing ? '일시정지' : '재생');
 
   playlist = player.getPlaylist() || playlist;
-  var index = player.getPlaylistIndex();
   var data = player.getVideoData();
   var displayTitle = data && (customTitlesByVideoId[data.video_id] || data.title);
   if (displayTitle) document.getElementById('track-title').textContent = displayTitle;
-  renderQueue(index);
+  renderQueue(data && data.video_id);
 }
 
-function renderQueue(activeIndex) {
+function renderQueue(activeVideoId) {
   var list = document.getElementById('queue-list');
   list.innerHTML = '';
-  playlist.forEach(function (videoId, index) {
-    if (!customTitlesByVideoId[videoId]) return;
+  displayTracks.forEach(function (track) {
     var item = document.createElement('button');
     item.type = 'button';
-    item.className = 'queue-item' + (index === activeIndex ? ' active' : '');
-    var title = customTitlesByVideoId[videoId];
-    item.innerHTML = '<span class="queue-name">' + title + '</span>';
-    item.addEventListener('click', function () { player.playVideoAt(index); });
+    item.className = 'queue-item' + (track.videoId && track.videoId === activeVideoId ? ' active' : '');
+    item.innerHTML = '<span class="queue-name">' + track.title + '</span>';
+    if (!track.videoId) {
+      item.disabled = true;
+    } else {
+      item.addEventListener('click', function () {
+        var playlistIndex = playlist.indexOf(track.videoId);
+        if (playlistIndex >= 0) player.playVideoAt(playlistIndex);
+        else player.loadVideoById(track.videoId);
+      });
+    }
     list.appendChild(item);
   });
 }
+
+renderQueue('');
 
 document.getElementById('play').addEventListener('click', function () {
   if (!player || !player.playVideo) return;
