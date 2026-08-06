@@ -1,6 +1,7 @@
 (function () {
   ['copy', 'cut', 'paste', 'contextmenu'].forEach(function (eventName) {
     document.addEventListener(eventName, function (event) {
+      if (eventName === 'contextmenu' && event.target.closest('.my-banner-list')) return;
       event.preventDefault();
     });
   });

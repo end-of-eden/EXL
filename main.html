@@ -90,23 +90,6 @@ h1 { margin-top: 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(32p
 .banner-list { display: flex; flex-wrap: wrap; gap: 10px; align-content: flex-start; }
 .banner-list img { width: 200px; height: 40px; display: block; object-fit: cover; }
 .my-banner-list { flex-direction: column; align-items: flex-start; }
-.banner-copy {
-  position: relative; width: 200px; height: 40px; padding: 0; border: 0;
-  overflow: hidden; background: transparent; cursor: pointer;
-}
-.banner-copy img { transition: filter 0.18s, transform 0.18s; }
-.banner-copy:hover img,
-.banner-copy:focus-visible img,
-.banner-copy.copied img { filter: brightness(0.68) blur(1.2px); transform: scale(1.02); }
-.banner-copy:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-.banner-copy-label {
-  position: absolute; inset: 0; display: grid; place-items: center;
-  background: rgba(0,0,0,0.34); color: #fff; font-size: 10px; font-weight: 700;
-  letter-spacing: 0.14em; opacity: 0; pointer-events: none; transition: opacity 0.15s;
-}
-.banner-copy:hover .banner-copy-label,
-.banner-copy:focus-visible .banner-copy-label,
-.banner-copy.copied .banner-copy-label { opacity: 1; }
 .banner-guidance { margin-bottom: 20px; }
 .banner-guidance p { color: var(--text-2); font-size: 12px; line-height: 1.9; }
 .fellow-banner {
@@ -175,16 +158,11 @@ h1 { margin-top: 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(32p
       <div class="section-label">BANNERS</div>
       <div class="banner-guidance">
         <p>↑ 배너 교환은 편한 방법으로 연락 주세요.</p>
+        <p>↗ 배너 이미지는 우클릭해서 저장 후 업로드해 주세요.</p>
       </div>
       <div class="banner-list my-banner-list">
-        <button class="banner-copy" type="button" data-banner-src="img/banner.jpg" aria-label="첫 번째 배너 이미지 주소 복사">
-          <img src="img/banner.jpg" alt="END OF EDEN banner">
-          <span class="banner-copy-label">COPY</span>
-        </button>
-        <button class="banner-copy" type="button" data-banner-src="img/banner2.jpg" aria-label="두 번째 배너 이미지 주소 복사">
-          <img src="img/banner2.jpg" alt="END OF EDEN banner alternate">
-          <span class="banner-copy-label">COPY</span>
-        </button>
+        <img src="img/banner.jpg" alt="END OF EDEN banner">
+        <img src="img/banner2.jpg" alt="END OF EDEN banner alternate">
       </div>
     </div>
     <div>
@@ -199,34 +177,6 @@ h1 { margin-top: 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(32p
   </section>
 </main>
 
-<script>
-(function () {
-  document.querySelectorAll('.banner-copy').forEach(function (button) {
-    var resetTimer;
-    button.addEventListener('click', function () {
-      var imageUrl = new URL(button.dataset.bannerSrc, window.location.href).href;
-      var label = button.querySelector('.banner-copy-label');
-      var copyAction;
-      try {
-        copyAction = window.parent !== window && typeof window.parent.copyArchiveText === 'function'
-          ? window.parent.copyArchiveText(imageUrl)
-          : navigator.clipboard.writeText(imageUrl);
-      } catch (_) {
-        return;
-      }
-      Promise.resolve(copyAction).then(function () {
-        label.textContent = 'COPIED';
-        button.classList.add('copied');
-        clearTimeout(resetTimer);
-        resetTimer = setTimeout(function () {
-          label.textContent = 'COPY';
-          button.classList.remove('copied');
-        }, 1800);
-      }).catch(function () {});
-    });
-  });
-})();
-</script>
 <script src="sparkle.js"></script>
 <script src="messenger.js"></script>
 </body>
