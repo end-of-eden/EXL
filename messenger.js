@@ -113,10 +113,11 @@
     font-family: inherit; cursor: default;
   }
   .msg-send {
-    width: 30px; height: 30px; border-radius: 50%; border: none; flex-shrink: 0; cursor: pointer;
+    width: 30px; height: 30px; padding: 0; border-radius: 50%; border: none; flex-shrink: 0; cursor: pointer;
     background: #0a84ff; color: #fff;
     display: flex; align-items: center; justify-content: center; font-size: 13px; transition: background 0.15s;
   }
+  .msg-send-icon { display: block; width: 16px; height: 16px; }
   .msg-send:hover { background: #0071df; }
 
   .msg-toast {
@@ -136,6 +137,12 @@
   }
   html[data-theme="light"] .msg-panel {
     box-shadow: 0 5px 16px rgba(25,30,40,0.12);
+  }
+  html[data-theme="light"] .msg-toast {
+    background: rgba(255,255,255,0.96);
+    border-color: rgba(25,30,40,0.12);
+    color: #555b66;
+    box-shadow: 0 3px 10px rgba(25,30,40,0.1);
   }
   `;
   document.head.appendChild(style);
@@ -205,7 +212,7 @@
     '<div class="msg-footer">' +
       '<button class="msg-footer-icon" aria-label="사진"><i class="ti ti-photo"></i></button>' +
       '<input class="msg-input" placeholder="메시지 입력" readonly>' +
-      '<button class="msg-send" aria-label="전송"><i class="ti ti-send-2"></i></button>' +
+      '<button class="msg-send" aria-label="전송"><svg class="msg-send-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 4l-7 7h4v8h6v-8h4z"/></svg></button>' +
     '</div>' +
     '<div class="msg-toast">저장된 대화 로그입니다</div>';
 
