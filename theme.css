@@ -25,6 +25,15 @@ html[data-theme="dark"] body {
   background: #11131a;
 }
 
+html[data-theme="dark"] .wiki-wrap,
+html[data-theme="dark"] .main-wrap,
+html[data-theme="dark"] .gallery-wrap,
+html[data-theme="dark"] .log-wrap,
+html[data-theme="dark"] .detail-wrap,
+html[data-theme="dark"] .post-wrap {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+}
+
 .topnav-links {
   margin-left: auto;
 }
