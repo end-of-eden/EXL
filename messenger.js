@@ -142,6 +142,7 @@
   ];
 
   var wrap = document.createElement('div');
+  wrap.className = 'arch-messenger-root';
 
   var fab = document.createElement('button');
   fab.className = 'msg-fab';
@@ -188,7 +189,45 @@
     '<div class="msg-toast">저장된 대화 로그입니다</div>';
 
   wrap.appendChild(panel);
-  document.body.appendChild(wrap);
+
+  var portalDocument = document;
+  if (window.parent !== window) {
+    try {
+      portalDocument = window.parent.document;
+      var previousRoot = portalDocument.querySelector('.arch-messenger-root');
+      if (previousRoot) previousRoot.remove();
+      if (!portalDocument.getElementById('arch-messenger-style')) {
+        var portalStyle = style.cloneNode(true);
+        portalStyle.id = 'arch-messenger-style';
+        portalDocument.head.appendChild(portalStyle);
+      }
+    } catch (_) {
+      portalDocument = document;
+    }
+  }
+  portalDocument.body.appendChild(wrap);
+
+  var portalVariables = [
+    '--color-background-primary', '--color-background-secondary', '--color-background-tertiary',
+    '--color-border-secondary', '--color-border-tertiary',
+    '--color-text-primary', '--color-text-secondary', '--color-text-tertiary',
+    '--font-sans', '--border-radius-md', '--border-radius-lg'
+  ];
+  function syncPortalTheme() {
+    if (portalDocument === document) return;
+    var sourceStyle = getComputedStyle(document.documentElement);
+    portalVariables.forEach(function (name) {
+      var value = sourceStyle.getPropertyValue(name);
+      if (value) wrap.style.setProperty(name, value);
+    });
+  }
+  syncPortalTheme();
+  if (portalDocument !== document && window.MutationObserver) {
+    new MutationObserver(syncPortalTheme).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    });
+  }
 
   var body = panel.querySelector('.msg-body');
   var toast = panel.querySelector('.msg-toast');
@@ -197,11 +236,9 @@
   function openPanel() {
     panel.classList.add('open');
     body.scrollTop = body.scrollHeight;
-    if (window.parent !== window) window.parent.postMessage({ type: 'arch-messenger', open: true }, '*');
   }
   function closePanel() {
     panel.classList.remove('open');
-    if (window.parent !== window) window.parent.postMessage({ type: 'arch-messenger', open: false }, '*');
   }
 
   fab.addEventListener('click', function () {

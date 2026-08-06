@@ -269,7 +269,6 @@ html[data-theme="light"] .queue-item:disabled { color: #303743; background: tran
 @media (max-width: 640px) {
   .playlist-window { left: 12px; right: 12px; top: 12px; width: auto; max-height: 65vh; }
 }
-body.messenger-open .playlist-window { z-index: 0; }
 </style>
 </head>
 <body>
@@ -349,14 +348,6 @@ var resizeZone = document.getElementById('resize-zone');
 var archiveFrame = document.getElementById('archive-frame');
 var dragState = null;
 var resizeState = null;
-
-window.addEventListener('message', function (event) {
-  if (event.source !== archiveFrame.contentWindow || !event.data || event.data.type !== 'arch-messenger') return;
-  document.body.classList.toggle('messenger-open', event.data.open === true);
-});
-archiveFrame.addEventListener('load', function () {
-  document.body.classList.remove('messenger-open');
-});
 
 function applyShellTheme(theme) {
   document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
