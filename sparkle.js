@@ -1,7 +1,6 @@
 (function () {
   ['copy', 'cut', 'paste', 'contextmenu'].forEach(function (eventName) {
     document.addEventListener(eventName, function (event) {
-      if (eventName === 'copy' && window.__allowProgrammaticCopy) return;
       event.preventDefault();
     });
   });

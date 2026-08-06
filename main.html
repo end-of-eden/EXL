@@ -94,6 +94,10 @@ h1 { margin-top: 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(32p
   position: relative; width: 200px; height: 40px; padding: 0; border: 0;
   overflow: hidden; background: transparent; cursor: pointer;
 }
+.banner-copy img { transition: filter 0.18s, transform 0.18s; }
+.banner-copy:hover img,
+.banner-copy:focus-visible img,
+.banner-copy.copied img { filter: brightness(0.68) blur(1.2px); transform: scale(1.02); }
 .banner-copy:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
 .banner-copy-label {
   position: absolute; inset: 0; display: grid; place-items: center;
@@ -202,22 +206,8 @@ h1 { margin-top: 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(32p
     button.addEventListener('click', function () {
       var imageUrl = new URL(button.dataset.bannerSrc, window.location.href).href;
       var label = button.querySelector('.banner-copy-label');
-      var buffer = document.createElement('textarea');
-      buffer.value = imageUrl;
-      buffer.setAttribute('readonly', '');
-      buffer.style.position = 'fixed';
-      buffer.style.opacity = '0';
-      document.body.appendChild(buffer);
-      buffer.select();
-      var copied = false;
-      try {
-        window.__allowProgrammaticCopy = true;
-        copied = document.execCommand('copy');
-      } finally {
-        window.__allowProgrammaticCopy = false;
-        buffer.remove();
-      }
-      if (copied) {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) return;
+      navigator.clipboard.writeText(imageUrl).then(function () {
         label.textContent = 'COPIED';
         button.classList.add('copied');
         clearTimeout(resetTimer);
@@ -225,7 +215,7 @@ h1 { margin-top: 12px; font-family: 'Noto Serif KR', serif; font-size: clamp(32p
           label.textContent = 'COPY';
           button.classList.remove('copied');
         }, 1800);
-      }
+      }).catch(function () {});
     });
   });
 })();
