@@ -107,7 +107,7 @@ html[data-theme="light"] .archive-frame { background: #eef0f3; }
   overflow: hidden;
 }
 .progress-fill { width: 34%; height: 100%; background: var(--eden-blue); }
-.controls { display: grid; grid-template-columns: 1fr auto auto auto 1fr; align-items: center; gap: 10px; margin-top: 8px; }
+.controls { display: grid; grid-template-columns: minmax(76px, 1fr) auto auto auto 28px; align-items: center; gap: 8px; margin-top: 8px; }
 .control {
   width: 24px; height: 24px; padding: 0;
   display: grid; place-items: center;
@@ -120,8 +120,24 @@ html[data-theme="light"] .archive-frame { background: #eef0f3; }
 }
 .control:hover { color: #fff; }
 .control.play { width: 25px; height: 25px; color: #c6d7ff; background: transparent; }
-.control.menu { justify-self: start; }
-.control.volume { justify-self: end; }
+.volume-control { display: flex; align-items: center; gap: 4px; min-width: 0; }
+.volume-slider {
+  width: 48px;
+  height: 3px;
+  margin: 0;
+  accent-color: var(--eden-blue);
+  cursor: pointer;
+}
+.control.loop { position: relative; justify-self: end; }
+.control.loop.active { color: var(--lilith-pink); }
+.loop-one {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: none;
+  font: 700 8px/1 'Pretendard', sans-serif;
+}
+.control.loop.one .loop-one { display: block; }
 .queue {
   position: absolute;
   z-index: 3;
@@ -215,11 +231,14 @@ html[data-theme="light"] .queue-item:disabled { color: #4c525d; background: tran
           <span class="time" id="duration">00:00</span>
         </div>
         <div class="controls">
-          <button class="control menu" type="button" aria-label="재생목록"><i class="ti ti-menu-2"></i></button>
-          <button class="control" type="button" id="prev" aria-label="이전 곡"><i class="ti ti-player-skip-back"></i></button>
-          <button class="control play" type="button" id="play" aria-label="재생"><i class="ti ti-player-play"></i></button>
-          <button class="control" type="button" id="next" aria-label="다음 곡"><i class="ti ti-player-skip-forward"></i></button>
-          <button class="control volume" type="button" id="volume" aria-label="음소거"><i class="ti ti-volume"></i></button>
+          <div class="volume-control">
+            <button class="control" type="button" id="volume" aria-label="음소거"><i class="ti ti-volume"></i></button>
+            <input class="volume-slider" id="volume-slider" type="range" min="0" max="100" value="60" aria-label="음량">
+          </div>
+          <button class="control" type="button" id="prev" aria-label="이전 곡"><i class="ti ti-player-skip-back-filled"></i></button>
+          <button class="control play" type="button" id="play" aria-label="재생"><i class="ti ti-player-play-filled"></i></button>
+          <button class="control" type="button" id="next" aria-label="다음 곡"><i class="ti ti-player-skip-forward-filled"></i></button>
+          <button class="control loop" type="button" id="loop" aria-label="반복 없음" title="반복 없음"><i class="ti ti-repeat"></i><span class="loop-one">1</span></button>
         </div>
       </div>
     </div>
@@ -257,6 +276,7 @@ var player;
 var playlist = [];
 var playing = false;
 var muted = false;
+var loopMode = 'off';
 var playlistWindow = document.querySelector('.playlist-window');
 var playerHead = document.querySelector('.player-head');
 var resizeZone = document.getElementById('resize-zone');
@@ -302,6 +322,7 @@ function onYouTubeIframeAPIReady() {
     },
     events: {
       onReady: function (event) {
+        event.target.setVolume(60);
         event.target.cuePlaylist({ listType: 'playlist', list: playlistId });
       },
       onStateChange: updatePlayer
@@ -311,7 +332,7 @@ function onYouTubeIframeAPIReady() {
 
 function updatePlayer(event) {
   playing = event.data === YT.PlayerState.PLAYING;
-  document.querySelector('#play i').className = playing ? 'ti ti-player-pause' : 'ti ti-player-play';
+  document.querySelector('#play i').className = playing ? 'ti ti-player-pause-filled' : 'ti ti-player-play-filled';
   document.getElementById('play').setAttribute('aria-label', playing ? '일시정지' : '재생');
 
   playlist = player.getPlaylist() || playlist;
@@ -319,6 +340,11 @@ function updatePlayer(event) {
   var displayTitle = data && (customTitlesByVideoId[data.video_id] || data.title);
   if (displayTitle) document.getElementById('track-title').textContent = displayTitle;
   renderQueue(data && data.video_id);
+
+  if (event.data === YT.PlayerState.ENDED && loopMode === 'one') {
+    player.seekTo(0);
+    player.playVideo();
+  }
 }
 
 function renderQueue(activeVideoId) {
@@ -355,6 +381,25 @@ document.getElementById('volume').addEventListener('click', function () {
   muted = !muted;
   if (muted) player.mute(); else player.unMute();
   document.querySelector('#volume i').className = muted ? 'ti ti-volume-off' : 'ti ti-volume';
+});
+document.getElementById('volume-slider').addEventListener('input', function (event) {
+  if (!player || !player.setVolume) return;
+  var volume = Number(event.target.value);
+  player.setVolume(volume);
+  muted = volume === 0;
+  if (muted) player.mute(); else player.unMute();
+  document.querySelector('#volume i').className = muted ? 'ti ti-volume-off' : 'ti ti-volume';
+});
+
+document.getElementById('loop').addEventListener('click', function () {
+  var button = document.getElementById('loop');
+  loopMode = loopMode === 'off' ? 'all' : loopMode === 'all' ? 'one' : 'off';
+  if (player && player.setLoop) player.setLoop(loopMode === 'all');
+  button.classList.toggle('active', loopMode !== 'off');
+  button.classList.toggle('one', loopMode === 'one');
+  var label = loopMode === 'all' ? '전체 반복' : loopMode === 'one' ? '한 곡 반복' : '반복 없음';
+  button.setAttribute('aria-label', label);
+  button.setAttribute('title', label);
 });
 
 playerHead.addEventListener('pointerdown', function (event) {
