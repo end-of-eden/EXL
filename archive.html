@@ -32,6 +32,7 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
   scrollbar-color: rgba(255,255,255,0.2) transparent;
 }
 .playlist-window::-webkit-scrollbar { width: 3px; }
+.playlist-window::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
 .playlist-window::-webkit-scrollbar-track { background: transparent; }
 .playlist-window::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 99px; }
 .player-head {
@@ -41,7 +42,12 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
   height: 192px;
   overflow: hidden;
   background: #08090e;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
 }
+.player-head.dragging { cursor: grabbing; }
+.player-head button { cursor: pointer; }
 .cover {
   position: absolute;
   inset: 0;
@@ -153,6 +159,9 @@ var player;
 var playlist = [];
 var playing = false;
 var muted = false;
+var playlistWindow = document.querySelector('.playlist-window');
+var playerHead = document.querySelector('.player-head');
+var dragState = null;
 
 function formatTime(seconds) {
   if (!isFinite(seconds)) return '00:00';
@@ -219,6 +228,37 @@ document.getElementById('volume').addEventListener('click', function () {
   if (muted) player.mute(); else player.unMute();
   document.querySelector('#volume i').className = muted ? 'ti ti-volume-off' : 'ti ti-volume';
 });
+
+playerHead.addEventListener('pointerdown', function (event) {
+  if (event.button !== 0 || event.target.closest('button')) return;
+  var rect = playlistWindow.getBoundingClientRect();
+  dragState = {
+    pointerId: event.pointerId,
+    offsetX: event.clientX - rect.left,
+    offsetY: event.clientY - rect.top
+  };
+  playerHead.setPointerCapture(event.pointerId);
+  playerHead.classList.add('dragging');
+});
+
+playerHead.addEventListener('pointermove', function (event) {
+  if (!dragState || event.pointerId !== dragState.pointerId) return;
+  var maxLeft = Math.max(8, window.innerWidth - playlistWindow.offsetWidth - 8);
+  var maxTop = Math.max(8, window.innerHeight - playlistWindow.offsetHeight - 8);
+  var left = Math.min(maxLeft, Math.max(8, event.clientX - dragState.offsetX));
+  var top = Math.min(maxTop, Math.max(8, event.clientY - dragState.offsetY));
+  playlistWindow.style.left = left + 'px';
+  playlistWindow.style.top = top + 'px';
+});
+
+function endDrag(event) {
+  if (!dragState || event.pointerId !== dragState.pointerId) return;
+  dragState = null;
+  playerHead.classList.remove('dragging');
+}
+
+playerHead.addEventListener('pointerup', endDrag);
+playerHead.addEventListener('pointercancel', endDrag);
 
 setInterval(function () {
   if (!player || !player.getCurrentTime) return;
