@@ -15,6 +15,7 @@ try {
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 <style>
 * { box-sizing: border-box; }
+:root { --eden-blue: #87ceeb; --lilith-pink: #ff2d7a; }
 html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #0a0a0f; }
 body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; }
 .archive-frame { width: 100%; height: 100%; border: 0; background: #0a0a0f; }
@@ -79,7 +80,7 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
 .track-title {
   min-height: 18px;
   margin: 4px 22px 8px;
-  color: #a9c7ff;
+  color: var(--eden-blue);
   font-size: 12px;
   font-weight: 700;
   line-height: 1.35;
@@ -93,7 +94,7 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
 .time { color: rgba(255,255,255,0.72); font-size: 8px; font-variant-numeric: tabular-nums; }
 .time:last-child { text-align: right; }
 .progress { height: 3px; border-radius: 99px; background: rgba(255,255,255,0.38); overflow: hidden; }
-.progress-fill { width: 34%; height: 100%; background: #a9c7ff; }
+.progress-fill { width: 34%; height: 100%; background: var(--eden-blue); }
 .controls { display: grid; grid-template-columns: 1fr auto auto auto 1fr; align-items: center; gap: 10px; margin-top: 8px; }
 .control {
   width: 24px; height: 24px; padding: 0;
@@ -117,7 +118,7 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #d7d9df; background: transparent; text-align: center; cursor: pointer;
 }
 .queue-item:hover { color: #fff; background: rgba(255,255,255,0.06); }
-.queue-item.active { color: #10131b; background: #a9c7ff; }
+.queue-item.active { color: #10131b; background: var(--eden-blue); }
 .queue-name { overflow: hidden; font-size: 10px; font-weight: 650; letter-spacing: 0.02em; text-overflow: ellipsis; white-space: nowrap; }
 .resize-zone {
   position: fixed;
@@ -139,17 +140,17 @@ html[data-theme="light"] .cover-shade {
   background: linear-gradient(to bottom, rgba(247,248,251,0.02) 18%, rgba(247,248,251,0.18) 52%, rgba(247,248,251,0.94) 100%);
 }
 html[data-theme="light"] .player-label { color: rgba(38,44,56,0.6); text-shadow: 0 1px 3px rgba(255,255,255,0.8); }
-html[data-theme="light"] .track-title { color: #46638f; text-shadow: 0 1px 4px rgba(255,255,255,0.88); }
+html[data-theme="light"] .track-title { color: var(--eden-blue); text-shadow: 0 1px 3px rgba(35,70,88,0.72); }
 html[data-theme="light"] .time { color: #4f5663; }
 html[data-theme="light"] .progress { background: rgba(35,42,55,0.25); }
-html[data-theme="light"] .progress-fill { background: #668cc7; }
-html[data-theme="light"] .control { color: #4e6385; }
+html[data-theme="light"] .progress-fill { background: var(--eden-blue); }
+html[data-theme="light"] .control { color: #4f9fbe; }
 html[data-theme="light"] .control:hover { color: #182033; }
 html[data-theme="light"] .queue { background: #f7f8fb; border-top-color: rgba(25,30,40,0.12); }
 html[data-theme="light"] .queue-heading { color: #8b919d; }
 html[data-theme="light"] .queue-item { color: #4c525d; }
 html[data-theme="light"] .queue-item:hover { color: #20242c; background: rgba(25,30,40,0.05); }
-html[data-theme="light"] .queue-item.active { color: #fff; background: #6d8fbe; }
+html[data-theme="light"] .queue-item.active { color: #17313c; background: var(--eden-blue); }
 
 @media (max-width: 640px) {
   .playlist-window { left: 12px; right: 12px; top: 12px; width: auto; max-height: 65vh; }
