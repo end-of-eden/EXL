@@ -268,7 +268,8 @@ html[data-theme="light"] .queue-item.active { color: var(--eden-blue); backgroun
 html[data-theme="light"] .queue-item:disabled { color: #303743; background: transparent; }
 
 @media (max-width: 640px) {
-  .playlist-window { left: 12px; right: 12px; top: 12px; width: auto; max-height: 65vh; }
+  .playlist-window,
+  .resize-zone { display: none !important; }
 }
 </style>
 </head>
@@ -573,7 +574,9 @@ setInterval(function () {
 
 var youtubeApi = document.createElement('script');
 youtubeApi.src = 'https://www.youtube.com/iframe_api';
-document.head.appendChild(youtubeApi);
+if (!window.matchMedia || !window.matchMedia('(max-width: 640px)').matches) {
+  document.head.appendChild(youtubeApi);
+}
 </script>
 </body>
 </html>

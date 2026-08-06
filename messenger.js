@@ -1,4 +1,6 @@
 (function () {
+  if (window.matchMedia && window.matchMedia('(max-width: 640px)').matches) return;
+
   var style = document.createElement('style');
   style.textContent = `
   .msg-fab {
