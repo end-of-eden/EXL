@@ -37,13 +37,17 @@
   .msg-panel.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
 
   .msg-header {
-    flex-shrink: 0; display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 16px; border-bottom: 0.5px solid var(--color-border-tertiary, rgba(255,255,255,0.10));
+    position: relative; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    min-height: 94px; padding: 10px 48px 12px;
+    border-bottom: 0.5px solid var(--color-border-tertiary, rgba(255,255,255,0.10));
   }
-  .msg-header-title { font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: var(--color-text-primary, #f2f2f5); }
-  .msg-header-sub { font-size: 10px; color: var(--color-text-tertiary, #6f7380); margin-top: 2px; }
+  .msg-contact { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .msg-contact-avatar { width: 42px; height: 42px; margin-bottom: 5px; border-radius: 50%; object-fit: cover; object-position: top; }
+  .msg-header-title { font-size: 11px; font-weight: 650; letter-spacing: 0.08em; color: var(--color-text-primary, #f2f2f5); }
+  .msg-header-sub { display: flex; align-items: center; gap: 5px; margin-top: 3px; font-size: 9px; letter-spacing: 0.08em; color: var(--color-text-tertiary, #6f7380); }
+  .msg-online-dot { width: 6px; height: 6px; border-radius: 50%; background: #87ceeb; box-shadow: 0 0 7px rgba(135,206,235,0.9); }
   .msg-close {
-    width: 26px; height: 26px; border-radius: 8px; border: none; background: transparent;
+    position: absolute; top: 12px; right: 12px; width: 26px; height: 26px; border-radius: 50%; border: none; background: transparent;
     color: var(--color-text-tertiary, #6f7380); cursor: pointer; font-size: 15px;
     display: flex; align-items: center; justify-content: center; transition: background 0.15s;
   }
@@ -55,29 +59,22 @@
   .msg-body::-webkit-scrollbar { width: 3px; }
   .msg-body::-webkit-scrollbar-thumb { background: var(--color-border-secondary, rgba(255,255,255,0.16)); border-radius: 99px; }
 
-  .msg-row { display: flex; gap: 8px; margin-top: 10px; max-width: 84%; }
-  .msg-row.right { align-self: flex-end; flex-direction: row-reverse; }
+  .msg-row { display: flex; margin-top: 10px; max-width: 78%; }
+  .msg-row.right { align-self: flex-end; }
   .msg-row.follow { margin-top: 3px; }
-
-  .msg-avatar { width: 30px; height: 30px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: var(--color-background-secondary, #1a1a22); border: 0.5px solid var(--color-border-tertiary, rgba(255,255,255,0.10)); }
-  .msg-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
-  .msg-avatar.spacer { visibility: hidden; }
 
   .msg-col { display: flex; flex-direction: column; min-width: 0; }
   .msg-row.right .msg-col { align-items: flex-end; }
-  .msg-name { font-size: 10px; font-weight: 600; margin-bottom: 4px; letter-spacing: 0.02em; }
-  .msg-bubble-wrap { display: flex; align-items: flex-end; gap: 6px; }
-  .msg-row.right .msg-bubble-wrap { flex-direction: row-reverse; }
+  .msg-bubble-wrap { display: block; }
   .msg-bubble {
     font-size: 13px; line-height: 1.5; padding: 8px 12px; border-radius: 14px;
     color: var(--color-text-primary, #f2f2f5); word-break: break-word;
   }
-  .msg-time { font-size: 9px; color: var(--color-text-tertiary, #6f7380); flex-shrink: 0; margin-bottom: 2px; }
+  .msg-time { margin-top: 4px; padding: 0 4px; font-size: 9px; color: var(--color-text-tertiary, #6f7380); }
+  .msg-row.right .msg-time { text-align: right; }
 
-  .msg-row.eden .msg-name { color: #87ceeb; }
-  .msg-row.eden .msg-bubble { background: rgba(135,206,235,0.13); border: 0.5px solid rgba(135,206,235,0.3); border-bottom-left-radius: 4px; }
-  .msg-row.lilith .msg-name { color: #fcd1e0; }
-  .msg-row.lilith .msg-bubble { background: rgba(252,209,224,0.14); border: 0.5px solid rgba(252,209,224,0.30); border-bottom-right-radius: 4px; }
+  .msg-row.eden .msg-bubble { background: var(--color-background-secondary, #1a1a22); border-bottom-left-radius: 4px; }
+  .msg-row.lilith .msg-bubble { background: #ff2d7a; color: #fff; border-bottom-right-radius: 4px; }
 
   .msg-divider { display: flex; align-items: center; gap: 8px; margin: 14px 0 6px; }
   .msg-divider::before, .msg-divider::after { content: ''; flex: 1; height: 0.5px; background: var(--color-border-tertiary, rgba(255,255,255,0.10)); }
@@ -100,10 +97,10 @@
   }
   .msg-send {
     width: 30px; height: 30px; border-radius: 50%; border: none; flex-shrink: 0; cursor: pointer;
-    background: var(--color-background-secondary, #1a1a22); color: var(--color-text-secondary, #b0b4bd);
+    background: #ff2d7a; color: #fff;
     display: flex; align-items: center; justify-content: center; font-size: 13px; transition: background 0.15s;
   }
-  .msg-send:hover { background: var(--color-background-tertiary, #22222c); }
+  .msg-send:hover { background: #df1f67; }
 
   .msg-toast {
     position: absolute; left: 50%; bottom: 66px; transform: translateX(-50%) translateY(6px);
@@ -130,8 +127,6 @@
     eden: 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg',
     lilith: 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Lilith_1.jpg'
   };
-  var NAME = { eden: 'Eden', lilith: 'Lilith' };
-
   var log = [
     { who: 'eden', text: '일어나.', time: '08:12' },
     { who: 'eden', text: '아침 브리핑 9시야. 또 지각하면 저스티스 팀장이 나한테 전화함.', time: '08:13' },
@@ -166,7 +161,7 @@
 
   var rowsHtml = '';
   var prevWho = null;
-  log.forEach(function (m) {
+  log.forEach(function (m, index) {
     if (m.divider) {
       rowsHtml += '<div class="msg-divider"><span>' + m.divider + '</span></div>';
       prevWho = null; // 구분선 다음엔 항상 아바타/이름 다시 표시
@@ -174,21 +169,19 @@
     }
     var follow = m.who === prevWho;
     var alignClass = m.who === 'lilith' ? ' right' : '';
-    var avatarHtml = follow
-      ? '<div class="msg-avatar spacer"></div>'
-      : '<div class="msg-avatar"><img src="' + AVA[m.who] + '" alt=""></div>';
-    var nameHtml = follow ? '' : '<div class="msg-name">' + NAME[m.who] + '</div>';
+    var next = log[index + 1];
+    var showTime = !next || next.divider || next.who !== m.who;
     rowsHtml += '<div class="msg-row ' + m.who + alignClass + (follow ? ' follow' : '') + '">' +
-      avatarHtml +
-      '<div class="msg-col">' + nameHtml +
-      '<div class="msg-bubble-wrap"><div class="msg-bubble">' + m.text + '</div>' +
-      '<div class="msg-time">' + m.time + '</div></div></div></div>';
+      '<div class="msg-col"><div class="msg-bubble-wrap"><div class="msg-bubble">' + m.text + '</div>' +
+      (showTime ? '<div class="msg-time">' + m.time + '</div>' : '') + '</div></div></div>';
     prevWho = m.who;
   });
 
   panel.innerHTML =
     '<div class="msg-header">' +
-      '<div><div class="msg-header-title">ARCH MESSENGER</div><div class="msg-header-sub">Eden &amp; Lilith · Log</div></div>' +
+      '<div class="msg-contact"><img class="msg-contact-avatar" src="' + AVA.eden + '" alt="Eden">' +
+      '<div class="msg-header-title">AGENT EDEN</div>' +
+      '<div class="msg-header-sub"><span class="msg-online-dot"></span>ONLINE</div></div>' +
       '<button class="msg-close" aria-label="닫기"><i class="ti ti-x"></i></button>' +
     '</div>' +
     '<div class="msg-body">' + rowsHtml + '</div>' +
