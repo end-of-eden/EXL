@@ -74,8 +74,8 @@
   }
   .msg-time { font-size: 9px; color: var(--color-text-tertiary, #6f7380); flex-shrink: 0; margin-bottom: 2px; }
 
-  .msg-row.eden .msg-name { color: #d1e0fc; }
-  .msg-row.eden .msg-bubble { background: rgba(209,224,252,0.13); border: 0.5px solid rgba(209,224,252,0.28); border-bottom-left-radius: 4px; }
+  .msg-row.eden .msg-name { color: #87ceeb; }
+  .msg-row.eden .msg-bubble { background: rgba(135,206,235,0.13); border: 0.5px solid rgba(135,206,235,0.3); border-bottom-left-radius: 4px; }
   .msg-row.lilith .msg-name { color: #fcd1e0; }
   .msg-row.lilith .msg-bubble { background: rgba(252,209,224,0.14); border: 0.5px solid rgba(252,209,224,0.30); border-bottom-right-radius: 4px; }
 
