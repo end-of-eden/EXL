@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>END OF EDEN — Archive Player Test</title>
+<title>END OF EDEN · Archive</title>
 <script>
 try {
   document.documentElement.dataset.theme = localStorage.getItem('arch-color-theme') === 'light' ? 'light' : 'dark';
@@ -272,9 +272,18 @@ html[data-theme="light"] .queue-item:disabled { color: #303743; background: tran
 </style>
 </head>
 <body>
-<iframe class="archive-frame" id="archive-frame" title="END OF EDEN archive" src="main.html"></iframe>
+<iframe class="archive-frame" id="archive-frame" title="END OF EDEN archive" src="about:blank"></iframe>
+<script>
+(function () {
+  var character = new URLSearchParams(window.location.search).get('char');
+  var initialPage = character === 'eden' || character === 'lilith'
+    ? 'wiki.html?char=' + encodeURIComponent(character)
+    : 'main.html';
+  document.getElementById('archive-frame').src = initialPage;
+})();
+</script>
 
-<aside class="playlist-window" aria-label="YouTube playlist test player">
+<aside class="playlist-window" aria-label="플레이리스트">
   <div class="player-head">
     <img class="cover" src="img/log/001.jpg" alt="Eden and Lilith playlist cover">
     <div class="cover-shade"></div>

@@ -278,7 +278,7 @@ if (window.location.pathname === '/index.html') {
 function goToWiki(character) {
   document.body.classList.add('fade-out');
   setTimeout(function() {
-    location.href = 'wiki.html?char=' + character;
+    location.href = 'playlist-test.html?char=' + encodeURIComponent(character);
   }, 400);
 }
 window.addEventListener('pageshow', function(e) {
