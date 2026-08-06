@@ -38,6 +38,25 @@ html[data-theme="dark"] .post-wrap {
   margin-left: auto;
 }
 
+.main-wrap,
+.scroll-area,
+.gallery-scroll,
+.log-scroll,
+.detail-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.main-wrap::-webkit-scrollbar,
+.scroll-area::-webkit-scrollbar,
+.gallery-scroll::-webkit-scrollbar,
+.log-scroll::-webkit-scrollbar,
+.detail-scroll::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
 .theme-toggle {
   width: 28px;
   height: 28px;
@@ -123,6 +142,15 @@ html[data-theme="light"] .detail-wrap,
 html[data-theme="light"] .detail-scroll,
 html[data-theme="light"] .msg-panel {
   background: var(--color-background-primary, #fff);
+}
+
+html[data-theme="light"] .wiki-wrap,
+html[data-theme="light"] .main-wrap,
+html[data-theme="light"] .gallery-wrap,
+html[data-theme="light"] .log-wrap,
+html[data-theme="light"] .detail-wrap,
+html[data-theme="light"] .post-wrap {
+  box-shadow: 0 3px 12px rgba(25,30,40,0.1);
 }
 
 html[data-theme="light"] .standing-gradient {
