@@ -1,7 +1,8 @@
 (function () {
-  var theme = 'dark';
+  var theme = 'light';
   try {
-    if (localStorage.getItem('arch-color-theme') === 'light') theme = 'light';
+    var saved = localStorage.getItem('arch-color-theme');
+    if (saved === 'light' || saved === 'dark') theme = saved;
   } catch (_) {}
   document.documentElement.dataset.theme = theme;
   document.documentElement.style.colorScheme = theme;

@@ -7,9 +7,10 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50%25' y='54%25' font-size='70' text-anchor='middle' dominant-baseline='central'>💙</text></svg>">
 <script>
 try {
-  document.documentElement.dataset.theme = localStorage.getItem('arch-color-theme') === 'light' ? 'light' : 'dark';
+  var savedTheme = localStorage.getItem('arch-color-theme');
+  document.documentElement.dataset.theme = savedTheme === 'dark' ? 'dark' : 'light';
 } catch (_) {
-  document.documentElement.dataset.theme = 'dark';
+  document.documentElement.dataset.theme = 'light';
 }
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
