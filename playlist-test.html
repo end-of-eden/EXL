@@ -123,8 +123,8 @@ html[data-theme="light"] .archive-frame { background: #eef0f3; }
 .volume-control { position: relative; width: 28px; justify-self: start; }
 .volume-popover {
   position: absolute;
-  left: 50%;
-  bottom: 32px;
+  left: calc(100% + 10px);
+  bottom: 1px;
   width: 20px;
   height: 88px;
   display: grid;
@@ -146,27 +146,25 @@ html[data-theme="light"] .archive-frame { background: #eef0f3; }
   --volume-level: 60%;
   -webkit-appearance: none;
   appearance: none;
-  width: 4px;
+  width: 18px;
   height: 76px;
   margin: 0;
   writing-mode: vertical-lr;
   direction: rtl;
   border-radius: 99px;
-  background: linear-gradient(to top, var(--eden-blue) 0 var(--volume-level), rgba(5,8,14,0.42) var(--volume-level) 100%);
+  background: linear-gradient(to top, var(--eden-blue) 0 var(--volume-level), rgba(5,8,14,0.42) var(--volume-level) 100%) center / 4px 100% no-repeat;
   cursor: pointer;
 }
-.volume-slider::-webkit-slider-runnable-track { width: 4px; height: 76px; background: transparent; }
+.volume-slider::-webkit-slider-runnable-track { width: 18px; height: 76px; background: transparent; }
 .volume-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 11px;
-  height: 11px;
-  margin-left: -3.5px;
+  width: 18px;
+  height: 1px;
   border: 0;
-  border-radius: 50%;
-  background: var(--eden-blue);
+  background: transparent;
 }
-.volume-slider::-moz-range-track { width: 4px; background: transparent; }
-.volume-slider::-moz-range-thumb { width: 11px; height: 11px; border: 0; border-radius: 50%; background: var(--eden-blue); }
+.volume-slider::-moz-range-track { width: 18px; background: transparent; }
+.volume-slider::-moz-range-thumb { width: 18px; height: 1px; border: 0; background: transparent; }
 .volume-icon { width: 17px; height: 17px; display: block; }
 #volume.muted .volume-waves { display: none; }
 .control.loop { position: relative; justify-self: end; }
@@ -205,8 +203,8 @@ html[data-theme="light"] .archive-frame { background: #eef0f3; }
   color: #d7d9df; background: transparent; text-align: center; cursor: pointer;
   touch-action: manipulation;
 }
-.queue-item:not(:disabled):hover { color: #fff; background: transparent; }
-.queue-item.active { color: var(--lilith-pink); background: transparent; }
+.queue-item:not(.active):not(:disabled):hover { color: var(--lilith-pink); background: transparent; }
+.queue-item.active { color: var(--eden-blue); background: transparent; }
 .queue-item:disabled { color: inherit; opacity: 1; cursor: default; background: transparent; }
 .queue-name {
   display: inline-block;
@@ -255,7 +253,7 @@ html[data-theme="light"] .volume-popover {
   background: transparent;
 }
 html[data-theme="light"] .volume-slider {
-  background: linear-gradient(to top, var(--eden-blue) 0 var(--volume-level), rgba(35,42,55,0.28) var(--volume-level) 100%);
+  background: linear-gradient(to top, var(--eden-blue) 0 var(--volume-level), rgba(35,42,55,0.28) var(--volume-level) 100%) center / 4px 100% no-repeat;
 }
 html[data-theme="light"] .control:hover { color: #182033; }
 html[data-theme="light"] .queue {
@@ -263,8 +261,8 @@ html[data-theme="light"] .queue {
 }
 html[data-theme="light"] .queue-heading { color: #8b919d; }
 html[data-theme="light"] .queue-item { color: #4c525d; }
-html[data-theme="light"] .queue-item:not(:disabled):hover { color: #20242c; background: transparent; }
-html[data-theme="light"] .queue-item.active { color: var(--lilith-pink); background: transparent; }
+html[data-theme="light"] .queue-item:not(.active):not(:disabled):hover { color: var(--lilith-pink); background: transparent; }
+html[data-theme="light"] .queue-item.active { color: var(--eden-blue); background: transparent; }
 html[data-theme="light"] .queue-item:disabled { color: #4c525d; background: transparent; }
 
 @media (max-width: 640px) {
@@ -472,7 +470,7 @@ document.getElementById('loop').addEventListener('click', function () {
 });
 
 playerHead.addEventListener('pointerdown', function (event) {
-  if (event.button !== 0 || event.target.closest('button')) return;
+  if (event.button !== 0 || event.target.closest('button, input')) return;
   var rect = playlistWindow.getBoundingClientRect();
   dragState = {
     pointerId: event.pointerId,
