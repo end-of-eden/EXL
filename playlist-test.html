@@ -19,6 +19,9 @@ try {
 html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #0a0a0f; }
 body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; }
 .archive-frame { width: 100%; height: 100%; border: 0; background: #0a0a0f; }
+html[data-theme="light"],
+html[data-theme="light"] body,
+html[data-theme="light"] .archive-frame { background: #eef0f3; }
 
 .playlist-window {
   position: fixed;
@@ -27,8 +30,8 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
   top: 80px;
   z-index: 10000;
   width: 340px;
-  height: 194px;
-  min-height: 194px;
+  height: 224px;
+  min-height: 224px;
   max-height: min(620px, calc(100vh - 48px));
   overflow-y: auto;
   overflow-x: hidden;
@@ -45,7 +48,7 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
   position: sticky;
   top: 0;
   z-index: 2;
-  height: 192px;
+  height: 222px;
   overflow: hidden;
   background: #08090e;
   cursor: grab;
@@ -59,7 +62,7 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
   inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: 50% 34%;
+  object-position: 50% 0%;
   filter: saturate(0.72) brightness(0.7) contrast(1.08);
 }
 .cover-shade {
@@ -108,7 +111,15 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
 .control.play { width: 25px; height: 25px; color: #c6d7ff; background: transparent; }
 .control.menu { justify-self: start; }
 .control.volume { justify-self: end; }
-.queue { min-height: 260px; padding: 9px 10px 18px; border-top: 0; background: #07080d; }
+.queue {
+  position: relative;
+  z-index: 3;
+  min-height: 260px;
+  margin-top: -30px;
+  padding: 40px 10px 18px;
+  border-top: 0;
+  background: linear-gradient(to bottom, rgba(7,8,13,0) 0, #07080d 34px);
+}
 .queue-heading { padding: 7px 8px 10px; color: #5f6573; font-size: 8px; letter-spacing: 0.16em; text-align: center; }
 .queue-item {
   width: 100%; min-height: 30px; padding: 6px 10px;
@@ -144,7 +155,9 @@ html[data-theme="light"] .progress { background: rgba(35,42,55,0.25); }
 html[data-theme="light"] .progress-fill { background: var(--eden-blue); }
 html[data-theme="light"] .control { color: #4f9fbe; }
 html[data-theme="light"] .control:hover { color: #182033; }
-html[data-theme="light"] .queue { background: #f7f8fb; }
+html[data-theme="light"] .queue {
+  background: linear-gradient(to bottom, rgba(247,248,251,0) 0, #f7f8fb 34px);
+}
 html[data-theme="light"] .queue-heading { color: #8b919d; }
 html[data-theme="light"] .queue-item { color: #4c525d; }
 html[data-theme="light"] .queue-item:hover { color: #20242c; background: rgba(25,30,40,0.05); }
@@ -356,7 +369,7 @@ resizeZone.addEventListener('pointermove', function (event) {
   if (!resizeState || event.pointerId !== resizeState.pointerId) return;
   var rect = playlistWindow.getBoundingClientRect();
   var maxHeight = Math.min(620, window.innerHeight - rect.top - 8);
-  var nextHeight = Math.min(maxHeight, Math.max(194, resizeState.startHeight + event.clientY - resizeState.startY));
+  var nextHeight = Math.min(maxHeight, Math.max(224, resizeState.startHeight + event.clientY - resizeState.startY));
   playlistWindow.style.height = nextHeight + 'px';
   placeResizeZone();
 });
