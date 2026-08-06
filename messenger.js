@@ -1,5 +1,5 @@
 (function () {
-  if (window.matchMedia && window.matchMedia('(max-width: 640px)').matches) return;
+  if (window.matchMedia && window.matchMedia('(max-width: 820px), (hover: none) and (pointer: coarse)').matches) return;
 
   var style = document.createElement('style');
   style.textContent = `

@@ -73,13 +73,19 @@ body.fade-out {
 }
 
 .roster-subtitle {
+  display: block;
   margin-top: 14px;
   font-size: 14px;
   font-weight: 300;
   letter-spacing: 0.08em;
   text-align: center;
   color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  transition: color 0.18s;
 }
+.roster-subtitle:hover,
+.roster-subtitle:focus-visible { color: #87ceeb; }
+.roster-subtitle:focus-visible { outline: none; text-decoration: underline; text-underline-offset: 5px; }
 
 .roster-divider {
   margin: 40px 0 48px;
@@ -234,13 +240,13 @@ body.fade-out {
     <span>CLEARANCE LEVEL REQUIRED: S</span>
   </div>
 
-  <div class="welcome-line">WELCOME, AGENT. SELECT AGENT FILE TO PROCEED.</div>
+  <div class="welcome-line">WELCOME, AGENT. SELECT A DESTINATION TO PROCEED.</div>
   <div class="roster-title">ARCH DATABASE</div>
-  <div class="roster-subtitle">AGENTS ON FILE</div>
+  <a class="roster-subtitle" href="playlist-test.html">MAIN PAGE →</a>
   <div class="roster-divider"></div>
 
   <div class="section-header">
-    <h2>ARCH</h2>
+    <h2>AGENTS ON FILE</h2>
     <span class="class-tag">S CLASS</span>
   </div>
   <div class="section-line"></div>
