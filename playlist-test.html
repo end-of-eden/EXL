@@ -1,9 +1,16 @@
 <!DOCTYPE html>
-<html lang="ko" data-theme="dark">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>END OF EDEN — Archive Player Test</title>
+<script>
+try {
+  document.documentElement.dataset.theme = localStorage.getItem('arch-color-theme') === 'light' ? 'light' : 'dark';
+} catch (_) {
+  document.documentElement.dataset.theme = 'dark';
+}
+</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 <style>
@@ -105,13 +112,12 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
 .queue-heading { padding: 7px 8px 10px; color: #5f6573; font-size: 8px; letter-spacing: 0.16em; text-align: center; }
 .queue-item {
   width: 100%; min-height: 30px; padding: 6px 10px;
-  display: grid; grid-template-columns: 25px 1fr; align-items: center; gap: 6px;
+  display: block;
   border: 0; border-radius: 3px;
   color: #d7d9df; background: transparent; text-align: center; cursor: pointer;
 }
 .queue-item:hover { color: #fff; background: rgba(255,255,255,0.06); }
 .queue-item.active { color: #10131b; background: #a9c7ff; }
-.queue-no { font-size: 8px; font-variant-numeric: tabular-nums; opacity: 0.62; }
 .queue-name { overflow: hidden; font-size: 10px; font-weight: 650; letter-spacing: 0.02em; text-overflow: ellipsis; white-space: nowrap; }
 .resize-zone {
   position: fixed;
@@ -122,13 +128,36 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 #youtube-player { position: fixed; left: -10000px; top: -10000px; width: 200px; height: 200px; }
 
+html[data-theme="light"] .playlist-window {
+  color: #242832;
+  background: #f7f8fb;
+  border-color: rgba(25,30,40,0.2);
+  box-shadow: 0 8px 20px rgba(25,30,40,0.18);
+}
+html[data-theme="light"] .cover { filter: saturate(0.72) brightness(0.96) contrast(0.96); }
+html[data-theme="light"] .cover-shade {
+  background: linear-gradient(to bottom, rgba(247,248,251,0.02) 18%, rgba(247,248,251,0.18) 52%, rgba(247,248,251,0.94) 100%);
+}
+html[data-theme="light"] .player-label { color: rgba(38,44,56,0.6); text-shadow: 0 1px 3px rgba(255,255,255,0.8); }
+html[data-theme="light"] .track-title { color: #46638f; text-shadow: 0 1px 4px rgba(255,255,255,0.88); }
+html[data-theme="light"] .time { color: #4f5663; }
+html[data-theme="light"] .progress { background: rgba(35,42,55,0.25); }
+html[data-theme="light"] .progress-fill { background: #668cc7; }
+html[data-theme="light"] .control { color: #4e6385; }
+html[data-theme="light"] .control:hover { color: #182033; }
+html[data-theme="light"] .queue { background: #f7f8fb; border-top-color: rgba(25,30,40,0.12); }
+html[data-theme="light"] .queue-heading { color: #8b919d; }
+html[data-theme="light"] .queue-item { color: #4c525d; }
+html[data-theme="light"] .queue-item:hover { color: #20242c; background: rgba(25,30,40,0.05); }
+html[data-theme="light"] .queue-item.active { color: #fff; background: #6d8fbe; }
+
 @media (max-width: 640px) {
   .playlist-window { left: 12px; right: 12px; top: 12px; width: auto; max-height: 65vh; }
 }
 </style>
 </head>
 <body>
-<iframe class="archive-frame" title="END OF EDEN archive" src="main.html"></iframe>
+<iframe class="archive-frame" id="archive-frame" title="END OF EDEN archive" src="main.html"></iframe>
 
 <aside class="playlist-window" aria-label="YouTube playlist test player">
   <div class="player-head">
@@ -152,7 +181,7 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
     </div>
   </div>
   <div class="queue">
-    <div class="queue-heading" id="track-count">YOUTUBE PLAYLIST</div>
+    <div class="queue-heading">YOUTUBE PLAYLIST</div>
     <div id="queue-list"></div>
   </div>
   <div class="resize-zone" id="resize-zone" aria-hidden="true"></div>
@@ -184,8 +213,27 @@ var muted = false;
 var playlistWindow = document.querySelector('.playlist-window');
 var playerHead = document.querySelector('.player-head');
 var resizeZone = document.getElementById('resize-zone');
+var archiveFrame = document.getElementById('archive-frame');
 var dragState = null;
 var resizeState = null;
+
+function applyShellTheme(theme) {
+  document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+}
+
+window.addEventListener('storage', function (event) {
+  if (event.key === 'arch-color-theme') applyShellTheme(event.newValue);
+});
+
+archiveFrame.addEventListener('load', function () {
+  try {
+    var frameRoot = archiveFrame.contentDocument.documentElement;
+    applyShellTheme(frameRoot.dataset.theme);
+    new MutationObserver(function () {
+      applyShellTheme(frameRoot.dataset.theme);
+    }).observe(frameRoot, { attributes: true, attributeFilter: ['data-theme'] });
+  } catch (_) {}
+});
 
 function formatTime(seconds) {
   if (!isFinite(seconds)) return '00:00';
@@ -225,7 +273,6 @@ function updatePlayer(event) {
   var data = player.getVideoData();
   var displayTitle = customTitles[displayIndex] || (data && data.title);
   if (displayTitle) document.getElementById('track-title').textContent = displayTitle;
-  if (playlist.length) document.getElementById('track-count').textContent = (index + 1) + ' / ' + playlist.length;
   renderQueue(index);
 }
 
@@ -237,7 +284,7 @@ function renderQueue(activeIndex) {
     item.type = 'button';
     item.className = 'queue-item' + (index === activeIndex ? ' active' : '');
     var title = customTitles[index] || ('TRACK ' + String(index + 1).padStart(2, '0'));
-    item.innerHTML = '<span class="queue-no">' + String(index + 1).padStart(2, '0') + '</span><span class="queue-name">' + title + '</span>';
+    item.innerHTML = '<span class="queue-name">' + title + '</span>';
     item.addEventListener('click', function () { player.playVideoAt(index); });
     list.appendChild(item);
   });
