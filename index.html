@@ -51,19 +51,51 @@ body.fade-out {
   object-fit: cover;
   display: block;
 }
+
+.mute-toggle {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(10,10,15,0.6);
+  color: #fff;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+.mute-toggle:hover { background: rgba(10,10,15,0.8); }
 </style>
 <script src="js/theme.js"></script>
 </head>
 <body>
 <div class="roster-wrap">
   <div class="hero-video" onclick="goToMain()">
-    <video src="img/video/main-hero.mp4" autoplay muted loop playsinline></video>
+    <video id="hero-video-el" src="img/video/main-hero.mp4" autoplay muted loop playsinline></video>
+    <button type="button" class="mute-toggle" id="mute-toggle" onclick="toggleMute(event)" aria-label="소리 켜기">🔇</button>
   </div>
 </div>
 
 <script>
 if (window.location.pathname === '/index.html') {
   window.history.replaceState(null, '', '/');
+}
+
+document.getElementById('hero-video-el').volume = 0.3;
+
+function toggleMute(e) {
+  e.stopPropagation();
+  var video = document.getElementById('hero-video-el');
+  var button = document.getElementById('mute-toggle');
+  video.muted = !video.muted;
+  button.textContent = video.muted ? '🔇' : '🔊';
+  button.setAttribute('aria-label', video.muted ? '소리 켜기' : '소리 끄기');
 }
 
 function goToMain() {
