@@ -144,6 +144,7 @@ body {
 }
 </style>
 <script src="js/theme.js"></script>
+<script src="js/content-api.js"></script>
 </head>
 <body>
 
@@ -176,21 +177,44 @@ var logs = [
 
 var base = 'https://raw.githubusercontent.com/end-of-eden/EXL/main/';
 
+function escapeHtml(value) {
+  return String(value || '').replace(/[&<>"']/g, function(char) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char];
+  });
+}
+
 function render() {
   var list = document.getElementById('log-list');
   list.innerHTML = logs.map(function(log) {
-    return '<div class="log-item" onclick="location.href=\'Log/' + log.id + '.html\'">' +
+    var href = log.remote ? 'Log/view.html?id=' + encodeURIComponent(log.id) : 'Log/' + encodeURIComponent(log.id) + '.html';
+    return '<div class="log-item" data-href="' + escapeHtml(href) + '">' +
       '<div class="log-item-text">' +
-      '<div class="log-item-title">' + log.title + '</div>' +
-      '<div class="log-item-date">' + log.date + '</div>' +
-      '<div class="log-item-preview">' + log.preview + '</div>' +
+      '<div class="log-item-title">' + escapeHtml(log.title) + '</div>' +
+      '<div class="log-item-date">' + escapeHtml(log.date) + '</div>' +
+      '<div class="log-item-preview">' + escapeHtml(log.preview) + '</div>' +
       '</div>' +
-      '<img class="log-item-thumb" src="' + base + log.thumb + '" alt="' + log.title + '" loading="lazy">' +
+      '<img class="log-item-thumb" src="' + escapeHtml(log.thumbUrl || (base + log.thumb)) + '" alt="' + escapeHtml(log.title) + '" loading="lazy">' +
       '</div>';
   }).join('');
+
+  Array.prototype.forEach.call(list.querySelectorAll('.log-item'), function(item) {
+    item.addEventListener('click', function() { location.href = item.dataset.href; });
+  });
 }
 
 render();
+
+fetch(window.EDEN_CONTENT_API + '/api/logs')
+  .then(function(response) { if (!response.ok) throw new Error('load failed'); return response.json(); })
+  .then(function(remoteLogs) {
+    logs = remoteLogs.map(function(log) {
+      log.remote = true;
+      log.thumbUrl = window.EDEN_CONTENT_API + log.imagePath;
+      return log;
+    }).concat(logs);
+    render();
+  })
+  .catch(function() { /* R2가 준비되지 않아도 기존 로그는 그대로 표시 */ });
 
 
 </script>

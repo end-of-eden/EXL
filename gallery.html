@@ -220,6 +220,7 @@ body {
 .popup-close:hover { background: rgba(255,255,255,0.3); }
 </style>
 <script src="js/theme.js"></script>
+<script src="js/content-api.js"></script>
 </head>
 <body>
 
@@ -267,21 +268,31 @@ var images = [
 
 var base = 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/gallery/';
 
+function imageUrl(img) {
+  return img.remote ? window.EDEN_CONTENT_API + img.imagePath : base + img.src;
+}
+
+function escapeHtml(value) {
+  return String(value || '').replace(/[&<>"']/g, function(char) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char];
+  });
+}
+
 function render() {
   var grid = document.getElementById('gallery-grid');
   grid.innerHTML = images.map(function(img, i) {
     return '<div class="gallery-item" onclick="openPopup(' + i + ')">' +
-      '<img src="' + base + img.src + '" alt="' + img.title + '" loading="lazy">' +
+      '<img src="' + escapeHtml(imageUrl(img)) + '" alt="' + escapeHtml(img.title) + '" loading="lazy">' +
       '<div class="gallery-item-overlay">' +
-      '<div class="gallery-item-title">' + img.title + '</div>' +
-      (img.lyrics ? '<div class="gallery-item-lyrics">' + img.lyrics + '</div>' : '') +
+      '<div class="gallery-item-title">' + escapeHtml(img.title) + '</div>' +
+      (img.lyrics ? '<div class="gallery-item-lyrics">' + escapeHtml(img.lyrics) + '</div>' : '') +
       '</div></div>';
   }).join('');
 }
 
 function openPopup(i) {
   var img = images[i];
-  document.getElementById('popup-img').src = base + img.src;
+  document.getElementById('popup-img').src = imageUrl(img);
   var popupTitle = document.getElementById('popup-title');
   popupTitle.textContent = '';
   if (img.song) {
@@ -311,6 +322,14 @@ document.addEventListener('keydown', function(e) {
 });
 
 render();
+
+fetch(window.EDEN_CONTENT_API + '/api/gallery')
+  .then(function(response) { if (!response.ok) throw new Error('load failed'); return response.json(); })
+  .then(function(remoteImages) {
+    images = remoteImages.map(function(img) { img.remote = true; return img; }).concat(images);
+    render();
+  })
+  .catch(function() { /* R2가 준비되지 않아도 기존 갤러리는 그대로 표시 */ });
 
 
 </script>
