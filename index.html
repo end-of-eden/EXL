@@ -5,6 +5,9 @@
 <script src="js/theme-init.js"></script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50%25' y='54%25' font-size='70' text-anchor='middle' dominant-baseline='central'>💙</text></svg>"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>END OF EDEN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,16 +41,9 @@ body.fade-out {
   border-radius: 12px;
   overflow: hidden;
   aspect-ratio: 16 / 9;
-  background: #0f0f14;
+  background: #000;
   box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.30);
   cursor: pointer;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.hero-video:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255,255,255,0.3);
-  box-shadow: 0 14px 40px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.35);
 }
 
 .hero-video video {
@@ -59,102 +55,121 @@ body.fade-out {
   display: block;
 }
 
-.hero-video::before {
+.yt-overlay {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.3s ease;
+}
+
+.yt-overlay::before {
   content: '';
   position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 35%;
-  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 100%);
-  pointer-events: none;
-  z-index: 1;
+  inset: 0;
+  background: rgba(0,0,0,0.15);
 }
 
-.play-status {
+.yt-play-btn {
   position: absolute;
-  left: 18px;
-  bottom: 16px;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.85);
-  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px; height: 44px;
+  background: rgba(20,20,20,0.75);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.yt-play-btn::after {
+  content: '';
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 17px;
+  border-color: transparent transparent transparent #ffffff;
+  margin-left: 4px;
 }
 
-.play-status .play-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #4a9d8f;
-  box-shadow: 0 0 6px #4a9d8f;
-}
-
-.play-status.is-paused .play-dot {
-  background: rgba(255,255,255,0.5);
-  box-shadow: none;
-  animation: none;
-}
-
-.play-status:not(.is-paused) .play-dot {
-  animation: pulse-dot 1.8s ease-in-out infinite;
-}
-
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.25; }
-}
-
-.enter-hint {
+.yt-duration {
   position: absolute;
-  right: 18px;
-  bottom: 16px;
-  z-index: 2;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: rgba(255,255,255,0);
-  transition: color 0.3s ease;
-}
-
-.hero-video:hover .enter-hint {
-  color: rgba(255,255,255,0.9);
-}
-
-.mute-toggle {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  z-index: 2;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(10,10,15,0.6);
+  right: 12px; bottom: 12px;
+  background: rgba(0,0,0,0.8);
   color: #fff;
-  font-size: 14px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+}
+
+.yt-progress {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 3px;
+  background: rgba(255,255,255,0.3);
+}
+.yt-progress::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 62%;
+  background: #ff0033;
+}
+
+.hover-reveal {
+  position: absolute;
+  inset: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  backdrop-filter: blur(4px);
+  background: rgba(10,10,15,0.55);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  text-align: center;
 }
-.mute-toggle:hover { background: rgba(10,10,15,0.8); }
+
+.hover-reveal .hover-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.7);
+}
+
+.hover-reveal .hover-enter {
+  margin-top: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.75);
+}
+
+.hero-video:hover video {
+  filter: brightness(0.6) blur(1px);
+}
+
+.hero-video:hover .yt-overlay {
+  opacity: 0;
+}
+
+.hero-video:hover .hover-reveal {
+  opacity: 1;
+}
 </style>
 <script src="js/theme.js"></script>
 </head>
 <body>
 <div class="roster-wrap">
   <div class="hero-video" onclick="goToMain()">
-    <video id="hero-video-el" src="img/video/main-hero.mp4" autoplay loop playsinline></video>
-    <div class="play-status is-paused" id="play-status">
-      <span class="play-dot"></span>
-      <span id="play-status-label">LOADING</span>
+    <video id="hero-video-el" src="img/video/main-hero.mp4" preload="auto" muted playsinline></video>
+    <div class="yt-overlay">
+      <div class="yt-play-btn"></div>
+      <div class="yt-duration" id="yt-duration">0:00</div>
+      <div class="yt-progress"></div>
     </div>
-    <span class="enter-hint">ENTER →</span>
-    <button type="button" class="mute-toggle" id="mute-toggle" onclick="toggleMute(event)" aria-label="소리 끄기">🔊</button>
+    <div class="hover-reveal">
+      <div class="hover-title">相互確證破壞</div>
+      <div class="hover-enter">ENTER →</div>
+    </div>
   </div>
 </div>
 
@@ -164,35 +179,14 @@ if (window.location.pathname === '/index.html') {
 }
 
 var heroVideo = document.getElementById('hero-video-el');
-var muteButton = document.getElementById('mute-toggle');
-var playStatus = document.getElementById('play-status');
-var playStatusLabel = document.getElementById('play-status-label');
+var durationLabel = document.getElementById('yt-duration');
 
-heroVideo.addEventListener('playing', function() {
-  playStatus.classList.remove('is-paused');
-  playStatusLabel.textContent = 'PLAYING';
+heroVideo.addEventListener('loadedmetadata', function() {
+  var total = Math.round(heroVideo.duration);
+  var minutes = Math.floor(total / 60);
+  var seconds = String(total % 60).padStart(2, '0');
+  durationLabel.textContent = minutes + ':' + seconds;
 });
-heroVideo.addEventListener('pause', function() {
-  playStatus.classList.add('is-paused');
-  playStatusLabel.textContent = 'PAUSED';
-});
-
-heroVideo.volume = 0.3;
-heroVideo.play().catch(function() {
-  heroVideo.muted = true;
-  muteButton.textContent = '🔇';
-  muteButton.setAttribute('aria-label', '소리 켜기');
-  heroVideo.play();
-});
-
-function toggleMute(e) {
-  e.stopPropagation();
-  var video = document.getElementById('hero-video-el');
-  var button = document.getElementById('mute-toggle');
-  video.muted = !video.muted;
-  button.textContent = video.muted ? '🔇' : '🔊';
-  button.setAttribute('aria-label', video.muted ? '소리 켜기' : '소리 끄기');
-}
 
 function goToMain() {
   document.body.classList.add('fade-out');
