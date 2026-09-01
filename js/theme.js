@@ -28,7 +28,7 @@
   var script = document.currentScript;
   var stylesheet = document.createElement('link');
   stylesheet.rel = 'stylesheet';
-  stylesheet.href = new URL('theme.css', script.src).href;
+  stylesheet.href = new URL('../css/theme.css', script.src).href;
   document.head.appendChild(stylesheet);
 
   document.addEventListener('DOMContentLoaded', function () {
