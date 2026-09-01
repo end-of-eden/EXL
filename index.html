@@ -77,8 +77,8 @@ body.fade-out {
 <body>
 <div class="roster-wrap">
   <div class="hero-video" onclick="goToMain()">
-    <video id="hero-video-el" src="img/video/main-hero.mp4" autoplay muted loop playsinline></video>
-    <button type="button" class="mute-toggle" id="mute-toggle" onclick="toggleMute(event)" aria-label="소리 켜기">🔇</button>
+    <video id="hero-video-el" src="img/video/main-hero.mp4" autoplay loop playsinline></video>
+    <button type="button" class="mute-toggle" id="mute-toggle" onclick="toggleMute(event)" aria-label="소리 끄기">🔊</button>
   </div>
 </div>
 
@@ -87,7 +87,15 @@ if (window.location.pathname === '/index.html') {
   window.history.replaceState(null, '', '/');
 }
 
-document.getElementById('hero-video-el').volume = 0.3;
+var heroVideo = document.getElementById('hero-video-el');
+var muteButton = document.getElementById('mute-toggle');
+heroVideo.volume = 0.3;
+heroVideo.play().catch(function() {
+  heroVideo.muted = true;
+  muteButton.textContent = '🔇';
+  muteButton.setAttribute('aria-label', '소리 켜기');
+  heroVideo.play();
+});
 
 function toggleMute(e) {
   e.stopPropagation();
