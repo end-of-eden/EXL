@@ -45,10 +45,6 @@ body.fade-out {
   box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.30);
 }
 
-.yt-overlay {
-  cursor: pointer;
-}
-
 .hero-video video {
   position: absolute;
   inset: 0;
@@ -58,72 +54,14 @@ body.fade-out {
   display: block;
 }
 
-.yt-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  transition: opacity 0.3s ease;
-}
-
-.yt-overlay::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.15);
-}
-
-.yt-play-btn {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 64px; height: 44px;
-  background: rgba(20,20,20,0.75);
-  border-radius: 14px;
-  display: flex; align-items: center; justify-content: center;
-}
-.yt-play-btn::after {
-  content: '';
-  width: 0; height: 0;
-  border-style: solid;
-  border-width: 10px 0 10px 17px;
-  border-color: transparent transparent transparent #ffffff;
-  margin-left: 4px;
-}
-
-.yt-duration {
-  position: absolute;
-  right: 12px; bottom: 12px;
-  background: rgba(0,0,0,0.8);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 6px;
-  border-radius: 4px;
-  letter-spacing: 0.02em;
-}
-
-.yt-progress {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 3px;
-  background: rgba(255,255,255,0.3);
-}
-.yt-progress::after {
-  content: '';
-  display: block;
-  height: 100%;
-  width: 62%;
-  background: #ff0033;
-}
-
 .hover-reveal {
   position: absolute;
   inset: 0;
   z-index: 1;
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  padding-top: 14%;
   background: rgba(10,10,15,0.45);
   backdrop-filter: blur(2px);
   opacity: 0;
@@ -141,17 +79,14 @@ body.fade-out {
   text-shadow: 0 2px 14px rgba(0,0,0,0.7);
 }
 
-.enter-hint {
-  position: absolute;
-  left: 14px;
-  top: 12px;
-  z-index: 2;
+.hover-reveal .enter-hint {
+  margin-top: 12px;
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.15em;
-  color: rgba(255,255,255,0);
-  transition: color 0.3s ease;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.85);
   cursor: pointer;
+  pointer-events: auto;
 }
 
 .hero-video:hover video {
@@ -162,28 +97,15 @@ body.fade-out {
   opacity: 1;
 }
 
-.hero-video:hover .enter-hint {
-  color: rgba(255,255,255,0.9);
-}
-
-.hero-video.is-playing .yt-overlay {
-  opacity: 0;
-  pointer-events: none;
-}
-
 .video-controls {
   position: absolute;
   left: 0; right: 0; bottom: 0;
   z-index: 3;
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 8px;
   padding: 8px 12px 10px;
   background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
-}
-
-.hero-video.is-playing .video-controls {
-  display: flex;
 }
 
 .vc-seek {
@@ -245,20 +167,15 @@ body.fade-out {
 <div class="roster-wrap">
   <div class="hero-video" id="hero-video-wrap">
     <video id="hero-video-el" src="img/video/main-hero.mp4" preload="auto" muted playsinline loop></video>
-    <div class="yt-overlay" onclick="playHero()">
-      <div class="yt-play-btn"></div>
-      <div class="yt-duration" id="yt-duration">0:00</div>
-      <div class="yt-progress"></div>
-    </div>
     <div class="hover-reveal">
       <div class="hover-title">相互確證破壞</div>
+      <div class="enter-hint" onclick="goToMain()">ENTER →</div>
     </div>
-    <span class="enter-hint" onclick="goToMain()">ENTER →</span>
     <div class="video-controls">
       <input type="range" class="vc-seek" id="vc-seek" min="0" max="100" value="0" step="0.1">
       <div class="vc-row">
-        <button type="button" class="vc-btn" id="vc-playpause" onclick="toggleHeroPlay()" aria-label="일시정지">⏸</button>
-        <button type="button" class="vc-btn" id="vc-mute" onclick="toggleHeroMute()" aria-label="음소거">🔊</button>
+        <button type="button" class="vc-btn" id="vc-playpause" onclick="toggleHeroPlay()" aria-label="재생">▶</button>
+        <button type="button" class="vc-btn" id="vc-mute" onclick="toggleHeroMute()" aria-label="음소거 해제">🔇</button>
         <span class="vc-time" id="vc-time">0:00 / 0:00</span>
       </div>
     </div>
@@ -271,8 +188,6 @@ if (window.location.pathname === '/index.html') {
 }
 
 var heroVideo = document.getElementById('hero-video-el');
-var heroWrap = document.getElementById('hero-video-wrap');
-var durationLabel = document.getElementById('yt-duration');
 var seekBar = document.getElementById('vc-seek');
 var timeLabel = document.getElementById('vc-time');
 var playPauseBtn = document.getElementById('vc-playpause');
@@ -287,7 +202,6 @@ function formatTime(sec) {
 }
 
 heroVideo.addEventListener('loadedmetadata', function() {
-  durationLabel.textContent = formatTime(heroVideo.duration);
   timeLabel.textContent = formatTime(0) + ' / ' + formatTime(heroVideo.duration);
 });
 
@@ -316,21 +230,23 @@ seekBar.addEventListener('change', function() {
 });
 
 function toggleHeroPlay() {
-  if (heroVideo.paused) heroVideo.play();
-  else heroVideo.pause();
+  if (heroVideo.paused) {
+    if (heroVideo.currentTime === 0) {
+      heroVideo.muted = false;
+      heroVideo.volume = 0.3;
+      muteBtn.textContent = '🔊';
+      muteBtn.setAttribute('aria-label', '음소거');
+    }
+    heroVideo.play();
+  } else {
+    heroVideo.pause();
+  }
 }
 
 function toggleHeroMute() {
   heroVideo.muted = !heroVideo.muted;
   muteBtn.textContent = heroVideo.muted ? '🔇' : '🔊';
   muteBtn.setAttribute('aria-label', heroVideo.muted ? '음소거 해제' : '음소거');
-}
-
-function playHero() {
-  heroVideo.muted = false;
-  heroVideo.volume = 0.3;
-  heroVideo.play();
-  heroWrap.classList.add('is-playing');
 }
 
 function goToMain() {
