@@ -1,5 +1,5 @@
 (function () {
-  var theme = 'light';
+  var theme = 'dark';
   try {
     var saved = localStorage.getItem('arch-color-theme');
     if (saved === 'light' || saved === 'dark') theme = saved;
