@@ -41,6 +41,13 @@ body.fade-out {
   background: #0f0f14;
   box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.30);
   cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-video:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.3);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.55), 0 4px 12px rgba(0,0,0,0.35);
 }
 
 .hero-video video {
@@ -50,6 +57,70 @@ body.fade-out {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.hero-video::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 35%;
+  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.play-status {
+  position: absolute;
+  left: 18px;
+  bottom: 16px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+
+.play-status .play-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4a9d8f;
+  box-shadow: 0 0 6px #4a9d8f;
+}
+
+.play-status.is-paused .play-dot {
+  background: rgba(255,255,255,0.5);
+  box-shadow: none;
+  animation: none;
+}
+
+.play-status:not(.is-paused) .play-dot {
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+.enter-hint {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  z-index: 2;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0);
+  transition: color 0.3s ease;
+}
+
+.hero-video:hover .enter-hint {
+  color: rgba(255,255,255,0.9);
 }
 
 .mute-toggle {
@@ -78,6 +149,11 @@ body.fade-out {
 <div class="roster-wrap">
   <div class="hero-video" onclick="goToMain()">
     <video id="hero-video-el" src="img/video/main-hero.mp4" autoplay loop playsinline></video>
+    <div class="play-status is-paused" id="play-status">
+      <span class="play-dot"></span>
+      <span id="play-status-label">LOADING</span>
+    </div>
+    <span class="enter-hint">ENTER →</span>
     <button type="button" class="mute-toggle" id="mute-toggle" onclick="toggleMute(event)" aria-label="소리 끄기">🔊</button>
   </div>
 </div>
@@ -89,6 +165,18 @@ if (window.location.pathname === '/index.html') {
 
 var heroVideo = document.getElementById('hero-video-el');
 var muteButton = document.getElementById('mute-toggle');
+var playStatus = document.getElementById('play-status');
+var playStatusLabel = document.getElementById('play-status-label');
+
+heroVideo.addEventListener('playing', function() {
+  playStatus.classList.remove('is-paused');
+  playStatusLabel.textContent = 'PLAYING';
+});
+heroVideo.addEventListener('pause', function() {
+  playStatus.classList.add('is-paused');
+  playStatusLabel.textContent = 'PAUSED';
+});
+
 heroVideo.volume = 0.3;
 heroVideo.play().catch(function() {
   heroVideo.muted = true;
