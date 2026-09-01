@@ -54,6 +54,13 @@ body.fade-out {
   display: block;
 }
 
+.hover-zone {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  bottom: 52px;
+  z-index: 1;
+}
+
 .hover-reveal {
   position: absolute;
   inset: 0;
@@ -89,11 +96,11 @@ body.fade-out {
   pointer-events: auto;
 }
 
-.hero-video:hover video {
+.hero-video:has(.hover-zone:hover) video {
   filter: brightness(0.6) blur(1px);
 }
 
-.hero-video:hover .hover-reveal {
+.hero-video:has(.hover-zone:hover) .hover-reveal {
   opacity: 1;
 }
 
@@ -167,6 +174,7 @@ body.fade-out {
 <div class="roster-wrap">
   <div class="hero-video" id="hero-video-wrap">
     <video id="hero-video-el" src="img/video/main-hero.mp4" preload="auto" muted playsinline loop></video>
+    <div class="hover-zone"></div>
     <div class="hover-reveal">
       <div class="hover-title">相互確證破壞</div>
       <div class="enter-hint" onclick="goToMain()">ENTER →</div>
