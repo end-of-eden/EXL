@@ -28,8 +28,8 @@ html[data-theme="light"] .archive-frame { background: #eef0f3; }
 .playlist-window {
   position: fixed;
   left: auto;
-  right: 7vw;
-  top: 80px;
+  right: 18px;
+  top: 60px;
   z-index: 2;
   width: 340px;
   height: 224px;
@@ -281,7 +281,7 @@ html[data-theme="light"] .queue-item:disabled { color: #303743; background: tran
   var character = new URLSearchParams(window.location.search).get('char');
   var initialPage = character === 'eden' || character === 'lilith'
     ? 'wiki.html?char=' + encodeURIComponent(character)
-    : 'main.html';
+    : 'main.html?v=20260907-simple-agents';
   document.getElementById('archive-frame').src = initialPage;
 })();
 </script>

@@ -1,6 +1,4 @@
 (function () {
-  if (window.matchMedia && window.matchMedia('(max-width: 820px), (hover: none) and (pointer: coarse)').matches) return;
-
   var style = document.createElement('style');
   style.textContent = `
   .msg-fab {
@@ -44,7 +42,7 @@
     border-bottom: 0.5px solid var(--color-border-tertiary, rgba(255,255,255,0.10));
   }
   .msg-contact { display: flex; flex-direction: column; align-items: center; text-align: center; }
-  .msg-contact-avatar { width: 42px; height: 42px; margin-bottom: 5px; border-radius: 50%; object-fit: cover; object-position: top; }
+  .msg-contact-avatar { width: 50px; height: 50px; margin-bottom: 5px; border-radius: 50%; object-fit: cover; object-position: center 18%; }
   .msg-header-title { font-size: 11px; font-weight: 650; letter-spacing: 0.08em; color: var(--color-text-primary, #f2f2f5); }
   .msg-header-sub { display: flex; align-items: center; gap: 5px; margin-top: 3px; font-size: 9px; letter-spacing: 0.08em; color: var(--color-text-tertiary, #6f7380); }
   .msg-online-dot { width: 6px; height: 6px; border-radius: 50%; background: #34c759; box-shadow: 0 0 7px rgba(52,199,89,0.85); }
@@ -144,12 +142,56 @@
     color: #555b66;
     box-shadow: 0 3px 10px rgba(25,30,40,0.1);
   }
+  #sidebar-messenger .arch-messenger-root { position: relative; width: 100%; height: 100%; }
+  #sidebar-messenger .msg-fab {
+    position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 0;
+    display: flex; align-items: center; justify-content: center; padding: 8px 36px 9px;
+    opacity: 1; pointer-events: auto; box-shadow: none; background: transparent;
+  }
+  #sidebar-messenger .msg-fab:hover { transform: none; background: rgba(255,255,255,.035); }
+  #sidebar-messenger .msg-preview-copy { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  #sidebar-messenger .msg-preview-avatar { width: 42px; height: 42px; margin-bottom: 5px; border-radius: 50%; object-fit: cover; object-position: top; }
+  #sidebar-messenger .msg-preview-title { color: #f4f5f8; font-size: 11px; font-weight: 650; letter-spacing: .08em; }
+  #sidebar-messenger .msg-preview-line { display: flex; align-items: center; gap: 5px; margin-top: 3px; color: #aeb4c2; font-size: 9px; letter-spacing: .08em; }
+  #sidebar-messenger .msg-preview-status { width: 6px; height: 6px; border-radius: 50%; background: #34c759; box-shadow: 0 0 7px rgba(52,199,89,.85); }
+  #sidebar-messenger .msg-panel {
+    position: relative; inset: auto; width: 100%; height: 100%;
+    border: 0; border-radius: 0; box-shadow: none;
+    opacity: 0; transform: none; pointer-events: none;
+    color: #f4f5f8; background: #181a22;
+  }
+  #sidebar-messenger .msg-panel.open { opacity: 1; transform: none; pointer-events: auto; }
+  #sidebar-messenger .msg-header { min-height: 76px; padding: 8px 36px 9px; }
+  #sidebar-messenger .msg-contact-avatar { width: 34px; height: 34px; margin-bottom: 3px; }
+  #sidebar-messenger .msg-close { display: none; }
+  #sidebar-messenger .msg-body { padding: 11px; }
+  #sidebar-messenger .msg-row { max-width: 88%; margin-top: 7px; }
+  #sidebar-messenger .msg-header-title { color: #f4f5f8; font-size: 12px; }
+  #sidebar-messenger .msg-header-sub,
+  #sidebar-messenger .msg-time { color: #aeb4c2; }
+  #sidebar-messenger .msg-bubble { padding: 7px 10px; color: #f4f5f8; font-size: 12px; line-height: 1.55; }
+  #sidebar-messenger .msg-row.eden .msg-bubble { background: #272a35; }
+  #sidebar-messenger .msg-row.lilith .msg-bubble { background: #0a84ff; color: #fff; }
+  #sidebar-messenger .msg-footer { padding: 8px 9px; gap: 5px; }
+  #sidebar-messenger .msg-footer-icon { width: 22px; height: 22px; }
+  #sidebar-messenger .msg-input { padding: 6px 10px; font-size: 10px; }
+  #sidebar-messenger .msg-send { width: 26px; height: 26px; }
+  html[data-theme="light"] #sidebar-messenger .msg-panel { color: #20232a; background: #fff; }
+  html[data-theme="light"] #sidebar-messenger .msg-fab:hover { background: rgba(25,30,40,.035); }
+  html[data-theme="light"] #sidebar-messenger .msg-preview-title { color: #20232a; }
+  html[data-theme="light"] #sidebar-messenger .msg-preview-line { color: #707783; }
+  html[data-theme="light"] #sidebar-messenger .msg-header-title { color: #20232a; }
+  html[data-theme="light"] #sidebar-messenger .msg-header-sub,
+  html[data-theme="light"] #sidebar-messenger .msg-time { color: #707783; }
+  html[data-theme="light"] #sidebar-messenger .msg-bubble { color: #20232a; }
+  html[data-theme="light"] #sidebar-messenger .msg-row.eden .msg-bubble { background: #edf0f5; }
+  html[data-theme="light"] #sidebar-messenger .msg-row.lilith .msg-bubble { color: #fff; }
   `;
   document.head.appendChild(style);
 
   var AVA = {
-    eden: 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg',
-    lilith: 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Lilith_1.jpg'
+    eden: 'img/wiki/Eden_1.jpg',
+    lilith: 'img/wiki/Lilith_1.jpg'
   };
   var log = [
     { who: 'eden', text: '일어나.', time: '08:12' },
@@ -175,6 +217,7 @@
   wrap.className = 'arch-messenger-root';
 
   var fab = document.createElement('button');
+  fab.type = 'button';
   fab.className = 'msg-fab';
   fab.setAttribute('aria-label', '메신저 열기');
   fab.innerHTML = '<i class="ti ti-message-circle-2" aria-hidden="true"></i><span class="dot"></span>';
@@ -218,8 +261,15 @@
 
   wrap.appendChild(panel);
 
+  var embeddedHost = document.getElementById('sidebar-messenger');
   var portalDocument = document;
-  if (window.parent !== window) {
+  if (embeddedHost && window.parent !== window) {
+    try {
+      var staleRoot = window.parent.document.querySelector('.arch-messenger-root');
+      if (staleRoot) staleRoot.remove();
+    } catch (_) {}
+  }
+  if (!embeddedHost && window.parent !== window) {
     try {
       portalDocument = window.parent.document;
       var previousRoot = portalDocument.querySelector('.arch-messenger-root');
@@ -233,7 +283,10 @@
       portalDocument = document;
     }
   }
-  portalDocument.body.appendChild(wrap);
+  (embeddedHost || portalDocument.body).appendChild(wrap);
+  if (embeddedHost) {
+    fab.innerHTML = '<span class="msg-preview-copy"><img class="msg-preview-avatar" src="' + AVA.eden + '" alt="Eden"><span class="msg-preview-title">AGENT EDEN</span><span class="msg-preview-line"><span class="msg-preview-status"></span>ONLINE</span></span>';
+  }
 
   var portalVariables = [
     '--color-background-primary', '--color-background-secondary', '--color-background-tertiary',
@@ -282,16 +335,23 @@
   var toastTimer = null;
 
   function openPanel() {
+    if (embeddedHost) embeddedHost.classList.add('expanded');
     panel.classList.add('open');
     body.scrollTop = body.scrollHeight;
   }
   function closePanel() {
     panel.classList.remove('open');
+    if (embeddedHost) embeddedHost.classList.remove('expanded');
   }
 
-  fab.addEventListener('click', function () {
-    panel.classList.contains('open') ? closePanel() : openPanel();
-  });
+  fab.addEventListener('click', function () { openPanel(); });
+  if (embeddedHost) {
+    embeddedHost.addEventListener('click', function (event) {
+      if (!embeddedHost.classList.contains('expanded') && !event.target.closest('.msg-panel')) {
+        openPanel();
+      }
+    });
+  }
   panel.querySelector('.msg-close').addEventListener('click', closePanel);
   panel.querySelector('.msg-send').addEventListener('click', function () {
     toast.classList.add('show');
@@ -301,6 +361,7 @@
 
   var FAB_SIZE = 40, GAP_SIDE = 20, GAP_PANEL = 12;
   function reposition() {
+    if (embeddedHost) return;
     var host = document.querySelector('.main-wrap, .wiki-wrap, .gallery-wrap, .log-wrap, .detail-wrap, .post-wrap');
     if (!host) return;
     var r = host.getBoundingClientRect();
@@ -330,7 +391,10 @@
   var pending = imgs.filter(function (img) { return !img.complete; });
   function reveal() {
     reposition();
-    requestAnimationFrame(function () { fab.classList.add('ready'); });
+    requestAnimationFrame(function () {
+      fab.classList.add('ready');
+      if (embeddedHost) openPanel();
+    });
   }
   if (pending.length === 0) {
     reveal();
