@@ -30,4 +30,18 @@ html[data-theme="light"] .explorer-sidebar .explorer-label { color: #aaa5aa; }
 html[data-theme="light"] .explorer-sidebar .explorer-root { color: #79747a !important; }
 html[data-theme="light"] .explorer-sidebar .explorer-root i,
 html[data-theme="light"] .explorer-sidebar .explorer-branch-title { color: #908b91; }
+
+.home-content > *,
+.wiki-wrap > *,
+.gallery-wrap > *,
+.log-wrap > * {
+  animation: archive-content-fade 240ms ease-out both;
+}
+@keyframes archive-content-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-content > *, .wiki-wrap > *, .gallery-wrap > *, .log-wrap > * { animation: none; }
+}
 @media (max-width: 760px) { .explorer-sidebar.topnav { display: none !important; } }
