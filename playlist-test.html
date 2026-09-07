@@ -555,7 +555,6 @@ html[data-theme="light"] .start-menu__item:hover { color: #fff; }
 <script>
 (function () {
   var doc = document.getElementById('desktop-document');
-  var frame = document.getElementById('archive-frame');
   var tabs = Array.prototype.slice.call(doc.querySelectorAll('[data-doc-tab]'));
   var panels = Array.prototype.slice.call(doc.querySelectorAll('[data-doc-panel]'));
   tabs.forEach(function (tab) {
@@ -564,10 +563,6 @@ html[data-theme="light"] .start-menu__item:hover { color: #fff; }
       panels.forEach(function (panel) { panel.classList.toggle('active', panel.dataset.docPanel === tab.dataset.docTab); });
     });
   });
-  frame.addEventListener('load', function () {
-    try { doc.hidden = !/\/main\.html$/.test(new URL(frame.contentWindow.location.href).pathname); } catch (_) { doc.hidden = false; }
-  });
-
   var bar = doc.querySelector('.desktop-document__bar');
   var drag = null;
   bar.addEventListener('pointerdown', function (event) {
