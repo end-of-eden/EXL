@@ -7,6 +7,7 @@
   display: block !important;
   border-right: 1px solid #50535c !important;
   background: #24272f !important;
+  font-family: "Galmuri11", "Pretendard", sans-serif !important;
 }
 .explorer-sidebar.topnav::before { display: none !important; content: none !important; }
 .explorer-sidebar .topnav-links { display: flex !important; flex-direction: column !important; align-items: stretch !important; gap: 0 !important; }
