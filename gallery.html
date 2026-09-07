@@ -7,7 +7,10 @@
 <title>END OF EDEN — Gallery</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/pc-page.css">
+<link rel="stylesheet" href="css/explorer-sidebar.css?v=20260907-unified-sidebar-2">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -218,21 +221,34 @@ body {
   transition: background 0.15s;
 }
 .popup-close:hover { background: rgba(255,255,255,0.3); }
+.gallery-wrap { width:100%; max-width:none; height:100%; border:0; border-radius:0; box-shadow:none; background:#fff; }
+.gallery-scroll { padding:22px; }
+.gallery-scroll::-webkit-scrollbar { width:12px; }.gallery-scroll::-webkit-scrollbar-track{background:#ececef}.gallery-scroll::-webkit-scrollbar-thumb{border:2px solid #ececef;border-radius:0;background:#b6b7bc}
+.gallery-grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+.gallery-item { border:1px solid #c9c9cd; border-radius:0; background:#ececef; box-shadow:2px 2px 0 rgba(0,0,0,.07); }
+.gallery-item:hover { border-color:#bd7892; }
+.popup-inner { padding:5px; border:2px solid; border-color:#fff #777477 #777477 #fff; border-radius:0; background:#d4d2d3; }
+.popup-close { top:9px; right:9px; width:22px; height:22px; border:2px solid; border-color:#fff #817b7e #817b7e #fff; border-radius:0; background:#d4d2d3; color:#65515a; }
+@media(max-width:980px){.gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:640px){.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 <script src="js/theme.js"></script>
 <script src="js/content-api.js"></script>
 </head>
-<body>
+<body class="pc-page-body">
+<main class="pc-page-window">
+<div class="pc-page-windowbar"><span>▧ ARCH IMAGE ARCHIVE</span><span class="pc-page-controls" aria-hidden="true"><span class="pc-page-control"></span><span class="pc-page-control"></span><span class="pc-page-control"></span></span></div>
+<div class="pc-page-toolbar"><span>‹　›　⌂</span><span class="pc-page-address">내 PC　›　相互確證破壞　›　GALLERY</span></div>
+<div class="pc-page-workspace">
 
-<nav class="topnav">
+<nav class="topnav explorer-sidebar" aria-label="카테고리">
   <div class="topnav-links">
-    <a href="main.html">Main</a>
-    <div class="topnav-divider"></div>
-    <a href="wiki.html">Agents</a>
-    <div class="topnav-divider"></div>
-    <a href="gallery.html" class="active">Gallery</a>
-    <div class="topnav-divider"></div>
-    <a href="log.html">Log</a>
+    <section class="explorer-group"><div class="explorer-label">즐겨찾기</div><a class="explorer-root" href="main.html?v=20260907-unified-sidebar-2"><i class="ti ti-folder"></i><span>내 PC</span></a><a class="explorer-root explorer-social" href="https://x.com/synapsezip" target="_blank" rel="noopener noreferrer"><i class="ti ti-brand-x"></i><span>BUTTERSCOTCH</span></a></section>
+    <section class="explorer-group"><div class="explorer-label">카테고리</div>
+      <div class="explorer-branch"><div class="explorer-branch-title"><span class="explorer-chevron">♡</span><span class="explorer-drive">로컬디스크 (C:)</span><span>⌄</span></div><div class="explorer-tree"><a href="main.html">main</a></div></div>
+      <div class="explorer-branch"><div class="explorer-branch-title"><span class="explorer-chevron">♡</span><span class="explorer-drive">에이전트</span><span>⌄</span></div><div class="explorer-tree"><a href="wiki.html?char=lilith&amp;v=20260907-unified-sidebar-2">lilith</a><a href="wiki.html?char=eden&amp;v=20260907-unified-sidebar-2">eden</a></div></div>
+      <div class="explorer-branch"><div class="explorer-branch-title"><span class="explorer-chevron">♡</span><span class="explorer-drive">로컬디스크 (D:)</span><span>⌄</span></div><div class="explorer-tree"><a href="gallery.html?v=20260907-unified-sidebar-2" class="active">gallery</a><a href="log.html?v=20260907-unified-sidebar-2">log</a></div></div>
+    </section>
+    <section class="explorer-group"><div class="explorer-label">기타</div><a class="explorer-root explorer-tag" href="main.html#banner"><i class="ti ti-photo"></i><span>banner</span></a></section>
   </div>
 </nav>
 
@@ -241,6 +257,8 @@ body {
     <div class="gallery-grid" id="gallery-grid"></div>
   </div>
 </div>
+</div>
+</main>
 
 <!-- 팝업 -->
 <div class="popup-bg" id="popup-bg" onclick="closePopup(event)">
@@ -266,7 +284,7 @@ var images = [
   },
 ];
 
-var base = 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/gallery/';
+var base = 'img/gallery/';
 
 function imageUrl(img) {
   return img.remote ? window.EDEN_CONTENT_API + img.imagePath : base + img.src;

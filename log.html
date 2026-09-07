@@ -7,7 +7,10 @@
 <title>END OF EDEN — Log</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/pc-page.css">
+<link rel="stylesheet" href="css/explorer-sidebar.css?v=20260907-unified-sidebar-2">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -134,6 +137,16 @@ body {
   flex-shrink: 0;
   border: 0.5px solid var(--color-border-tertiary);
 }
+.log-wrap { width:100%; max-width:none; height:100%; border:0; border-radius:0; box-shadow:none; background:#fff; }
+.log-scroll { padding:26px 42px; }
+.log-scroll::-webkit-scrollbar { width:12px; }.log-scroll::-webkit-scrollbar-track{background:#ececef}.log-scroll::-webkit-scrollbar-thumb{border:2px solid #ececef;border-radius:0;background:#b6b7bc}
+.log-item { padding:20px 0; border-bottom:1px solid #d0d1d4; }
+.log-item-title { color:#2e2f35; font-size:16px; font-weight:700; }
+.log-item-title::before { content:'▸ '; color:#b36a86; }
+.log-item-date { color:#8a7a81; font:400 9px/1.5 "Galmuri11","Pretendard",sans-serif; }
+.log-item-preview { color:#55565d; }
+.log-item-thumb { border:1px solid #bfc0c4; border-radius:0; }
+.log-item:hover { opacity:1; background:#faf6f8; }
 
 @media (max-width: 640px) {
   .log-scroll { padding: 2rem 1.25rem; }
@@ -146,17 +159,21 @@ body {
 <script src="js/theme.js"></script>
 <script src="js/content-api.js"></script>
 </head>
-<body>
+<body class="pc-page-body">
+<main class="pc-page-window">
+<div class="pc-page-windowbar"><span>▤ ARCH LOG DATABASE</span><span class="pc-page-controls" aria-hidden="true"><span class="pc-page-control"></span><span class="pc-page-control"></span><span class="pc-page-control"></span></span></div>
+<div class="pc-page-toolbar"><span>‹　›　⌂</span><span class="pc-page-address">내 PC　›　相互確證破壞　›　LOG</span></div>
+<div class="pc-page-workspace">
 
-<nav class="topnav">
+<nav class="topnav explorer-sidebar" aria-label="카테고리">
   <div class="topnav-links">
-    <a href="main.html">Main</a>
-    <div class="topnav-divider"></div>
-    <a href="wiki.html">Agents</a>
-    <div class="topnav-divider"></div>
-    <a href="gallery.html">Gallery</a>
-    <div class="topnav-divider"></div>
-    <a href="log.html" class="active">Log</a>
+    <section class="explorer-group"><div class="explorer-label">즐겨찾기</div><a class="explorer-root" href="main.html?v=20260907-unified-sidebar-2"><i class="ti ti-folder"></i><span>내 PC</span></a><a class="explorer-root explorer-social" href="https://x.com/synapsezip" target="_blank" rel="noopener noreferrer"><i class="ti ti-brand-x"></i><span>BUTTERSCOTCH</span></a></section>
+    <section class="explorer-group"><div class="explorer-label">카테고리</div>
+      <div class="explorer-branch"><div class="explorer-branch-title"><span class="explorer-chevron">♡</span><span class="explorer-drive">로컬디스크 (C:)</span><span>⌄</span></div><div class="explorer-tree"><a href="main.html">main</a></div></div>
+      <div class="explorer-branch"><div class="explorer-branch-title"><span class="explorer-chevron">♡</span><span class="explorer-drive">에이전트</span><span>⌄</span></div><div class="explorer-tree"><a href="wiki.html?char=lilith&amp;v=20260907-unified-sidebar-2">lilith</a><a href="wiki.html?char=eden&amp;v=20260907-unified-sidebar-2">eden</a></div></div>
+      <div class="explorer-branch"><div class="explorer-branch-title"><span class="explorer-chevron">♡</span><span class="explorer-drive">로컬디스크 (D:)</span><span>⌄</span></div><div class="explorer-tree"><a href="gallery.html?v=20260907-unified-sidebar-2">gallery</a><a href="log.html?v=20260907-unified-sidebar-2" class="active">log</a></div></div>
+    </section>
+    <section class="explorer-group"><div class="explorer-label">기타</div><a class="explorer-root explorer-tag" href="main.html#banner"><i class="ti ti-photo"></i><span>banner</span></a></section>
   </div>
 </nav>
 
@@ -165,6 +182,8 @@ body {
     <div id="log-list"></div>
   </div>
 </div>
+</div>
+</main>
 
 <script>
 // ✏️ 로그 추가할 때 여기에 한 줄씩 추가
@@ -175,7 +194,7 @@ var logs = [
   { id: '004', title: '뚱뚱해', date: '2026.07.02', preview: '뱅가드 2팀 회식에서 릴리스가 따라준 술에 잔뜩 취해 뻗었다가 아침에 눈을 뜬 에덴은 그녀에게 애정 표현을 시도하지만 그가 치는 모든 달콤한 말은 예외 없이 \'뚱뚱해\'로 바뀌어 전송된다. 범인은 뻔했다 — 복도 건너에서 잠든 척하고 있을 그녀.', thumb: 'img/log/004.jpg' },
 ];
 
-var base = 'https://raw.githubusercontent.com/end-of-eden/EXL/main/';
+var base = '';
 
 function escapeHtml(value) {
   return String(value || '').replace(/[&<>"']/g, function(char) {
@@ -186,7 +205,9 @@ function escapeHtml(value) {
 function render() {
   var list = document.getElementById('log-list');
   list.innerHTML = logs.map(function(log) {
-    var href = log.remote ? 'Log/view.html?id=' + encodeURIComponent(log.id) : 'Log/' + encodeURIComponent(log.id) + '.html';
+    var href = log.remote
+      ? 'Log/view.html?id=' + encodeURIComponent(log.id) + '&v=20260907-log-detail-frame'
+      : 'Log/' + encodeURIComponent(log.id) + '.html?v=20260907-log-detail-frame';
     return '<div class="log-item" data-href="' + escapeHtml(href) + '">' +
       '<div class="log-item-text">' +
       '<div class="log-item-title">' + escapeHtml(log.title) + '</div>' +

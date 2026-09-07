@@ -8,6 +8,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/pc-page.css">
+<link rel="stylesheet" href="../css/explorer-sidebar.css?v=20260907-log-detail-frame">
+<link rel="stylesheet" href="../css/log-detail-pc.css?v=20260907-log-detail-frame">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -191,20 +194,22 @@ body {
 </style>
 <script src="../js/theme.js"></script>
 </head>
-<body>
-
-<nav class="topnav">
+<body class="pc-page-body">
+<main class="pc-page-window">
+<div class="pc-page-windowbar"><span>▤ ARCH LOG DATABASE</span><span class="pc-page-controls" aria-hidden="true"><span class="pc-page-control"></span><span class="pc-page-control"></span><span class="pc-page-control"></span></span></div>
+<div class="pc-page-toolbar"><span>‹　›　⌂</span><span class="pc-page-address">내 PC　›　相互確證破壞　›　LOG</span></div>
+<div class="pc-page-workspace">
+<nav class="topnav explorer-sidebar" aria-label="카테고리">
   <div class="topnav-links">
-    <a href="../main.html">Main</a>
-    <div class="topnav-divider"></div>
-    <a href="../wiki.html">Agents</a>
-    <div class="topnav-divider"></div>
-    <a href="../gallery.html">Gallery</a>
-    <div class="topnav-divider"></div>
-    <a href="../log.html" class="active">Log</a>
+    <section class="explorer-group"><div class="explorer-label">즐겨찾기</div><a class="explorer-root" href="../main.html?v=20260907-log-detail-frame"><i class="ti ti-folder"></i><span>내 PC</span></a><a class="explorer-root explorer-social" href="https://x.com/synapsezip" target="_blank" rel="noopener noreferrer"><i class="ti ti-brand-x"></i><span>BUTTERSCOTCH</span></a></section>
+    <section class="explorer-group"><div class="explorer-label">카테고리</div>
+      <div class="explorer-branch"><div class="explorer-branch-title"><span class="explorer-chevron">♡</span><span class="explorer-drive">로컬디스크 (C:)</span><span>⌄</span></div><div class="explorer-tree"><a href="../main.html?v=20260907-log-detail-frame">main</a></div></div>
+      <div class="explorer-branch"><div class="explorer-branch-title"><span class="explorer-chevron">♡</span><span class="explorer-drive">에이전트</span><span>⌄</span></div><div class="explorer-tree"><a href="../wiki.html?char=lilith&amp;v=20260907-log-detail-frame">lilith</a><a href="../wiki.html?char=eden&amp;v=20260907-log-detail-frame">eden</a></div></div>
+      <div class="explorer-branch"><div class="explorer-branch-title"><span class="explorer-chevron">♡</span><span class="explorer-drive">로컬디스크 (D:)</span><span>⌄</span></div><div class="explorer-tree"><a href="../gallery.html?v=20260907-log-detail-frame">gallery</a><a class="active" href="../log.html?v=20260907-log-detail-frame">log</a></div></div>
+    </section>
+    <section class="explorer-group"><div class="explorer-label">기타</div><a class="explorer-root explorer-tag" href="../main.html#banner"><i class="ti ti-photo"></i><span>banner</span></a></section>
   </div>
 </nav>
-
 <div class="detail-wrap">
   <div class="detail-scroll" id="detail-scroll">
 
@@ -384,6 +389,8 @@ body {
 
   </div>
 </div>
+</div>
+</main>
 
 <script>
 </script>
@@ -392,3 +399,4 @@ body {
 <script src="../js/messenger.js"></script>
 </body>
 </html>
+
