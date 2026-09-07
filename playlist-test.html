@@ -22,14 +22,6 @@ try {
 html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #11131a; }
 body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; }
 .archive-frame { position: relative; z-index: 1; width: 100%; height: 100%; border: 0; background: #11131a; }
-.archive-frame.page-enter { animation: archive-page-enter 320ms cubic-bezier(.22,.78,.28,1) both; }
-@keyframes archive-page-enter {
-  from { opacity: 0; transform: translateY(8px); filter: blur(2px); }
-  to { opacity: 1; transform: translateY(0); filter: blur(0); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .archive-frame.page-enter { animation: none; }
-}
 html[data-theme="light"],
 html[data-theme="light"] body,
 html[data-theme="light"] .archive-frame {
@@ -529,11 +521,6 @@ html[data-theme="light"] .start-menu__item:hover { color: #fff; }
     ? 'wiki.html?char=' + encodeURIComponent(character)
     : 'main.html?v=20260907-start-taskbar';
   var frame = document.getElementById('archive-frame');
-  frame.addEventListener('load', function () {
-    frame.classList.remove('page-enter');
-    void frame.offsetWidth;
-    frame.classList.add('page-enter');
-  });
   frame.src = initialPage;
 })();
 </script>
