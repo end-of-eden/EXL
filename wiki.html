@@ -226,8 +226,11 @@ body { min-height: 100vh; padding: 2rem; display: flex; align-items: center; jus
 .standing-panel::after { height: 190px; background: linear-gradient(to top, rgba(236,236,239,.98), rgba(236,236,239,0)); }
 .standing-img { inset: 12px 12px 82px; border: 1px solid #b8b9be; background: #fff; }
 .standing-img img { object-fit: contain !important; object-position: center top !important; }
+.wiki-wrap.theme-eden .standing-panel,
 .wiki-wrap.theme-lilith .standing-panel { flex-basis: 430px; padding-bottom: 18px; }
+.wiki-wrap.theme-eden .standing-img,
 .wiki-wrap.theme-lilith .standing-img { inset: 0; border: 0; }
+.wiki-wrap.theme-eden .standing-img img,
 .wiki-wrap.theme-lilith .standing-img img {
   width: 100% !important; height: 100% !important;
   object-fit: contain !important; object-position: center top !important;
@@ -316,7 +319,7 @@ html[data-theme="light"] .topnav { border-right-color: #c7c3c5; background: #e5e
 var current = 'eden';
 
 var STANDING_IMG = {
-  eden: 'https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg',
+  eden: 'img/wiki/Eden_full.png',
   lilith: 'img/wiki/Lilith_full.png'
 };
 // 전환 클릭 시점에 이미 캐시돼 있도록 두 스탠딩 이미지를 미리 받아둠 (밀림현상 방지)
