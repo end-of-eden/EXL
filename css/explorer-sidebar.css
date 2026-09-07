@@ -13,6 +13,7 @@
 .explorer-sidebar .explorer-group + .explorer-group { margin-top: 19px; }
 .explorer-sidebar .explorer-label { margin: 0 0 8px; color: #8f929d; font: 400 10px/1.2 "Galmuri11", "Pretendard", sans-serif; letter-spacing: .04em; }
 .explorer-sidebar .explorer-root { min-height: 25px; display: flex; align-items: center; gap: 7px; margin: 0; padding: 0 !important; color: #b0b4bd !important; font-size: 11px !important; text-decoration: none; transition: color .16s ease, transform .16s ease; }
+.explorer-sidebar .explorer-root::before { content: none !important; display: none !important; }
 .explorer-sidebar .explorer-root i { width: 14px; color: #8c909b; font-size: 14px; }
 .explorer-sidebar .explorer-branch { margin-top: 5px; }
 .explorer-sidebar .explorer-branch-title { min-height: 24px; display: flex; align-items: center; gap: 5px; color: #6f7380; font-size: 11px; }
@@ -24,24 +25,28 @@
 .explorer-sidebar .explorer-root:hover,
 .explorer-sidebar .explorer-tree a:hover { color: #87ceeb !important; transform: translateX(3px); }
 .explorer-sidebar .explorer-tree a.active { color: #ff2d7a !important; }
-.explorer-sidebar .explorer-tag { margin-top: 5px; text-transform: uppercase; }
+.explorer-sidebar .explorer-tag { margin-top: 5px; text-transform: uppercase !important; }
 html[data-theme="light"] .explorer-sidebar.topnav { border-right-color: #c7c3c5 !important; background: #e5e3e4 !important; }
 html[data-theme="light"] .explorer-sidebar .explorer-label { color: #aaa5aa; }
 html[data-theme="light"] .explorer-sidebar .explorer-root { color: #79747a !important; }
 html[data-theme="light"] .explorer-sidebar .explorer-root i,
 html[data-theme="light"] .explorer-sidebar .explorer-branch-title { color: #908b91; }
 
-.home-content > *,
-.wiki-wrap > *,
-.gallery-wrap > *,
-.log-wrap > * {
-  animation: archive-content-fade 240ms ease-out both;
+.home-board > *,
+.room-media > *,
+.standing-img img,
+.wiki-header > *,
+#wiki-content > *,
+.gallery-item,
+.log-item {
+  animation: archive-content-fade 700ms ease-out both;
 }
 @keyframes archive-content-fade {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .home-content > *, .wiki-wrap > *, .gallery-wrap > *, .log-wrap > * { animation: none; }
+  .home-board > *, .room-media > *, .standing-img img, .wiki-header > *,
+  #wiki-content > *, .gallery-item, .log-item { animation: none; }
 }
 @media (max-width: 760px) { .explorer-sidebar.topnav { display: none !important; } }
