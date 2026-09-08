@@ -241,14 +241,25 @@ body { min-height: 100vh; padding: 2rem; display: flex; align-items: center; jus
   background: #fff;
 }
 .wiki-wrap.theme-eden .standing-img,
-.wiki-wrap.theme-lilith .standing-img { background: #fff; }
-.wiki-wrap.theme-eden .standing-img img {
-  transform: scale(.9);
-  transform-origin: center center;
+.wiki-wrap.theme-lilith .standing-img {
+  background: #fff;
+  container-type: size;
+}
+.wiki-wrap.theme-eden .standing-img img,
+.wiki-wrap.theme-lilith .standing-img img {
+  /* Both sources are 1664 x 2432 with almost identical head/foot margins. */
+  position: absolute;
+  left: 50%;
+  bottom: 5%;
+  width: auto !important;
+  height: min(90cqh, 146.153846cqw) !important;
+  max-width: none;
+  object-fit: contain !important;
+  transform: translateX(-50%);
 }
 .wiki-wrap.theme-lilith .standing-img img {
-  transform: scale(.8);
-  transform-origin: center center;
+  /* Use 90% of Eden's fitted height, including when width limits the fit. */
+  height: min(81cqh, 131.538461cqw) !important;
 }
 .char-badge { color: #a44b6d !important; background: #f3dce5 !important; font: 400 9px/1.2 "Galmuri11", "Pretendard", sans-serif; }
 .char-name-panel { color: #222329; font-size: 22px; font-weight: 700; }
