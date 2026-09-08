@@ -4,7 +4,7 @@ html[data-theme="light"] .archive-content-slot { background: #fff; }
 .archive-content-slot > .home-content { height: 100%; }
 .archive-content-frame { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: transparent; }
 .archive-content-frame.is-loading { visibility: hidden; }
-.archive-content-frame.is-ready { animation: archive-page-enter 180ms ease-out; }
+.archive-content-frame.is-ready { animation: archive-page-enter 700ms ease-out both; }
 .archive-content-slot [hidden] { display: none !important; }
 @keyframes archive-page-enter { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .archive-content-frame.is-ready { animation: none; } }

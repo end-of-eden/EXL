@@ -31,7 +31,7 @@
       else link.removeAttribute('aria-current');
     });
     var label = category === 'wiki.html' ? 'AGENTS　›　' + (route.url.searchParams.get('char') || 'eden').toUpperCase() : category.replace('.html', '').toUpperCase();
-    document.querySelector('.main-address').textContent = '내 PC　›　相互確證破壞　›　' + label;
+    document.querySelector('.main-address').textContent = 'This PC　›　相互確證破壞　›　' + label;
     if (historyMode !== 'none') {
       var address = new URL(window.parent.location.href);
       address.searchParams.delete('char');
