@@ -71,7 +71,7 @@
       selectRoute(route, historyMode);
     });
     var contentUrl = new URL(route.url.href);
-    if (route.path === 'gallery.html') contentUrl.searchParams.set('v', '20260909-sidebar');
+    if (route.path === 'gallery.html') contentUrl.searchParams.set('v', '20260909-upload-only');
     next.src = contentUrl.href;
     slot.appendChild(next);
     return true;
