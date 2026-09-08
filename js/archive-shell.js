@@ -70,7 +70,9 @@
       slot.removeAttribute('aria-busy');
       selectRoute(route, historyMode);
     });
-    next.src = route.url.href;
+    var contentUrl = new URL(route.url.href);
+    if (route.path === 'gallery.html') contentUrl.searchParams.set('v', '20260909-glass-frame');
+    next.src = contentUrl.href;
     slot.appendChild(next);
     return true;
   };
