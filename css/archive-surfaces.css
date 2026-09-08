@@ -29,7 +29,9 @@ html[data-theme] .gallery-item {
   box-shadow:0 3px 12px #63465c12; overflow:hidden;
 }
 html[data-theme] .gallery-item:hover { border-color:#aa718e; box-shadow:0 5px 18px #63465c24; }
-html[data-theme] .popup-inner { border:1px solid #ffffff70; border-radius:16px; padding:7px; background:#ebd5e2; }
+html[data-theme] .popup-inner { width:auto; max-width:92%; border:0; border-radius:0; padding:0; background:transparent; box-shadow:none; overflow:visible; }
+html[data-theme] .popup-inner img { width:auto; height:auto; max-width:100%; max-height:85vh; max-height:85dvh; object-fit:contain; background:transparent; }
+html[data-theme] .popup-title { display:none; }
 html[data-theme] .popup-close { border:1px solid #ffffff70; border-radius:50%; background:#eedce8; color:#51364a; }
 html[data-theme] .log-item {
   margin-bottom:12px; padding:18px; border:1px solid #ffffff65; border-radius:12px;
