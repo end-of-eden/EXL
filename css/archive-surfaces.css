@@ -29,10 +29,10 @@ html[data-theme] .gallery-item {
   box-shadow:0 3px 12px #63465c12; overflow:hidden;
 }
 html[data-theme] .gallery-item:hover { border-color:#aa718e; box-shadow:0 5px 18px #63465c24; }
-html[data-theme] .popup-inner { width:auto; max-width:92%; border:0; border-radius:0; padding:0; background:transparent; box-shadow:none; overflow:visible; }
-html[data-theme] .popup-inner img { width:auto; height:auto; max-width:100%; max-height:85vh; max-height:85dvh; object-fit:contain; background:transparent; }
+html[data-theme] .popup-inner { width:max-content; max-width:min(76%,520px); border:0; border-radius:0; padding:0; background:transparent; box-shadow:none; overflow:visible; }
+html[data-theme] .popup-inner img { width:auto; height:auto; max-width:100%; max-height:62vh; max-height:62dvh; object-fit:contain; background:transparent; }
 html[data-theme] .popup-title { display:none; }
-html[data-theme] .popup-close { border:1px solid #ffffff70; border-radius:50%; background:#eedce8; color:#51364a; }
+html[data-theme] .popup-close { display:none!important; }
 html[data-theme] .log-item {
   margin-bottom:12px; padding:18px; border:1px solid #ffffff65; border-radius:12px;
   background:rgba(249,232,241,.35); transition:background .15s ease;
@@ -75,3 +75,11 @@ html[data-theme] .log-scroll::-webkit-scrollbar-thumb { border:0; border-radius:
   html[data-theme] .main-wrap,html[data-theme] .pc-page-window { background:#ead7e3!important; }
   html[data-theme] body .detail-wrap { background:#f3e4ed!important; }
 }
+
+/* Keep the photo view free of the surrounding window controls. */
+html.gallery-photo-open .main-window-controls { visibility:hidden!important; }
+.popup-bg.open { animation:photo-backdrop-in .24s ease both; outline:none; }
+.popup-bg.open .popup-inner { animation:photo-float-in .36s cubic-bezier(.2,.7,.25,1) both; }
+@keyframes photo-backdrop-in { from { opacity:0; } to { opacity:1; } }
+@keyframes photo-float-in { from { opacity:0; transform:translateY(16px) scale(.96); } to { opacity:1; transform:translateY(0) scale(1); } }
+@media(prefers-reduced-motion:reduce) { .popup-bg.open,.popup-bg.open .popup-inner { animation:none; } }
