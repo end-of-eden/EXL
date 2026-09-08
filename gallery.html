@@ -235,7 +235,7 @@ body {
 <script src="js/content-api.js"></script>
 <script src="js/archive-content.js"></script>
 <link rel="stylesheet" href="css/window-controls.css">
-<link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/archive-surfaces.css?v=20260909-glass-frame">
+<link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/archive-surfaces.css?v=20260909-photo-windows">
 </head>
 <body class="pc-page-body">
 <main class="pc-page-window">
@@ -335,7 +335,6 @@ function openPopup(i) {
 
 function setPhotoViewing(open) {
   try {
-    window.top.document.documentElement.classList.toggle('gallery-photo-open', open);
     window.parent.document.documentElement.classList.toggle('gallery-photo-open', open);
   } catch (_) {}
 }

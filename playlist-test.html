@@ -590,7 +590,7 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
 .playlist-window .queue { scrollbar-color:auto; }
 </style>
 <link rel="stylesheet" href="css/window-controls.css">
-<link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><style>html.gallery-photo-open .playlist-window,html.gallery-photo-open .desktop-document,html.gallery-photo-open .dday-window,html.gallery-photo-open .arch-messenger-root { visibility:hidden!important; pointer-events:none!important; }</style>
+<link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap">
 </head>
 <body>
 <iframe class="archive-frame" id="archive-frame" title="END OF EDEN archive" src="about:blank"></iframe>
@@ -658,7 +658,7 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
     ? 'wiki.html?char=' + encodeURIComponent(character)
     : 'main.html?v=20260907-start-taskbar');
   var frame = document.getElementById('archive-frame');
-  frame.src = 'main.html?v=20260909-glass-frame&page=' + encodeURIComponent(initialPage);
+  frame.src = 'main.html?v=20260909-photo-windows&page=' + encodeURIComponent(initialPage);
 })();
 </script>
 <script>
@@ -674,7 +674,7 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
     var item = event.target.closest('[data-start-page]');
     if (!item) return;
     if (frame.contentWindow.navigateArchive) frame.contentWindow.navigateArchive(item.dataset.startPage);
-    else frame.src = 'main.html?v=20260909-glass-frame&page=' + encodeURIComponent(item.dataset.startPage);
+    else frame.src = 'main.html?v=20260909-photo-windows&page=' + encodeURIComponent(item.dataset.startPage);
     setMenu(false);
   });
   document.addEventListener('click', function (event) { if (!startMenu.contains(event.target)) setMenu(false); });
