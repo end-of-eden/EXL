@@ -279,7 +279,7 @@ var images = [];
 var base = 'img/gallery/';
 
 function imageUrl(img) {
-  return img.remote ? window.EDEN_CONTENT_API + img.imagePath : base + img.src;
+  return window.EDEN_CONTENT_API + img.imagePath;
 }
 
 function escapeHtml(value) {
@@ -346,10 +346,13 @@ render();
 fetch(window.EDEN_CONTENT_API + '/api/gallery')
   .then(function(response) { if (!response.ok) throw new Error('load failed'); return response.json(); })
   .then(function(remoteImages) {
-    images = remoteImages.map(function(img) { img.remote = true;
-      if (img.title === 'Shigeru Umebayashi - 2046') img.title = '2046';
-      if (img.song === 'Shigeru Umebayashi - 2046') img.song = '2046';
-      return img; }).concat(images);
+    images = remoteImages.slice().sort(function(a, b) {
+      // Keep the curated migration order; subsequent uploads follow chronologically.
+      var aOrder = Number.isFinite(a.displayOrder) ? a.displayOrder : Infinity;
+      var bOrder = Number.isFinite(b.displayOrder) ? b.displayOrder : Infinity;
+      if (aOrder !== bOrder) return aOrder - bOrder;
+      return String(a.createdAt || '').localeCompare(String(b.createdAt || '')) || String(a.id).localeCompare(String(b.id));
+    });
     render();
   })
   .catch(function() { /* R2가 준비되지 않아도 기존 갤러리는 그대로 표시 */ });
