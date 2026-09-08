@@ -274,15 +274,15 @@ body {
 <script>
 // ✏️ 이미지 추가할 때 여기에 한 줄씩 추가하면 됨
 var images = [
-  {"src":"winter-walk-20260909.webp","title":"California Dreamin' — The Mamas & the Papas","song":"California Dreamin' — The Mamas & the Papas","lyrics":"I've been for a walk On a winter's day, If I didn't tell her I could leave today."},
+  {"src":"winter-walk-20260909.webp","title":"California Dreamin'","song":"California Dreamin'","lyrics":"I've been for a walk On a winter's day, If I didn't tell her I could leave today."},
   {
-    src: '003.jpg', title: 'HAPPY DAY — 체리필터',
-    song: 'HAPPY DAY — 체리필터',
+    src: '003.jpg', title: 'HAPPY DAY',
+    song: 'HAPPY DAY',
     lyrics: '찬란하게 빛나던 내 모습은 어디로 날아갔을까 어느 별로'
   },
   {
-    src: '004.jpg', title: '불꽃놀이 — 하현상',
-    song: '불꽃놀이 — 하현상',
+    src: '004.jpg', title: '불꽃놀이',
+    song: '불꽃놀이',
     lyrics: '가는 길에 다 두고 내릴까 더 멀리 더 멀리 말이야'
   },
 ];
@@ -356,7 +356,10 @@ render();
 fetch(window.EDEN_CONTENT_API + '/api/gallery')
   .then(function(response) { if (!response.ok) throw new Error('load failed'); return response.json(); })
   .then(function(remoteImages) {
-    images = remoteImages.map(function(img) { img.remote = true; return img; }).concat(images);
+    images = remoteImages.map(function(img) { img.remote = true;
+      if (img.title === 'Shigeru Umebayashi - 2046') img.title = '2046';
+      if (img.song === 'Shigeru Umebayashi - 2046') img.song = '2046';
+      return img; }).concat(images);
     render();
   })
   .catch(function() { /* R2가 준비되지 않아도 기존 갤러리는 그대로 표시 */ });
