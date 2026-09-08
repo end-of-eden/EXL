@@ -269,7 +269,7 @@
   });
 
   panel.innerHTML =
-    '<div class="msg-windowbar"><span>✉ SNS · AGENT EDEN</span><span class="msg-window-controls"><button type="button" class="msg-window-button archive-window-control msg-window-collapse" aria-label="SNS 접기">−</button><button class="msg-window-button msg-window-toggle archive-window-control" type="button" aria-label="SNS 펼치기" aria-expanded="false">□</button><span class="msg-window-button archive-window-control">×</span></span></div>' +
+    '<div class="msg-windowbar"><span>✉ SNS · AGENT EDEN</span><span class="msg-window-controls"><button type="button" class="msg-window-button archive-window-control msg-window-collapse" aria-label="SNS 접기">−</button><button class="msg-window-button msg-window-toggle archive-window-control" type="button" aria-label="SNS 펼치기" aria-expanded="false">□</button><button type="button" class="msg-window-button archive-window-control msg-title-close" aria-label="SNS 닫기">×</button></span></div>' +
     '<div class="msg-header">' +
       '<div class="msg-contact"><img class="msg-contact-avatar" src="' + AVA.eden + '" alt="Eden">' +
       '<div class="msg-header-title">AGENT EDEN</div>' +
@@ -370,15 +370,26 @@
     var rect = playerWindow.getBoundingClientRect();
     var gap = 12;
     var left = Math.max(6, Math.min(portalDocument.documentElement.clientWidth - wrap.offsetWidth - 6, rect.left));
-    var top = Math.min(portalDocument.documentElement.clientHeight - wrap.offsetHeight - 42, rect.bottom + gap);
+    var top = Math.min(portalDocument.documentElement.clientHeight - wrap.offsetHeight - 42, (playerWindow.querySelector('.media-transport') ? playerWindow.querySelector('.media-transport').getBoundingClientRect().bottom + parseFloat(portalDocument.defaultView.getComputedStyle(playerWindow).paddingBottom) + 1 : rect.bottom) + gap);
     wrap.style.left = left + 'px';
     wrap.style.top = Math.max(6, top) + 'px';
     wrap.style.right = 'auto';
     wrap.style.bottom = 'auto';
   }
+  function placeDdayAboveDocument() {
+    var day = portalDocument.getElementById('dday-window');
+    var doc = portalDocument.getElementById('desktop-document');
+    if (!day || !doc || portalDocument === document) return;
+    var rect = doc.getBoundingClientRect();
+    day.style.left = Math.max(8, rect.left - 54) + 'px';
+    day.style.right = 'auto';
+    day.style.top = Math.max(8, rect.top - day.offsetHeight - 16) + 'px';
+  }
+  placeDdayAboveDocument();
   dockBelowPlayer();
   if (dockedToPlayer) {
     var playerWindow = portalDocument.querySelector('.playlist-window');
+    if (playerWindow) playerWindow.addEventListener('player-drag-start', function () { dockedToPlayer = false; });
     if (playerWindow && portalDocument.defaultView.MutationObserver) {
       new portalDocument.defaultView.MutationObserver(dockBelowPlayer).observe(playerWindow, { attributes: true, attributeFilter: ['style'] });
     }
@@ -387,7 +398,6 @@
     }
     portalDocument.defaultView.addEventListener('resize', dockBelowPlayer);
   }
-
   windowBar.addEventListener('pointerdown', function (event) {
     if (event.button !== 0 || event.target.closest('button')) return;
     var rect = wrap.getBoundingClientRect();
@@ -427,6 +437,7 @@
   fab.addEventListener('click', function () { openPanel(); });
   windowToggle.addEventListener('click', openPanel);
   panel.querySelector('.msg-window-collapse').addEventListener('click', closePanel);
+  panel.querySelector('.msg-title-close').addEventListener('click', closePanel);
   if (embeddedHost) {
     embeddedHost.addEventListener('click', function (event) {
       if (!embeddedHost.classList.contains('expanded') && !event.target.closest('.msg-panel')) {

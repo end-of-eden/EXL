@@ -590,7 +590,7 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
 .playlist-window .queue { scrollbar-color:auto; }
 </style>
 <link rel="stylesheet" href="css/window-controls.css">
-</head>
+<link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"></head>
 <body>
 <iframe class="archive-frame" id="archive-frame" title="END OF EDEN archive" src="about:blank"></iframe>
 <aside class="desktop-document" id="desktop-document" aria-label="DOCUMENT">
@@ -600,26 +600,17 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
       <span class="desktop-document__button archive-window-control">−</span><span class="desktop-document__button archive-window-control">□</span><span class="desktop-document__button archive-window-control">×</span>
     </span>
   </div>
-  <div class="desktop-document__tabs" role="tablist">
-    <button class="desktop-document__tab active" type="button" role="tab" data-doc-tab="notice">NOTICE</button>
-    <button class="desktop-document__tab" type="button" role="tab" data-doc-tab="pair">PAIR</button>
-  </div>
   <div class="desktop-document__body">
     <section class="desktop-document__panel active" data-doc-panel="notice">
       <div class="desktop-document__heading">NOTICE.TXT</div>
       <p class="desktop-document__copy">비팔알림 OFF / 좁은 탐라에서 깊은 교류 합니다<br>앵챗 양지로 끌올되는 거 별로 안 좋아합니다<br>드림 지우기 / 허공 저격 / 카피캣 / 성인물 공계 발언<br>온리 드림 직멘X 이별은 블락 (재연결x)</p>
-    </section>
-    <section class="desktop-document__panel" data-doc-panel="pair">
-      <div class="desktop-document__heading">PAIR.TXT</div>
-      <div class="desktop-document__pair">Eden × Lilith <span class="desktop-document__meta">S-Class Guide × S-Class Sentinel</span></div>
-      <p class="desktop-document__quote">이것은 퍽 낭만적이고도 지독한 첫사랑이었다.</p>
     </section>
   </div>
 </aside>
 <aside class="dday-window" id="dday-window" aria-label="홍차 디데이">
   <div class="dday-window__bar">
     <span>♥ D-DAY</span>
-    <span class="dday-window__controls" aria-hidden="true"><span class="dday-window__button archive-window-control">−</span><span class="dday-window__button archive-window-control">□</span><span class="dday-window__button archive-window-control">×</span></span>
+
   </div>
   <div class="dday-window__image">
     <img src="img/main/hongcha-strip.png" alt="홍차 — 에덴과 릴리스">
@@ -706,8 +697,10 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
   var panels = Array.prototype.slice.call(doc.querySelectorAll('[data-doc-panel]'));
   tabs.forEach(function (tab) {
     tab.addEventListener('click', function () {
-      tabs.forEach(function (item) { item.classList.toggle('active', item === tab); });
-      panels.forEach(function (panel) { panel.classList.toggle('active', panel.dataset.docPanel === tab.dataset.docTab); });
+      var enabled = tab.getAttribute('aria-checked') !== 'true';
+      tab.setAttribute('aria-checked', String(enabled));
+      tab.classList.toggle('active', enabled);
+      panels.forEach(function (panel) { if (panel.dataset.docPanel === tab.dataset.docTab) panel.classList.toggle('active', enabled); });
     });
   });
   var bar = doc.querySelector('.desktop-document__bar');
@@ -818,7 +811,7 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
 })();
 </script>
 <aside class="playlist-window" aria-label="플레이리스트">
-  <div class="player-windowbar">
+  <div class="player-windowbar" aria-hidden="true">
     <span>♫ MUSIC PLAYER</span>
     <span aria-hidden="true">♫</span>
   </div>
@@ -869,21 +862,36 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
 
 <div id="youtube-player" aria-hidden="true"></div>
 <script>
+// Media-card layout based on the supplied reference.
+var card = document.querySelector('.playlist-window');
+var info = document.createElement('div'); info.className = 'media-info';
+info.innerHTML = '<img class="media-art" src="img/log/001.jpg" alt="플레이리스트 커버"><div class="media-copy"></div>';
+info.querySelector('.media-copy').appendChild(document.getElementById('track-title'));
+var caption = document.createElement('div'); caption.className='media-caption'; caption.textContent='END OF EDEN'; info.querySelector('.media-copy').appendChild(caption);
+var timeline = document.createElement('div'); timeline.className='media-timeline';
+timeline.append(document.getElementById('current-time'),document.querySelector('.progress'),document.getElementById('duration'));
+var transport = document.createElement('div'); transport.className='media-transport';
+transport.append(document.getElementById('prev'),document.getElementById('play'),document.getElementById('next'));
+var extra = document.createElement('div'); extra.className='media-extras';
+extra.append(document.getElementById('loop'),document.querySelector('.volume-control'),document.querySelector('.player-tabs'));
+card.prepend(info,timeline,transport,extra);
+transport.appendChild(document.getElementById('queue-toggle'));
+
 var playlistId = 'PLKNbEhdi8XzI';
 var displayTracks = [
-  { videoId: 'rBa4ZYxI4vM', title: '미안해 널 미워해' },
-  { videoId: '4i1wkzAlU5M', title: 'HAPPY DAY' },
-  { videoId: 'CgiPuXwhhfY', title: 'SOS' },
-  { videoId: 'q90SFMi8aUg', title: 'ザムザ' },
-  { videoId: 'h1QTkwJnX0E', title: 'はぐ' },
-  { videoId: 'p363yleNtGI', title: '私は、私達は' },
-  { videoId: 'xt_IlpwNAFo', title: 'light' },
-  { videoId: 'VcQIpQB4Fiw', title: '大丈夫' },
-  { videoId: 'RvuWxiaPUqQ', title: '야행성' },
-  { videoId: 'QW87DP4-elQ', title: 'cares' },
-  { videoId: 'ACJyvx9XtAg', title: '虚無さん' },
-  { videoId: 'oLu4n9HToG0', title: 'Darling' },
-  { videoId: 'ACDf9fhpuqo', title: 'Whiskey and Morphine' }
+  { videoId: 'rBa4ZYxI4vM', title: '미안해 널 미워해', artist: "자우림", duration: 235 },
+  { videoId: '4i1wkzAlU5M', title: 'HAPPY DAY', artist: "체리필터", duration: 216 },
+  { videoId: 'CgiPuXwhhfY', title: 'SOS', artist: "Avicii", duration: 157 },
+  { videoId: 'q90SFMi8aUg', title: 'ザムザ', artist: "てにをは feat. 初音ミク", duration: 211 },
+  { videoId: 'h1QTkwJnX0E', title: 'はぐ', artist: "MORE MORE JUMP！ × 鏡音レン", duration: 159 },
+  { videoId: 'p363yleNtGI', title: '私は、私達は', artist: "MORE MORE JUMP！ × 鏡音レン", duration: 240 },
+  { videoId: 'xt_IlpwNAFo', title: 'light', artist: "wave to earth", duration: 226 },
+  { videoId: 'VcQIpQB4Fiw', title: '大丈夫', artist: "RADWIMPS", duration: 258 },
+  { videoId: 'RvuWxiaPUqQ', title: '야행성', artist: "ONEWE", duration: 223 },
+  { videoId: 'QW87DP4-elQ', title: 'cares', artist: "The Poles", duration: 275 },
+  { videoId: 'ACJyvx9XtAg', title: '虚無さん', artist: "25時、ナイトコードで。 × 鏡音レン", duration: 151 },
+  { videoId: 'oLu4n9HToG0', title: 'Darling', artist: "須田景凪", duration: 149 },
+  { videoId: 'ACDf9fhpuqo', title: 'Whiskey and Morphine', artist: "Alexander Jean", duration: 305 }
 ];
 var customTitlesByVideoId = {};
 displayTracks.forEach(function (track) {
@@ -895,7 +903,7 @@ var playing = false;
 var muted = false;
 var loopMode = 'off';
 var playlistWindow = document.querySelector('.playlist-window');
-var playerHead = document.querySelector('.player-windowbar');
+var playerHead = document.querySelector('.media-info');
 var resizeZone = document.getElementById('resize-zone');
 var archiveFrame = document.getElementById('archive-frame');
 var dragState = null;
@@ -951,10 +959,15 @@ function updatePlayer(event) {
   playing = event.data === YT.PlayerState.PLAYING;
   document.getElementById('playback-status').textContent = playing ? '▶ PLAYING' : event.data === YT.PlayerState.PAUSED ? 'Ⅱ PAUSED' : '● READY';
   document.getElementById('play').setAttribute('aria-pressed', String(playing));
+  document.getElementById('play').setAttribute('aria-label', playing ? '일시정지' : '재생');
+  document.getElementById('play').setAttribute('title', playing ? '일시정지' : '재생');
+  document.querySelector('#play svg path').setAttribute('d', playing ? 'M5 4h5v16H5zM14 4h5v16h-5z' : 'M6 4l14 8-14 8z');
   document.getElementById('pause').setAttribute('aria-pressed', String(event.data === YT.PlayerState.PAUSED));
 
   playlist = player.getPlaylist() || playlist;
   var data = player.getVideoData();
+  var currentTrack = displayTracks.find(function (track) { return data && track.videoId === data.video_id; });
+  caption.textContent = currentTrack ? currentTrack.artist : '';
   var displayTitle = data && (customTitlesByVideoId[data.video_id] || data.title);
   if (displayTitle) document.getElementById('track-title').textContent = displayTitle;
   renderQueue(data && data.video_id);
@@ -974,6 +987,31 @@ function renderLyrics(videoId) {
 ['queue', 'lyrics'].forEach(function (name) {
   document.getElementById(name + '-toggle').addEventListener('click', function () {
     var panel = document.getElementById('player-' + name);
+    if (name === 'queue') {
+      var previous = panel.getAnimations ? panel.getAnimations() : [];
+      var closing = this.getAttribute('aria-expanded') === 'true';
+      var fromHeight = panel.hidden ? 0 : panel.getBoundingClientRect().height;
+      previous.forEach(function (animation) { animation.cancel(); });
+      panel.hidden = false;
+      var naturalHeight = panel.getBoundingClientRect().height;
+      this.setAttribute('aria-expanded', String(!closing));
+      if (!closing) {
+        document.getElementById('player-lyrics').hidden = true;
+        document.getElementById('lyrics-toggle').setAttribute('aria-expanded', 'false');
+      }
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !panel.animate) {
+        panel.hidden = closing;
+      } else {
+        var animation = panel.animate([
+          { height: fromHeight + 'px', opacity: closing ? 1 : 0 },
+          { height: (closing ? 0 : naturalHeight) + 'px', opacity: closing ? 0 : 1 }
+        ], { duration: 200, easing: 'cubic-bezier(.22,.7,.25,1)' });
+        panel.style.overflow = 'hidden';
+        animation.onfinish = function () { panel.hidden = closing; panel.style.overflow = ''; };
+        animation.oncancel = function () { panel.style.overflow = ''; };
+      }
+      return;
+    }
     panel.hidden = !panel.hidden;
     this.setAttribute('aria-expanded', String(!panel.hidden));
     if (!panel.hidden) {
@@ -986,6 +1024,7 @@ function renderLyrics(videoId) {
   });
 });
 var trackDurations = {};
+displayTracks.forEach(function (track) { trackDurations[track.videoId] = track.duration; });
 function updateQueueDuration() {
   if (!player || !player.getVideoData || !player.getDuration) return;
   var data = player.getVideoData();
@@ -1019,6 +1058,8 @@ function renderQueue(activeVideoId) {
       item.addEventListener('click', function () {
         if (!player || typeof player.loadVideoById !== 'function') return;
         document.getElementById('track-title').textContent = track.title;
+        caption.textContent = track.artist || '';
+        document.getElementById('duration').textContent = formatTime(track.duration);
         renderQueue(track.videoId);
         var playlistIndex = playlist.indexOf(track.videoId);
         if (playlistIndex >= 0) player.playVideoAt(playlistIndex);
@@ -1033,7 +1074,8 @@ renderQueue('');
 
 document.getElementById('play').addEventListener('click', function () {
   if (!player || !player.playVideo) return;
-  player.playVideo();
+  if (player.getPlayerState() === YT.PlayerState.PLAYING) player.pauseVideo();
+  else player.playVideo();
 });
 document.getElementById('prev').addEventListener('click', function () { if (player) player.previousVideo(); });
 document.getElementById('next').addEventListener('click', function () { if (player) player.nextVideo(); });
@@ -1095,6 +1137,7 @@ playerHead.addEventListener('pointermove', function (event) {
     var distance = Math.hypot(event.clientX - dragState.startX, event.clientY - dragState.startY);
     if (distance < 4) return;
     dragState.started = true;
+    playlistWindow.dispatchEvent(new Event('player-drag-start'));
     playlistWindow.style.left = dragState.startLeft + 'px';
     playlistWindow.style.top = dragState.startTop + 'px';
     playlistWindow.style.right = 'auto';
@@ -1185,9 +1228,7 @@ if (!window.matchMedia || !window.matchMedia('(max-width: 820px), (hover: none) 
 <script>
 (function () {
   [
-    { selector: '.desktop-document', bar: '.desktop-document__bar', name: 'DOCUMENT' },
-    { selector: '.dday-window', bar: '.dday-window__bar', name: 'D-DAY' },
-    { selector: '.playlist-window', bar: '.player-windowbar', name: '플레이어' }
+    { selector: '.desktop-document', bar: '.desktop-document__bar', name: 'DOCUMENT' }
   ].forEach(function (config) {
     var win = document.querySelector(config.selector);
     var bar = win.querySelector(config.bar);

@@ -1,0 +1,390 @@
+/* Independent glass study. */
+:root { --glass-ink:#503b50; --glass-edge:rgba(255,255,255,.85); }
+html,html[data-theme="light"],body,html[data-theme="light"] body {
+  background:radial-gradient(ellipse at 12% 15%,#fbe5ef,transparent 53%),radial-gradient(ellipse at 85% 75%,#cbcce9,transparent 60%),linear-gradient(125deg,#f4edf0,#dfd8e5)!important;
+  color:var(--glass-ink); font-family:'Pretendard',sans-serif!important;
+}
+.archive-frame { background:transparent!important; }
+.main-wrap,.playlist-window,.desktop-document,.dday-window,.banner-window,
+html body > .arch-messenger-root > .msg-panel {
+  border:1px solid var(--glass-edge)!important; border-radius:18px!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(252,224,237,.36))!important;
+  box-shadow:inset 0 1px 0 #fff,inset 0 -1px 0 #ffffff65,0 12px 32px #67486926!important;
+  backdrop-filter:blur(22px) saturate(135%); -webkit-backdrop-filter:blur(22px) saturate(135%);
+  padding:7px!important; overflow:hidden;
+}
+.main-wrap { padding:12px!important; }
+.playlist-window { width:310px!important; }
+.playlist-window::before,.playlist-window::after { display:none!important; }
+.main-windowbar,.player-windowbar,.desktop-document__bar,.dday-window__bar,.banner-window__bar,.msg-windowbar {
+  height:30px!important; min-height:30px!important; flex-basis:30px!important;
+  padding:0 9px!important; background:transparent!important; border:0!important; box-shadow:none!important;
+  color:#675064!important; font:500 10px/1 'Pretendard',sans-serif!important; letter-spacing:.04em;
+}
+html .archive-window-control { border:1px solid #ffffffa0!important; border-radius:50%!important; background:#ffffff66!important; color:#776174!important; box-shadow:0 1px 3px #68536b16!important; }
+.main-toolbar { background:#ffffff42!important; border:0!important; border-radius:10px; color:#766479!important; }
+.main-address { background:transparent!important; border:0!important; box-shadow:none!important; }
+.category-card,.explorer-sidebar { background:transparent!important; border:0!important; box-shadow:none!important; }
+.explorer-label { color:#998398!important; font-family:'Pretendard',sans-serif!important; }
+.explorer-sidebar a { border-radius:8px!important; color:#675266!important; font-family:'Pretendard',sans-serif!important; }
+.explorer-sidebar a.active,.explorer-sidebar a:hover { background:#ffffff85!important; color:#9d4f7c!important; }
+.desktop-document__tabs { background:transparent!important; border:0!important; padding:4px; gap:4px; }
+.desktop-document__tab { border:0!important; border-radius:8px!important; background:#ffffff55!important; color:#766176!important; font-family:'Pretendard',sans-serif!important; }
+.desktop-document__tab.active { background:#ffffffba!important; }
+.desktop-document__body,.banner-window__body,.msg-body,.msg-header,.msg-footer { border:0!important; border-radius:12px; background:#ffffffa6!important; color:#59475a!important; }
+.desktop-document__body p,.desktop-document__heading,.banner-window__copy { color:#675369!important; text-shadow:none!important; font-family:'Pretendard',sans-serif!important; }
+.dday-window__image { border-radius:12px; overflow:hidden; }
+.playlist-window .player-head { background:transparent!important; padding:2px!important; }
+.playlist-window .lcd { border:1px solid #ffffffb3!important; border-radius:12px!important; background:linear-gradient(125deg,#fff9fcbd,#e7b8d06b)!important; box-shadow:inset 0 1px 5px #fff7!important; padding:5px 9px 0!important; }
+.playlist-window .track-title { color:#704e68!important; background:#ffffff38!important; border-color:#fff7!important; text-shadow:none!important; font-family:'Pretendard',sans-serif!important; }
+.playlist-window .lcd .time { color:#73516b!important; text-shadow:none!important; }
+.playlist-window .control,.playlist-window .player-tabs button { border:1px solid #fff!important; background:linear-gradient(#ffffffdb,#fff6)!important; color:#6e5068!important; box-shadow:0 2px 4px #70516b20!important; border-radius:8px!important; }
+.playlist-window .center-controls .control { border-radius:50%!important; }
+.playlist-window .control.play { background:linear-gradient(#fce6f0,#e5b3ce)!important; }
+.playlist-window .queue,.playlist-window .lyrics-panel { border:1px solid #ffffffba!important; border-radius:10px!important; background:#fff9fcde!important; box-shadow:none!important; }
+.playlist-window .queue-heading { background:transparent!important; border:0!important; color:#887086!important; font-family:'Pretendard',sans-serif!important; }
+.playlist-window .queue-item { border-radius:6px!important; }
+.playlist-window .queue-name { font-family:'Pretendard',sans-serif!important; }
+.playlist-window .queue-item.active { background:#dfbcd2!important; color:#573c51!important; }
+.desktop-taskbar { left:12px!important; right:12px!important; bottom:9px!important; width:auto!important; border:1px solid #fff9!important; border-radius:15px!important; background:#fff8!important; backdrop-filter:blur(20px); box-shadow:0 4px 16px #73547221!important; padding:4px!important; }
+.task-button,.start-button { border:0!important; border-radius:10px!important; background:transparent!important; box-shadow:none!important; color:#71576c!important; }
+.task-button.is-active { background:#fff9!important; }
+.start-menu { border:1px solid #fff!important; border-radius:15px!important; background:#f9edf5e8!important; backdrop-filter:blur(20px); }
+.start-menu__rail { background:#d9b8ce88!important; border-radius:9px; }
+.start-menu__item { color:#62485e!important; border-radius:8px; }
+@media (prefers-reduced-transparency:reduce) { .main-wrap,.playlist-window,.desktop-document,.dday-window,.banner-window,html body > .arch-messenger-root > .msg-panel { background:#f5edf3!important; backdrop-filter:none; } }
+html[data-theme] .main-wrap { border:1px solid #ffffffb3!important; background:linear-gradient(135deg,#ffffff8f,#f6e7f14d)!important; box-shadow:inset 0 1px #fff,0 12px 32px #67486926!important; }
+html[data-theme] .main-windowbar,html[data-theme] .main-toolbar { background:#ffffff40!important; border:0!important; box-shadow:none!important; color:#675064!important; }
+html[data-theme] .archive-content-slot,html[data-theme] .home-content { background:transparent!important; }
+html[data-theme] .desktop-taskbar { background:#fff8!important; border:1px solid #fff9!important; border-radius:15px!important; }
+/* Milk-glass refinement */
+html,html[data-theme="light"],body,html[data-theme="light"] body { background:radial-gradient(ellipse at 15% 10%,#f5edf1,transparent 55%),radial-gradient(ellipse at 85% 80%,#d5dfed,transparent 60%),#edf0f5!important; }
+html[data-theme] .main-wrap,.playlist-window,.desktop-document,.dday-window,.banner-window,html body > .arch-messenger-root > .msg-panel { background:linear-gradient(140deg,#ffffffc2,#f5f7fb80)!important; border:1px solid #ffffffd9!important; box-shadow:inset 0 1px 0 #fff,0 8px 28px #28344818!important; backdrop-filter:blur(28px) saturate(125%); }
+html[data-theme] .main-windowbar,html[data-theme] .main-toolbar,.player-windowbar,.desktop-document__bar,.dday-window__bar,.banner-window__bar,.msg-windowbar { background:transparent!important; color:#555762!important; letter-spacing:0!important; font:500 11px/1.2 -apple-system,BlinkMacSystemFont,'Pretendard',sans-serif!important; }
+html[data-theme] .main-toolbar { border-bottom:1px solid #4248590c!important; }
+html .archive-window-control { width:12px!important; min-width:12px!important; max-width:12px!important; height:12px!important; min-height:12px!important; max-height:12px!important; flex:0 0 12px!important; border:1px solid #0000000e!important; box-shadow:none!important; color:#514743!important; background:#ffbd44!important; }
+html .archive-window-control:nth-child(2) { background:#00c84b!important; }
+html .archive-window-control:nth-child(3) { background:#ff6058!important; }
+html .archive-window-control::before,html .archive-window-control::after { opacity:0; }
+html .archive-window-control:hover::before,html .archive-window-control:hover::after,html .archive-window-control:focus-visible::before,html .archive-window-control:focus-visible::after { opacity:.65; }
+.player-window-controls,.desktop-document__controls,.dday-window__controls,.banner-window__controls,.msg-window-controls,.main-window-controls { gap:7px!important; }
+.playlist-window .lcd { background:linear-gradient(135deg,#ffffffa6,#eef0f566)!important; border-color:#ffffffb0!important; box-shadow:none!important; }
+.playlist-window .track-title { background:transparent!important; border:0!important; color:#343641!important; font:500 10px/1.3 'Pretendard',sans-serif!important; }
+.playlist-window .lcd .time { color:#3d3d49!important; font-family:'Pretendard',sans-serif!important; letter-spacing:-1px!important; font-weight:300!important; }
+.playlist-window .lcd-brand,.playlist-window .lcd-status,.playlist-window .queue-name,.playlist-window .queue-heading,.explorer-sidebar *, .desktop-document__body * { font-family:-apple-system,BlinkMacSystemFont,'Pretendard',sans-serif!important; }
+.playlist-window .lcd-brand { color:#82828e!important; letter-spacing:.02em!important; }
+.playlist-window .control,.playlist-window .player-tabs button { background:#ffffff70!important; border:1px solid #ffffffa0!important; box-shadow:0 1px 3px #20293a0a!important; color:#51535f!important; }
+.playlist-window .control.play { background:#ecd6e1!important; color:#89546f!important; }
+.playlist-window .control:hover,.playlist-window .player-tabs button:hover { background:#fff!important; }
+.playlist-window .control.loop.active,.playlist-window .player-tabs button[aria-expanded="true"] { background:#ecd6e1!important; color:#89546f!important; }
+.playlist-window .queue,.playlist-window .lyrics-panel,.desktop-document__body,.banner-window__body,.msg-body,.msg-header,.msg-footer { background:#ffffffc2!important; border-color:#fff!important; color:#454550!important; }
+.playlist-window .queue-item.active { background:#e9dce5!important; color:#704c64!important; }
+.playlist-window .queue-item { color:#4e4e59!important; }
+.playlist-window .queue-heading { font-weight:600!important; letter-spacing:.05em!important; color:#8b8c95!important; }
+.desktop-document__tab { border-radius:7px!important; color:#72737f!important; background:transparent!important; }
+.desktop-document__tab.active { color:#383b47!important; background:#fff!important; box-shadow:0 1px 4px #26354a0e!important; }
+.explorer-sidebar a { color:#595c68!important; }
+.explorer-sidebar a.active { color:#77536d!important; background:#ffffffa8!important; }
+html[data-theme] .desktop-taskbar { background:#ffffff8c!important; box-shadow:0 5px 22px #202d4115!important; }
+.task-button,.start-button { font-family:'Pretendard',sans-serif!important; font-size:11px!important; color:#565b68!important; }
+/* Quiet window controls and clock tray. */
+html .archive-window-control,html .archive-window-control:nth-child(2),html .archive-window-control:nth-child(3) { background:#ffffff8c!important; border-color:#c9cbd54d!important; color:#777584!important; }
+html .archive-window-control::before,html .archive-window-control::after { opacity:.75; }
+html .archive-window-control:hover { background:#eadce7!important; }
+html[data-theme] .taskbar-tray { background:#ffffff59!important; border:1px solid #ffffffa6!important; border-radius:10px!important; box-shadow:none!important; color:#666573!important; font:500 11px/1 'Pretendard',sans-serif!important; }
+html[data-theme] .taskbar-tray__status { color:#b395a8!important; }
+/* Clearer glass with unframed window controls. */
+html .archive-window-control,html .archive-window-control:nth-child(2),html .archive-window-control:nth-child(3) {
+  width:20px!important; min-width:20px!important; max-width:20px!important;
+  height:20px!important; min-height:20px!important; max-height:20px!important; flex:0 0 20px!important;
+  border:0!important; border-radius:5px!important; background:transparent!important; box-shadow:none!important; color:#676575!important;
+}
+html .archive-window-control:hover,html .archive-window-control:focus-visible { background:#ffffff5c!important; }
+html[data-theme] .main-wrap,.playlist-window,.desktop-document,.dday-window,.banner-window,html body > .arch-messenger-root > .msg-panel {
+  background:linear-gradient(135deg,rgba(255,255,255,.38),rgba(239,230,243,.16))!important;
+  border-color:rgba(255,255,255,.72)!important;
+  backdrop-filter:blur(12px) saturate(145%); -webkit-backdrop-filter:blur(12px) saturate(145%);
+  box-shadow:inset 0 1px 0 #ffffffba,inset 0 -1px 0 #ffffff29,0 8px 28px #28344818!important;
+}
+.playlist-window .lcd { background:linear-gradient(135deg,#ffffff4d,#efdfec26)!important; border-color:#ffffff70!important; }
+.desktop-document__body,.banner-window__body,.msg-header,.msg-footer { background:#ffffff6b!important; }
+.playlist-window .queue,.playlist-window .lyrics-panel,.msg-body { background:#ffffffa6!important; }
+html[data-theme] .desktop-taskbar { background:#ffffff47!important; backdrop-filter:blur(12px) saturate(140%); }
+@media (prefers-reduced-transparency:reduce) {
+  html[data-theme] .main-wrap,.playlist-window,.desktop-document,.dday-window,.banner-window,html body > .arch-messenger-root > .msg-panel { background:#f5edf3!important; backdrop-filter:none; -webkit-backdrop-filter:none; }
+}
+/* One continuous main glass surface. */
+html[data-theme] .mini-home {
+  background:transparent!important; border:0!important; border-radius:14px;
+  overflow:hidden; gap:0;
+}
+html[data-theme] .sidebar-stack {
+  background:linear-gradient(90deg,#ffffff24,#ffffff08)!important;
+  border:0!important; border-right:1px solid #ffffff70!important;
+}
+html[data-theme] .category-card,html[data-theme] .side-card,
+html[data-theme] .home-content,html[data-theme] .archive-content-slot {
+  background:transparent!important; border:0!important; box-shadow:none!important;
+}
+html[data-theme] .home-content { padding:18px; gap:18px; }
+html[data-theme] .main-toolbar { border-bottom:1px solid #ffffff5c!important; border-radius:0; padding:5px 12px; }
+html[data-theme] .main-address { background:transparent!important; border:0!important; color:#676472!important; font-family:'Pretendard',sans-serif!important; font-size:12px!important; line-height:18px!important; height:24px; padding:3px 9px; }
+html[data-theme] .main-toolbar-nav { font-size:14px!important; }
+html[data-theme] .room-media { border-radius:12px; overflow:hidden; }
+html[data-theme] .recent-memory { border-radius:12px; }
+html[data-theme] .home-board { border-bottom-color:#ffffff66; }
+html[data-theme] .explorer-tree { border-left-color:#8a81952e; }
+html[data-theme] .board-title { color:#6f667a!important; }
+html[data-theme] .explorer-sidebar.topnav { background:transparent!important; border:0!important; }
+html[data-theme] .explorer-sidebar .explorer-tree a { font:400 11px/1.4 'Pretendard',sans-serif!important; color:#696573!important; }
+html[data-theme] .explorer-sidebar .explorer-tree a.active { color:#855c79!important; background:#ffffff70!important; }
+/* Consistent compact floating windows. */
+html[data-theme] .playlist-window,html[data-theme] .desktop-document,
+html[data-theme] .dday-window,html[data-theme] .banner-window,
+html body > .arch-messenger-root > .msg-panel {
+  width:310px!important; padding:4px!important; border-radius:12px!important;
+}
+html[data-theme] .player-windowbar,html[data-theme] .desktop-document__bar,
+html[data-theme] .dday-window__bar,html[data-theme] .banner-window__bar,
+html .msg-windowbar {
+  height:24px!important; min-height:24px!important; flex-basis:24px!important;
+  padding:0 7px!important;
+}
+html[data-theme] .playlist-window.is-collapsed,
+html[data-theme] .desktop-document.is-collapsed,
+html[data-theme] .dday-window.is-collapsed,
+html[data-theme] .banner-window.is-collapsed,
+html body > .arch-messenger-root > .msg-panel:not(.open) {
+  height:34px!important; min-height:34px!important; border-radius:9px!important;
+}
+html[data-theme] .dday-window__image { border-radius:8px; }
+/* Muted strawberry-milk backdrop. */
+html,html[data-theme="light"],body,html[data-theme="light"] body {
+  background:radial-gradient(ellipse at 48% 38%,#efedef 0%,#dedade 45%,#ccc5cd 78%,#beb5c0 100%)!important;
+}
+/* Soft directional edge light. */
+html[data-theme] .main-wrap,
+html[data-theme] .playlist-window,html[data-theme] .desktop-document,
+html[data-theme] .dday-window,html[data-theme] .banner-window,
+html body > .arch-messenger-root > .msg-panel {
+  border-color:rgba(255,255,255,.48) rgba(255,255,255,.19) rgba(255,255,255,.10) rgba(255,255,255,.24)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.20),0 8px 25px rgba(50,43,62,.09)!important;
+}
+html[data-theme] .desktop-taskbar {
+  border-color:#ffffff70 #ffffff30 #ffffff18 #ffffff38!important;
+  box-shadow:0 5px 20px #322b3e12!important;
+}
+.playlist-window .lcd,.playlist-window .queue,.playlist-window .lyrics-panel {
+  border-color:#ffffff40 #ffffff20 #ffffff14 #ffffff26!important;
+}
+html[data-theme] .sidebar-stack { border-right-color:#ffffff26!important; }
+html[data-theme] .main-toolbar { border-bottom-color:#ffffff26!important; }
+/* Sidebar tint within the shared glass panel. */
+html[data-theme] .sidebar-stack {
+  background:linear-gradient(110deg,rgba(86,74,99,.13),rgba(105,91,117,.075))!important;
+  border-right:1px solid rgba(87,73,101,.10)!important;
+}
+html[data-theme] .explorer-sidebar.topnav { background:transparent!important; }
+html[data-theme] .explorer-sidebar .explorer-label { color:#807486!important; }
+html[data-theme] .explorer-sidebar .explorer-branch-title,
+html[data-theme] .explorer-sidebar .explorer-root,
+html[data-theme] .explorer-sidebar .explorer-tree a { color:#62596b!important; }
+html[data-theme] .explorer-sidebar a.active,
+html[data-theme] .explorer-sidebar .explorer-tree a.active {
+  position:relative; background:transparent!important; color:#80566e!important;
+  border-radius:0!important; box-shadow:none!important; font-weight:700!important;
+  transform:translateX(6px);
+}
+html[data-theme] .explorer-sidebar a.active::after {
+  content:none!important;
+}
+/* Language-aware UI type. Poppins covers Latin; CJK uses the next faces. */
+@font-face {
+  font-family:'Archive Han';
+  src:local('Meiryo'),local('Yu Gothic UI'),local('Microsoft YaHei');
+  unicode-range:U+2E80-2FFF,U+3000-303F,U+3040-30FF,U+3400-4DBF,U+4E00-9FFF,U+F900-FAFF;
+}
+html body,html body button,html body input,html body select,html body textarea,
+html[data-theme] .explorer-sidebar *,html[data-theme] .desktop-document__body *,
+html[data-theme] .main-windowbar,html[data-theme] .main-toolbar,
+html[data-theme] .main-address,html[data-theme] .player-windowbar,
+html[data-theme] .desktop-document__bar,html[data-theme] .dday-window__bar,
+html[data-theme] .banner-window__bar,html .msg-windowbar,
+html[data-theme] .playlist-window .track-title,html[data-theme] .playlist-window .lcd-brand,
+html[data-theme] .playlist-window .lcd-status,html[data-theme] .playlist-window .queue-name,
+html[data-theme] .playlist-window .queue-heading,html[data-theme] .playlist-window .time,
+html[data-theme] .taskbar-tray,html .task-button,html .start-button {
+  font-family:'Poppins','Archive Han','Pretendard','Meiryo',sans-serif!important;
+}
+html[data-theme] .explorer-sidebar .explorer-tree a,
+html[data-theme] .explorer-sidebar .explorer-root,
+html[data-theme] .explorer-sidebar .explorer-branch-title { font-size:12px!important; line-height:1.5!important; }
+html[data-theme] .explorer-sidebar .explorer-label { font-size:11px!important; }
+html[data-theme] .player-windowbar,html[data-theme] .desktop-document__bar,
+html[data-theme] .dday-window__bar,html[data-theme] .banner-window__bar,
+html .msg-windowbar,html[data-theme] .main-windowbar { font-size:12px!important; }
+html[data-theme] .main-windowbar > span:first-child { font-size:14px!important; font-weight:700!important; }
+html[data-theme] .desktop-document__body p { font-size:12px!important; line-height:1.75!important; }
+html[data-theme] .playlist-window .track-title,html[data-theme] .playlist-window .queue-name { font-size:11px!important; }
+html[data-theme] .playlist-window .track-title { height:auto!important; min-height:18px!important; }
+/* The glass player stays open as a media card. */
+html[data-theme] .playlist-window > .player-windowbar { display:none!important; }
+html[data-theme] .playlist-window { padding:8px!important; }
+/* Reference media card: artwork, timeline, three primary controls. */
+html[data-theme] .playlist-window { padding:15px!important; border-radius:20px!important; }
+html[data-theme] .playlist-window > .player-head,
+html[data-theme] .playlist-window > .player-bottom { display:none!important; }
+.media-info { display:flex; align-items:center; gap:12px; cursor:grab; touch-action:none; }
+.media-art { width:56px; height:56px; object-fit:cover; border-radius:10px; flex-shrink:0; }
+.media-copy { flex:1; min-width:0; }
+html[data-theme] .playlist-window .media-copy .track-title { margin:0!important; padding:0!important; height:auto!important; min-height:0!important; white-space:normal; text-align:left!important; font-size:14px!important; font-weight:600!important; line-height:1.4!important; color:#34333d!important; }
+.media-caption { font:11px/1.6 'Poppins','Pretendard',sans-serif; color:#84808d; margin-top:3px; }
+.media-timeline { display:grid; grid-template-columns:32px 1fr 32px; align-items:center; gap:7px; margin:14px 0 7px; }
+html[data-theme] .playlist-window .media-timeline .time { font:10px/1.3 'Poppins',sans-serif!important; letter-spacing:0!important; text-shadow:none!important; color:#777280!important; }
+.media-timeline .progress { height:5px; border-radius:10px; background:#76718030!important; }
+.media-timeline .progress-fill { background:#918391!important; border-radius:10px; }
+.media-transport { display:flex; align-items:center; justify-content:center; gap:30px; }
+html[data-theme] .playlist-window .media-transport .control { width:38px!important; height:38px!important; border:0!important; background:transparent!important; box-shadow:none!important; color:#34323e!important; }
+html[data-theme] .playlist-window .media-transport .control svg { width:25px; height:25px; }
+html[data-theme] .playlist-window .media-transport #play svg { width:32px; height:32px; }
+.media-extras { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:6px; }
+.media-extras .volume-control { margin:0; }
+html[data-theme] .playlist-window .media-extras button { background:transparent!important; border:0!important; box-shadow:none!important; color:#777180!important; }
+html[data-theme] .playlist-window .media-extras button:hover { background:#ffffff50!important; }
+.media-extras .player-tabs { display:flex; margin:0; padding:0; border:0; }
+.media-extras .player-tabs::before { display:none; }
+/* Minimal media card: no secondary control row. */
+html[data-theme] .playlist-window .media-extras,
+html[data-theme] .playlist-window #player-queue,
+html[data-theme] .playlist-window #player-lyrics { display:none!important; }
+html[data-theme] .playlist-window .media-transport { margin-bottom:0; }
+/* Playlist occupies the reference card's sharing position. */
+.media-transport { position:relative; }
+html[data-theme] .playlist-window .media-transport #queue-toggle {
+  position:absolute; right:0; top:50%; transform:translateY(-50%);
+  width:28px; height:28px; padding:0; display:grid; place-items:center;
+  border:0; border-radius:7px; background:transparent; color:#777180; cursor:pointer;
+}
+html[data-theme] .playlist-window .media-transport #queue-toggle:hover,
+html[data-theme] .playlist-window .media-transport #queue-toggle[aria-expanded="true"] { background:#ffffff50; color:#80566e; }
+html[data-theme] .playlist-window #player-queue:not([hidden]) { display:block!important; }
+/* Sidebar section and group headings. */
+html[data-theme] .explorer-sidebar .explorer-label,
+html[data-theme] .explorer-sidebar .explorer-branch-title,
+html[data-theme] .explorer-sidebar .explorer-drive {
+  font-weight:600!important;
+}
+/* Playlist shares the media card's glass surface. */
+html[data-theme] .playlist-window #player-queue {
+  background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(241,230,241,.08))!important;
+  border:0!important; border-top:1px solid rgba(255,255,255,.28)!important;
+  border-radius:0 0 10px 10px!important; box-shadow:none!important;
+  margin:10px 0 0!important; padding:8px 2px 2px!important;
+}
+html[data-theme] .playlist-window #player-queue .queue-heading {
+  background:transparent!important; color:#756779!important;
+}
+html[data-theme] .playlist-window #player-queue .queue-item {
+  background:transparent!important; color:#49414f!important; text-shadow:none!important;
+}
+html[data-theme] .playlist-window #player-queue .queue-item.active {
+  background:rgba(255,255,255,.36)!important; color:#754d69!important;
+}
+html[data-theme] .playlist-window #player-queue .queue-item:not(.active):hover {
+  background:rgba(255,255,255,.20)!important;
+}
+html[data-theme] .playlist-window #player-queue::-webkit-scrollbar-track { background:transparent!important; }
+html[data-theme] .playlist-window #player-queue::-webkit-scrollbar-thumb { background:rgba(108,86,114,.30)!important; border-radius:4px; }
+/* Playlist overlays the docked windows without changing card height. */
+html[data-theme] .playlist-window { overflow:visible!important; z-index:10001!important; }
+html[data-theme] .playlist-window #player-queue {
+  position:absolute; top:100%; left:0; right:0; z-index:2;
+  margin:8px 0 0!important; max-height:220px;
+  padding:9px 7px!important; border:1px solid rgba(255,255,255,.35)!important;
+  border-radius:12px!important;
+  background:linear-gradient(135deg,rgba(247,241,248,.74),rgba(232,223,237,.57))!important;
+  backdrop-filter:blur(18px) saturate(135%); -webkit-backdrop-filter:blur(18px) saturate(135%);
+  box-shadow:0 10px 25px rgba(52,39,61,.15)!important;
+}
+/* Open queue is opaque so the docked windows cannot show through. */
+html[data-theme] .playlist-window #player-queue:not([hidden]) {
+  background:linear-gradient(135deg,#f2edf3,#e6dfe9)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+/* Expanded SNS overlays the dock; collapsed footprint remains 34px. */
+html body > .arch-messenger-root { height:34px!important; z-index:10000!important; }
+html body > .arch-messenger-root > .msg-panel.open {
+  position:absolute!important; inset:0 auto auto 0!important;
+  background:linear-gradient(135deg,rgba(249,245,250,.76),rgba(231,222,237,.65))!important;
+  backdrop-filter:blur(30px) saturate(130%)!important;
+  -webkit-backdrop-filter:blur(30px) saturate(130%)!important;
+}
+html body > .arch-messenger-root .msg-header,
+html body > .arch-messenger-root .msg-body,
+html body > .arch-messenger-root .msg-footer {
+  background:transparent!important; border:0!important; border-radius:0!important; box-shadow:none!important;
+}
+html body > .arch-messenger-root .msg-footer { border-top:1px solid #ffffff30!important; }
+html[data-theme] .playlist-window #player-queue:not([hidden]) {
+  background:linear-gradient(135deg,rgba(249,245,250,.76),rgba(231,222,237,.65))!important;
+  backdrop-filter:blur(30px) saturate(130%)!important;
+  -webkit-backdrop-filter:blur(30px) saturate(130%)!important;
+}
+/* Independent backdrop sampling for the floating playlist. */
+html[data-theme] .glass-queue-overlay {
+  position:fixed!important; z-index:20002!important; box-sizing:border-box;
+  height:auto; max-height:220px; margin:0!important; padding:10px 8px!important;
+  overflow:auto; border:1px solid #ffffff45; border-radius:14px;
+  background:linear-gradient(135deg,rgba(255,255,255,.40),rgba(226,215,236,.26))!important;
+  backdrop-filter:blur(26px) saturate(135%); -webkit-backdrop-filter:blur(26px) saturate(135%);
+  box-shadow:inset 0 1px #ffffff40,0 10px 25px #34273d20;
+  scrollbar-width:auto; scrollbar-color:auto;
+}
+.glass-queue-overlay .queue-heading { background:transparent; color:#746578; text-align:left; font:600 9px/1.4 'Poppins',sans-serif; padding:3px 6px 8px; }
+.glass-queue-overlay .queue-item { display:flex; align-items:center; gap:8px; width:100%; min-height:25px; padding:4px 6px; border:0; border-radius:5px; background:transparent; color:#49414f; text-align:left; }
+.glass-queue-overlay .queue-name { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font:11px/1.5 'Poppins','Archive Han','Pretendard',sans-serif; }
+.glass-queue-overlay .queue-duration { flex:0 0 34px; text-align:right; font:10px/1.5 'Poppins',sans-serif; }
+.glass-queue-overlay .queue-item.active { background:#ffffff30; color:#754d69; }
+.glass-queue-overlay .queue-item:hover { background:#ffffff45; }
+.glass-queue-overlay::-webkit-scrollbar { width:5px; }
+.glass-queue-overlay::-webkit-scrollbar-button { width:0; height:0; display:none; }
+.glass-queue-overlay::-webkit-scrollbar-track { background:transparent; margin-block:4px; }
+.glass-queue-overlay::-webkit-scrollbar-thumb { background:#6c56724d; border-radius:4px; }
+/* One expanding glass card, with the dock anchored to the transport row. */
+html[data-theme] .playlist-window { overflow:hidden!important; max-height:calc(100dvh - 76px); }
+html[data-theme] .playlist-window #player-queue,
+html[data-theme] .playlist-window #player-queue:not([hidden]) {
+  position:relative!important; top:auto!important; left:auto!important; right:auto!important;
+  width:auto!important; margin:10px 0 0!important; padding:8px 0 0!important;
+  background:transparent!important; border:0!important; border-radius:0!important;
+  box-shadow:none!important; backdrop-filter:none!important; -webkit-backdrop-filter:none!important;
+}
+html[data-theme] .playlist-window:has(#queue-toggle[aria-expanded="true"]) {
+  background:linear-gradient(135deg,rgba(250,247,251,.66),rgba(234,228,239,.50))!important;
+  backdrop-filter:blur(28px) saturate(110%)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(110%)!important;
+}
+html[data-theme] .playlist-window #player-queue .queue-name { font-size:13px!important; font-weight:500!important; line-height:1.5!important; color:#39313f!important; text-shadow:none!important; }
+html[data-theme] .playlist-window #player-queue .queue-duration { font-size:11px!important; color:#615467!important; text-shadow:none!important; }
+html[data-theme] .playlist-window #player-queue .queue-item { min-height:29px!important; }
+/* Keep track times clear of the scrollbar. */
+html[data-theme] .playlist-window #player-queue,
+html[data-theme] .playlist-window #player-queue:not([hidden]) {
+  padding-right:10px!important;
+}
+html .arch-messenger-root .msg-header .msg-close { display:none!important; }
+/* Artwork sits directly inside the glass D-DAY frame. */
+html[data-theme] .dday-window__image,
+html[data-theme] .dday-window__image img {
+  border:0!important; outline:0!important; box-shadow:none!important;
+}
+/* Document visibility switches. */
+html[data-theme] .desktop-document__tabs { display:flex; gap:16px; padding:8px 12px; }
+html[data-theme] .desktop-document__tab,
+html[data-theme] .desktop-document__tab.active { position:relative; display:flex; align-items:center; justify-content:center; flex:1; height:28px; padding:0 8px 0 28px; border-radius:999px!important; background:rgba(110,108,120,.20)!important; box-shadow:none!important; color:#57535f!important; font-size:11px; font-weight:600; cursor:pointer; transition:background .18s ease,color .18s ease,padding .18s ease; }
+.document-switch { position:absolute; inset:0; pointer-events:none; }
+.document-switch::after { content:''; position:absolute; top:3px; left:3px; width:22px; height:22px; background:#fff; border-radius:50%; box-shadow:0 1px 3px #0002; transition:left .18s ease; }
+html[data-theme] .desktop-document__tab[aria-checked="true"] { background:#9d8296!important; color:#fff!important; padding:0 28px 0 8px; }
+[aria-checked="true"] > .document-switch::after { left:calc(100% - 25px); }
+.desktop-document__tab:focus-visible { outline:2px solid #9d8296!important; outline-offset:4px; }
