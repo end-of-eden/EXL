@@ -25,6 +25,12 @@
 
   applyTheme(window.name === 'archive-content' ? root.dataset.theme : savedTheme());
 
+  if (window.name !== 'archive-content') {
+    window.addEventListener('storage', function (event) {
+      if (event.key === storageKey || event.key === null) applyTheme(savedTheme());
+    });
+  }
+
   var script = document.currentScript;
   var stylesheet = document.createElement('link');
   stylesheet.rel = 'stylesheet';

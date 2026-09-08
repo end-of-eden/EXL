@@ -423,12 +423,9 @@ html[data-theme="light"] .main-wrap {
     play.setAttribute('aria-label', '재생');
   });
 
+  video.volume = 0.3;
   play.addEventListener('click', function () {
     if (video.paused) {
-      video.muted = false;
-      video.volume = 0.3;
-      mute.textContent = '🔊';
-      mute.setAttribute('aria-label', '음소거');
       video.play();
     } else {
       video.pause();
