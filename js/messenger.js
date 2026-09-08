@@ -1,4 +1,5 @@
 (function () {
+  if (window.name === 'archive-content') return;
   var style = document.createElement('style');
   style.textContent = `
   .msg-fab {

@@ -516,12 +516,13 @@ html[data-theme="light"] .start-menu__item:hover { color: #fff; }
 </footer>
 <script>
 (function () {
-  var character = new URLSearchParams(window.location.search).get('char');
-  var initialPage = character === 'eden' || character === 'lilith'
+  var params = new URLSearchParams(window.location.search);
+  var character = params.get('char');
+  var initialPage = params.get('page') || (character === 'eden' || character === 'lilith'
     ? 'wiki.html?char=' + encodeURIComponent(character)
-    : 'main.html?v=20260907-start-taskbar';
+    : 'main.html?v=20260907-start-taskbar');
   var frame = document.getElementById('archive-frame');
-  frame.src = initialPage;
+  frame.src = 'main.html?page=' + encodeURIComponent(initialPage);
 })();
 </script>
 <script>
@@ -536,7 +537,8 @@ html[data-theme="light"] .start-menu__item:hover { color: #fff; }
   startMenu.addEventListener('click', function (event) {
     var item = event.target.closest('[data-start-page]');
     if (!item) return;
-    frame.src = item.dataset.startPage;
+    if (frame.contentWindow.navigateArchive) frame.contentWindow.navigateArchive(item.dataset.startPage);
+    else frame.src = 'main.html?page=' + encodeURIComponent(item.dataset.startPage);
     setMenu(false);
   });
   document.addEventListener('click', function (event) { if (!startMenu.contains(event.target)) setMenu(false); });

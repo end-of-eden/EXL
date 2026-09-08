@@ -276,6 +276,7 @@ html[data-theme="light"] .topnav { border-right-color: #c7c3c5; background: #e5e
 @media (max-width: 760px) { body { padding: 14px; } .agent-window { height: calc(100vh - 28px); } .agent-workspace { grid-template-columns: 1fr; } .topnav { display: none; } .wiki-wrap { flex-direction: column; overflow-y: auto; } .standing-panel { flex: 0 0 430px; min-height: 430px; border-right: 0; border-bottom: 1px solid #c7c8cc; } .wiki-panel { overflow: visible; } .scroll-area { overflow: visible; } }
 </style>
 <script src="js/theme.js"></script>
+<script src="js/archive-content.js"></script>
 </head>
 <body>
 <main class="agent-window">
@@ -506,6 +507,10 @@ function render(key) {
 
 function switchTo(key) {
   if (current === key) return;
+  if (window.name === 'archive-content' && window.parent.navigateArchive) {
+    window.parent.navigateArchive('wiki.html?char=' + encodeURIComponent(key));
+    return;
+  }
   current = key;
   render(current);
 }

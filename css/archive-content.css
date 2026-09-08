@@ -1,0 +1,33 @@
+html.archive-content-document,
+html.archive-content-document body {
+  width: 100%; height: 100%; min-height: 0; margin: 0; padding: 0 !important;
+  background: transparent !important; overflow: hidden;
+}
+.archive-content-document .agent-window,
+.archive-content-document .pc-page-window {
+  display: block; width: 100%; max-width: none; height: 100%;
+  margin: 0; padding: 0; border: 0; box-shadow: none; background: transparent;
+}
+.archive-content-document .agent-windowbar,
+.archive-content-document .agent-toolbar,
+.archive-content-document .pc-page-windowbar,
+.archive-content-document .pc-page-toolbar,
+.archive-content-document .explorer-sidebar,
+.archive-content-document .theme-toggle { display: none !important; }
+.archive-content-document .agent-workspace,
+.archive-content-document .pc-page-workspace {
+  display: block; height: 100%; min-height: 0; border: 0;
+}
+.archive-content-document .wiki-wrap,
+.archive-content-document .gallery-wrap,
+.archive-content-document .log-wrap,
+.archive-content-document .detail-wrap {
+  width: 100%; max-width: none; height: 100%; margin: 0;
+  border: 0; border-radius: 0; box-shadow: none;
+}
+/* The shell animates the content once, after the document is ready. */
+.archive-content-document .standing-img img,
+.archive-content-document .wiki-header > *,
+.archive-content-document #wiki-content > *,
+.archive-content-document .gallery-item,
+.archive-content-document .log-item { animation: none; }

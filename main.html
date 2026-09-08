@@ -47,14 +47,6 @@ body {
   align-items: center;
   justify-content: center;
 }
-html[data-theme="light"],
-html[data-theme="light"] body {
-  background:
-    radial-gradient(circle at 12% 16%, rgba(255,255,255,.72) 0 8%, transparent 31%),
-    radial-gradient(circle at 88% 80%, rgba(190,165,174,.22) 0 7%, transparent 35%),
-    linear-gradient(145deg, #eee9ea 0%, #e7dfe2 54%, #ddd2d6 100%) !important;
-}
-
 .site-shell {
   position: relative;
   width: 100%; max-width: 1280px; height: min(820px, calc(100vh - 96px));
@@ -305,6 +297,7 @@ html[data-theme="light"] .main-wrap {
 }
 </style>
 <script src="js/theme.js"></script>
+<link rel="stylesheet" href="css/archive-shell.css">
 </head>
 <body>
 <div class="site-shell">
@@ -460,6 +453,7 @@ html[data-theme="light"] .main-wrap {
   });
 })();
 </script>
+<script src="js/archive-shell.js"></script>
 <script src="js/sparkle.js"></script>
 <script src="js/messenger.js?v=20260907-player-docked-sns"></script>
 </body>

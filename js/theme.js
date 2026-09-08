@@ -23,7 +23,7 @@
     button.setAttribute('aria-pressed', String(isLight));
   }
 
-  applyTheme(savedTheme());
+  applyTheme(window.name === 'archive-content' ? root.dataset.theme : savedTheme());
 
   var script = document.currentScript;
   var stylesheet = document.createElement('link');
@@ -32,6 +32,7 @@
   document.head.appendChild(stylesheet);
 
   document.addEventListener('DOMContentLoaded', function () {
+    if (window.name === 'archive-content') return;
     var button = document.createElement('button');
     button.type = 'button';
     button.id = 'theme-toggle';
