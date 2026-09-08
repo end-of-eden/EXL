@@ -240,7 +240,12 @@ body { min-height: 100vh; padding: 2rem; display: flex; align-items: center; jus
   object-fit: cover !important; object-position: center top !important;
   background: #fff;
 }
+.wiki-wrap.theme-eden .standing-img,
 .wiki-wrap.theme-lilith .standing-img { background: #fff; }
+.wiki-wrap.theme-eden .standing-img img {
+  transform: scale(.9);
+  transform-origin: center center;
+}
 .wiki-wrap.theme-lilith .standing-img img {
   transform: scale(.8);
   transform-origin: center center;
@@ -282,10 +287,11 @@ html[data-theme="light"] .topnav { border-right-color: #c7c3c5; background: #e5e
 </style>
 <script src="js/theme.js"></script>
 <script src="js/archive-content.js"></script>
+<link rel="stylesheet" href="css/window-controls.css">
 </head>
 <body>
 <main class="agent-window">
-<div class="agent-windowbar"><span>▣ ARCH AGENT DATABASE</span><span class="agent-window-controls" aria-hidden="true"><span class="agent-window-button"></span><span class="agent-window-button"></span><span class="agent-window-button"></span></span></div>
+<div class="agent-windowbar"><span>▣ ARCH AGENT DATABASE</span><span class="agent-window-controls" aria-hidden="true"><span class="agent-window-button archive-window-control"></span><span class="agent-window-button archive-window-control"></span><span class="agent-window-button archive-window-control"></span></span></div>
 <div class="agent-toolbar"><span>‹　›　⌂</span><span class="agent-address">This PC　›　相互確證破壞　›　AGENTS　›　<span id="agent-address-name">EDEN</span></span></div>
 <div class="agent-workspace">
 <nav class="topnav explorer-sidebar" aria-label="Categories">

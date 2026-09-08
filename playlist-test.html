@@ -446,6 +446,7 @@ html[data-theme="light"] .start-menu__item:hover { color: #fff; }
   .start-menu { bottom: 36px; width: min(238px, calc(100vw - 8px)); }
 }
 </style>
+<link rel="stylesheet" href="css/window-controls.css">
 </head>
 <body>
 <iframe class="archive-frame" id="archive-frame" title="END OF EDEN archive" src="about:blank"></iframe>
@@ -453,7 +454,7 @@ html[data-theme="light"] .start-menu__item:hover { color: #fff; }
   <div class="desktop-document__bar">
     <span>▤ DOCUMENT</span>
     <span class="desktop-document__controls" aria-hidden="true">
-      <span class="desktop-document__button">−</span><span class="desktop-document__button">□</span><span class="desktop-document__button">×</span>
+      <span class="desktop-document__button archive-window-control">−</span><span class="desktop-document__button archive-window-control">□</span><span class="desktop-document__button archive-window-control">×</span>
     </span>
   </div>
   <div class="desktop-document__tabs" role="tablist">
@@ -475,7 +476,7 @@ html[data-theme="light"] .start-menu__item:hover { color: #fff; }
 <aside class="dday-window" id="dday-window" aria-label="홍차 디데이">
   <div class="dday-window__bar">
     <span>♥ D-DAY</span>
-    <span class="dday-window__controls" aria-hidden="true"><span class="dday-window__button">−</span><span class="dday-window__button">□</span><span class="dday-window__button">×</span></span>
+    <span class="dday-window__controls" aria-hidden="true"><span class="dday-window__button archive-window-control">−</span><span class="dday-window__button archive-window-control">□</span><span class="dday-window__button archive-window-control">×</span></span>
   </div>
   <div class="dday-window__image">
     <img src="img/main/hongcha-strip.png" alt="홍차 — 에덴과 릴리스">
@@ -485,7 +486,7 @@ html[data-theme="light"] .start-menu__item:hover { color: #fff; }
 <aside class="banner-window is-collapsed" id="banner-window" aria-label="배너">
   <div class="banner-window__bar">
     <span>▧ BANNER</span>
-    <span class="banner-window__controls"><span class="banner-window__button">−</span><button class="banner-window__button" type="button" data-banner-toggle aria-label="배너 펼치기" aria-expanded="false">□</button><span class="banner-window__button">×</span></span>
+    <span class="banner-window__controls"><span class="banner-window__button archive-window-control">−</span><button class="banner-window__button archive-window-control" type="button" data-banner-toggle aria-label="배너 펼치기" aria-expanded="false">□</button><span class="banner-window__button archive-window-control">×</span></span>
   </div>
   <div class="banner-window__body">
     <p class="banner-window__copy">배너 이미지는 저장 후 업로드해 주세요.</p>
@@ -651,7 +652,7 @@ html[data-theme="light"] .start-menu__item:hover { color: #fff; }
 <aside class="playlist-window" aria-label="플레이리스트">
   <div class="player-windowbar">
     <span>♫ MUSIC PLAYER</span>
-    <span class="player-window-controls" aria-hidden="true"><span class="player-window-button">−</span><span class="player-window-button">□</span><span class="player-window-button">×</span></span>
+    <span class="player-window-controls" aria-hidden="true"><span class="player-window-button archive-window-control">−</span><span class="player-window-button archive-window-control">□</span><span class="player-window-button archive-window-control">×</span></span>
   </div>
   <div class="player-head">
     <img class="cover" src="img/log/001.jpg" alt="Eden and Lilith playlist cover">
