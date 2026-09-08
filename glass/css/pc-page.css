@@ -1,0 +1,31 @@
+body.pc-page-body { min-height: 100vh; padding: 2rem; display: flex; align-items: center; justify-content: center; background: transparent; overflow: hidden; }
+.pc-page-window { width: 100%; max-width: 1280px; height: min(820px, calc(100vh - 96px)); padding: 5px; display: grid; grid-template-rows: 30px 30px minmax(0,1fr); border: 2px solid; border-color: #6f7178 #262831 #262831 #6f7178; background: #3a3d46; box-shadow: inset -1px -1px 0 #252730, 3px 3px 12px rgba(0,0,0,.3); }
+.pc-page-windowbar { padding: 0 5px 0 9px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #c897aa; background: #d9a9bb; color: #4f3e46; box-shadow: inset 0 1px rgba(255,255,255,.48); font: 400 11px/1 "Galmuri11", "Pretendard", sans-serif; }
+.pc-page-controls { display: flex; gap: 4px; }
+.pc-page-control { position: relative; width: 20px; height: 20px; border: 2px solid; border-color: #73757c #272932 #272932 #73757c; background: #454851; color: #e7dbe0; }
+.pc-page-control::before,.pc-page-control::after { content:''; position:absolute; display:block; }
+.pc-page-control:nth-child(1)::before { left:4px; top:7.5px; width:8px; height:1px; background:currentColor; }
+.pc-page-control:nth-child(2)::before { left:3px; top:3px; width:8px; height:8px; border:1px solid currentColor; }
+.pc-page-control:nth-child(3)::before,.pc-page-control:nth-child(3)::after { left:7.5px; top:3px; width:1px; height:10px; background:currentColor; transform-origin:center; }
+.pc-page-control:nth-child(3)::before { transform:rotate(45deg); }.pc-page-control:nth-child(3)::after { transform:rotate(-45deg); }
+.pc-page-toolbar { padding: 4px 7px; display:flex; align-items:center; gap:8px; border-bottom:1px solid #24262e; background:#30333c; color:#aaaeb8; font:400 10px/1 "Galmuri11","Pretendard",sans-serif; }
+.pc-page-address { flex:1; height:21px; padding:3px 9px; overflow:hidden; border:2px solid; border-color:#24262e #6f727b #6f727b #24262e; background:#171920; color:#aeb1bb; white-space:nowrap; text-overflow:ellipsis; }
+.pc-page-workspace { min-height:0; display:grid; grid-template-columns:230px minmax(0,1fr); border:2px solid; border-color:#262831 #777983 #777983 #262831; background:#171920; }
+.pc-page-body .topnav { width:auto; max-width:none; min-height:0; margin:0; padding:18px 14px; display:block; border-right:1px solid #50535c; background:#24272f; }
+.pc-page-body .topnav::before { content:'카테고리'; display:block; margin-bottom:10px; color:#7f838f; font:400 9px/1 "Galmuri11","Pretendard",sans-serif; }
+.pc-page-body .topnav-links { display:grid; align-content:start; gap:3px; }
+.pc-page-body .topnav-divider { display:none; }
+.pc-page-body .topnav a { padding:7px 9px; border-radius:0; color:#858995; font:400 10px/1.2 "Galmuri11","Pretendard",sans-serif; text-transform:uppercase; text-decoration:none; }
+.pc-page-body .topnav a::before { content:'·'; margin-right:7px; color:#777b86; }
+.pc-page-body .topnav a:hover,.pc-page-body .topnav a.active { background:rgba(255,255,255,.045); color:#f1bfd2; }
+html[data-theme="light"] body.pc-page-body { background:transparent; }
+html[data-theme="light"] .pc-page-window { border-color:#fff #777477 #777477 #fff; background:#d4d2d3; box-shadow:inset -1px -1px 0 #aaa7a9,3px 3px 14px rgba(57,55,58,.14); }
+html[data-theme="light"] .pc-page-windowbar { border-color:#d4b4bf; background:#edc8d6; color:#65515a; }
+html[data-theme="light"] .pc-page-control { border-color:#fff #817b7e #817b7e #fff; background:#d4d2d3; color:#696368; }
+html[data-theme="light"] .pc-page-toolbar { border-bottom-color:#bcb7ba; background:#e5e3e4; color:#625d62; }
+html[data-theme="light"] .pc-page-address { border-color:#959093 #fff #fff #959093; background:#fff; color:#6d676d; }
+html[data-theme="light"] .pc-page-workspace { border-color:#959093 #fff #fff #959093; background:#fff; }
+html[data-theme="light"] .pc-page-body .topnav { border-right-color:#c7c3c5; background:#e5e3e4; }
+html[data-theme="light"] .pc-page-body .topnav a { color:#7d7780; }
+html[data-theme="light"] .pc-page-body .topnav a:hover,html[data-theme="light"] .pc-page-body .topnav a.active { background:#eee6e9; color:#b34e75; }
+@media(max-width:760px){body.pc-page-body{padding:14px}.pc-page-window{height:calc(100vh - 28px)}.pc-page-workspace{grid-template-columns:1fr}.pc-page-body .topnav{display:none}}

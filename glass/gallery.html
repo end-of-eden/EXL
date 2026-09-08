@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<script src="js/theme-init.js"></script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50%25' y='54%25' font-size='70' text-anchor='middle' dominant-baseline='central'>💙</text></svg>"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>END OF EDEN — Gallery</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/pc-page.css">
+<link rel="stylesheet" href="css/explorer-sidebar.css?v=20260907-content-fade-3">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --color-background-primary: #0f0f14;
+  --color-background-secondary: #1a1a22;
+  --color-border-tertiary: rgba(255,255,255,0.10);
+  --color-border-secondary: rgba(255,255,255,0.16);
+  --color-text-primary: #f2f2f5;
+  --color-text-secondary: #b0b4bd;
+  --color-text-tertiary: #6f7380;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: #0a0a0f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.topnav {
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.topnav-links { display: flex; align-items: center; gap: 2px; }
+.topnav-music { display: flex; align-items: center; gap: 8px; }
+.music-btn {
+  width: 24px; height: 24px;
+  border: 0.5px solid var(--color-border-secondary);
+  border-radius: 50%;
+  background: transparent; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-text-secondary); font-size: 11px;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.music-btn:hover { background: var(--color-background-secondary); }
+.music-title { font-size: 11px; color: var(--color-text-tertiary); letter-spacing: 0.02em; }
+.topnav a {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+  padding: 5px 14px;
+  border-radius: var(--border-radius-md);
+  transition: background 0.15s, color 0.15s;
+}
+.topnav a:hover { background: rgba(255,255,255,0.06); color: var(--color-text-secondary); }
+.topnav a.active { background: rgba(255,255,255,0.08); color: var(--color-text-primary); }
+.topnav-divider { width: 1px; height: 12px; background: var(--color-border-tertiary); margin: 0 4px; }
+
+.gallery-wrap {
+  width: 100%;
+  max-width: 960px;
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  background: var(--color-background-primary);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.30);
+  height: 580px;
+}
+
+.gallery-scroll {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1.75rem;
+}
+.gallery-scroll::-webkit-scrollbar { width: 3px; }
+.gallery-scroll::-webkit-scrollbar-track { background: transparent; }
+.gallery-scroll::-webkit-scrollbar-thumb { background: var(--color-border-secondary); border-radius: 99px; }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.gallery-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--color-background-secondary);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.04);
+}
+
+.gallery-item-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  transition: background 0.3s ease;
+}
+
+.gallery-item:hover .gallery-item-overlay {
+  background: rgba(0,0,0,0.55);
+}
+
+.gallery-item-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,0);
+  letter-spacing: 0.03em;
+  transition: color 0.3s ease;
+  line-height: 1.4;
+  text-align: center;
+}
+.gallery-item-lyrics {
+  margin-top: 5px; color: rgba(255,255,255,0); font-size: 10px;
+  font-weight: 300; line-height: 1.5; text-align: center; transition: color 0.3s ease;
+}
+
+.gallery-item:hover .gallery-item-title {
+  color: rgba(255,255,255,0.9);
+}
+.gallery-item:hover .gallery-item-lyrics { color: rgba(255,255,255,0.88); }
+
+@media (max-width: 640px) {
+  .gallery-scroll { padding: 1.25rem; }
+  .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+}
+
+/* 팝업 */
+.popup-bg {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(5,5,8,0.85);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.popup-bg.open { display: flex; }
+
+.popup-inner {
+  position: relative;
+  max-width: 800px;
+  width: 90%;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+}
+
+.popup-inner img {
+  width: 100%;
+  display: block;
+  max-height: 85vh;
+  object-fit: contain;
+  background: #050508;
+}
+
+.popup-title {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  padding: 12px 16px;
+  background: linear-gradient(to top, rgba(5,5,8,0.85) 0%, transparent 100%);
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.03em;
+}
+.popup-song { font-weight: 700; }
+.popup-lyrics { margin-top: 4px; font-size: 12px; font-weight: 300; line-height: 1.6; }
+
+.popup-close {
+  position: absolute;
+  top: 12px; right: 12px;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+.popup-close:hover { background: rgba(255,255,255,0.3); }
+.gallery-wrap { width:100%; max-width:none; height:100%; border:0; border-radius:0; box-shadow:none; background:#fff; }
+.gallery-scroll { padding:22px; }
+.gallery-scroll::-webkit-scrollbar { width:12px; }.gallery-scroll::-webkit-scrollbar-track{background:#ececef}.gallery-scroll::-webkit-scrollbar-thumb{border:2px solid #ececef;border-radius:0;background:#b6b7bc}
+.gallery-grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+.gallery-item { border:1px solid #c9c9cd; border-radius:0; background:#ececef; box-shadow:2px 2px 0 rgba(0,0,0,.07); }
+.gallery-item:hover { border-color:#bd7892; }
+.popup-inner { padding:5px; border:2px solid; border-color:#fff #777477 #777477 #fff; border-radius:0; background:#d4d2d3; }
+.popup-close { top:9px; right:9px; width:22px; height:22px; border:2px solid; border-color:#fff #817b7e #817b7e #fff; border-radius:0; background:#d4d2d3; color:#65515a; }
+@media(max-width:980px){.gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:640px){.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+<script src="js/theme.js"></script>
+<script src="js/content-api.js"></script>
+<script src="js/archive-content.js"></script>
+<link rel="stylesheet" href="css/window-controls.css">
+<link rel="stylesheet" href="css/glass-preview.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"></head>
+<body class="pc-page-body">
+<main class="pc-page-window">
+<div class="pc-page-windowbar"><span>▧ ARCH IMAGE ARCHIVE</span><span class="pc-page-controls" aria-hidden="true"><span class="pc-page-control archive-window-control"></span><span class="pc-page-control archive-window-control"></span><span class="pc-page-control archive-window-control"></span></span></div>
+<div class="pc-page-toolbar"><span>‹　›　⌂</span><span class="pc-page-address">This PC　›　相互確證破壞　›　GALLERY</span></div>
+<div class="pc-page-workspace">
+
+<nav class="topnav explorer-sidebar" aria-label="Categories">
+  <div class="topnav-links">
+    <section class="explorer-group"><div class="explorer-label">Favorites</div><a class="explorer-root" href="main.html?v=20260907-unified-sidebar-2"><i class="ti ti-folder"></i><span>This PC</span></a><a class="explorer-root explorer-social" href="https://x.com/synapsezip" target="_blank" rel="noopener noreferrer"><i class="ti ti-brand-x"></i><span>BUTTERSCOTCH</span></a></section>
+    <section class="explorer-group"><div class="explorer-label">Categories</div>
+      <div class="explorer-branch"><div class="explorer-branch-title"><span class="explorer-chevron">♡</span><span class="explorer-drive">Local Disk (C:)</span><span>⌄</span></div><div class="explorer-tree"><a href="main.html">main</a></div></div>
+      <div class="explorer-branch"><div class="explorer-branch-title"><span class="explorer-chevron">♡</span><span class="explorer-drive">Agents</span><span>⌄</span></div><div class="explorer-tree"><a href="wiki.html?char=lilith&amp;v=20260907-unified-sidebar-2">lilith</a><a href="wiki.html?char=eden&amp;v=20260907-unified-sidebar-2">eden</a></div></div>
+      <div class="explorer-branch"><div class="explorer-branch-title"><span class="explorer-chevron">♡</span><span class="explorer-drive">Local Disk (D:)</span><span>⌄</span></div><div class="explorer-tree"><a href="gallery.html?v=20260907-unified-sidebar-2" class="active">gallery</a><a href="log.html?v=20260907-unified-sidebar-2">log</a></div></div>
+    </section>
+    <section class="explorer-group"><div class="explorer-label">Other</div><a class="explorer-root explorer-tag" href="main.html#banner"><i class="ti ti-photo"></i><span>banner</span></a></section>
+  </div>
+</nav>
+
+<div class="gallery-wrap">
+  <div class="gallery-scroll" id="gallery-scroll">
+    <div class="gallery-grid" id="gallery-grid"></div>
+  </div>
+</div>
+</div>
+</main>
+
+<!-- 팝업 -->
+<div class="popup-bg" id="popup-bg" onclick="closePopup(event)">
+  <div class="popup-inner">
+    <img id="popup-img" src="" alt="">
+    <div class="popup-title" id="popup-title"></div>
+    <button class="popup-close" onclick="closePopup()">✕</button>
+  </div>
+</div>
+
+<script>
+// ✏️ 이미지 추가할 때 여기에 한 줄씩 추가하면 됨
+var images = [
+  {
+    src: '003.jpg', title: 'HAPPY DAY — 체리필터',
+    song: 'HAPPY DAY — 체리필터',
+    lyrics: '찬란하게 빛나던 내 모습은 어디로 날아갔을까 어느 별로'
+  },
+  {
+    src: '004.jpg', title: '불꽃놀이 — 하현상',
+    song: '불꽃놀이 — 하현상',
+    lyrics: '가는 길에 다 두고 내릴까 더 멀리 더 멀리 말이야'
+  },
+];
+
+var base = 'img/gallery/';
+
+function imageUrl(img) {
+  return img.remote ? window.EDEN_CONTENT_API + img.imagePath : base + img.src;
+}
+
+function escapeHtml(value) {
+  return String(value || '').replace(/[&<>"']/g, function(char) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char];
+  });
+}
+
+function render() {
+  var grid = document.getElementById('gallery-grid');
+  grid.innerHTML = images.map(function(img, i) {
+    return '<div class="gallery-item" onclick="openPopup(' + i + ')">' +
+      '<img src="' + escapeHtml(imageUrl(img)) + '" alt="' + escapeHtml(img.title) + '" loading="lazy">' +
+      '<div class="gallery-item-overlay">' +
+      '<div class="gallery-item-title">' + escapeHtml(img.title) + '</div>' +
+      (img.lyrics ? '<div class="gallery-item-lyrics">' + escapeHtml(img.lyrics) + '</div>' : '') +
+      '</div></div>';
+  }).join('');
+}
+
+function openPopup(i) {
+  var img = images[i];
+  document.getElementById('popup-img').src = imageUrl(img);
+  var popupTitle = document.getElementById('popup-title');
+  popupTitle.textContent = '';
+  if (img.song) {
+    var song = document.createElement('div');
+    song.className = 'popup-song';
+    song.textContent = img.song;
+    popupTitle.appendChild(song);
+
+    var lyrics = document.createElement('div');
+    lyrics.className = 'popup-lyrics';
+    lyrics.textContent = img.lyrics;
+    popupTitle.appendChild(lyrics);
+  } else {
+    popupTitle.textContent = img.title;
+  }
+  document.getElementById('popup-bg').classList.add('open');
+}
+
+function closePopup(e) {
+  if (!e || e.target === document.getElementById('popup-bg') || e.currentTarget.classList.contains('popup-close')) {
+    document.getElementById('popup-bg').classList.remove('open');
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePopup();
+});
+
+render();
+
+fetch(window.EDEN_CONTENT_API + '/api/gallery')
+  .then(function(response) { if (!response.ok) throw new Error('load failed'); return response.json(); })
+  .then(function(remoteImages) {
+    images = remoteImages.map(function(img) { img.remote = true; return img; }).concat(images);
+    render();
+  })
+  .catch(function() { /* R2가 준비되지 않아도 기존 갤러리는 그대로 표시 */ });
+
+
+</script>
+
+<script src="js/sparkle.js"></script>
+<script src="js/messenger.js"></script>
+</body>
+</html>

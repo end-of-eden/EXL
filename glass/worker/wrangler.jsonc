@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "end-of-eden-content",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "r2_buckets": [{ "binding": "CONTENT", "bucket_name": "end-of-eden-content" }],
+  "vars": { "ALLOWED_ORIGIN": "https://assured.love" },
+  "observability": { "enabled": true, "head_sampling_rate": 1 },
+  "secrets": { "required": ["UPLOAD_TOKEN"] }
+}

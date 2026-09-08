@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<script src="js/theme-init.js"></script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50%25' y='54%25' font-size='70' text-anchor='middle' dominant-baseline='central'>💙</text></svg>"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>END OF EDEN</title>
+<script>window.location.replace('playlist-test.html?v=20260907-direct-main');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0a0a0f;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+body.fade-out {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.roster-wrap {
+  max-width: 800px;
+  width: 100%;
+}
+
+.hero-video {
+  position: relative;
+  border: 0.5px solid rgba(255,255,255,0.10);
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45), 0 2px 8px rgba(0,0,0,0.30);
+}
+
+.hero-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hover-zone {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  bottom: 52px;
+  z-index: 1;
+}
+
+.hover-reveal {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10,10,15,0.45);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  text-align: center;
+  pointer-events: none;
+}
+
+.hover-reveal .hover-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: clamp(22px, 3.4vw, 32px);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.7);
+}
+
+.hover-reveal .enter-hint {
+  margin-top: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.85);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.hero-video:has(.hover-zone:hover) video {
+  filter: brightness(0.6) blur(1px);
+}
+
+.hero-video:has(.hover-zone:hover) .hover-reveal {
+  opacity: 1;
+}
+
+.video-controls {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 12px 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+}
+
+.vc-seek {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  border-radius: 99px;
+  background: rgba(255,255,255,0.3);
+  outline: none;
+  cursor: pointer;
+}
+.vc-seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: #ff0033;
+  cursor: pointer;
+}
+.vc-seek::-moz-range-thumb {
+  width: 11px; height: 11px;
+  border: none;
+  border-radius: 50%;
+  background: #ff0033;
+  cursor: pointer;
+}
+.vc-seek::-moz-range-track {
+  background: rgba(255,255,255,0.3);
+  height: 3px;
+  border-radius: 99px;
+}
+
+.vc-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vc-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.vc-time {
+  font-size: 11px;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+</style>
+<script src="js/theme.js"></script>
+<link rel="stylesheet" href="css/glass-preview.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"></head>
+<body>
+<div class="roster-wrap">
+  <div class="hero-video" id="hero-video-wrap">
+    <video id="hero-video-el" src="img/video/main-hero.mp4" preload="auto" muted playsinline loop></video>
+    <div class="hover-zone"></div>
+    <div class="hover-reveal">
+      <div class="hover-title">相互確證破壞</div>
+      <div class="enter-hint" onclick="goToMain()">ENTER →</div>
+    </div>
+    <div class="video-controls">
+      <input type="range" class="vc-seek" id="vc-seek" min="0" max="100" value="0" step="0.1">
+      <div class="vc-row">
+        <button type="button" class="vc-btn" id="vc-playpause" onclick="toggleHeroPlay()" aria-label="재생">▶</button>
+        <button type="button" class="vc-btn" id="vc-mute" onclick="toggleHeroMute()" aria-label="음소거 해제">🔇</button>
+        <span class="vc-time" id="vc-time">0:00 / 0:00</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+if (window.location.pathname === '/index.html') {
+  window.history.replaceState(null, '', '/');
+}
+
+var heroVideo = document.getElementById('hero-video-el');
+var seekBar = document.getElementById('vc-seek');
+var timeLabel = document.getElementById('vc-time');
+var playPauseBtn = document.getElementById('vc-playpause');
+var muteBtn = document.getElementById('vc-mute');
+var seeking = false;
+
+function formatTime(sec) {
+  sec = Math.max(0, Math.round(sec));
+  var minutes = Math.floor(sec / 60);
+  var seconds = String(sec % 60).padStart(2, '0');
+  return minutes + ':' + seconds;
+}
+
+heroVideo.addEventListener('loadedmetadata', function() {
+  timeLabel.textContent = formatTime(0) + ' / ' + formatTime(heroVideo.duration);
+});
+
+heroVideo.addEventListener('timeupdate', function() {
+  if (seeking) return;
+  seekBar.value = (heroVideo.currentTime / heroVideo.duration) * 100 || 0;
+  timeLabel.textContent = formatTime(heroVideo.currentTime) + ' / ' + formatTime(heroVideo.duration);
+});
+
+heroVideo.addEventListener('play', function() {
+  playPauseBtn.textContent = '⏸';
+  playPauseBtn.setAttribute('aria-label', '일시정지');
+});
+heroVideo.addEventListener('pause', function() {
+  playPauseBtn.textContent = '▶';
+  playPauseBtn.setAttribute('aria-label', '재생');
+});
+
+seekBar.addEventListener('input', function() {
+  seeking = true;
+  timeLabel.textContent = formatTime((seekBar.value / 100) * heroVideo.duration) + ' / ' + formatTime(heroVideo.duration);
+});
+seekBar.addEventListener('change', function() {
+  heroVideo.currentTime = (seekBar.value / 100) * heroVideo.duration;
+  seeking = false;
+});
+
+function toggleHeroPlay() {
+  if (heroVideo.paused) {
+    if (heroVideo.currentTime === 0) {
+      heroVideo.muted = false;
+      heroVideo.volume = 0.3;
+      muteBtn.textContent = '🔊';
+      muteBtn.setAttribute('aria-label', '음소거');
+    }
+    heroVideo.play();
+  } else {
+    heroVideo.pause();
+  }
+}
+
+function toggleHeroMute() {
+  heroVideo.muted = !heroVideo.muted;
+  muteBtn.textContent = heroVideo.muted ? '🔇' : '🔊';
+  muteBtn.setAttribute('aria-label', heroVideo.muted ? '음소거 해제' : '음소거');
+}
+
+function goToMain() {
+  document.body.classList.add('fade-out');
+  setTimeout(function() {
+    location.href = 'playlist-test.html';
+  }, 400);
+}
+window.addEventListener('pageshow', function(e) {
+  document.body.classList.remove('fade-out');
+});
+</script>
+<script src="js/sparkle.js"></script>
+</body>
+</html>
