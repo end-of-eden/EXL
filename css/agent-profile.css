@@ -2,7 +2,7 @@
 html .wiki-wrap{--profile-accent:#a74772;--profile-muted:#8e7785}
 html .wiki-wrap.theme-eden{--profile-accent:#577e94;--profile-muted:#7b8c98}
 html .wiki-wrap .wiki-header{align-items:flex-start;padding-top:38px}
-html .wiki-wrap .profile-heading{border-left:2px solid var(--profile-accent);padding-left:16px}
+html .wiki-wrap .profile-heading{border-left:0;padding-left:16px}
 html .wiki-wrap .profile-eyebrow{font-size:8px;letter-spacing:.18em;color:var(--profile-muted);margin-bottom:10px}
 html .wiki-wrap .profile-heading .wiki-title{font-size:clamp(30px,4.8vw,48px);line-height:1.1;letter-spacing:-.04em}
 html .wiki-wrap .profile-heading .wiki-title::after{display:none}
