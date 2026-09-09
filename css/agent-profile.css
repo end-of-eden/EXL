@@ -7,8 +7,8 @@ html .wiki-wrap .profile-eyebrow{font-size:8px;letter-spacing:.18em;color:var(--
 html .wiki-wrap .profile-heading .wiki-title{font-size:clamp(30px,4.8vw,48px);line-height:1.1;letter-spacing:-.04em}
 html .wiki-wrap .profile-heading .wiki-title::after{display:none}
 html .wiki-wrap .profile-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:12px}
-html .wiki-wrap .profile-tags span{font-size:8px;padding:4px 7px;color:white;background:var(--profile-accent);letter-spacing:.04em}
-html .wiki-wrap .profile-tags span+span{background:#ada0aa}
+html .wiki-wrap .profile-tags span{font-size:8px;padding:4px 7px;color:var(--profile-accent);background:#ffffff65;border:1px solid #ffffff90;border-radius:6px;letter-spacing:.04em}
+html .wiki-wrap .profile-tags span+span{background:#ffffff40}
 html .wiki-wrap .heart-switcher{gap:8px;padding-top:4px}
 .profile-tabs{display:flex;margin:8px 24px 22px;border-bottom:1px solid #c6bac34d;flex-shrink:0}
 .profile-tabs button{flex:1;padding:12px 4px;border:0;border-bottom:2px solid transparent;background:transparent;color:#8b8189;font:inherit;font-size:10px;cursor:pointer}
@@ -23,13 +23,13 @@ html .wiki-wrap .divider{display:none}
 html .wiki-wrap .scroll-area::-webkit-scrollbar{width:3px}
 html .wiki-wrap .scroll-area::-webkit-scrollbar-track{background:transparent}
 html .wiki-wrap .scroll-area::-webkit-scrollbar-thumb{border:0;border-radius:10px;background:#b9aab5}
-html .wiki-wrap:is(.theme-eden,.theme-lilith){position:relative;isolation:isolate;display:flex;flex-direction:row;overflow:hidden;background:linear-gradient(110deg,#e3c6d6b3 0%,#f5e8ef99 45%,#ffffffdc 45.2%)}
-html .wiki-wrap.theme-eden{background:linear-gradient(110deg,#cddde8b3 0%,#e8edf599 45%,#ffffffdc 45.2%)}
+html .wiki-wrap:is(.theme-eden,.theme-lilith){position:relative;isolation:isolate;display:flex;flex-direction:row;overflow:hidden;background:radial-gradient(ellipse at 20% 30%,#ecc5de70,transparent 68%),radial-gradient(ellipse at 85% 80%,#d9d9ed50,transparent 65%),#ffffff14}
+html .wiki-wrap.theme-eden{background:radial-gradient(ellipse at 20% 30%,#c9e1ed70,transparent 68%),radial-gradient(ellipse at 85% 80%,#ebcfe250,transparent 65%),#ffffff14}
 html .wiki-wrap:is(.theme-eden,.theme-lilith) .standing-panel{flex:0 0 46%;min-height:0;height:100%;padding:0;border:0;background:transparent;overflow:visible;z-index:1;pointer-events:none}
 html .wiki-wrap:is(.theme-eden,.theme-lilith) .standing-img{inset:0;overflow:hidden;border:0;background:transparent}
 html .wiki-wrap:is(.theme-eden,.theme-lilith) .standing-img img{top:2%;bottom:auto;left:50%;width:auto!important;height:170cqh!important;max-width:none;background:transparent;object-fit:contain!important;transform:translateX(-50%)}
 html .wiki-wrap:is(.theme-eden,.theme-lilith) .char-badge{display:none}
-html .wiki-wrap .wiki-panel{flex:1;min-width:0;height:100%;background:transparent;overflow:hidden;z-index:2}
+html .wiki-wrap .wiki-panel{flex:1;min-width:0;height:calc(100% - 28px);margin:14px 14px 14px 0;border:1px solid #ffffff85;border-radius:22px;background:linear-gradient(145deg,#ffffff60,#ffffff26);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:inset 0 1px 0 #ffffff80,0 8px 28px #796b8010;overflow:hidden;z-index:2}
 html .wiki-wrap .wiki-header{padding:28px 24px 18px;border:0;background:transparent}
 html .wiki-wrap .wiki-title{font-size:28px;letter-spacing:-.04em}
 html .wiki-wrap .wiki-title::after{display:block;margin:8px 0 0;font-size:9px;letter-spacing:.15em;content:'ARCH / AGENT DOSSIER'}
