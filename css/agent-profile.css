@@ -1,4 +1,28 @@
 /* A shared stage: the portrait is cropped at the waist, alongside the dossier. */
+html .wiki-wrap{--profile-accent:#a74772;--profile-muted:#8e7785}
+html .wiki-wrap.theme-eden{--profile-accent:#577e94;--profile-muted:#7b8c98}
+html .wiki-wrap .wiki-header{align-items:flex-start;padding-top:38px}
+html .wiki-wrap .profile-heading{border-left:2px solid var(--profile-accent);padding-left:16px}
+html .wiki-wrap .profile-eyebrow{font-size:8px;letter-spacing:.18em;color:var(--profile-muted);margin-bottom:10px}
+html .wiki-wrap .profile-heading .wiki-title{font-size:clamp(30px,4.8vw,48px);line-height:1.1;letter-spacing:-.04em}
+html .wiki-wrap .profile-heading .wiki-title::after{display:none}
+html .wiki-wrap .profile-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:12px}
+html .wiki-wrap .profile-tags span{font-size:8px;padding:4px 7px;color:white;background:var(--profile-accent);letter-spacing:.04em}
+html .wiki-wrap .profile-tags span+span{background:#ada0aa}
+html .wiki-wrap .heart-switcher{gap:8px;padding-top:4px}
+.profile-tabs{display:flex;margin:8px 24px 22px;border-bottom:1px solid #c6bac34d;flex-shrink:0}
+.profile-tabs button{flex:1;padding:12px 4px;border:0;border-bottom:2px solid transparent;background:transparent;color:#8b8189;font:inherit;font-size:10px;cursor:pointer}
+.profile-tabs button[aria-pressed="true"]{border-bottom-color:var(--profile-accent);color:var(--profile-accent)}
+.profile-tabs button:focus-visible{outline:2px solid var(--profile-accent);outline-offset:-3px}
+[data-profile-page][hidden]{display:none!important}
+html .wiki-wrap [data-profile-page]>.section-title:first-child{margin-top:0}
+html .wiki-wrap [data-profile-page="character"]>.section-title:first-child,
+html .wiki-wrap [data-profile-page="character"]>.attr-tag{display:none}
+html .wiki-wrap .desc-block,html .wiki-wrap .log-block{font-size:12px;line-height:1.9}
+html .wiki-wrap .divider{display:none}
+html .wiki-wrap .scroll-area::-webkit-scrollbar{width:3px}
+html .wiki-wrap .scroll-area::-webkit-scrollbar-track{background:transparent}
+html .wiki-wrap .scroll-area::-webkit-scrollbar-thumb{border:0;border-radius:10px;background:#b9aab5}
 html .wiki-wrap:is(.theme-eden,.theme-lilith){position:relative;isolation:isolate;display:flex;flex-direction:row;overflow:hidden;background:linear-gradient(110deg,#e3c6d6b3 0%,#f5e8ef99 45%,#ffffffdc 45.2%)}
 html .wiki-wrap.theme-eden{background:linear-gradient(110deg,#cddde8b3 0%,#e8edf599 45%,#ffffffdc 45.2%)}
 html .wiki-wrap:is(.theme-eden,.theme-lilith) .standing-panel{flex:0 0 46%;min-height:0;height:100%;padding:0;border:0;background:transparent;overflow:visible;z-index:1;pointer-events:none}

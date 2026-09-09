@@ -299,7 +299,7 @@ html[data-theme="light"] .topnav { border-right-color: #c7c3c5; background: #e5e
 <script src="js/theme.js"></script>
 <script src="js/archive-content.js"></script>
 <link rel="stylesheet" href="css/window-controls.css">
-<link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/agent-profile.css?v=20260909-hero"></head>
+<link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/agent-profile.css?v=20260909-profile-ui"></head>
 <body>
 <main class="agent-window">
 <div class="agent-windowbar"><span>▣ ARCH AGENT DATABASE</span><span class="agent-window-controls" aria-hidden="true"><span class="agent-window-button archive-window-control"></span><span class="agent-window-button archive-window-control"></span><span class="agent-window-button archive-window-control"></span></span></div>
@@ -329,13 +329,18 @@ html[data-theme="light"] .topnav { border-right-color: #c7c3c5; background: #e5e
   </div>
   <div class="wiki-panel">
     <div class="wiki-header">
-      <div class="wiki-title" id="wiki-title">Eden</div>
+      <div class="profile-heading"><div class="profile-eyebrow">ARCH · AGENT FILE</div><div class="wiki-title" id="wiki-title">Eden</div><div class="profile-tags" id="profile-tags"></div></div>
       <div class="heart-switcher">
         <a href="agents.html" style="font-size:11px;color:inherit;margin-right:12px;text-decoration:none">‹ Agents</a>
         <button class="heart-btn active" id="btn-eden" onclick="switchTo('eden')" aria-label="에덴으로 전환">🩵</button>
         <button class="heart-btn" id="btn-lilith" onclick="switchTo('lilith')" aria-label="릴리스로 전환">🩷</button>
       </div>
     </div>
+    <nav class="profile-tabs" aria-label="프로필 항목">
+      <button type="button" data-profile-tab="character" aria-pressed="true">캐릭터</button>
+      <button type="button" data-profile-tab="details" aria-pressed="false">상세</button>
+      <button type="button" data-profile-tab="records" aria-pressed="false">기록</button>
+    </nav>
     <div class="scroll-area" id="scroll-area">
       <div id="wiki-content"></div>
     </div>
@@ -483,10 +488,11 @@ function buildContent(key) {
     if (d.visual.length) archiveSection += '<div class="section-title">Visual Profile</div>' + visuals;
     if (d.tmi.length) archiveSection += '<div class="section-title">TMI</div>' + tmis;
     if (d.notes.length) archiveSection += '<div class="section-title">Notes</div><ul class="note-list">' + noteItems + '</ul>';
-    if (d.log) archiveSection += '<div class="section-title" style="margin-top:1.25rem;">Background Log</div><div class="log-block">' + d.log + '</div>';
+    if (!d.log) archiveSection += '</section><section data-profile-page="records" hidden>';
+    if (d.log) archiveSection += '</section><section data-profile-page="records" hidden><div class="section-title" style="margin-top:1.25rem;">Background Log</div><div class="log-block">' + d.log + '</div>';
   }
 
-  return '<div class="section-title">Attribute</div>' +
+  return '<section data-profile-page="character"><div class="section-title">Attribute</div>' +
     '<div class="attr-tag"><i class="ti ' + d.attrIcon + '" aria-hidden="true"></i>' + d.attrLabel + '</div>' +
     '<div class="section-title">Profile</div>' +
     '<div class="info-grid">' + infos + '</div>' +
@@ -496,14 +502,14 @@ function buildContent(key) {
     '<div class="section-title" style="margin-top:1rem;">Personality</div>' +
     '<div class="desc-block">' + d.personality + '</div>' +
     '<div class="divider"></div>' +
-    '<div class="section-title">Ability & Gear</div>' + abilities +
+    '</section><section data-profile-page="details" hidden><div class="section-title">Ability & Gear</div>' + abilities +
     archiveSection +
     '<div class="divider"></div>' +
     '<div class="team-section-header"><div class="team-label">' + d.teamLabel + '</div>' +
     '<div class="team-nav"><button onclick="teamPrev()" aria-label="prev"><i class="ti ti-chevron-left"></i></button>' +
     '<button onclick="teamNext()" aria-label="next"><i class="ti ti-chevron-right"></i></button></div></div>' +
     '<div id="member-slot"></div>' +
-    '<div class="team-dots">' + dots + '</div>';
+    '<div class="team-dots">' + dots + '</div></section>';
 }
 
 function updateHeartBtns(key) {
@@ -520,6 +526,8 @@ function render(key) {
   document.getElementById('char-name-panel').textContent = d.name;
   document.getElementById('char-codename').textContent = d.codename;
   document.getElementById('wiki-title').textContent = d.name;
+  document.getElementById('profile-tags').replaceChildren();
+  [d.badge,d.attrLabel].forEach(function(label){var tag=document.createElement('span');tag.textContent=label;document.getElementById('profile-tags').appendChild(tag);});
   document.getElementById('agent-address-name').textContent = d.name.toUpperCase();
   document.getElementById('side-eden').classList.toggle('active', key === 'eden');
   document.getElementById('side-lilith').classList.toggle('active', key === 'lilith');
@@ -527,7 +535,15 @@ function render(key) {
   document.getElementById('scroll-area').scrollTop = 0;
   document.getElementById('wiki-content').innerHTML = buildContent(key);
   renderTeam();
+  selectProfileTab('character');
 }
+
+function selectProfileTab(key) {
+  document.querySelectorAll('[data-profile-page]').forEach(function(panel){panel.hidden=panel.dataset.profilePage!==key;});
+  document.querySelectorAll('[data-profile-tab]').forEach(function(button){button.setAttribute('aria-pressed',String(button.dataset.profileTab===key));});
+  document.getElementById('scroll-area').scrollTop=0;
+}
+document.querySelectorAll('[data-profile-tab]').forEach(function(button){button.addEventListener('click',function(){selectProfileTab(button.dataset.profileTab);});});
 
 function switchTo(key) {
   if (current === key) return;
