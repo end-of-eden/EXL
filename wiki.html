@@ -299,7 +299,7 @@ html[data-theme="light"] .topnav { border-right-color: #c7c3c5; background: #e5e
 <script src="js/theme.js"></script>
 <script src="js/archive-content.js"></script>
 <link rel="stylesheet" href="css/window-controls.css">
-<link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/agent-profile.css?v=20260909-profile-glass"></head>
+<link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/agent-profile.css?v=20260909-profile-sides"></head>
 <body>
 <main class="agent-window">
 <div class="agent-windowbar"><span>▣ ARCH AGENT DATABASE</span><span class="agent-window-controls" aria-hidden="true"><span class="agent-window-button archive-window-control"></span><span class="agent-window-button archive-window-control"></span><span class="agent-window-button archive-window-control"></span></span></div>
@@ -559,7 +559,7 @@ var params = new URLSearchParams(window.location.search);
 var initial = params.get('char') === 'lilith' ? 'lilith' : 'eden';
 current = initial;
 render(initial);
-if (params.get('entrance') === 'left' && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+if (params.has('entrance') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
   var portrait = document.querySelector('.standing-panel');
   var details = document.querySelector('.wiki-panel');
   var portraitImage = document.getElementById('standing-img-el');
@@ -568,8 +568,8 @@ if (params.get('entrance') === 'left' && !matchMedia('(prefers-reduced-motion: r
   function enterProfile() {
     portrait.style.opacity = '';
     details.style.opacity = '';
-    portrait.animate([{transform:'translateX(-80px)',opacity:0},{transform:'translateX(0)',opacity:1}],{duration:650,easing:'cubic-bezier(.2,.7,.2,1)',fill:'backwards'});
-    details.animate([{transform:'translateX(80px)',opacity:0},{transform:'translateX(0)',opacity:1}],{duration:650,delay:80,easing:'cubic-bezier(.2,.7,.2,1)',fill:'backwards'});
+    portrait.animate([{transform:initial === 'lilith' ? 'translateX(80px)' : 'translateX(-80px)',opacity:0},{transform:'translateX(0)',opacity:1}],{duration:650,easing:'cubic-bezier(.2,.7,.2,1)',fill:'backwards'});
+    details.animate([{transform:initial === 'lilith' ? 'translateX(-80px)' : 'translateX(80px)',opacity:0},{transform:'translateX(0)',opacity:1}],{duration:650,delay:80,easing:'cubic-bezier(.2,.7,.2,1)',fill:'backwards'});
   }
   portraitImage.decode().catch(function(){}).then(enterProfile);
 }

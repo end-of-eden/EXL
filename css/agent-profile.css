@@ -48,3 +48,11 @@ html .wiki-wrap .ability-block,html .wiki-wrap .tmi-block,html .wiki-wrap .membe
  html .wiki-wrap:is(.theme-eden,.theme-lilith) .standing-img img{height:145cqh!important;left:52%}
  html .wiki-wrap .info-grid{grid-template-columns:1fr}
 }
+
+/* Let the persistent rose glass shell show through the entire dossier. */
+html[data-theme] .agent-workspace{background:transparent}
+html .wiki-wrap:is(.theme-eden,.theme-lilith){background:transparent}
+html .wiki-wrap .wiki-panel{background:rgba(255,255,255,.06);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-color:rgba(255,255,255,.35);box-shadow:inset 0 1px 0 rgba(255,255,255,.2)}
+html .wiki-wrap.theme-lilith{flex-direction:row-reverse}
+html .wiki-wrap.theme-lilith .wiki-panel{margin:14px 0 14px 14px}
+html[data-theme] .agent-window{background:transparent!important}
