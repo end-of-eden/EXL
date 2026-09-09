@@ -93,3 +93,11 @@ html .wiki-wrap.theme-lilith .standing-img img{top:auto;bottom:0;height:100cqh!i
 /* Hidden Attribute nodes must not add space before the visible Profile heading. */
 html .wiki-wrap [data-profile-page="character"]>.attr-tag+.section-title,
 html .wiki-wrap [data-profile-page]>.section-title:first-child{margin-top:0!important}
+
+/* Keep the heading, tabs and copy on the same symmetric inset. */
+html .wiki-wrap{--profile-inset:40px}
+html .wiki-wrap .profile-heading{padding-left:0}
+html .wiki-wrap .wiki-header{padding-inline:var(--profile-inset)}
+html .wiki-wrap .profile-tabs{margin-inline:var(--profile-inset)}
+html .wiki-wrap .scroll-area{padding-inline:var(--profile-inset)}
+@media(max-width:540px){html .wiki-wrap{--profile-inset:28px}}
