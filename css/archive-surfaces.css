@@ -55,7 +55,7 @@ html[data-theme] body .detail-meta,
 html[data-theme] body .detail-quote .q-mark,
 html[data-theme] body .loading { color:#765d70; }
 html[data-theme] body .back-btn { color:#824e70; }
-html[data-theme] body .detail-img { background:rgba(230,208,223,.35); }
+html[data-theme] body .detail-img { background:transparent; }
 html[data-theme] body .video-block { background:rgba(227,202,218,.42); }
 html[data-theme] body .video-title,
 html[data-theme] body .yt-video-title { color:#483043; }
