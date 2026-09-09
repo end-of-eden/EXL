@@ -56,3 +56,8 @@ html .wiki-wrap .wiki-panel{background:rgba(255,255,255,.06);backdrop-filter:blu
 html .wiki-wrap.theme-lilith{flex-direction:row-reverse}
 html .wiki-wrap.theme-lilith .wiki-panel{margin:14px 0 14px 14px}
 html[data-theme] .agent-window{background:transparent!important}
+
+html .wiki-wrap .agent-back{position:absolute;top:10px;left:16px;z-index:5;color:#695b6c;font-size:11px;text-decoration:none;padding:5px 8px}
+html .wiki-wrap .agent-back:focus-visible{outline:2px solid var(--profile-accent);border-radius:6px}
+html .wiki-wrap .wiki-panel{margin-top:40px;height:calc(100% - 54px)}
+html .wiki-wrap.theme-lilith .wiki-panel{margin-top:40px}

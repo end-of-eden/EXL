@@ -299,7 +299,7 @@ html[data-theme="light"] .topnav { border-right-color: #c7c3c5; background: #e5e
 <script src="js/theme.js"></script>
 <script src="js/archive-content.js"></script>
 <link rel="stylesheet" href="css/window-controls.css">
-<link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/agent-profile.css?v=20260909-profile-sides"></head>
+<link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/agent-profile.css?v=20260909-agents-back"></head>
 <body>
 <main class="agent-window">
 <div class="agent-windowbar"><span>▣ ARCH AGENT DATABASE</span><span class="agent-window-controls" aria-hidden="true"><span class="agent-window-button archive-window-control"></span><span class="agent-window-button archive-window-control"></span><span class="agent-window-button archive-window-control"></span></span></div>
@@ -319,6 +319,7 @@ html[data-theme="light"] .topnav { border-right-color: #c7c3c5; background: #e5e
 </nav>
 
 <div class="wiki-wrap theme-eden" id="wiki">
+  <a class="agent-back" href="agents.html">‹ Agents</a>
   <div class="standing-panel">
     <div class="standing-img">
       <img id="standing-img-el" src="https://raw.githubusercontent.com/end-of-eden/EXL/main/img/wiki/Eden_1.jpg" alt="standing" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">
@@ -330,11 +331,7 @@ html[data-theme="light"] .topnav { border-right-color: #c7c3c5; background: #e5e
   <div class="wiki-panel">
     <div class="wiki-header">
       <div class="profile-heading"><div class="profile-eyebrow">ARCH · AGENT FILE</div><div class="wiki-title" id="wiki-title">Eden</div><div class="profile-tags" id="profile-tags"></div></div>
-      <div class="heart-switcher">
-        <a href="agents.html" style="font-size:11px;color:inherit;margin-right:12px;text-decoration:none">‹ Agents</a>
-        <button class="heart-btn active" id="btn-eden" onclick="switchTo('eden')" aria-label="에덴으로 전환">🩵</button>
-        <button class="heart-btn" id="btn-lilith" onclick="switchTo('lilith')" aria-label="릴리스로 전환">🩷</button>
-      </div>
+
     </div>
     <nav class="profile-tabs" aria-label="프로필 항목">
       <button type="button" data-profile-tab="character" aria-pressed="true">캐릭터</button>
@@ -512,10 +509,7 @@ function buildContent(key) {
     '<div class="team-dots">' + dots + '</div></section>';
 }
 
-function updateHeartBtns(key) {
-  document.getElementById('btn-eden').className = 'heart-btn' + (key === 'eden' ? ' active' : '');
-  document.getElementById('btn-lilith').className = 'heart-btn' + (key === 'lilith' ? ' active' : '');
-}
+
 
 function render(key) {
   var d = data[key];
@@ -531,7 +525,6 @@ function render(key) {
   document.getElementById('agent-address-name').textContent = d.name.toUpperCase();
   document.getElementById('side-eden').classList.toggle('active', key === 'eden');
   document.getElementById('side-lilith').classList.toggle('active', key === 'lilith');
-  updateHeartBtns(key);
   document.getElementById('scroll-area').scrollTop = 0;
   document.getElementById('wiki-content').innerHTML = buildContent(key);
   renderTeam();
