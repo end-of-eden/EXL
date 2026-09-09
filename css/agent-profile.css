@@ -78,3 +78,14 @@ html .wiki-wrap .team-nav button{border-radius:50%}
 
 /* This portrait is already a torso crop, rather than a full-body source. */
 html .wiki-wrap.theme-eden .standing-img img{top:auto;bottom:0;height:100cqh!important;left:57%}
+
+
+/* Match the player's arrow-free custom scrollbar; standard properties must be auto in Chromium. */
+html .wiki-wrap .scroll-area{scrollbar-width:auto;scrollbar-color:auto}
+html .wiki-wrap .scroll-area::-webkit-scrollbar{width:5px}
+html .wiki-wrap .scroll-area::-webkit-scrollbar-button{width:0;height:0;display:none}
+html .wiki-wrap .scroll-area::-webkit-scrollbar-track{background:transparent;margin-block:4px}
+html .wiki-wrap .scroll-area::-webkit-scrollbar-thumb{background:#6c56724d;border:0;border-radius:4px}
+
+/* The new Lilith illustration is a near-square upper-body composition. */
+html .wiki-wrap.theme-lilith .standing-img img{top:auto;bottom:0;height:100cqh!important;left:48%}

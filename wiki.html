@@ -299,7 +299,7 @@ html[data-theme="light"] .topnav { border-right-color: #c7c3c5; background: #e5e
 <script src="js/theme.js"></script>
 <script src="js/archive-content.js"></script>
 <link rel="stylesheet" href="css/window-controls.css">
-<link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/agent-profile.css?v=20260910-eden-portrait"></head>
+<link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/agent-profile.css?v=20260910-lilith-portrait"></head>
 <body>
 <main class="agent-window">
 <div class="agent-windowbar"><span>▣ ARCH AGENT DATABASE</span><span class="agent-window-controls" aria-hidden="true"><span class="agent-window-button archive-window-control"></span><span class="agent-window-button archive-window-control"></span><span class="agent-window-button archive-window-control"></span></span></div>
@@ -334,9 +334,9 @@ html[data-theme="light"] .topnav { border-right-color: #c7c3c5; background: #e5e
 
     </div>
     <nav class="profile-tabs" aria-label="프로필 항목">
-      <button type="button" data-profile-tab="character" aria-pressed="true">캐릭터</button>
-      <button type="button" data-profile-tab="details" aria-pressed="false">상세</button>
-      <button type="button" data-profile-tab="records" aria-pressed="false">기록</button>
+      <button type="button" data-profile-tab="character" aria-pressed="true">CHARACTER</button>
+      <button type="button" data-profile-tab="details" aria-pressed="false">DETAILS</button>
+      <button type="button" data-profile-tab="records" aria-pressed="false">RECORDS</button>
     </nav>
     <div class="scroll-area" id="scroll-area">
       <div id="wiki-content"></div>
@@ -351,7 +351,7 @@ var current = 'eden';
 
 var STANDING_IMG = {
   eden: 'https://content.assured.love/media/gallery/images/eden-profile-20260910.webp',
-  lilith: 'img/wiki/Lilith_full.png'
+  lilith: 'https://content.assured.love/media/gallery/images/lilith-profile-20260910.webp'
 };
 // 전환 클릭 시점에 이미 캐시돼 있도록 두 스탠딩 이미지를 미리 받아둠 (밀림현상 방지)
 Object.keys(STANDING_IMG).forEach(function (k) {
@@ -569,6 +569,6 @@ if (params.has('entrance') && !matchMedia('(prefers-reduced-motion: reduce)').ma
 </script>
 
 <script src="js/sparkle.js"></script>
-<script src="js/messenger.js?v=20260909-glass-main"></script>
+<script src="js/messenger.js?v=20260910-fixed"></script>
 </body>
 </html>

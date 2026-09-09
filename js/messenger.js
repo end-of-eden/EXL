@@ -379,7 +379,7 @@
   function placeDdayAboveDocument() {
     var day = portalDocument.getElementById('dday-window');
     var doc = portalDocument.getElementById('desktop-document');
-    if (!day || !doc || portalDocument === document) return;
+    if (!day || !doc || portalDocument === document || day.dataset.positionLocked === 'true') return;
     var rect = doc.getBoundingClientRect();
     day.style.left = Math.max(8, rect.left - 54) + 'px';
     day.style.right = 'auto';

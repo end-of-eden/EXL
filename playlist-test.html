@@ -658,7 +658,7 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
     ? 'wiki.html?char=' + encodeURIComponent(character)
     : 'main.html?v=20260907-start-taskbar');
   var frame = document.getElementById('archive-frame');
-  frame.src = 'main.html?v=20260910-title-position&page=' + encodeURIComponent(initialPage);
+  frame.src = 'main.html?v=20260910-lilith-portrait&page=' + encodeURIComponent(initialPage);
 })();
 </script>
 <script>
@@ -674,7 +674,7 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
     var item = event.target.closest('[data-start-page]');
     if (!item) return;
     if (frame.contentWindow.navigateArchive) frame.contentWindow.navigateArchive(item.dataset.startPage);
-    else frame.src = 'main.html?v=20260910-title-position&page=' + encodeURIComponent(item.dataset.startPage);
+    else frame.src = 'main.html?v=20260910-lilith-portrait&page=' + encodeURIComponent(item.dataset.startPage);
     setMenu(false);
   });
   document.addEventListener('click', function (event) { if (!startMenu.contains(event.target)) setMenu(false); });
@@ -708,6 +708,7 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
   var drag = null;
   bar.addEventListener('pointerdown', function (event) {
     if (event.button !== 0) return;
+    if (doc.dataset.positionLocked === 'true') return;
     var rect = doc.getBoundingClientRect();
     drag = { x: event.clientX, y: event.clientY, left: rect.left, top: rect.top };
     doc.style.left = rect.left + 'px';
@@ -743,7 +744,7 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
   document.getElementById('floating-hongcha-day').textContent = 'D+' + (Math.floor((today - start) / 86400000) + 1);
   var drag = null;
   bar.addEventListener('pointerdown', function (event) {
-    if (event.button !== 0) return;
+    if (event.button !== 0 || win.dataset.positionLocked === 'true') return;
     var rect = win.getBoundingClientRect();
     drag = { x: event.clientX, y: event.clientY, left: rect.left, top: rect.top };
     win.style.left = rect.left + 'px'; win.style.top = rect.top + 'px';
@@ -1272,5 +1273,6 @@ if (!window.matchMedia || !window.matchMedia('(max-width: 820px), (hover: none) 
   });
 })();
 </script>
+<script src="js/desktop-dock.js?v=20260910-fixed"></script>
 </body>
 </html>
