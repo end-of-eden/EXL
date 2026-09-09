@@ -331,6 +331,7 @@ html[data-theme="light"] .topnav { border-right-color: #c7c3c5; background: #e5e
     <div class="wiki-header">
       <div class="wiki-title" id="wiki-title">Eden</div>
       <div class="heart-switcher">
+        <a href="agents.html" style="font-size:11px;color:inherit;margin-right:12px;text-decoration:none">‹ Agents</a>
         <button class="heart-btn active" id="btn-eden" onclick="switchTo('eden')" aria-label="에덴으로 전환">🩵</button>
         <button class="heart-btn" id="btn-lilith" onclick="switchTo('lilith')" aria-label="릴리스로 전환">🩷</button>
       </div>
@@ -542,6 +543,20 @@ var params = new URLSearchParams(window.location.search);
 var initial = params.get('char') === 'lilith' ? 'lilith' : 'eden';
 current = initial;
 render(initial);
+if (params.get('entrance') === 'left' && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  var portrait = document.querySelector('.standing-panel');
+  var details = document.querySelector('.wiki-panel');
+  var portraitImage = document.getElementById('standing-img-el');
+  portrait.style.opacity = '0';
+  details.style.opacity = '0';
+  function enterProfile() {
+    portrait.style.opacity = '';
+    details.style.opacity = '';
+    portrait.animate([{transform:'translateX(-80px)',opacity:0},{transform:'translateX(0)',opacity:1}],{duration:650,easing:'cubic-bezier(.2,.7,.2,1)',fill:'backwards'});
+    details.animate([{transform:'translateX(80px)',opacity:0},{transform:'translateX(0)',opacity:1}],{duration:650,delay:80,easing:'cubic-bezier(.2,.7,.2,1)',fill:'backwards'});
+  }
+  portraitImage.decode().catch(function(){}).then(enterProfile);
+}
 </script>
 
 <script src="js/sparkle.js"></script>

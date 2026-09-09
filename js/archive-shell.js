@@ -14,7 +14,7 @@
     try { url = new URL(value, base); } catch (_) { return null; }
     if (url.origin !== base.origin || !url.pathname.startsWith(base.pathname)) return null;
     var path = url.pathname.slice(base.pathname.length);
-    if (!/^(main|wiki|gallery|log)\.html$/.test(path) && !/^Log\/(view|00[1-4])\.html$/.test(path)) return null;
+    if (!/^(main|agents|wiki|gallery|log)\.html$/.test(path) && !/^Log\/(view|00[1-4])\.html$/.test(path)) return null;
     url.searchParams.delete('v');
     return { url: url, path: path, key: path + url.search + url.hash };
   }
@@ -24,7 +24,7 @@
     var category = route.path.startsWith('Log/') ? 'log.html' : route.path;
     document.querySelectorAll('.explorer-tree a').forEach(function (link) {
       var item = routeFor(link.href);
-      var active = item.path === category && (category !== 'wiki.html' ||
+      var active = item && item.path === category && (category !== 'wiki.html' ||
         item.url.searchParams.get('char') === (route.url.searchParams.get('char') || 'eden'));
       link.classList.toggle('active', active);
       if (active) link.setAttribute('aria-current', 'page');
