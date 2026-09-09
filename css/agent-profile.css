@@ -87,8 +87,8 @@ html .wiki-wrap .scroll-area::-webkit-scrollbar-button{width:0;height:0;display:
 html .wiki-wrap .scroll-area::-webkit-scrollbar-track{background:transparent;margin-block:4px}
 html .wiki-wrap .scroll-area::-webkit-scrollbar-thumb{background:#6c56724d;border:0;border-radius:4px}
 
-/* The new Lilith illustration is a near-square upper-body composition. */
-html .wiki-wrap.theme-lilith .standing-img img{top:auto;bottom:0;height:100cqh!important;left:48%}
+/* Bring the portrait inward and enlarge it while keeping the head in frame. */
+html .wiki-wrap.theme-lilith .standing-img img{top:0;bottom:auto;height:120cqh!important;left:20%}
 
 /* Hidden Attribute nodes must not add space before the visible Profile heading. */
 html .wiki-wrap [data-profile-page="character"]>.attr-tag+.section-title,

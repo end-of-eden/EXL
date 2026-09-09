@@ -658,7 +658,7 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
     ? 'wiki.html?char=' + encodeURIComponent(character)
     : 'main.html?v=20260907-start-taskbar');
   var frame = document.getElementById('archive-frame');
-  frame.src = 'main.html?v=20260910-profile-insets&page=' + encodeURIComponent(initialPage);
+  frame.src = 'main.html?v=20260910-lilith-position&page=' + encodeURIComponent(initialPage);
 })();
 </script>
 <script>
@@ -674,7 +674,7 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
     var item = event.target.closest('[data-start-page]');
     if (!item) return;
     if (frame.contentWindow.navigateArchive) frame.contentWindow.navigateArchive(item.dataset.startPage);
-    else frame.src = 'main.html?v=20260910-profile-insets&page=' + encodeURIComponent(item.dataset.startPage);
+    else frame.src = 'main.html?v=20260910-lilith-position&page=' + encodeURIComponent(item.dataset.startPage);
     setMenu(false);
   });
   document.addEventListener('click', function (event) { if (!startMenu.contains(event.target)) setMenu(false); });
