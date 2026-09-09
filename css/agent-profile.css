@@ -75,3 +75,6 @@ html .wiki-wrap [data-profile-page="records"] .log-block,
 html .wiki-wrap [data-profile-page="records"] .member-card{border-radius:14px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.24);padding:14px 16px}
 html .wiki-wrap [data-profile-page="records"] .member-card img{border-radius:10px}
 html .wiki-wrap .team-nav button{border-radius:50%}
+
+/* This portrait is already a torso crop, rather than a full-body source. */
+html .wiki-wrap.theme-eden .standing-img img{top:auto;bottom:0;height:100cqh!important;left:57%}
