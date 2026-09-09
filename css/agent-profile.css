@@ -1,0 +1,26 @@
+/* A shared stage: the portrait is cropped at the waist, alongside the dossier. */
+html .wiki-wrap:is(.theme-eden,.theme-lilith){position:relative;isolation:isolate;display:flex;flex-direction:row;overflow:hidden;background:linear-gradient(110deg,#e3c6d6b3 0%,#f5e8ef99 45%,#ffffffdc 45.2%)}
+html .wiki-wrap.theme-eden{background:linear-gradient(110deg,#cddde8b3 0%,#e8edf599 45%,#ffffffdc 45.2%)}
+html .wiki-wrap:is(.theme-eden,.theme-lilith) .standing-panel{flex:0 0 46%;min-height:0;height:100%;padding:0;border:0;background:transparent;overflow:visible;z-index:1;pointer-events:none}
+html .wiki-wrap:is(.theme-eden,.theme-lilith) .standing-img{inset:0;overflow:hidden;border:0;background:transparent}
+html .wiki-wrap:is(.theme-eden,.theme-lilith) .standing-img img{top:2%;bottom:auto;left:50%;width:auto!important;height:170cqh!important;max-width:none;background:transparent;object-fit:contain!important;transform:translateX(-50%)}
+html .wiki-wrap:is(.theme-eden,.theme-lilith) .char-badge{display:none}
+html .wiki-wrap .wiki-panel{flex:1;min-width:0;height:100%;background:transparent;overflow:hidden;z-index:2}
+html .wiki-wrap .wiki-header{padding:28px 24px 18px;border:0;background:transparent}
+html .wiki-wrap .wiki-title{font-size:28px;letter-spacing:-.04em}
+html .wiki-wrap .wiki-title::after{display:block;margin:8px 0 0;font-size:9px;letter-spacing:.15em;content:'ARCH / AGENT DOSSIER'}
+html .wiki-wrap .scroll-area{padding:0 24px 30px;overflow-y:auto;min-height:0;scrollbar-width:thin;scrollbar-color:#bba8b5 transparent}
+html .wiki-wrap .section-title{font-size:12px;font-weight:600;border-bottom:1px solid #b7a6b666;padding-bottom:10px;margin-top:24px}
+html .wiki-wrap .section-title::before{content:''}
+html .wiki-wrap .info-grid{border:0;background:transparent;grid-template-columns:1fr 1fr;gap:14px 12px}
+html .wiki-wrap .info-item{display:block;padding:0;border:0;background:transparent}
+html .wiki-wrap .info-label{font-size:9px;margin-bottom:5px}
+html .wiki-wrap .info-value{font-size:12px}
+html .wiki-wrap .ability-block,html .wiki-wrap .tmi-block,html .wiki-wrap .member-card{border:0;background:#ffffff45}
+@media(max-width:540px){
+ html .wiki-wrap .wiki-header{padding:20px 12px 16px;align-items:flex-start;gap:8px;flex-wrap:wrap}
+ html .wiki-wrap .wiki-title{font-size:23px}
+ html .wiki-wrap .scroll-area{padding:0 12px 24px}
+ html .wiki-wrap:is(.theme-eden,.theme-lilith) .standing-img img{height:145cqh!important;left:52%}
+ html .wiki-wrap .info-grid{grid-template-columns:1fr}
+}
