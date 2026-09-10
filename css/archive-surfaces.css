@@ -101,4 +101,4 @@ html[data-theme="light"] .detail-title{color:#302b34}
 
 /* Blur the existing reading panel, without boxing the body text. */
 html[data-theme] .detail-wrap:has(.detail-body-glass){background:rgba(245,232,241,.08)!important;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
-html[data-theme] .detail-body.detail-body-glass{text-align:justify}
+html[data-theme] .detail-body.detail-body-glass{text-align:justify;text-indent:1em}
