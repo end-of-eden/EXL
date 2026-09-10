@@ -14,7 +14,7 @@
 .entry-names span{position:absolute}
 .entry-names span:first-child{left:7%;top:24%}
 .entry-names span:last-child{right:9%;top:1%}
-.art img{position:relative;width:100%;height:100%;display:block;object-fit:contain;pointer-events:none;transform-origin:50% 20%;transition:transform .65s cubic-bezier(.2,.7,.2,1)}
+.art img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain;pointer-events:none;transform-origin:50% 20%;transition:transform .5s ease,filter .5s ease,opacity .25s ease}
 .character{position:absolute;inset:0;border:0;background:transparent;cursor:pointer;color:inherit;font:inherit;-webkit-tap-highlight-color:transparent}
 .character:focus-visible{outline:2px solid #ad829a;outline-offset:-5px}
 .eden{right:47%}
@@ -24,10 +24,14 @@
 .character:hover span,.character:focus-visible span{background:#fff;box-shadow:0 0 25px #fff;outline:2px solid #b797ad}
 .hint{position:absolute;bottom:12px;margin:0;font-size:11px;letter-spacing:.08em;pointer-events:none;background:#fffc;padding:6px 12px;border-radius:20px}
 .entry.leaving .art{transform:scale(1.06);opacity:0;pointer-events:none}.entry.leaving .hint{opacity:0}
-@media(hover:hover) and (pointer:fine){
- .entry:not(.leaving) .art:has(.character:hover) img{transform:scale(1.035)}
-}
-.entry:not(.leaving) .art:has(.character:focus-visible) img{transform:scale(1.035)}
+ .art .portrait-layer{opacity:0}
+.art .portrait-eden{transform-origin:35% 25%}
+.art .portrait-lilith{transform-origin:72% 25%}
+.art[data-active] .portrait-base{opacity:0}
+.art[data-active] .portrait-layer{opacity:1;filter:brightness(.82) blur(3px)}
+.art[data-active="eden"] .portrait-eden,
+.art[data-active="lilith"] .portrait-lilith{filter:none;transform:scale(1.08);z-index:2}
+.character{z-index:3}
 @media(prefers-reduced-motion:reduce){.art,.art img{transition:none}.entry .art img{transform:none!important}}
 </style>
 </head>
@@ -35,14 +39,21 @@
 <main class="entry" aria-label="캐릭터 선택">
  <div class="art">
   <div class="entry-names" aria-hidden="true"><span>EDEN</span><span>LILITH</span></div>
-  <img src="https://content.assured.love/media/gallery/images/agents-entry-clean-20260910.webp" width="2400" height="1642" alt="왼쪽의 에덴과 오른쪽의 릴리스">
+  <img class="portrait-base" src="https://content.assured.love/media/gallery/images/agents-main-20260910.webp" width="2400" height="1642" alt="왼쪽의 에덴과 오른쪽의 릴리스">
+  <img class="portrait-layer portrait-eden" src="https://content.assured.love/media/gallery/images/agents-eden-20260910.webp" width="2400" height="1642" alt="" aria-hidden="true">
+  <img class="portrait-layer portrait-lilith" src="https://content.assured.love/media/gallery/images/agents-lilith-20260910.webp" width="2400" height="1642" alt="" aria-hidden="true">
   <button class="character eden" aria-label="에덴 프로필 열기" data-character="eden"></button>
   <button class="character lilith" aria-label="릴리스 프로필 열기" data-character="lilith"></button>
  </div>
 
 </main>
 <script>
+var art=document.querySelector('.art');
 document.querySelectorAll('[data-character]').forEach(function(button){
+ button.addEventListener('pointerenter',function(event){if(event.pointerType!=='touch')art.dataset.active=button.dataset.character});
+ button.addEventListener('pointerleave',function(){delete art.dataset.active});
+ button.addEventListener('focus',function(){art.dataset.active=button.dataset.character});
+ button.addEventListener('blur',function(){delete art.dataset.active});
  button.addEventListener('click',function(){
   var entry=document.querySelector('.entry');
   if(entry.classList.contains('leaving'))return;
