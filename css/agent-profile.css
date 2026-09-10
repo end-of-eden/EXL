@@ -116,3 +116,6 @@ html .wiki-wrap.theme-eden .wiki-panel{margin:40px 0 14px 14px}
 html .wiki-wrap.theme-lilith .wiki-panel{margin:40px 14px 14px 0}
 html .wiki-wrap.theme-eden .standing-img img{left:43%}
 html .wiki-wrap.theme-lilith .standing-img img{left:35%}
+
+/* Embedded profiles must not retain the old inset window frame. */
+html.archive-content-document[data-theme] .agent-window{box-shadow:none!important}
