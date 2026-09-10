@@ -28,6 +28,7 @@
     document.addEventListener('click', function (event) {
       if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       var link = event.target.closest('a[href], [data-href]');
+      if (link && link.hasAttribute('data-animated-navigation')) return;
       if (!link || link.target === '_blank' || link.hasAttribute('download')) return;
       var url = new URL(link.getAttribute('href') || link.dataset.href, location.href);
       if (host.navigateArchive && host.navigateArchive(url.href)) {

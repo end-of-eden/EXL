@@ -25,7 +25,7 @@
 .hint{position:absolute;bottom:12px;margin:0;font-size:11px;letter-spacing:.08em;pointer-events:none;background:#fffc;padding:6px 12px;border-radius:20px}
 .entry.leaving .art{pointer-events:none}
 .entry.leaving .entry-names{opacity:0;transition:opacity .3s}
-.entry.leaving .art img{transition:transform .4s ease-in,opacity .4s ease-in}
+.entry.leaving .art img{transition:transform .3s ease-in,opacity .3s ease-in}
 .entry.leaving .art .portrait-base,.entry.leaving .art .portrait-layer{opacity:0}
 .entry.leaving .art[data-active="eden"] .portrait-eden{transform:translateX(-90px) scale(1.08)}
 .entry.leaving .art[data-active="lilith"] .portrait-lilith{transform:translateX(90px) scale(1.08)}.entry.leaving .hint{opacity:0}
@@ -71,7 +71,7 @@ document.querySelectorAll('[data-character]').forEach(function(button){
   setTimeout(function(){
    if(window.parent!==window && window.parent.navigateArchive)window.parent.navigateArchive(url);
    else location.href=url;
-  },matchMedia('(prefers-reduced-motion: reduce)').matches?0:550);
+  },matchMedia('(prefers-reduced-motion: reduce)').matches?0:350);
  });
 });
 </script>
