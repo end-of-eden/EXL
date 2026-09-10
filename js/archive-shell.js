@@ -73,7 +73,7 @@
     var contentUrl = new URL(route.url.href);
     if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260911-log-glass');
     if (route.path === 'gallery.html') contentUrl.searchParams.set('v', '20260909-r2-order');
-    if (route.path.startsWith('Log/')) contentUrl.searchParams.set('v', '20260909-clear-log');
+    if (route.path === 'log.html' || route.path.startsWith('Log/')) contentUrl.searchParams.set('v', '20260911-log-render-fix');
     next.src = contentUrl.href;
     slot.appendChild(next);
     return true;
