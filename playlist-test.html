@@ -620,7 +620,7 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
 </aside>
 <aside class="banner-window" id="banner-window" hidden aria-label="배너">
   <div class="banner-window__bar">
-    <span>▧ BANNER</span>
+    <span><svg width="12" height="12" viewBox="0 0 24 24" fill="#252329" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-1px;flex-shrink:0"><path d="M12 21S2 15 2 8a5 5 0 0 1 10-1A5 5 0 0 1 22 8c0 7-10 13-10 13Z"/></svg> BANNER</span>
     <span class="banner-window__controls"><button type="button" class="banner-window__button archive-window-control" data-banner-collapse aria-label="배너 접기">−</button><button class="banner-window__button archive-window-control" type="button" data-banner-toggle aria-label="배너 펼치기" aria-expanded="true">□</button><button type="button" class="banner-window__button archive-window-control" data-banner-close aria-label="배너 닫기">×</button></span>
   </div>
   <div class="banner-window__body">
@@ -628,6 +628,10 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
     <div class="banner-window__images">
       <img src="img/banner.jpg" alt="END OF EDEN 배너 1">
       <img src="img/banner2.jpg" alt="END OF EDEN 배너 2">
+      <div class="banner-window__friends">
+        <p class="banner-window__copy" style="margin:8px 0;font-weight:700">FELLOW AGENTS</p>
+        <a href="https://luvlog.me/pure" target="_blank" rel="noopener noreferrer" aria-label="순백세계침식주의보 새 창에서 열기"><img src="img/banners/fellow-agent-001.jpg" alt="순백세계침식주의보" width="200" height="40"></a>
+      </div>
     </div>
   </div>
 </aside>
@@ -658,7 +662,7 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
     ? 'wiki.html?char=' + encodeURIComponent(character)
     : 'main.html?v=20260907-start-taskbar');
   var frame = document.getElementById('archive-frame');
-  frame.src = 'main.html?v=20260910-soft-entry&page=' + encodeURIComponent(initialPage);
+  frame.src = 'main.html?v=20260910-banner-heart&page=' + encodeURIComponent(initialPage);
 })();
 </script>
 <script>
@@ -674,7 +678,7 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
     var item = event.target.closest('[data-start-page]');
     if (!item) return;
     if (frame.contentWindow.navigateArchive) frame.contentWindow.navigateArchive(item.dataset.startPage);
-    else frame.src = 'main.html?v=20260910-soft-entry&page=' + encodeURIComponent(item.dataset.startPage);
+    else frame.src = 'main.html?v=20260910-banner-heart&page=' + encodeURIComponent(item.dataset.startPage);
     setMenu(false);
   });
   document.addEventListener('click', function (event) { if (!startMenu.contains(event.target)) setMenu(false); });
