@@ -299,7 +299,7 @@ html[data-theme="light"] .topnav { border-right-color: #c7c3c5; background: #e5e
 <script src="js/theme.js"></script>
 <script src="js/archive-content.js"></script>
 <link rel="stylesheet" href="css/window-controls.css">
-<link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/agent-profile.css?v=20260910-lilith-position"></head>
+<link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/agent-profile.css?v=20260910-directional-entry"></head>
 <body>
 <main class="agent-window">
 <div class="agent-windowbar"><span>▣ ARCH AGENT DATABASE</span><span class="agent-window-controls" aria-hidden="true"><span class="agent-window-button archive-window-control"></span><span class="agent-window-button archive-window-control"></span><span class="agent-window-button archive-window-control"></span></span></div>
@@ -552,6 +552,26 @@ var params = new URLSearchParams(window.location.search);
 var initial = params.get('char') === 'lilith' ? 'lilith' : 'eden';
 current = initial;
 render(initial);
+var profileLeaving=false;
+document.querySelector('.agent-back').addEventListener('click',function(event){
+ event.preventDefault();event.stopPropagation();
+ if(profileLeaving)return;
+ profileLeaving=true;
+ var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ var portrait=document.querySelector('.standing-panel');
+ var panel=document.querySelector('.wiki-panel');
+ if(!reduced){
+  [portrait,panel].forEach(function(el,index){
+   var direction=(initial==='eden'?1:-1)*(index===0?1:-1);
+   el.animate([{transform:getComputedStyle(el).transform,opacity:getComputedStyle(el).opacity},{transform:'translateX('+(direction*70)+'px)',opacity:0}],{duration:500,delay:index*70,easing:'cubic-bezier(.4,0,.7,1)',fill:'forwards'});
+  });
+ }
+ setTimeout(function(){
+  var url='agents.html?return=1';
+  if(window.parent!==window&&window.parent.navigateArchive)window.parent.navigateArchive(url);
+  else location.href=url;
+ },reduced?0:650);
+});
 if (params.has('entrance') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
   var portrait = document.querySelector('.standing-panel');
   var details = document.querySelector('.wiki-panel');
@@ -559,12 +579,13 @@ if (params.has('entrance') && !matchMedia('(prefers-reduced-motion: reduce)').ma
   portrait.style.opacity = '0';
   details.style.opacity = '0';
   function enterProfile() {
+    if(profileLeaving)return;
     portrait.style.opacity = '';
     details.style.opacity = '';
-    portrait.animate([{transform:initial === 'lilith' ? 'translateX(32px)' : 'translateX(-32px)',opacity:0},{transform:'translateX(0)',opacity:1}],{duration:560,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
-    details.animate([{transform:initial === 'lilith' ? 'translateX(-32px)' : 'translateX(32px)',opacity:0},{transform:'translateX(0)',opacity:1}],{duration:560,delay:40,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
+    portrait.animate([{transform:initial === 'lilith' ? 'translateX(-60px)' : 'translateX(60px)',opacity:0},{transform:'translateX(0)',opacity:1}],{duration:800,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
+    details.animate([{transform:initial === 'lilith' ? 'translateX(60px)' : 'translateX(-60px)',opacity:0},{transform:'translateX(0)',opacity:1}],{duration:800,delay:250,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
     details.querySelectorAll('.profile-heading,.profile-tabs,.scroll-area').forEach(function(part,index){
-      part.animate([{opacity:0},{opacity:1}],{duration:280,delay:180+index*40,easing:'ease-out',fill:'backwards'});
+      part.animate([{opacity:0},{opacity:1}],{duration:400,delay:500+index*70,easing:'ease-out',fill:'backwards'});
     });
   }
   portraitImage.decode().catch(function(){}).then(enterProfile);

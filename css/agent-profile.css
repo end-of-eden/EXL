@@ -108,3 +108,11 @@ html[data-theme="light"] .wiki-wrap .wiki-panel{
   backdrop-filter:blur(46px) saturate(102%)!important;
   -webkit-backdrop-filter:blur(46px) saturate(102%)!important;
 }
+
+/* Opposite-side dossiers, matching entrance and return directions. */
+html .wiki-wrap.theme-eden{flex-direction:row-reverse}
+html .wiki-wrap.theme-lilith{flex-direction:row}
+html .wiki-wrap.theme-eden .wiki-panel{margin:40px 0 14px 14px}
+html .wiki-wrap.theme-lilith .wiki-panel{margin:40px 14px 14px 0}
+html .wiki-wrap.theme-eden .standing-img img{left:43%}
+html .wiki-wrap.theme-lilith .standing-img img{left:35%}
