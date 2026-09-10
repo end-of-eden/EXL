@@ -388,3 +388,67 @@ html[data-theme] .desktop-document__tab.active { position:relative; display:flex
 html[data-theme] .desktop-document__tab[aria-checked="true"] { background:#9d8296!important; color:#fff!important; padding:0 28px 0 8px; }
 [aria-checked="true"] > .document-switch::after { left:calc(100% - 25px); }
 .desktop-document__tab:focus-visible { outline:2px solid #9d8296!important; outline-offset:4px; }
+
+/* Pink leopard stays at the desktop layer in light mode. */
+html[data-theme="light"]:has(body > .archive-frame),
+html[data-theme="light"]:has(body > .archive-frame) > body {
+  background-color:#d9cdd7!important;
+  background-image:
+    radial-gradient(ellipse at 14% 18%,rgba(250,218,229,.92) 0,rgba(250,218,229,0) 42%),
+    radial-gradient(ellipse at 84% 12%,rgba(224,214,233,.88) 0,rgba(224,214,233,0) 40%),
+    radial-gradient(ellipse at 70% 88%,rgba(231,178,199,.62) 0,rgba(231,178,199,0) 44%),
+    linear-gradient(145deg,#e9dce4 0%,#cfc7d4 52%,#dfc0ce 100%)!important;
+  background-size:cover!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  background-attachment:fixed!important;
+}
+html[data-theme="light"]:has(body > .archive-frame) > body {
+  isolation:isolate;
+}
+html[data-theme="light"]:has(body > .archive-frame) > body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:url('../img/glass-object-star-bg.jpg') center/cover no-repeat;
+  opacity:.48;
+}
+html[data-theme="light"] .archive-frame {
+  background:rgba(239,228,235,.08)!important;
+  backdrop-filter:blur(8px) saturate(102%)!important;
+  -webkit-backdrop-filter:blur(8px) saturate(102%)!important;
+}
+html[data-theme="light"] .main-wrap,
+html[data-theme="light"] .playlist-window,
+html[data-theme="light"] .desktop-document,
+html[data-theme="light"] .dday-window,
+html[data-theme="light"] .banner-window,
+html[data-theme="light"] body > .arch-messenger-root > .msg-panel {
+  background:linear-gradient(135deg,rgba(255,255,255,.50),rgba(236,224,233,.24))!important;
+  backdrop-filter:blur(26px) saturate(118%)!important;
+  -webkit-backdrop-filter:blur(26px) saturate(118%)!important;
+}
+/* The archive frame softens the desktop print without painting a second background. */
+html[data-theme="light"] body .main-wrap {
+  background:linear-gradient(135deg,rgba(249,244,247,.68),rgba(229,218,227,.54))!important;
+  backdrop-filter:blur(24px) saturate(108%)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(108%)!important;
+}
+html[data-theme="light"].archive-content-document,
+html[data-theme="light"].archive-content-document body {
+  background:transparent!important;
+}
+html[data-theme="light"]:not(:has(body > .archive-frame)),
+html[data-theme="light"]:not(:has(body > .archive-frame)) > body {
+  background:transparent!important;
+  background-image:none!important;
+}
+html[data-theme="light"] .archive-content-slot,
+html[data-theme="light"] .archive-content-frame,
+html[data-theme="light"] .agent-workspace,
+html[data-theme="light"] .agent-window,
+html[data-theme="light"] .wiki-wrap {
+  background:transparent!important;
+}

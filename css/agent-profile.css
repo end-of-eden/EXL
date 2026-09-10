@@ -101,3 +101,10 @@ html .wiki-wrap .wiki-header{padding-inline:var(--profile-inset)}
 html .wiki-wrap .profile-tabs{margin-inline:var(--profile-inset)}
 html .wiki-wrap .scroll-area{padding-inline:var(--profile-inset)}
 @media(max-width:540px){html .wiki-wrap{--profile-inset:28px}}
+
+/* Keep copy readable when the portrait extends beneath the glass dossier. */
+html[data-theme="light"] .wiki-wrap .wiki-panel{
+  background:rgba(250,245,248,.64)!important;
+  backdrop-filter:blur(46px) saturate(102%)!important;
+  -webkit-backdrop-filter:blur(46px) saturate(102%)!important;
+}
