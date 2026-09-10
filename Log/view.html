@@ -13,7 +13,7 @@
 <script src="../js/theme.js"></script>
 <script src="../js/content-api.js"></script>
 <script src="../js/archive-content.js"></script>
-<link rel="stylesheet" href="../css/archive-surfaces.css?v=20260911-log-panel-blur">
+<link rel="stylesheet" href="../css/archive-surfaces.css?v=20260911-inline-quotes">
 </head>
 <body>
 <div class="detail-wrap"><div class="detail-scroll"><a class="back-btn" href="../log.html">← Back</a><div id="content" class="loading">기록을 불러오는 중…</div></div></div>
@@ -34,6 +34,6 @@ fetch(window.EDEN_CONTENT_API + '/api/logs/' + encodeURIComponent(id || ''))
   })
   .catch(function(){content.textContent='기록을 불러오지 못했어.';});
 </script>
-<script src="../js/log-text.js?v=20260911"></script>
+<script src="../js/log-text.js?v=20260911-inline-quotes"></script>
 </body>
 </html>
