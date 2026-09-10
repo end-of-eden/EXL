@@ -561,8 +561,11 @@ if (params.has('entrance') && !matchMedia('(prefers-reduced-motion: reduce)').ma
   function enterProfile() {
     portrait.style.opacity = '';
     details.style.opacity = '';
-    portrait.animate([{transform:initial === 'lilith' ? 'translateX(80px)' : 'translateX(-80px)',opacity:0},{transform:'translateX(0)',opacity:1}],{duration:650,easing:'cubic-bezier(.2,.7,.2,1)',fill:'backwards'});
-    details.animate([{transform:initial === 'lilith' ? 'translateX(-80px)' : 'translateX(80px)',opacity:0},{transform:'translateX(0)',opacity:1}],{duration:650,delay:80,easing:'cubic-bezier(.2,.7,.2,1)',fill:'backwards'});
+    portrait.animate([{transform:initial === 'lilith' ? 'translateX(32px)' : 'translateX(-32px)',opacity:0},{transform:'translateX(0)',opacity:1}],{duration:560,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
+    details.animate([{transform:initial === 'lilith' ? 'translateX(-32px)' : 'translateX(32px)',opacity:0},{transform:'translateX(0)',opacity:1}],{duration:560,delay:40,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
+    details.querySelectorAll('.profile-heading,.profile-tabs,.scroll-area').forEach(function(part,index){
+      part.animate([{opacity:0},{opacity:1}],{duration:280,delay:180+index*40,easing:'ease-out',fill:'backwards'});
+    });
   }
   portraitImage.decode().catch(function(){}).then(enterProfile);
 }

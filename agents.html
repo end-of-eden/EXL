@@ -23,7 +23,7 @@
 .eden span{left:41%}.lilith span{left:30%}
 .character:hover span,.character:focus-visible span{background:#fff;box-shadow:0 0 25px #fff;outline:2px solid #b797ad}
 .hint{position:absolute;bottom:12px;margin:0;font-size:11px;letter-spacing:.08em;pointer-events:none;background:#fffc;padding:6px 12px;border-radius:20px}
-.entry.leaving .art{transform:scale(1.06);opacity:0;pointer-events:none}.entry.leaving .hint{opacity:0}
+.entry.leaving .art{opacity:0;pointer-events:none;transition:opacity .18s ease-out}.entry.leaving .hint{opacity:0}
  .art .portrait-layer{opacity:0}
 .art .portrait-eden{transform-origin:35% 25%}
 .art .portrait-lilith{transform-origin:72% 25%}
@@ -62,7 +62,7 @@ document.querySelectorAll('[data-character]').forEach(function(button){
   setTimeout(function(){
    if(window.parent!==window && window.parent.navigateArchive)window.parent.navigateArchive(url);
    else location.href=url;
-  },matchMedia('(prefers-reduced-motion: reduce)').matches?0:320);
+  },matchMedia('(prefers-reduced-motion: reduce)').matches?0:180);
  });
 });
 </script>
