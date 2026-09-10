@@ -210,8 +210,8 @@ function render() {
   var list = document.getElementById('log-list');
   list.innerHTML = logs.map(function(log) {
     var href = log.remote
-      ? 'Log/view.html?id=' + encodeURIComponent(log.id) + '&v=20260911-log-glass'
-      : 'Log/' + encodeURIComponent(log.id) + '.html?v=20260911-log-glass';
+      ? 'Log/view.html?id=' + encodeURIComponent(log.id) + '&v=20260911-log-body-blur'
+      : 'Log/' + encodeURIComponent(log.id) + '.html?v=20260911-log-body-blur';
     return '<div class="log-item" data-href="' + escapeHtml(href) + '">' +
       '<div class="log-item-text">' +
       '<div class="log-item-title">' + escapeHtml(log.title) + '</div>' +

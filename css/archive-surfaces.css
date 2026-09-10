@@ -97,3 +97,7 @@ html[data-theme="light"] .detail-title{color:#302b34}
 .detail-body .log-dialogue{display:inline-block;max-width:100%;padding:.18em .5em;border-left:3px solid #ad7088;background:#faedf1;color:#654d57;line-height:inherit;vertical-align:baseline}
 .detail-body .log-code{padding:.1em .35em;border:1px solid #e1dadd;background:#f5f2f3;color:#755864;font-size:.9em}
 @media(hover:hover){.detail-body .log-thought:hover{color:#512b3b}.detail-body .log-dialogue:hover{border-left-color:#875267}}
+
+/* Frost the background behind log 005 without making the reader opaque. */
+html[data-theme] .detail-body.detail-body-glass{padding:24px 28px;border:1px solid rgba(255,255,255,.35);border-radius:18px;background:rgba(245,232,241,.18);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+@media(max-width:640px){html[data-theme] .detail-body.detail-body-glass{padding:18px 16px}}
