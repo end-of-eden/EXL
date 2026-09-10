@@ -71,7 +71,7 @@
       selectRoute(route, historyMode);
     });
     var contentUrl = new URL(route.url.href);
-    if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260910-frame-shadow-fix');
+    if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260911-log-glass');
     if (route.path === 'gallery.html') contentUrl.searchParams.set('v', '20260909-r2-order');
     if (route.path.startsWith('Log/')) contentUrl.searchParams.set('v', '20260909-clear-log');
     next.src = contentUrl.href;

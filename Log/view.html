@@ -13,7 +13,7 @@
 <script src="../js/theme.js"></script>
 <script src="../js/content-api.js"></script>
 <script src="../js/archive-content.js"></script>
-<link rel="stylesheet" href="../css/archive-surfaces.css?v=20260909-clear-log">
+<link rel="stylesheet" href="../css/archive-surfaces.css?v=20260911-log-glass">
 </head>
 <body>
 <div class="detail-wrap"><div class="detail-scroll"><a class="back-btn" href="../log.html">← Back</a><div id="content" class="loading">기록을 불러오는 중…</div></div></div>
@@ -29,10 +29,11 @@ fetch(window.EDEN_CONTENT_API + '/api/logs/' + encodeURIComponent(id || ''))
     content.appendChild(title); content.appendChild(meta);
     if(log.quote){var quote=document.createElement('div');quote.className='detail-quote';quote.textContent='“ '+log.quote+' ”';content.appendChild(quote);}
     if(log.imagePath){var img=document.createElement('img');img.className='detail-img';img.src=window.EDEN_CONTENT_API+log.imagePath;img.alt=log.title;content.appendChild(img);}
-    var body=document.createElement('div');body.className='detail-body';body.textContent=log.body;content.appendChild(body);
+    var body=document.createElement('div');body.className='detail-body';body.textContent=log.body;content.appendChild(body);if(window.formatLogText)window.formatLogText(body);
     document.title='END OF EDEN — '+log.title;
   })
   .catch(function(){content.textContent='기록을 불러오지 못했어.';});
 </script>
+<script src="../js/log-text.js?v=20260911"></script>
 </body>
 </html>

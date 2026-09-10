@@ -210,8 +210,8 @@ function render() {
   var list = document.getElementById('log-list');
   list.innerHTML = logs.map(function(log) {
     var href = log.remote
-      ? 'Log/view.html?id=' + encodeURIComponent(log.id) + '&v=20260907-log-detail-frame'
-      : 'Log/' + encodeURIComponent(log.id) + '.html?v=20260907-log-detail-frame';
+      ? 'Log/view.html?id=' + encodeURIComponent(log.id) + '&v=20260911-log-glass'
+      : 'Log/' + encodeURIComponent(log.id) + '.html?v=20260911-log-glass';
     return '<div class="log-item" data-href="' + escapeHtml(href) + '">' +
       '<div class="log-item-text">' +
       '<div class="log-item-title">' + escapeHtml(log.title) + '</div>' +
@@ -232,11 +232,11 @@ render();
 fetch(window.EDEN_CONTENT_API + '/api/logs')
   .then(function(response) { if (!response.ok) throw new Error('load failed'); return response.json(); })
   .then(function(remoteLogs) {
-    logs = remoteLogs.map(function(log) {
+    logs = logs.concat(remoteLogs.map(function(log) {
       log.remote = true;
       log.thumbUrl = window.EDEN_CONTENT_API + log.imagePath;
       return log;
-    }).concat(logs);
+    }));
     render();
   })
   .catch(function() { /* R2가 준비되지 않아도 기존 로그는 그대로 표시 */ });

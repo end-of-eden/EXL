@@ -86,3 +86,14 @@ html.gallery-photo-open .main-window-controls { visibility:hidden!important; }
 @keyframes photo-backdrop-in { from { opacity:0; } to { opacity:1; } }
 @keyframes photo-float-in { from { opacity:0; transform:translateY(16px) scale(.96); } to { opacity:1; transform:translateY(0) scale(1); } }
 @media(prefers-reduced-motion:reduce) { .popup-bg.open,.popup-bg.open .popup-inner { animation:none; } }
+
+/* Log reading surfaces inherit the surrounding glass background. */
+html[data-theme] .detail-wrap,
+html[data-theme] .detail-scroll{background:transparent!important;box-shadow:none!important}
+html[data-theme="light"] .detail-body{color:#55515b}
+html[data-theme="light"] .detail-title{color:#302b34}
+
+.detail-body .log-thought{color:#65394b;font-weight:700;background:#faedf1;padding:.08em .22em;border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.detail-body .log-dialogue{display:inline-block;max-width:100%;padding:.18em .5em;border-left:3px solid #ad7088;background:#faedf1;color:#654d57;line-height:inherit;vertical-align:baseline}
+.detail-body .log-code{padding:.1em .35em;border:1px solid #e1dadd;background:#f5f2f3;color:#755864;font-size:.9em}
+@media(hover:hover){.detail-body .log-thought:hover{color:#512b3b}.detail-body .log-dialogue:hover{border-left-color:#875267}}
