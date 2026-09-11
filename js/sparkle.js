@@ -15,7 +15,7 @@
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (window.matchMedia('(pointer: coarse)').matches) return;
 
-  var HEART_COLORS = ['#ffb6c1', '#ffd1dc', '#87ceeb', '#b0e0e6'];
+  var HEART_COLORS = ['#c6c6c6', '#dcdcdc', '#c1c1c1', '#d6d6d6'];
   var SPAWN_INTERVAL_MS = 90;
   var HEART_LIFETIME_MS = 900;
   var HEART_SVG = '<svg viewBox="0 0 33 29" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M23.6 0c-3.4 0-6.3 2-7.6 4.9C14.7 2 11.8 0 8.4 0 3.8 0 0 3.8 0 8.4c0 9.3 15.3 17.6 15.9 17.9.2.1.4.2.6.2s.4-.1.6-.2c.6-.3 15.9-8.6 15.9-17.9C33 3.8 29.2 0 24.6 0z" fill="currentColor"/></svg>';

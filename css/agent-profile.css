@@ -1,6 +1,6 @@
 /* A shared stage: the portrait is cropped at the waist, alongside the dossier. */
-html .wiki-wrap{--profile-accent:#a74772;--profile-muted:#8e7785}
-html .wiki-wrap.theme-eden{--profile-accent:#577e94;--profile-muted:#7b8c98}
+html .wiki-wrap{--profile-accent:#5f5f5f;--profile-muted:#7d7d7d}
+html .wiki-wrap.theme-eden{--profile-accent:#777777;--profile-muted:#898989}
 html .wiki-wrap .wiki-header{align-items:flex-start;padding-top:38px}
 html .wiki-wrap .profile-heading{border-left:0;padding-left:16px}
 html .wiki-wrap .profile-eyebrow{font-size:8px;letter-spacing:.18em;color:var(--profile-muted);margin-bottom:10px}
@@ -10,8 +10,8 @@ html .wiki-wrap .profile-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:12p
 html .wiki-wrap .profile-tags span{font-size:8px;padding:4px 7px;color:var(--profile-accent);background:#ffffff65;border:1px solid #ffffff90;border-radius:6px;letter-spacing:.04em}
 html .wiki-wrap .profile-tags span+span{background:#ffffff40}
 html .wiki-wrap .heart-switcher{gap:8px;padding-top:4px}
-.profile-tabs{display:flex;margin:8px 24px 22px;border-bottom:1px solid #c6bac34d;flex-shrink:0}
-.profile-tabs button{flex:1;padding:12px 4px;border:0;border-bottom:2px solid transparent;background:transparent;color:#8b8189;font:inherit;font-size:calc(10px + 2pt);font-weight:700;cursor:pointer}
+.profile-tabs{display:flex;margin:8px 24px 22px;border-bottom:1px solid #bdbdbd4d;flex-shrink:0}
+.profile-tabs button{flex:1;padding:12px 4px;border:0;border-bottom:2px solid transparent;background:transparent;color:#848484;font:inherit;font-size:calc(10px + 2pt);font-weight:700;cursor:pointer}
 .profile-tabs button[aria-pressed="true"]{border-bottom-color:var(--profile-accent);color:var(--profile-accent)}
 .profile-tabs button:focus-visible{outline:2px solid var(--profile-accent);outline-offset:-3px}
 [data-profile-page][hidden]{display:none!important}
@@ -22,19 +22,19 @@ html .wiki-wrap .desc-block,html .wiki-wrap .log-block{font-size:12px;line-heigh
 html .wiki-wrap .divider{display:none}
 html .wiki-wrap .scroll-area::-webkit-scrollbar{width:3px}
 html .wiki-wrap .scroll-area::-webkit-scrollbar-track{background:transparent}
-html .wiki-wrap .scroll-area::-webkit-scrollbar-thumb{border:0;border-radius:10px;background:#b9aab5}
-html .wiki-wrap:is(.theme-eden,.theme-lilith){position:relative;isolation:isolate;display:flex;flex-direction:row;overflow:hidden;background:radial-gradient(ellipse at 20% 30%,#ecc5de70,transparent 68%),radial-gradient(ellipse at 85% 80%,#d9d9ed50,transparent 65%),#ffffff14}
-html .wiki-wrap.theme-eden{background:radial-gradient(ellipse at 20% 30%,#c9e1ed70,transparent 68%),radial-gradient(ellipse at 85% 80%,#ebcfe250,transparent 65%),#ffffff14}
+html .wiki-wrap .scroll-area::-webkit-scrollbar-thumb{border:0;border-radius:10px;background:#aeaeae}
+html .wiki-wrap:is(.theme-eden,.theme-lilith){position:relative;isolation:isolate;display:flex;flex-direction:row;overflow:hidden;background:radial-gradient(ellipse at 20% 30%,#cfcfcf70,transparent 68%),radial-gradient(ellipse at 85% 80%,#dadada50,transparent 65%),#ffffff14}
+html .wiki-wrap.theme-eden{background:radial-gradient(ellipse at 20% 30%,#dddddd70,transparent 68%),radial-gradient(ellipse at 85% 80%,#d6d6d650,transparent 65%),#ffffff14}
 html .wiki-wrap:is(.theme-eden,.theme-lilith) .standing-panel{flex:0 0 46%;min-height:0;height:100%;padding:0;border:0;background:transparent;overflow:visible;z-index:1;pointer-events:none}
 html .wiki-wrap:is(.theme-eden,.theme-lilith) .standing-img{inset:0;overflow:hidden;border:0;background:transparent}
 html .wiki-wrap:is(.theme-eden,.theme-lilith) .standing-img img{top:2%;bottom:auto;left:50%;width:auto!important;height:170cqh!important;max-width:none;background:transparent;object-fit:contain!important;transform:translateX(-50%)}
 html .wiki-wrap:is(.theme-eden,.theme-lilith) .char-badge{display:none}
-html .wiki-wrap .wiki-panel{flex:1;min-width:0;height:calc(100% - 28px);margin:14px 14px 14px 0;border:1px solid #ffffff85;border-radius:22px;background:linear-gradient(145deg,#ffffff60,#ffffff26);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:inset 0 1px 0 #ffffff80,0 8px 28px #796b8010;overflow:hidden;z-index:2}
+html .wiki-wrap .wiki-panel{flex:1;min-width:0;height:calc(100% - 28px);margin:14px 14px 14px 0;border:1px solid #ffffff85;border-radius:22px;background:linear-gradient(145deg,#ffffff60,#ffffff26);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:inset 0 1px 0 #ffffff80,0 8px 28px #6f6f6f10;overflow:hidden;z-index:2}
 html .wiki-wrap .wiki-header{padding:28px 24px 18px;border:0;background:transparent}
 html .wiki-wrap .wiki-title{font-size:28px;letter-spacing:-.04em}
 html .wiki-wrap .wiki-title::after{display:block;margin:8px 0 0;font-size:9px;letter-spacing:.15em;content:'ARCH / AGENT DOSSIER'}
-html .wiki-wrap .scroll-area{padding:0 24px 30px;overflow-y:auto;min-height:0;scrollbar-width:thin;scrollbar-color:#bba8b5 transparent}
-html .wiki-wrap .section-title{font-size:12px;font-weight:600;border-bottom:1px solid #b7a6b666;padding-bottom:10px;margin-top:24px}
+html .wiki-wrap .scroll-area{padding:0 24px 30px;overflow-y:auto;min-height:0;scrollbar-width:thin;scrollbar-color:#adadad transparent}
+html .wiki-wrap .section-title{font-size:12px;font-weight:600;border-bottom:1px solid #ababab66;padding-bottom:10px;margin-top:24px}
 html .wiki-wrap .section-title::before{content:''}
 html .wiki-wrap .info-grid{border:0;background:transparent;grid-template-columns:1fr 1fr;gap:14px 12px}
 html .wiki-wrap .info-item{display:block;padding:0;border:0;background:transparent}
@@ -57,7 +57,7 @@ html .wiki-wrap.theme-lilith{flex-direction:row-reverse}
 html .wiki-wrap.theme-lilith .wiki-panel{margin:14px 0 14px 14px}
 html[data-theme] .agent-window{background:transparent!important}
 
-html .wiki-wrap .agent-back{position:absolute;top:10px;left:16px;z-index:5;color:#695b6c;font-size:11px;text-decoration:none;padding:5px 8px}
+html .wiki-wrap .agent-back{position:absolute;top:10px;left:16px;z-index:5;color:#5f5f5f;font-size:11px;text-decoration:none;padding:5px 8px}
 html .wiki-wrap .agent-back:focus-visible{outline:2px solid var(--profile-accent);border-radius:6px}
 html .wiki-wrap .wiki-panel{margin-top:40px;height:calc(100% - 54px)}
 html .wiki-wrap.theme-lilith .wiki-panel{margin-top:40px}
@@ -85,7 +85,7 @@ html .wiki-wrap .scroll-area{scrollbar-width:auto;scrollbar-color:auto}
 html .wiki-wrap .scroll-area::-webkit-scrollbar{width:5px}
 html .wiki-wrap .scroll-area::-webkit-scrollbar-button{width:0;height:0;display:none}
 html .wiki-wrap .scroll-area::-webkit-scrollbar-track{background:transparent;margin-block:4px}
-html .wiki-wrap .scroll-area::-webkit-scrollbar-thumb{background:#6c56724d;border:0;border-radius:4px}
+html .wiki-wrap .scroll-area::-webkit-scrollbar-thumb{background:#5d5d5d4d;border:0;border-radius:4px}
 
 /* Bring the portrait inward and enlarge it while keeping the head in frame. */
 html .wiki-wrap.theme-lilith .standing-img img{top:0;bottom:auto;height:120cqh!important;left:20%}
@@ -104,7 +104,7 @@ html .wiki-wrap .scroll-area{padding-inline:var(--profile-inset)}
 
 /* Keep copy readable when the portrait extends beneath the glass dossier. */
 html[data-theme="light"] .wiki-wrap .wiki-panel{
-  background:rgba(250,245,248,.64)!important;
+  background:rgba(246,246,246,.64)!important;
   backdrop-filter:blur(46px) saturate(102%)!important;
   -webkit-backdrop-filter:blur(46px) saturate(102%)!important;
 }

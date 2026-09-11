@@ -19,15 +19,15 @@ html .archive-window-control {
   font-size: 0;
   line-height: 0;
   border: 2px solid;
-  border-color: #73757c #272932 #272932 #73757c;
-  background: #454851;
-  color: #e7dbe0;
+  border-color: #757575 #292929 #292929 #757575;
+  background: #484848;
+  color: #dedede;
   box-shadow: none;
 }
 html[data-theme="light"] .archive-window-control {
-  border-color: #fff #817b7e #817b7e #fff;
-  background: #d4d2d3;
-  color: #696368;
+  border-color: #ffffff #7c7c7c #7c7c7c #ffffff;
+  background: #d2d2d2;
+  color: #656565;
 }
 html .archive-window-control:nth-child(n)::before,
 html .archive-window-control:nth-child(n)::after {

@@ -2,25 +2,25 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<script src="js/theme-init.js"></script>
+<script src="js/theme-init.js?v=20260911-silver"></script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50%25' y='54%25' font-size='70' text-anchor='middle' dominant-baseline='central'>💙</text></svg>"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>END OF EDEN — Log</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/pc-page.css">
-<link rel="stylesheet" href="css/explorer-sidebar.css?v=20260907-content-fade-3">
+<link rel="stylesheet" href="css/style.css?v=20260911-silver">
+<link rel="stylesheet" href="css/pc-page.css?v=20260911-silver">
+<link rel="stylesheet" href="css/explorer-sidebar.css?v=20260911-silver">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --color-background-primary: #0f0f14;
+  --color-background-primary: #0f0f0f;
   --color-border-tertiary: rgba(255,255,255,0.10);
   --color-border-secondary: rgba(255,255,255,0.16);
-  --color-text-primary: #f2f2f5;
-  --color-text-secondary: #b0b4bd;
-  --color-text-tertiary: #6f7380;
+  --color-text-primary: #f2f2f2;
+  --color-text-secondary: #b4b4b4;
+  --color-text-tertiary: #737373;
   --border-radius-md: 8px;
   --border-radius-lg: 12px;
   --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -28,7 +28,7 @@
 
 body {
   font-family: var(--font-sans);
-  background: #0a0a0f;
+  background: #0a0a0a;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,16 +137,16 @@ body {
   flex-shrink: 0;
   border: 0.5px solid var(--color-border-tertiary);
 }
-.log-wrap { width:100%; max-width:none; height:100%; border:0; border-radius:0; box-shadow:none; background:#fff; }
+.log-wrap { width:100%; max-width:none; height:100%; border:0; border-radius:0; box-shadow:none; background:#ffffff; }
 .log-scroll { padding:26px 42px; }
-.log-scroll::-webkit-scrollbar { width:12px; }.log-scroll::-webkit-scrollbar-track{background:#ececef}.log-scroll::-webkit-scrollbar-thumb{border:2px solid #ececef;border-radius:0;background:#b6b7bc}
-.log-item { padding:20px 0; border-bottom:1px solid #d0d1d4; }
-.log-item-title { color:#2e2f35; font-size:16px; font-weight:700; }
-.log-item-title::before { content:'▸ '; color:#b36a86; }
-.log-item-date { color:#8a7a81; font:400 9px/1.5 "Galmuri11","Pretendard",sans-serif; }
-.log-item-preview { color:#55565d; }
-.log-item-thumb { border:1px solid #bfc0c4; border-radius:0; }
-.log-item:hover { opacity:1; background:#faf6f8; }
+.log-scroll::-webkit-scrollbar { width:12px; }.log-scroll::-webkit-scrollbar-track{background:#ececec}.log-scroll::-webkit-scrollbar-thumb{border:2px solid #ececec;border-radius:0;background:#b7b7b7}
+.log-item { padding:20px 0; border-bottom:1px solid #d1d1d1; }
+.log-item-title { color:#2f2f2f; font-size:16px; font-weight:700; }
+.log-item-title::before { content:'▸ '; color:#7c7c7c; }
+.log-item-date { color:#7e7e7e; font:400 9px/1.5 "Galmuri11","Pretendard",sans-serif; }
+.log-item-preview { color:#565656; }
+.log-item-thumb { border:1px solid #c0c0c0; border-radius:0; }
+.log-item:hover { opacity:1; background:#f7f7f7; }
 
 @media (max-width: 640px) {
   .log-scroll { padding: 2rem 1.25rem; }
@@ -156,11 +156,11 @@ body {
   .log-item-preview { font-size: 12px; line-height: 1.6; -webkit-line-clamp: 3; word-break: keep-all; }
 }
 </style>
-<script src="js/theme.js"></script>
-<script src="js/content-api.js"></script>
-<script src="js/archive-content.js"></script>
-<link rel="stylesheet" href="css/window-controls.css">
-<link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/archive-surfaces.css?v=20260909-rose">
+<script src="js/theme.js?v=20260911-silver"></script>
+<script src="js/content-api.js?v=20260911-silver"></script>
+<script src="js/archive-content.js?v=20260911-silver"></script>
+<link rel="stylesheet" href="css/window-controls.css?v=20260911-silver">
+<link rel="stylesheet" href="css/glass-preview.css?v=20260911-silver"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/archive-surfaces.css?v=20260911-silver">
 </head>
 <body class="pc-page-body">
 <main class="pc-page-window">
@@ -244,7 +244,7 @@ fetch(window.EDEN_CONTENT_API + '/api/logs')
 
 </script>
 
-<script src="js/sparkle.js"></script>
-<script src="js/messenger.js?v=20260909-glass-main"></script>
+<script src="js/sparkle.js?v=20260911-silver"></script>
+<script src="js/messenger.js?v=20260911-silver"></script>
 </body>
 </html>

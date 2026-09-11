@@ -3,17 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="../js/theme-init.js"></script>
+<script src="../js/theme-init.js?v=20260911-silver"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
-<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/style.css?v=20260911-silver">
 <title>END OF EDEN — Log</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{font-family:'Pretendard',sans-serif;background:#0a0a0f;color:#f2f2f5;min-height:100vh;padding:2rem}.detail-wrap{width:100%;max-width:960px;height:580px;margin:42px auto 0;border:.5px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden;background:#0f0f14;box-shadow:0 8px 32px rgba(0,0,0,.45)}.detail-scroll{height:100%;overflow-y:auto;padding:2.5rem 4rem}.back-btn{display:inline-block;color:#6f7380;text-decoration:none;font-size:11px;letter-spacing:.06em;margin-bottom:1.5rem}.detail-title{text-align:center;font-size:18px;font-weight:500;margin-bottom:10px}.detail-meta{text-align:center;font-size:11px;color:#6f7380;margin-bottom:1.5rem}.detail-quote{text-align:center;color:#b0b4bd;font-size:13px;font-style:italic;margin-bottom:1.5rem}.detail-img{display:block;width:100%;max-height:520px;object-fit:contain;border-radius:8px;margin-bottom:1.75rem;background:#0a0a0f}.detail-body{font-size:14px;line-height:1.9;color:#b0b4bd;white-space:pre-wrap;word-break:keep-all}.loading{text-align:center;color:#6f7380;padding:5rem 0}@media(max-width:640px){body{padding:1rem}.detail-wrap{margin-top:24px}.detail-scroll{padding:2rem 1.25rem}.detail-body{word-break:break-all}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}body{font-family:'Pretendard',sans-serif;background:#0a0a0a;color:#f2f2f2;min-height:100vh;padding:2rem}.detail-wrap{width:100%;max-width:960px;height:580px;margin:42px auto 0;border:.5px solid rgba(255,255,255,.1);border-radius:12px;overflow:hidden;background:#0f0f0f;box-shadow:0 8px 32px rgba(0,0,0,.45)}.detail-scroll{height:100%;overflow-y:auto;padding:2.5rem 4rem}.back-btn{display:inline-block;color:#737373;text-decoration:none;font-size:11px;letter-spacing:.06em;margin-bottom:1.5rem}.detail-title{text-align:center;font-size:18px;font-weight:500;margin-bottom:10px}.detail-meta{text-align:center;font-size:11px;color:#737373;margin-bottom:1.5rem}.detail-quote{text-align:center;color:#b4b4b4;font-size:13px;font-style:italic;margin-bottom:1.5rem}.detail-img{display:block;width:100%;max-height:520px;object-fit:contain;border-radius:8px;margin-bottom:1.75rem;background:#0a0a0a}.detail-body{font-size:14px;line-height:1.9;color:#b4b4b4;white-space:pre-wrap;word-break:keep-all}.loading{text-align:center;color:#737373;padding:5rem 0}@media(max-width:640px){body{padding:1rem}.detail-wrap{margin-top:24px}.detail-scroll{padding:2rem 1.25rem}.detail-body{word-break:break-all}}
 </style>
-<script src="../js/theme.js"></script>
-<script src="../js/content-api.js"></script>
-<script src="../js/archive-content.js"></script>
-<link rel="stylesheet" href="../css/archive-surfaces.css?v=20260911-first-indent">
+<script src="../js/theme.js?v=20260911-silver"></script>
+<script src="../js/content-api.js?v=20260911-silver"></script>
+<script src="../js/archive-content.js?v=20260911-silver"></script>
+<link rel="stylesheet" href="../css/archive-surfaces.css?v=20260911-silver">
 </head>
 <body>
 <div class="detail-wrap"><div class="detail-scroll"><a class="back-btn" href="../log.html">← Back</a><div id="content" class="loading">기록을 불러오는 중…</div></div></div>
@@ -34,6 +34,6 @@ fetch(window.EDEN_CONTENT_API + '/api/logs/' + encodeURIComponent(id || ''))
   })
   .catch(function(){content.textContent='기록을 불러오지 못했어.';});
 </script>
-<script src="../js/log-text.js?v=20260911-first-indent"></script>
+<script src="../js/log-text.js?v=20260911-silver"></script>
 </body>
 </html>

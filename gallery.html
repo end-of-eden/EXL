@@ -2,26 +2,26 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<script src="js/theme-init.js"></script>
+<script src="js/theme-init.js?v=20260911-silver"></script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50%25' y='54%25' font-size='70' text-anchor='middle' dominant-baseline='central'>💙</text></svg>"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>END OF EDEN — Gallery</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css">
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/pc-page.css">
-<link rel="stylesheet" href="css/explorer-sidebar.css?v=20260907-content-fade-3">
+<link rel="stylesheet" href="css/style.css?v=20260911-silver">
+<link rel="stylesheet" href="css/pc-page.css?v=20260911-silver">
+<link rel="stylesheet" href="css/explorer-sidebar.css?v=20260911-silver">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --color-background-primary: #0f0f14;
-  --color-background-secondary: #1a1a22;
+  --color-background-primary: #0f0f0f;
+  --color-background-secondary: #1b1b1b;
   --color-border-tertiary: rgba(255,255,255,0.10);
   --color-border-secondary: rgba(255,255,255,0.16);
-  --color-text-primary: #f2f2f5;
-  --color-text-secondary: #b0b4bd;
-  --color-text-tertiary: #6f7380;
+  --color-text-primary: #f2f2f2;
+  --color-text-secondary: #b4b4b4;
+  --color-text-tertiary: #737373;
   --border-radius-md: 8px;
   --border-radius-lg: 12px;
   --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -29,7 +29,7 @@
 
 body {
   font-family: var(--font-sans);
-  background: #0a0a0f;
+  background: #0a0a0a;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -190,7 +190,7 @@ body {
   display: block;
   max-height: 85vh;
   object-fit: contain;
-  background: #050508;
+  background: #050505;
 }
 
 .popup-title {
@@ -198,7 +198,7 @@ body {
   bottom: 0;
   left: 0; right: 0;
   padding: 12px 16px;
-  background: linear-gradient(to top, rgba(5,5,8,0.85) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(5,5,5,0.85) 0%, transparent 100%);
   font-size: 13px;
   font-weight: 700;
   color: rgba(255,255,255,0.9);
@@ -215,27 +215,27 @@ body {
   background: rgba(255,255,255,0.15);
   border: none;
   cursor: pointer;
-  color: #fff;
+  color: #ffffff;
   font-size: 14px;
   display: flex; align-items: center; justify-content: center;
   transition: background 0.15s;
 }
 .popup-close:hover { background: rgba(255,255,255,0.3); }
-.gallery-wrap { width:100%; max-width:none; height:100%; border:0; border-radius:0; box-shadow:none; background:#fff; }
+.gallery-wrap { width:100%; max-width:none; height:100%; border:0; border-radius:0; box-shadow:none; background:#ffffff; }
 .gallery-scroll { padding:22px; }
-.gallery-scroll::-webkit-scrollbar { width:12px; }.gallery-scroll::-webkit-scrollbar-track{background:#ececef}.gallery-scroll::-webkit-scrollbar-thumb{border:2px solid #ececef;border-radius:0;background:#b6b7bc}
+.gallery-scroll::-webkit-scrollbar { width:12px; }.gallery-scroll::-webkit-scrollbar-track{background:#ececec}.gallery-scroll::-webkit-scrollbar-thumb{border:2px solid #ececec;border-radius:0;background:#b7b7b7}
 .gallery-grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
-.gallery-item { border:1px solid #c9c9cd; border-radius:0; background:#ececef; box-shadow:2px 2px 0 rgba(0,0,0,.07); }
-.gallery-item:hover { border-color:#bd7892; }
-.popup-inner { padding:5px; border:2px solid; border-color:#fff #777477 #777477 #fff; border-radius:0; background:#d4d2d3; }
-.popup-close { top:9px; right:9px; width:22px; height:22px; border:2px solid; border-color:#fff #817b7e #817b7e #fff; border-radius:0; background:#d4d2d3; color:#65515a; }
+.gallery-item { border:1px solid #c9c9c9; border-radius:0; background:#ececec; box-shadow:2px 2px 0 rgba(0,0,0,.07); }
+.gallery-item:hover { border-color:#898989; }
+.popup-inner { padding:5px; border:2px solid; border-color:#ffffff #757575 #757575 #ffffff; border-radius:0; background:#d2d2d2; }
+.popup-close { top:9px; right:9px; width:22px; height:22px; border:2px solid; border-color:#ffffff #7c7c7c #7c7c7c #ffffff; border-radius:0; background:#d2d2d2; color:#565656; }
 @media(max-width:980px){.gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:640px){.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
-<script src="js/theme.js"></script>
-<script src="js/content-api.js"></script>
-<script src="js/archive-content.js"></script>
-<link rel="stylesheet" href="css/window-controls.css">
-<link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/archive-surfaces.css?v=20260909-photo-caption">
+<script src="js/theme.js?v=20260911-silver"></script>
+<script src="js/content-api.js?v=20260911-silver"></script>
+<script src="js/archive-content.js?v=20260911-silver"></script>
+<link rel="stylesheet" href="css/window-controls.css?v=20260911-silver">
+<link rel="stylesheet" href="css/glass-preview.css?v=20260911-silver"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/archive-surfaces.css?v=20260911-silver">
 </head>
 <body class="pc-page-body">
 <main class="pc-page-window">
@@ -360,7 +360,7 @@ fetch(window.EDEN_CONTENT_API + '/api/gallery')
 
 </script>
 
-<script src="js/sparkle.js"></script>
-<script src="js/messenger.js?v=20260909-glass-main"></script>
+<script src="js/sparkle.js?v=20260911-silver"></script>
+<script src="js/messenger.js?v=20260911-silver"></script>
 </body>
 </html>
