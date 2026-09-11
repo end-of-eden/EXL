@@ -913,7 +913,7 @@ html body .desktop-taskbar,html body .start-menu{display:none!important}
         <div class="controls">
 
           <div class="center-controls"><button class="control " type="button" id="prev" aria-label="이전 곡" title="이전 곡"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 5h2v14H4zM20 5v14L7 12z"/></svg></button><button class="control play" type="button" id="play" aria-label="재생" title="재생"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4l14 8-14 8z"/></svg></button><button class="control " type="button" id="stop" aria-label="정지" title="정지"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 5h14v14H5z"/></svg></button><button class="control " type="button" id="pause" aria-label="일시정지" title="일시정지"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 4h5v16H5zM14 4h5v16h-5z"/></svg></button><button class="control " type="button" id="next" aria-label="다음 곡" title="다음 곡"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 5h2v14h-2zM4 5l13 7-13 7z"/></svg></button></div>
-          <button class="control loop" type="button" id="loop" aria-label="반복 없음" title="반복 없음"><i class="ti ti-repeat"></i><span class="loop-one">1</span></button>
+          <button class="control loop active" type="button" id="loop" aria-label="전체 반복" title="전체 반복"><i class="ti ti-repeat"></i><span class="loop-one">1</span></button>
   <div class="player-tabs">
     <button type="button" id="queue-toggle" aria-expanded="false" aria-controls="player-queue" aria-label="곡 목록" title="곡 목록"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h1M3 12h1M3 18h1"/></svg></button>
     <button type="button" id="lyrics-toggle" aria-expanded="false" aria-controls="player-lyrics" aria-label="가사" title="가사"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M5 3h10l4 4v14H5zM14 3v5h5M8 12h8M8 16h6"/></svg></button>
@@ -1045,7 +1045,7 @@ var player;
 var playlist = [];
 var playing = false;
 var muted = false;
-var loopMode = 'off';
+var loopMode = 'all';
 var playlistWindow = document.querySelector('.playlist-window');
 var playerHead = document.querySelector('.media-info');
 var resizeZone = document.getElementById('resize-zone');
@@ -1103,6 +1103,7 @@ function onYouTubeIframeAPIReady() {
     events: {
       onReady: function (event) {
         event.target.setVolume(35);
+        event.target.setLoop(loopMode === 'all');
         event.target.playVideo();
       },
       onStateChange: updatePlayer
