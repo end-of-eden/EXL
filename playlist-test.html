@@ -828,7 +828,7 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
       <div class="playback-panel">
         <div class="lcd">
           <div class="lcd-top"><div class="lcd-brand"><span>END OF EDEN</span><span class="lcd-status" id="playback-status">● READY</span></div><span class="time" id="current-time">00:00</span></div>
-          <div class="track-title" id="track-title">재생 버튼을 눌러 시작</div>
+          <div class="track-title" id="track-title">ザムザ (INST)</div>
 
         </div>
         <div class="controls">
@@ -845,7 +845,7 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
   </div>
   <div class="player-bottom">          <div class="progress-row">
           <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
-          <span class="time" id="duration">00:00</span>
+          <span class="time" id="duration">03:32</span>
         </div>          <div class="volume-control">
             <button class="control" type="button" id="volume" aria-label="음소거">
               <svg class="volume-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -873,7 +873,7 @@ var card = document.querySelector('.playlist-window');
 var info = document.createElement('div'); info.className = 'media-info';
 info.innerHTML = '<img class="media-art" src="img/log/001.jpg" alt="플레이리스트 커버"><div class="media-copy"></div>';
 info.querySelector('.media-copy').appendChild(document.getElementById('track-title'));
-var caption = document.createElement('div'); caption.className='media-caption'; caption.textContent='END OF EDEN'; info.querySelector('.media-copy').appendChild(caption);
+var caption = document.createElement('div'); caption.className='media-caption'; caption.textContent='てにをは'; info.querySelector('.media-copy').appendChild(caption);
 var timeline = document.createElement('div'); timeline.className='media-timeline';
 timeline.append(document.getElementById('current-time'),document.querySelector('.progress'),document.getElementById('duration'));
 var transport = document.createElement('div'); transport.className='media-transport';
@@ -884,10 +884,10 @@ card.prepend(info,timeline,transport,extra);
 transport.appendChild(document.getElementById('queue-toggle'));
 
 var displayTracks = [
+  { videoId: 'gj_94e-fxlY', title: 'ザムザ (INST)', artist: "てにをは", duration: 212 },
   { videoId: 'rBa4ZYxI4vM', title: '미안해 널 미워해', artist: "자우림", duration: 235 },
   { videoId: '4i1wkzAlU5M', title: 'HAPPY DAY', artist: "체리필터", duration: 216 },
   { videoId: 'CgiPuXwhhfY', title: 'SOS', artist: "Avicii", duration: 157 },
-  { videoId: 'q90SFMi8aUg', title: 'ザムザ', artist: "てにをは feat. 初音ミク", duration: 211 },
   { videoId: 'h1QTkwJnX0E', title: 'はぐ', artist: "MORE MORE JUMP！ × 鏡音レン", duration: 159 },
   { videoId: 'p363yleNtGI', title: '私は、私達は', artist: "MORE MORE JUMP！ × 鏡音レン", duration: 240 },
   { videoId: 'xt_IlpwNAFo', title: 'light', artist: "wave to earth", duration: 226 },
@@ -896,7 +896,8 @@ var displayTracks = [
   { videoId: 'QW87DP4-elQ', title: 'cares', artist: "The Poles", duration: 275 },
   { videoId: 'ACJyvx9XtAg', title: '虚無さん', artist: "25時、ナイトコードで。 × 鏡音レン", duration: 151 },
   { videoId: 'oLu4n9HToG0', title: 'Darling', artist: "須田景凪", duration: 149 },
-  { videoId: 'ACDf9fhpuqo', title: 'Whiskey and Morphine', artist: "Alexander Jean", duration: 305 }
+  { videoId: 'ACDf9fhpuqo', title: 'Whiskey and Morphine', artist: "Alexander Jean", duration: 305 },
+  { videoId: 'FtJUS7jW1sY', title: '너를 위해', artist: "임재범", duration: 247 }
 ];
 var playableVideoIds = displayTracks.map(function (track) { return track.videoId; }).filter(Boolean);
 var customTitlesByVideoId = {};
