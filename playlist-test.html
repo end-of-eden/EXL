@@ -243,7 +243,7 @@ html[data-theme="light"] .archive-frame {
   transform: translateX(0);
 }
 .volume-slider {
-  --volume-level: 70%;
+  --volume-level: 35%;
   -webkit-appearance: none;
   appearance: none;
   width: 60px;
@@ -925,7 +925,7 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
               </svg>
             </button>
             <div class="volume-popover">
-              <input class="volume-slider" id="volume-slider" type="range" min="0" max="100" value="70" aria-label="음량">
+              <input class="volume-slider" id="volume-slider" type="range" min="0" max="100" value="35" aria-label="음량">
             </div>
           </div></div>
 
@@ -1036,7 +1036,7 @@ function onYouTubeIframeAPIReady() {
     },
     events: {
       onReady: function (event) {
-        event.target.setVolume(70);
+        event.target.setVolume(35);
         event.target.playVideo();
       },
       onStateChange: updatePlayer
