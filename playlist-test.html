@@ -22,6 +22,72 @@ try {
 html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #11131a; }
 body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; }
 .archive-frame { position: relative; z-index: 1; width: 100%; height: 100%; border: 0; background: #11131a; }
+.entrance-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  background: rgba(231,221,230,.30);
+  backdrop-filter: blur(18px) saturate(112%);
+  -webkit-backdrop-filter: blur(18px) saturate(112%);
+  transition: opacity .75s ease, backdrop-filter .75s ease, visibility 0s linear .75s;
+}
+.entrance-screen.is-leaving {
+  opacity: 0;
+  visibility: hidden;
+  backdrop-filter: blur(2px) saturate(100%);
+  -webkit-backdrop-filter: blur(2px) saturate(100%);
+}
+.entrance-button {
+  position: relative;
+  width: min(340px, 72vw);
+  aspect-ratio: 1;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.72);
+  border-radius: 22px;
+  background: rgba(255,255,255,.18);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.75), 0 18px 50px rgba(72,52,70,.18);
+  cursor: pointer;
+  transition: transform .75s cubic-bezier(.2,.8,.2,1), opacity .6s ease, box-shadow .25s ease;
+}
+.entrance-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg,rgba(255,255,255,.08),rgba(222,199,214,.20));
+  pointer-events: none;
+}
+.entrance-button img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: filter .3s ease, transform .55s cubic-bezier(.2,.8,.2,1);
+}
+.entrance-copy {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #302b33;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity .3s ease, transform .3s ease;
+}
+.entrance-copy strong { font-size: 18px; font-weight: 700; letter-spacing: .12em; }
+.entrance-copy span { font: 500 10px/1 'Poppins','Pretendard',sans-serif; letter-spacing: .32em; }
+.entrance-button:hover,.entrance-button:focus-visible { box-shadow: inset 0 1px 0 #fff,0 22px 58px rgba(72,52,70,.23); outline: none; }
+.entrance-button:hover img,.entrance-button:focus-visible img { filter: blur(2.5px) brightness(.88); transform: scale(1.035); }
+.entrance-button:hover .entrance-copy,.entrance-button:focus-visible .entrance-copy { opacity: 1; transform: translateY(0); }
+.entrance-screen.is-leaving .entrance-button { opacity: 0; transform: scale(1.08); }
+@media (hover:none) { .entrance-button img { filter: blur(1.5px) brightness(.91); } .entrance-copy { opacity: 1; transform:none; } }
+@media (prefers-reduced-motion:reduce) { .entrance-screen,.entrance-button,.entrance-button img,.entrance-copy { transition-duration:.01ms!important; } }
 html[data-theme="light"],
 html[data-theme="light"] body,
 html[data-theme="light"] .archive-frame {
@@ -593,6 +659,12 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
 <link rel="stylesheet" href="css/glass-preview.css?v=20260909-main"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap">
 </head>
 <body>
+<div class="entrance-screen" id="entrance-screen">
+  <button class="entrance-button" id="entrance-button" type="button" aria-label="상호확증파괴 입장">
+    <img src="img/entrance-banner-hd.png" alt="">
+    <span class="entrance-copy"><strong>相互確證破壊</strong><span>ENTER</span></span>
+  </button>
+</div>
 <iframe class="archive-frame" id="archive-frame" title="END OF EDEN archive" src="about:blank"></iframe>
 <aside class="desktop-document" id="desktop-document" aria-label="DOCUMENT">
   <div class="desktop-document__bar">
@@ -1290,5 +1362,17 @@ if (!window.matchMedia || !window.matchMedia('(max-width: 820px), (hover: none) 
 })();
 </script>
 <script src="js/desktop-dock.js?v=20260910-fixed"></script>
+<script>
+(function () {
+  var screen = document.getElementById('entrance-screen');
+  var button = document.getElementById('entrance-button');
+  if (!screen || !button) return;
+  button.addEventListener('click', function () {
+    if (window.player && typeof window.player.playVideo === 'function') window.player.playVideo();
+    screen.classList.add('is-leaving');
+    window.setTimeout(function () { screen.remove(); }, 780);
+  }, { once: true });
+})();
+</script>
 </body>
 </html>
