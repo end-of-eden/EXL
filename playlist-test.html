@@ -61,7 +61,9 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 .entrance-copy {
   position: absolute;
-  inset: 0;
+  left: 50%;
+  top: 50%;
+  width: min(460px, 88vw);
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -69,19 +71,26 @@ body { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
   justify-content: center;
   gap: 12px;
   color: #302b33;
-  opacity: 0;
-  transform: translateY(5px);
-  transition: opacity .3s ease, transform .3s ease;
+  pointer-events: none;
+  transform: translate(-50%,-50%);
 }
-.entrance-copy strong { font-size: 18px; font-weight: 700; letter-spacing: .12em; }
-.entrance-copy span { font: 500 10px/1 'Poppins','Pretendard',sans-serif; letter-spacing: .32em; }
+.entrance-copy strong,.entrance-copy span {
+  opacity:0;
+  transform:translateY(12px);
+  transition:opacity .55s ease,transform .65s cubic-bezier(.2,.8,.2,1),letter-spacing .65s ease;
+}
+.entrance-copy strong { font-size:18px; font-weight:700; letter-spacing:.18em; }
+.entrance-copy span { font:500 10px/1 'Poppins','Pretendard',sans-serif; letter-spacing:.42em; transition-delay:.10s; }
 .entrance-button:hover,.entrance-button:focus-visible { box-shadow: none; outline: none; }
 .entrance-screen:has(.entrance-button:hover) .entrance-art,
 .entrance-screen:has(.entrance-button:focus-visible) .entrance-art { transform:scale(1.012); }
-.entrance-button:hover .entrance-copy,.entrance-button:focus-visible .entrance-copy { opacity: 1; transform: translateY(0); }
+.entrance-button:hover + .entrance-copy strong,.entrance-button:focus-visible + .entrance-copy strong,
+.entrance-button:hover + .entrance-copy span,.entrance-button:focus-visible + .entrance-copy span { opacity:1; transform:translateY(0); }
+.entrance-button:hover + .entrance-copy strong,.entrance-button:focus-visible + .entrance-copy strong { letter-spacing:.12em; }
+.entrance-button:hover + .entrance-copy span,.entrance-button:focus-visible + .entrance-copy span { letter-spacing:.32em; }
 .entrance-screen.is-leaving .entrance-art { transform:scale(1.045); }
 .entrance-screen.is-leaving .entrance-button { opacity: 0; transform:translate(-50%,-50%) scale(1.08); }
-@media (hover:none) { .entrance-copy { opacity:1; transform:none; } }
+@media (hover:none) { .entrance-copy strong,.entrance-copy span { opacity:1; transform:none; } }
 @media (max-aspect-ratio:1/1) { .entrance-button { left:81%; top:50%; } }
 @media (prefers-reduced-motion:reduce) { .entrance-screen,.entrance-art,.entrance-button,.entrance-copy { transition-duration:.01ms!important; } }
 html[data-theme="light"],
@@ -657,9 +666,8 @@ html[data-theme="light"] .playlist-window { border-color:#fff #777477 #777477 #f
 <body>
 <div class="entrance-screen" id="entrance-screen">
   <img class="entrance-art" src="img/entrance-bg.jpg" alt="">
-  <button class="entrance-button" id="entrance-button" type="button" aria-label="상호확증파괴 입장">
-    <span class="entrance-copy"><strong>相互確證破壊</strong><span>ENTER</span></span>
-  </button>
+  <button class="entrance-button" id="entrance-button" type="button" aria-label="상호확증파괴 입장"></button>
+  <span class="entrance-copy"><strong>相互確證破壊</strong><span>ENTER</span></span>
 </div>
 <iframe class="archive-frame" id="archive-frame" title="END OF EDEN archive" src="about:blank"></iframe>
 <aside class="desktop-document" id="desktop-document" aria-label="DOCUMENT">
