@@ -883,7 +883,6 @@ extra.append(document.getElementById('loop'),document.querySelector('.volume-con
 card.prepend(info,timeline,transport,extra);
 transport.appendChild(document.getElementById('queue-toggle'));
 
-var playlistId = 'PLKNbEhdi8XzI';
 var displayTracks = [
   { videoId: 'rBa4ZYxI4vM', title: '미안해 널 미워해', artist: "자우림", duration: 235 },
   { videoId: '4i1wkzAlU5M', title: 'HAPPY DAY', artist: "체리필터", duration: 216 },
@@ -899,6 +898,7 @@ var displayTracks = [
   { videoId: 'oLu4n9HToG0', title: 'Darling', artist: "須田景凪", duration: 149 },
   { videoId: 'ACDf9fhpuqo', title: 'Whiskey and Morphine', artist: "Alexander Jean", duration: 305 }
 ];
+var playableVideoIds = displayTracks.map(function (track) { return track.videoId; }).filter(Boolean);
 var customTitlesByVideoId = {};
 displayTracks.forEach(function (track) {
   if (track.videoId) customTitlesByVideoId[track.videoId] = track.title;
@@ -940,13 +940,22 @@ function formatTime(seconds) {
   return String(minutes).padStart(2, '0') + ':' + String(rest).padStart(2, '0');
 }
 
+function rememberInitialPlaybackGesture() {
+  if (!player || typeof player.playVideo !== 'function') return;
+  document.removeEventListener('pointerdown', rememberInitialPlaybackGesture, true);
+  document.removeEventListener('keydown', rememberInitialPlaybackGesture, true);
+  player.playVideo();
+}
+
+document.addEventListener('pointerdown', rememberInitialPlaybackGesture, true);
+document.addEventListener('keydown', rememberInitialPlaybackGesture, true);
+
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('youtube-player', {
     width: 200,
     height: 200,
+    videoId: playableVideoIds[0],
     playerVars: {
-      listType: 'playlist',
-      list: playlistId,
       playsinline: 1,
       controls: 0,
       rel: 0
@@ -954,7 +963,7 @@ function onYouTubeIframeAPIReady() {
     events: {
       onReady: function (event) {
         event.target.setVolume(60);
-        event.target.cuePlaylist({ listType: 'playlist', list: playlistId });
+        event.target.loadPlaylist(playableVideoIds, 0, 0);
       },
       onStateChange: updatePlayer
     }
