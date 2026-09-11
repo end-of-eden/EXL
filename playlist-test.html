@@ -963,20 +963,78 @@ card.prepend(info,timeline,transport,extra);
 transport.appendChild(document.getElementById('queue-toggle'));
 
 var displayTracks = [
-  { videoId: 'gj_94e-fxlY', title: 'ザムザ (INST)', artist: "てにをは", duration: 212 },
-  { videoId: 'rBa4ZYxI4vM', title: '미안해 널 미워해', artist: "자우림", duration: 235 },
-  { videoId: '4i1wkzAlU5M', title: 'HAPPY DAY', artist: "체리필터", duration: 216 },
-  { videoId: 'CgiPuXwhhfY', title: 'SOS', artist: "Avicii", duration: 157 },
-  { videoId: 'h1QTkwJnX0E', title: 'はぐ', artist: "MORE MORE JUMP！ × 鏡音レン", duration: 159 },
-  { videoId: 'p363yleNtGI', title: '私は、私達は', artist: "MORE MORE JUMP！ × 鏡音レン", duration: 240 },
-  { videoId: 'xt_IlpwNAFo', title: 'light', artist: "wave to earth", duration: 226 },
-  { videoId: 'VcQIpQB4Fiw', title: '大丈夫', artist: "RADWIMPS", duration: 258 },
-  { videoId: 'RvuWxiaPUqQ', title: '야행성', artist: "ONEWE", duration: 223 },
-  { videoId: 'QW87DP4-elQ', title: 'cares', artist: "The Poles", duration: 275 },
-  { videoId: 'ACJyvx9XtAg', title: '虚無さん', artist: "25時、ナイトコードで。 × 鏡音レン", duration: 151 },
-  { videoId: 'oLu4n9HToG0', title: 'Darling', artist: "須田景凪", duration: 149 },
-  { videoId: 'ACDf9fhpuqo', title: 'Whiskey and Morphine', artist: "Alexander Jean", duration: 305 },
-  { videoId: 'FtJUS7jW1sY', title: '너를 위해', artist: "임재범", duration: 247 }
+  {
+    "videoId": "gj_94e-fxlY",
+    "title": "ザムザ (INST)",
+    "artist": "てにをは",
+    "duration": 212
+  },
+  {
+    "videoId": "O43m7A9Qi7Y",
+    "title": "ツギハギスタッカート (INST)",
+    "artist": "REN",
+    "duration": 252
+  },
+  {
+    "videoId": "rBa4ZYxI4vM",
+    "title": "미안해 널 미워해",
+    "artist": "자우림",
+    "duration": 236
+  },
+  {
+    "videoId": "CgiPuXwhhfY",
+    "title": "SOS",
+    "artist": "Avicii",
+    "duration": 158
+  },
+  {
+    "videoId": "QW87DP4-elQ",
+    "title": "cares",
+    "artist": "The Poles",
+    "duration": 275
+  },
+  {
+    "videoId": "ACDf9fhpuqo",
+    "title": "Whiskey and Morphine",
+    "artist": "Alexander Jean",
+    "duration": 306
+  },
+  {
+    "videoId": "FtJUS7jW1sY",
+    "title": "너를 위해",
+    "artist": "임재범",
+    "duration": 247
+  },
+  {
+    "videoId": "1WXjtu5T6Ms",
+    "title": "隣に…",
+    "artist": "Release",
+    "duration": 310
+  },
+  {
+    "videoId": "h1QTkwJnX0E",
+    "title": "はぐ",
+    "artist": "MORE MORE JUMP！ × 鏡音レン",
+    "duration": 160
+  },
+  {
+    "videoId": "KnTzSpNJ-M8",
+    "title": "after the play is over",
+    "artist": "dosii",
+    "duration": 236
+  },
+  {
+    "videoId": "MjQjaB-HedA",
+    "title": "Track 9",
+    "artist": "이소라",
+    "duration": 232
+  },
+  {
+    "videoId": "MK_Su-gQ7SQ",
+    "title": "죽여줘",
+    "artist": "보수동쿨러",
+    "duration": 243
+  }
 ];
 var playableVideoIds = displayTracks.map(function (track) { return track.videoId; }).filter(Boolean);
 var customTitlesByVideoId = {};
