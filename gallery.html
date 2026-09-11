@@ -2,15 +2,15 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<script src="js/theme-init.js?v=20260911-silver"></script>
+<script src="js/theme-init.js?v=20260911-clear-background"></script>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text x='50%25' y='54%25' font-size='70' text-anchor='middle' dominant-baseline='central'>💙</text></svg>"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>END OF EDEN — Gallery</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css">
-<link rel="stylesheet" href="css/style.css?v=20260911-silver">
-<link rel="stylesheet" href="css/pc-page.css?v=20260911-silver">
-<link rel="stylesheet" href="css/explorer-sidebar.css?v=20260911-silver">
+<link rel="stylesheet" href="css/style.css?v=20260911-clear-background">
+<link rel="stylesheet" href="css/pc-page.css?v=20260911-clear-background">
+<link rel="stylesheet" href="css/explorer-sidebar.css?v=20260911-clear-background">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -231,11 +231,12 @@ body {
 .popup-close { top:9px; right:9px; width:22px; height:22px; border:2px solid; border-color:#ffffff #7c7c7c #7c7c7c #ffffff; border-radius:0; background:#d2d2d2; color:#565656; }
 @media(max-width:980px){.gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:640px){.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
-<script src="js/theme.js?v=20260911-silver"></script>
-<script src="js/content-api.js?v=20260911-silver"></script>
-<script src="js/archive-content.js?v=20260911-silver"></script>
-<link rel="stylesheet" href="css/window-controls.css?v=20260911-silver">
-<link rel="stylesheet" href="css/glass-preview.css?v=20260911-silver"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/archive-surfaces.css?v=20260911-silver">
+<script src="js/theme.js?v=20260911-clear-background"></script>
+<script src="js/content-api.js?v=20260911-clear-background"></script>
+<script src="js/archive-content.js?v=20260911-clear-background"></script>
+<link rel="stylesheet" href="css/window-controls.css?v=20260911-clear-background">
+<link rel="stylesheet" href="css/glass-preview.css?v=20260911-clear-background"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/archive-surfaces.css?v=20260911-clear-background">
+<link rel="preconnect" href="https://content.assured.love">
 </head>
 <body class="pc-page-body">
 <main class="pc-page-window">
@@ -292,7 +293,7 @@ function render() {
   var grid = document.getElementById('gallery-grid');
   grid.innerHTML = images.map(function(img, i) {
     return '<div class="gallery-item" onclick="openPopup(' + i + ')">' +
-      '<img src="' + escapeHtml(imageUrl(img)) + '" alt="' + escapeHtml(img.title) + '" loading="lazy">' +
+      '<img src="' + escapeHtml(imageUrl(img)) + '" alt="' + escapeHtml(img.title) + '" loading="' + (i < 4 ? 'eager' : 'lazy') + '" decoding="async">' +
       '<div class="gallery-item-overlay">' +
       '<div class="gallery-item-title">' + escapeHtml(img.title) + '</div>' +
       (img.lyrics ? '<div class="gallery-item-lyrics">' + escapeHtml(img.lyrics) + '</div>' : '') +
@@ -341,6 +342,7 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closePopup();
 });
 
+try { var cached=JSON.parse(sessionStorage.getItem('eden-gallery-list')||'null'); if(Array.isArray(cached))images=cached; } catch (_) {}
 render();
 
 fetch(window.EDEN_CONTENT_API + '/api/gallery')
@@ -353,6 +355,7 @@ fetch(window.EDEN_CONTENT_API + '/api/gallery')
       if (aOrder !== bOrder) return aOrder - bOrder;
       return String(a.createdAt || '').localeCompare(String(b.createdAt || '')) || String(a.id).localeCompare(String(b.id));
     });
+    try { sessionStorage.setItem('eden-gallery-list',JSON.stringify(images)); } catch (_) {}
     render();
   })
   .catch(function() { /* R2가 준비되지 않아도 기존 갤러리는 그대로 표시 */ });
@@ -360,7 +363,7 @@ fetch(window.EDEN_CONTENT_API + '/api/gallery')
 
 </script>
 
-<script src="js/sparkle.js?v=20260911-silver"></script>
-<script src="js/messenger.js?v=20260911-silver"></script>
+<script src="js/sparkle.js?v=20260911-clear-background"></script>
+<script src="js/messenger.js?v=20260911-clear-background"></script>
 </body>
 </html>
