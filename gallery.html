@@ -283,6 +283,10 @@ function imageUrl(img) {
   return window.EDEN_CONTENT_API + img.imagePath;
 }
 
+function thumbnailUrl(img) {
+  return window.EDEN_CONTENT_API + (img.thumbnailPath || img.imagePath);
+}
+
 function escapeHtml(value) {
   return String(value || '').replace(/[&<>"']/g, function(char) {
     return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char];
@@ -294,7 +298,7 @@ function render() {
   if (!images.length) { grid.innerHTML = '<p class="gallery-status" role="status">사진을 불러오는 중…</p>'; return; }
   grid.innerHTML = images.map(function(img, i) {
     return '<div class="gallery-item" role="button" tabindex="0" onclick="openPopup(' + i + ')">' +
-      '<img src="' + escapeHtml(imageUrl(img)) + '" alt="' + escapeHtml(img.title) + '" loading="' + (i < 4 ? 'eager' : 'lazy') + '" decoding="async">' +
+      '<img src="' + escapeHtml(thumbnailUrl(img)) + '" alt="' + escapeHtml(img.title) + '" width="600" height="600" loading="' + (i < 4 ? 'eager' : 'lazy') + '" decoding="async">' +
       '<div class="gallery-item-overlay">' +
       '<div class="gallery-item-title">' + escapeHtml(img.title) + '</div>' +
       (img.lyrics ? '<div class="gallery-item-lyrics">' + escapeHtml(img.lyrics) + '</div>' : '') +
@@ -349,7 +353,7 @@ document.addEventListener('keydown', function(e) {
   if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.gallery-item')) { e.preventDefault(); e.target.click(); }
 });
 
-try { var cached=JSON.parse(sessionStorage.getItem('eden-gallery-list')||'null'); if(Array.isArray(cached))images=cached; } catch (_) {}
+try { var cached=JSON.parse(sessionStorage.getItem('eden-gallery-list-v2')||'null'); if(Array.isArray(cached))images=cached; } catch (_) {}
 render();
 
 fetch(window.EDEN_CONTENT_API + '/api/gallery')
@@ -363,7 +367,7 @@ fetch(window.EDEN_CONTENT_API + '/api/gallery')
       if (aOrder !== bOrder) return aOrder - bOrder;
       return String(a.createdAt || '').localeCompare(String(b.createdAt || '')) || String(a.id).localeCompare(String(b.id));
     });
-    try { sessionStorage.setItem('eden-gallery-list',JSON.stringify(images)); } catch (_) {}
+    try { sessionStorage.setItem('eden-gallery-list-v2',JSON.stringify(images)); } catch (_) {}
     render();
     if (!images.length) document.getElementById('gallery-grid').innerHTML = '<p class="gallery-status" role="status">등록된 사진이 없어요.</p>';
   })

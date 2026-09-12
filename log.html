@@ -210,11 +210,11 @@ function animateLogItems() {
     item.removeAttribute('data-enter-pending');
     item.style.removeProperty('opacity');
     if (reduced || !item.animate) return;
-    var delay = Math.max(0, logEntranceStart + Number(item.dataset.enterIndex) * 140 - performance.now());
+    var delay = Math.max(0, logEntranceStart + Number(item.dataset.enterIndex) * 70 - performance.now());
     item.animate([
-      { opacity: 0, transform: 'translateY(-12px)' },
+      { opacity: 0, transform: 'translateY(-8px)' },
       { opacity: 1, transform: 'translateY(0)' }
-    ], { duration: 480, delay: delay, easing: 'cubic-bezier(.22,.61,.36,1)', fill: 'backwards' });
+    ], { duration: 620, delay: delay, easing: 'cubic-bezier(.22,.61,.36,1)', fill: 'backwards' });
   });
 }
 
