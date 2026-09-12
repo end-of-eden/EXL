@@ -199,6 +199,32 @@ var logs = [
 ];
 
 var base = '';
+var renderedLogIds = new Set();
+var logEntranceReady = false;
+var logEntranceStart = 0;
+
+function animateLogItems() {
+  if (!logEntranceReady) return;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.log-item[data-enter-pending]').forEach(function(item) {
+    item.removeAttribute('data-enter-pending');
+    item.style.removeProperty('opacity');
+    if (reduced || !item.animate) return;
+    var delay = Math.max(0, logEntranceStart + Number(item.dataset.enterIndex) * 140 - performance.now());
+    item.animate([
+      { opacity: 0, transform: 'translateY(-12px)' },
+      { opacity: 1, transform: 'translateY(0)' }
+    ], { duration: 480, delay: delay, easing: 'cubic-bezier(.22,.61,.36,1)', fill: 'backwards' });
+  });
+}
+
+window.startLogEntrance = function() {
+  if (logEntranceReady) return;
+  logEntranceReady = true;
+  logEntranceStart = performance.now();
+  animateLogItems();
+};
+if (window.name !== 'archive-content') window.addEventListener('load', window.startLogEntrance, { once: true });
 
 function escapeHtml(value) {
   return String(value || '').replace(/[&<>"']/g, function(char) {
@@ -208,11 +234,13 @@ function escapeHtml(value) {
 
 function render() {
   var list = document.getElementById('log-list');
-  list.innerHTML = logs.map(function(log) {
+  var newLogs = logs.filter(function(log) { return !renderedLogIds.has(log.id); });
+  var startIndex = renderedLogIds.size;
+  list.insertAdjacentHTML('beforeend', newLogs.map(function(log, index) {
     var href = log.remote
       ? 'Log/view.html?id=' + encodeURIComponent(log.id) + '&v=20260911-log-body-blur'
       : 'Log/' + encodeURIComponent(log.id) + '.html?v=20260911-log-body-blur';
-    return '<div class="log-item" data-href="' + escapeHtml(href) + '">' +
+    return '<div class="log-item" data-enter-pending data-enter-index="' + (startIndex + index) + '" style="opacity:0" data-href="' + escapeHtml(href) + '">' +
       '<div class="log-item-text">' +
       '<div class="log-item-title">' + escapeHtml(log.title) + '</div>' +
       '<div class="log-item-date">' + escapeHtml(log.date) + '</div>' +
@@ -220,11 +248,13 @@ function render() {
       '</div>' +
       '<img class="log-item-thumb" src="' + escapeHtml(log.thumbUrl || (base + log.thumb)) + '" alt="' + escapeHtml(log.title) + '" loading="lazy">' +
       '</div>';
-  }).join('');
+  }).join(''));
+  newLogs.forEach(function(log) { renderedLogIds.add(log.id); });
 
-  Array.prototype.forEach.call(list.querySelectorAll('.log-item'), function(item) {
+  Array.prototype.slice.call(list.querySelectorAll('.log-item'), startIndex).forEach(function(item) {
     item.addEventListener('click', function() { location.href = item.dataset.href; });
   });
+  animateLogItems();
 }
 
 render();

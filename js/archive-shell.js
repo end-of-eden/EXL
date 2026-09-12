@@ -67,13 +67,17 @@
       currentFrame = next;
       pendingFrame = null;
       next.className = 'archive-content-frame is-ready';
+      if (route.path === 'log.html' && typeof next.contentWindow.startLogEntrance === 'function') {
+        next.style.animation = 'none';
+        next.contentWindow.startLogEntrance();
+      }
       slot.removeAttribute('aria-busy');
       selectRoute(route, historyMode);
     });
     var contentUrl = new URL(route.url.href);
     if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260912-style-review');
     if (route.path === 'gallery.html') contentUrl.searchParams.set('v', '20260912-style-review');
-    if (route.path === 'log.html' || route.path.startsWith('Log/')) contentUrl.searchParams.set('v', '20260912-style-review');
+    if (route.path === 'log.html' || route.path.startsWith('Log/')) contentUrl.searchParams.set('v', '20260912-log-stagger');
     next.src = contentUrl.href;
     slot.appendChild(next);
     return true;
