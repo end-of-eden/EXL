@@ -10,7 +10,7 @@ html .wiki-wrap .profile-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:12p
 html .wiki-wrap .profile-tags span{font-size:8px;padding:4px 7px;color:var(--profile-accent);background:#ffffff65;border:1px solid #ffffff90;border-radius:6px;letter-spacing:.04em}
 html .wiki-wrap .profile-tags span+span{background:#ffffff40}
 html .wiki-wrap .heart-switcher{gap:8px;padding-top:4px}
-.profile-tabs{display:flex;margin:8px 24px 22px;border-bottom:1px solid #bdbdbd4d;flex-shrink:0}
+.profile-tabs{display:flex;flex-wrap:wrap;margin:8px 24px 22px;border-bottom:1px solid #bdbdbd4d;flex-shrink:0}
 .profile-tabs button{flex:1;padding:12px 4px;border:0;border-bottom:2px solid transparent;background:transparent;color:#848484;font:inherit;font-size:calc(10px + 2pt);font-weight:700;cursor:pointer}
 .profile-tabs button[aria-pressed="true"]{border-bottom-color:var(--profile-accent);color:var(--profile-accent)}
 .profile-tabs button:focus-visible{outline:2px solid var(--profile-accent);outline-offset:-3px}

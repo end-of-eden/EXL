@@ -235,7 +235,7 @@ body {
 <script src="js/content-api.js?v=20260911-clear-background"></script>
 <script src="js/archive-content.js?v=20260911-clear-background"></script>
 <link rel="stylesheet" href="css/window-controls.css?v=20260911-clear-background">
-<link rel="stylesheet" href="css/glass-preview.css?v=20260911-clear-background"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/archive-surfaces.css?v=20260911-clear-background">
+<link rel="stylesheet" href="css/glass-preview.css?v=20260911-clear-background"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/archive-surfaces.css?v=20260912-style-review">
 <link rel="preconnect" href="https://content.assured.love">
 </head>
 <body class="pc-page-body">
@@ -266,7 +266,7 @@ body {
 </main>
 
 <!-- 팝업 -->
-<div class="popup-bg" id="popup-bg" tabindex="-1" onclick="closePopup(event)">
+<div class="popup-bg" id="popup-bg" role="dialog" aria-modal="true" aria-labelledby="popup-title" tabindex="-1" onclick="closePopup(event)">
   <div class="popup-inner">
     <img id="popup-img" src="" alt="">
     <div class="popup-title" id="popup-title"></div>
@@ -277,7 +277,7 @@ body {
 // Gallery entries come from the upload service.
 var images = [];
 
-var base = 'img/gallery/';
+var popupTrigger = null;
 
 function imageUrl(img) {
   return window.EDEN_CONTENT_API + img.imagePath;
@@ -291,8 +291,9 @@ function escapeHtml(value) {
 
 function render() {
   var grid = document.getElementById('gallery-grid');
+  if (!images.length) { grid.innerHTML = '<p class="gallery-status" role="status">사진을 불러오는 중…</p>'; return; }
   grid.innerHTML = images.map(function(img, i) {
-    return '<div class="gallery-item" onclick="openPopup(' + i + ')">' +
+    return '<div class="gallery-item" role="button" tabindex="0" onclick="openPopup(' + i + ')">' +
       '<img src="' + escapeHtml(imageUrl(img)) + '" alt="' + escapeHtml(img.title) + '" loading="' + (i < 4 ? 'eager' : 'lazy') + '" decoding="async">' +
       '<div class="gallery-item-overlay">' +
       '<div class="gallery-item-title">' + escapeHtml(img.title) + '</div>' +
@@ -303,6 +304,9 @@ function render() {
 
 function openPopup(i) {
   var img = images[i];
+  if (!img) return;
+  popupTrigger = document.querySelectorAll('.gallery-item')[i];
+  document.getElementById('gallery-scroll').inert = true;
   document.getElementById('popup-img').src = imageUrl(img);
   document.getElementById('popup-img').alt = img.title;
   var popupTitle = document.getElementById('popup-title');
@@ -335,11 +339,14 @@ function closePopup(e) {
   if (!e || e.target === document.getElementById('popup-bg')) {
     document.getElementById('popup-bg').classList.remove('open');
     setPhotoViewing(false);
+    document.getElementById('gallery-scroll').inert = false;
+    if (popupTrigger && popupTrigger.isConnected) popupTrigger.focus();
   }
 }
 
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closePopup();
+  if (e.key === 'Escape' && document.getElementById('popup-bg').classList.contains('open')) closePopup();
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.gallery-item')) { e.preventDefault(); e.target.click(); }
 });
 
 try { var cached=JSON.parse(sessionStorage.getItem('eden-gallery-list')||'null'); if(Array.isArray(cached))images=cached; } catch (_) {}
@@ -348,6 +355,7 @@ render();
 fetch(window.EDEN_CONTENT_API + '/api/gallery')
   .then(function(response) { if (!response.ok) throw new Error('load failed'); return response.json(); })
   .then(function(remoteImages) {
+    if (!Array.isArray(remoteImages)) throw new Error('invalid gallery');
     images = remoteImages.slice().sort(function(a, b) {
       // Keep the curated migration order; subsequent uploads follow chronologically.
       var aOrder = Number.isFinite(a.displayOrder) ? a.displayOrder : Infinity;
@@ -357,8 +365,9 @@ fetch(window.EDEN_CONTENT_API + '/api/gallery')
     });
     try { sessionStorage.setItem('eden-gallery-list',JSON.stringify(images)); } catch (_) {}
     render();
+    if (!images.length) document.getElementById('gallery-grid').innerHTML = '<p class="gallery-status" role="status">등록된 사진이 없어요.</p>';
   })
-  .catch(function() { /* R2가 준비되지 않아도 기존 갤러리는 그대로 표시 */ });
+  .catch(function() { if (!images.length) document.getElementById('gallery-grid').innerHTML = '<p class="gallery-status" role="alert">사진을 불러오지 못했어요. 잠시 후 다시 열어주세요.</p>'; });
 
 
 </script>

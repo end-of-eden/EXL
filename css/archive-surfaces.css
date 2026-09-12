@@ -1,4 +1,4 @@
-/* Shared rose-glass surfaces for the main archive and its content documents. */
+/* Shared silver-glass surfaces for the main archive and its content documents. */
 html[data-theme] .main-wrap {
   background:linear-gradient(135deg,rgba(228,228,228,.58),rgba(213,213,213,.38))!important;
 }
@@ -22,7 +22,7 @@ html[data-theme].archive-content-document .pc-page-window {
 html[data-theme] .gallery-scroll,
 html[data-theme] .log-scroll {
   background:linear-gradient(135deg,rgba(230,230,230,.16),rgba(219,219,219,.12));
-  scrollbar-color:#86868670 transparent; scrollbar-width:thin;
+
 }
 html[data-theme] .gallery-item {
   background:rgba(235,235,235,.24); border:1px solid #ffffff70; border-radius:12px;
@@ -45,8 +45,8 @@ html[data-theme] .log-item-title { color:#3e3e3e; }
 html[data-theme] .log-item-preview { color:#545454; }
 html[data-theme] .log-item-date { color:#676767; }
 html[data-theme] .log-item-thumb { border:1px solid #ffffff60; border-radius:9px; }
-html[data-theme] body .detail-wrap { background:rgba(234,234,234,.86)!important; }
-html[data-theme] body .detail-scroll { background:transparent!important; scrollbar-color:#86868670 transparent; scrollbar-width:thin; }
+html[data-theme] body .detail-wrap { background:transparent!important; box-shadow:none!important; }
+html[data-theme] body .detail-scroll { background:transparent!important;  }
 html[data-theme] body .detail-title { color:#363636; }
 html[data-theme] body .detail-body,
 html[data-theme] body .detail-quote,
@@ -64,17 +64,12 @@ html[data-theme] body .video-meta,
 html[data-theme] body .video-thumb-desc,
 html[data-theme] body .yt-channel-meta,
 html[data-theme] body .log-divider-label { color:#565656; }
-html[data-theme] .gallery-scroll::-webkit-scrollbar,
-html[data-theme] .log-scroll::-webkit-scrollbar { width:6px; }
-html[data-theme] .gallery-scroll::-webkit-scrollbar-track,
-html[data-theme] .log-scroll::-webkit-scrollbar-track { background:transparent; }
-html[data-theme] .gallery-scroll::-webkit-scrollbar-thumb,
-html[data-theme] .log-scroll::-webkit-scrollbar-thumb { border:0; border-radius:8px; background:#86868670; }
 @media(max-width:640px) {
   html[data-theme] .log-item { padding:12px; gap:12px; }
   html[data-theme] .log-item-thumb { width:80px; height:96px; }
 }
 @media(prefers-reduced-transparency:reduce) {
+  html[data-theme] .main-wrap,html[data-theme] .pc-page-window { background:#dcdcdc!important; }
   html[data-theme] .main-wrap,html[data-theme] .pc-page-window { background:#dcdcdc!important; }
   html[data-theme] body .detail-wrap { background:#e8e8e8!important; }
 }
@@ -88,8 +83,6 @@ html.gallery-photo-open .main-window-controls { visibility:hidden!important; }
 @media(prefers-reduced-motion:reduce) { .popup-bg.open,.popup-bg.open .popup-inner { animation:none; } }
 
 /* Log reading surfaces inherit the surrounding glass background. */
-html[data-theme] .detail-wrap,
-html[data-theme] .detail-scroll{background:transparent!important;box-shadow:none!important}
 html[data-theme="light"] .detail-body{color:#535353}
 html[data-theme="light"] .detail-title{color:#2d2d2d}
 
@@ -102,3 +95,21 @@ html[data-theme="light"] .detail-title{color:#2d2d2d}
 /* Blur the existing reading panel, without boxing the body text. */
 html[data-theme] .detail-wrap:has(.detail-body-glass){background:rgba(235,235,235,.08)!important;backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
 html[data-theme] .detail-body.detail-body-glass{text-align:justify;text-indent:1em}
+
+/* Keep the complete photo and caption inside short viewports. */
+html[data-theme] .popup-inner { display:flex; flex-direction:column; max-height:calc(100dvh - 24px); }
+html[data-theme] .popup-inner img { min-height:0; flex:0 1 auto; }
+html[data-theme] .popup-title { flex:0 0 auto; }
+
+/* Standard scrollbar colors override WebKit styling in Chromium. */
+html[data-theme] :is(.gallery-scroll,.log-scroll,.detail-scroll,.popup-title) { scrollbar-width:auto; scrollbar-color:auto; }
+html[data-theme] :is(.gallery-scroll,.log-scroll,.detail-scroll,.popup-title)::-webkit-scrollbar { width:5px; height:5px; }
+html[data-theme] :is(.gallery-scroll,.log-scroll,.detail-scroll,.popup-title)::-webkit-scrollbar-button { width:0; height:0; display:none; }
+html[data-theme] :is(.gallery-scroll,.log-scroll,.detail-scroll,.popup-title)::-webkit-scrollbar-track { background:transparent; margin-block:4px; }
+html[data-theme] :is(.gallery-scroll,.log-scroll,.detail-scroll,.popup-title)::-webkit-scrollbar-thumb { border:0; border-radius:4px; background:#5d5d5d4d; }
+.gallery-item:focus-visible { outline:2px solid #777; outline-offset:3px; }
+.gallery-status { padding:24px; color:#555; font-size:13px; }
+@media(prefers-reduced-transparency:reduce) {
+  html[data-theme] body .detail-wrap,
+  html[data-theme] .detail-wrap:has(.detail-body-glass) { background:#e8e8e8!important; backdrop-filter:none; -webkit-backdrop-filter:none; }
+}
