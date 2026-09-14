@@ -1117,7 +1117,7 @@ function updatePlayer(event) {
   document.getElementById('play').setAttribute('aria-pressed', String(playing));
   document.getElementById('play').setAttribute('aria-label', playing ? '일시정지' : '재생');
   document.getElementById('play').setAttribute('title', playing ? '일시정지' : '재생');
-  document.querySelector('#play svg path').setAttribute('d', playing ? 'M5 4h5v16H5zM14 4h5v16h-5z' : 'M6 4l14 8-14 8z');
+  if (window.animatePlayerIcon) window.animatePlayerIcon(playing);
   document.getElementById('pause').setAttribute('aria-pressed', String(event.data === YT.PlayerState.PAUSED));
 
   playlist = player.getPlaylist() || playlist;
@@ -1144,28 +1144,12 @@ function renderLyrics(videoId) {
   document.getElementById(name + '-toggle').addEventListener('click', function () {
     var panel = document.getElementById('player-' + name);
     if (name === 'queue') {
-      var previous = panel.getAnimations ? panel.getAnimations() : [];
-      var closing = this.getAttribute('aria-expanded') === 'true';
-      var fromHeight = panel.hidden ? 0 : panel.getBoundingClientRect().height;
-      previous.forEach(function (animation) { animation.cancel(); });
-      panel.hidden = false;
-      var naturalHeight = panel.getBoundingClientRect().height;
-      this.setAttribute('aria-expanded', String(!closing));
-      if (!closing) {
+      var open = this.getAttribute('aria-expanded') !== 'true';
+      if (open) {
         document.getElementById('player-lyrics').hidden = true;
         document.getElementById('lyrics-toggle').setAttribute('aria-expanded', 'false');
       }
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !panel.animate) {
-        panel.hidden = closing;
-      } else {
-        var animation = panel.animate([
-          { height: fromHeight + 'px', opacity: closing ? 1 : 0 },
-          { height: (closing ? 0 : naturalHeight) + 'px', opacity: closing ? 0 : 1 }
-        ], { duration: 200, easing: 'cubic-bezier(.22,.7,.25,1)' });
-        panel.style.overflow = 'hidden';
-        animation.onfinish = function () { panel.hidden = closing; panel.style.overflow = ''; };
-        animation.oncancel = function () { panel.style.overflow = ''; };
-      }
+      window.animatePlayerQueue(open);
       return;
     }
     panel.hidden = !panel.hidden;
@@ -1440,5 +1424,6 @@ if (!window.matchMedia || !window.matchMedia('(max-width: 820px), (hover: none) 
   }, { once: true });
 })();
 </script>
+<script src="js/player-motion.js?v=20260914"></script>
 </body>
 </html>
