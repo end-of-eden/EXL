@@ -1,0 +1,66 @@
+/* Zamza PV palette. Every rule is limited to dark mode. */
+html[data-theme="dark"] {
+  --bg:#0c0b10; --surface:#211e30; --surface-2:#302b43;
+  --text:#e9e7f1; --text-2:#c6c1d6; --text-3:#a39bb9;
+  --border:#b0a2d126; --border-strong:#b0a2d140;
+  --pink:#b3a0eb; --blue:#a697db; --eden-blue:#a697db; --lilith-pink:#b3a0eb;
+  --color-background-primary:#17141f; --color-background-secondary:#211e30; --color-background-tertiary:#302b43;
+  --color-text-primary:#e9e7f1; --color-text-secondary:#c6c1d6; --color-text-tertiary:#a39bb9;
+  --color-border-tertiary:#b0a2d126; --color-border-secondary:#b0a2d140;
+  background:#0c0b10!important;
+}
+html[data-theme="dark"] body { color:var(--text); background:transparent!important; }
+html[data-theme="dark"]:has(body > .archive-frame) {
+  background:radial-gradient(ellipse at 76% 22%,#33274c 0,transparent 52%),radial-gradient(ellipse at 14% 85%,#242133 0,transparent 48%),#09090d!important;
+}
+html[data-theme="dark"] body > .archive-frame { background:transparent!important; }
+html[data-theme="dark"] body :is(.main-wrap,.playlist-window,.desktop-document,.dday-window,.banner-window,.pc-page-window),
+html[data-theme="dark"] body > .arch-messenger-root > .msg-panel {
+  background:linear-gradient(135deg,rgba(69,61,91,.76),rgba(24,22,34,.86))!important;
+  border-color:#b6a7d832 #b6a7d81c #b6a7d812!important;
+  box-shadow:inset 0 1px 0 #d4c8ef0d,0 12px 34px #0005!important;
+  backdrop-filter:blur(20px) saturate(115%)!important;
+  -webkit-backdrop-filter:blur(20px) saturate(115%)!important;
+  color:var(--text)!important;
+}
+html[data-theme="dark"].archive-content-document,
+html[data-theme="dark"].archive-content-document body,
+html[data-theme="dark"] body :is(.archive-content-slot,.archive-content-frame,.agent-workspace,.agent-window,.wiki-wrap,.home-content,.gallery-wrap,.log-wrap,.detail-wrap,.detail-scroll,.pc-page-workspace) { background:transparent!important; }
+html[data-theme="dark"].archive-content-document body .pc-page-window { background:transparent!important; box-shadow:none!important; }
+html[data-theme="dark"] body .sidebar-stack { background:#100e1b55!important; border-right-color:#afa0cf20!important; }
+html[data-theme="dark"] body :is(.main-windowbar,.main-toolbar,.main-address,.player-windowbar,.desktop-document__bar,.dday-window__bar,.banner-window__bar,.msg-windowbar,.pc-page-windowbar,.pc-page-toolbar,.pc-page-address) { background:transparent!important; color:#cbc5da!important; border-color:#afa0cf20!important; }
+html[data-theme="dark"] body :is(.main-toolbar-nav,.archive-window-control,.main-window-button,.desktop-document__button,.msg-window-button,.theme-toggle) { color:#c6bfd9!important; }
+html[data-theme="dark"] body .explorer-sidebar :is(.explorer-root,.explorer-branch-title,.explorer-tree a,.explorer-drive) { color:#c6c1d6!important; }
+html[data-theme="dark"] body .explorer-sidebar :is(.explorer-label,.explorer-chevron) { color:#a39bb9!important; }
+html[data-theme="dark"] body .explorer-sidebar a.active,
+html[data-theme="dark"] body .explorer-sidebar .explorer-tree a.active { color:#c1a8ff!important; }
+html[data-theme="dark"] body .explorer-sidebar svg { fill:currentColor; }
+html[data-theme="dark"] body :is(.desktop-document__body,.banner-window__body,.wiki-panel,.popup-inner,.log-item,.gallery-item,.msg-body,.msg-header) { background:rgba(43,38,59,.76)!important; border-color:#b0a2d126!important; box-shadow:none!important; color:var(--text)!important; }
+html[data-theme="dark"] body .wiki-wrap { --profile-accent:#b6a0ee; --profile-muted:#a39bb9; }
+html[data-theme="dark"] body .wiki-wrap .wiki-panel { backdrop-filter:blur(20px)!important; -webkit-backdrop-filter:blur(20px)!important; }
+html[data-theme="dark"] body :is(.wiki-title,.info-value,.section-title,.log-item-title,.detail-title,.popup-title,.video-title,.yt-video-title,.board-title) { color:#e9e7f1!important; }
+html[data-theme="dark"] body :is(.desc-block,.log-block,.detail-body,.detail-quote,.detail-quote p,.log-item-preview,.popup-lyrics,.desktop-document__copy,.banner-window__copy,.video-desc,.video-meta,.msg-name,.msg-text) { color:#c6c1d6!important; }
+html[data-theme="dark"] body :is(.info-label,.profile-eyebrow,.detail-meta,.log-item-date,.agent-back,.back-btn,.desktop-document__heading,.media-caption,.queue-heading) { color:#a39bb9!important; }
+html[data-theme="dark"] body .wiki-wrap :is(.ability-block,.tmi-block,.member-card,.note-list,.profile-tags span) { background:#8672b01a!important; border-color:#b0a2d126!important; color:#c6c1d6!important; }
+html[data-theme="dark"] body .profile-tabs button { color:#a39bb9; }
+html[data-theme="dark"] body .profile-tabs button[aria-pressed="true"] { color:#c1a8ff; border-bottom-color:#9e7ddb; }
+html[data-theme="dark"] body .playlist-window .media-copy .track-title,
+html[data-theme="dark"] body .playlist-window .media-transport .control { color:#e9e7f1!important; }
+html[data-theme="dark"] body .playlist-window .media-timeline .time,
+html[data-theme="dark"] body .playlist-window #player-queue .queue-duration { color:#b8afcc!important; }
+html[data-theme="dark"] body .playlist-window #player-queue .queue-name { color:#ddd7ea!important; }
+html[data-theme="dark"] body .playlist-window #player-queue .queue-item.active { background:#9877d42b!important; }
+html[data-theme="dark"] body .playlist-window .media-transport #queue-toggle { color:#c6b5e7!important; }
+html[data-theme="dark"] body .playlist-window .media-transport #queue-toggle[aria-expanded="true"] { background:#9877d42b!important; }
+html[data-theme="dark"] body .media-timeline .progress { background:#b0a2d12b!important; }
+html[data-theme="dark"] body .media-timeline .progress-fill { background:#aa88e8!important; }
+html[data-theme="dark"] body :is(.log-item:hover,.gallery-item:hover) { background:#51426580!important; }
+html[data-theme="dark"] body .theme-toggle { background:#292235!important; }
+@media (prefers-reduced-transparency:reduce) {
+  html[data-theme="dark"] body :is(.main-wrap,.playlist-window,.desktop-document,.dday-window,.banner-window,.wiki-panel,.msg-panel) { background:#292435!important; backdrop-filter:none!important; -webkit-backdrop-filter:none!important; }
+}
+html[data-theme="dark"] body .playlist-window:has(#queue-toggle[aria-expanded="true"]) {
+  background:linear-gradient(135deg,rgba(62,54,83,.90),rgba(24,22,34,.94))!important;
+}
+html[data-theme="dark"] body .playlist-window #player-queue .queue-item:not(.active):hover { background:#9877d41f!important; color:#e9e7f1!important; }
+html[data-theme="dark"] body .playlist-window #player-queue .queue-heading { color:#a39bb9!important; }
