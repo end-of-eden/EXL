@@ -102,3 +102,8 @@ html[data-theme="dark"] body :is(.log-scroll,.detail-scroll)::-webkit-scrollbar-
   html[data-theme="dark"] body .detail-wrap,
   html[data-theme="dark"] body .detail-wrap:has(.detail-body-glass) { background:#292435!important; }
 }
+/* Embedded documents must reveal the desktop photograph behind the shell. */
+html[data-theme="dark"]:not(:has(body > .archive-frame)),
+html[data-theme="dark"]:not(:has(body > .archive-frame)) > body {
+  background:transparent!important;
+}
