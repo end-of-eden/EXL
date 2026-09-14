@@ -1,0 +1,18 @@
+html[data-theme] .explorer-sidebar a.gdock-item {
+  transform:none!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.explorer-sidebar .gdock-glyph {
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  transform:translateX(calc(8px * var(--f, 0))) scale(calc(1 + .32 * var(--f, 0)));
+  transform-origin:0 50%;
+  transition:transform 220ms cubic-bezier(.32,.72,.24,1);
+  pointer-events:none;
+}
+.explorer-sidebar .gdock-item.active .gdock-glyph { margin-left:6px; }
+@media (prefers-reduced-motion:reduce) {
+  .explorer-sidebar .gdock-glyph { transform:none; transition:none; }
+}
