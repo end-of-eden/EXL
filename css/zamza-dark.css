@@ -67,11 +67,11 @@ html[data-theme="dark"] body .playlist-window #player-queue .queue-heading { col
 
 /* Blur only the desktop photograph, never the windows or text. */
 html[data-theme="dark"]:has(body > .archive-frame) > body { isolation:isolate; }
-html[data-theme="dark"]:has(body > .archive-frame) > body::before {
+html[data-theme="dark"] body > .dark-desktop-background {
   content:'';
   position:fixed;
   inset:-18px;
-  z-index:-1;
+  z-index:0;
   pointer-events:none;
   background:url('../img/desktop-dark.jpg') center/cover no-repeat;
   filter:blur(6px);
@@ -107,3 +107,7 @@ html[data-theme="dark"]:not(:has(body > .archive-frame)),
 html[data-theme="dark"]:not(:has(body > .archive-frame)) > body {
   background:transparent!important;
 }
+
+.dark-desktop-background { display:none; }
+html[data-theme="dark"] body > .dark-desktop-background { display:block; }
+html[data-theme="dark"] { color-scheme:dark; }
