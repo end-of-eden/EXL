@@ -76,3 +76,29 @@ html[data-theme="dark"]:has(body > .archive-frame) > body::before {
   background:url('../img/desktop-dark.jpg') center/cover no-repeat;
   filter:blur(6px);
 }
+/* Log emphasis has its own colors; it cannot inherit the light reading palette. */
+html[data-theme="dark"] body .detail-body { color:#d2ccdf!important; }
+html[data-theme="dark"] body .detail-body :is(strong,b,.log-dialogue) { color:#f0eaf9!important; }
+html[data-theme="dark"] body .detail-body :is(em,i,.log-thought) { color:#cbbce8!important; }
+html[data-theme="dark"] body .detail-body .log-dialogue-block {
+  background:#a88bd61f!important; border-left-color:#ab8cdb!important;
+}
+html[data-theme="dark"] body .detail-body :is(code,pre,.log-code) {
+  color:#dfd1f4!important; background:#171320!important; border-color:#9980be55!important;
+}
+html[data-theme="dark"] body .detail-body :is(blockquote,mark) {
+  color:#eee5fa!important; background:#6b518c38!important; border-color:#ab8cdb!important;
+}
+html[data-theme="dark"] body .detail-body a { color:#c7a6ff!important; }
+html[data-theme="dark"] body .detail-body :is(summary,.log-thought:hover) { color:#f0eaf9!important; }
+html[data-theme="dark"] body :is(.detail-meta,.log-item-date,.log-divider-label,.video-meta,.video-thumb-desc,.yt-channel-meta,.story-msg-time) { color:#b5acc9!important; }
+html[data-theme="dark"] body :is(.label-eden,.line-eden,.story-msg-row.eden .story-msg-name) { color:#c7c0ed!important; }
+html[data-theme="dark"] body :is(.label-lilith,.line-lilith,.story-msg-row.lilith .story-msg-name) { color:#dec5ea!important; }
+html[data-theme="dark"] body .story-msg-row .story-msg-bubble { color:#eee8f7!important; background:#62517533!important; border-color:#b0a2d140!important; }
+html[data-theme="dark"] body .video-block { background:#201b2c99!important; border-color:#b0a2d126!important; }
+html[data-theme="dark"] body .detail-wrap:has(.detail-body-glass) { background:#211c2c80!important; }
+html[data-theme="dark"] body :is(.log-scroll,.detail-scroll)::-webkit-scrollbar-thumb { background:#a798c466!important; }
+@media(prefers-reduced-transparency:reduce) {
+  html[data-theme="dark"] body .detail-wrap,
+  html[data-theme="dark"] body .detail-wrap:has(.detail-body-glass) { background:#292435!important; }
+}
