@@ -1,4 +1,5 @@
-@import url('https://cdn.cursors-4u.net/cursors/animated/baby-blue-spinning-heart-within-a-heart-3c401aa2-32.css');
+/* Angel Wing Heart — https://www.cursors-4u.com/cursor/angel-wing-heart */
+* { cursor: url('https://cdn.cursors-4u.net/previews/angel-wing-heart-800e0eca-32.webp') 32 32, auto !important; }
 
 /* 여기에 나머지 스타일 추가 */
 img {
