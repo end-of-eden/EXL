@@ -74,7 +74,7 @@ html[data-theme="dark"] body > .dark-desktop-background {
   z-index:0;
   pointer-events:none;
   background:url('../img/desktop-dark.jpg') center/cover no-repeat;
-  filter:blur(6px);
+  filter:blur(2px);
 }
 /* Log emphasis has its own colors; it cannot inherit the light reading palette. */
 html[data-theme="dark"] body .detail-body { color:#d2ccdf!important; }
