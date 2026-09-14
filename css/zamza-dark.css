@@ -122,3 +122,9 @@ html[data-theme="dark"] body .wiki-wrap .profile-tabs button[aria-pressed="true"
 html[data-theme="dark"] body .wiki-wrap :is(.profile-tags span,.attr-tag,.member-attr) { color:#e1d4f6!important; background:#55436d!important; border-color:#bfa6de40!important; }
 html[data-theme="dark"] body .wiki-wrap .wiki-title::after { color:#c1b7d3!important; }
 html[data-theme="dark"] body .wiki-wrap .team-nav button { color:#e1d4f6!important; border-color:#bfa6de55; }
+/* Character selection screen: names remain visible behind the portraits. */
+html[data-theme="dark"] body .entry {
+  background:radial-gradient(ellipse at 25% 35%,#51436530,transparent 65%),radial-gradient(ellipse at 75% 65%,#73608d20,transparent 65%);
+}
+html[data-theme="dark"] body .entry-names { color:rgba(218,207,238,.68); }
+html[data-theme="dark"] body .entry .character:focus-visible { outline-color:#c6a5f0; }
