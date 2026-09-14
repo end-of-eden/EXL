@@ -11,7 +11,7 @@ html[data-theme="dark"] {
 }
 html[data-theme="dark"] body { color:var(--text); background:transparent!important; }
 html[data-theme="dark"]:has(body > .archive-frame) {
-  background:radial-gradient(ellipse at 76% 22%,#33274c 0,transparent 52%),radial-gradient(ellipse at 14% 85%,#242133 0,transparent 48%),#09090d!important;
+  background:#161616!important;
 }
 html[data-theme="dark"] body > .archive-frame { background:transparent!important; }
 html[data-theme="dark"] body :is(.main-wrap,.playlist-window,.desktop-document,.dday-window,.banner-window,.pc-page-window),
@@ -64,3 +64,15 @@ html[data-theme="dark"] body .playlist-window:has(#queue-toggle[aria-expanded="t
 }
 html[data-theme="dark"] body .playlist-window #player-queue .queue-item:not(.active):hover { background:#9877d41f!important; color:#e9e7f1!important; }
 html[data-theme="dark"] body .playlist-window #player-queue .queue-heading { color:#a39bb9!important; }
+
+/* Blur only the desktop photograph, never the windows or text. */
+html[data-theme="dark"]:has(body > .archive-frame) > body { isolation:isolate; }
+html[data-theme="dark"]:has(body > .archive-frame) > body::before {
+  content:'';
+  position:fixed;
+  inset:-18px;
+  z-index:-1;
+  pointer-events:none;
+  background:url('../img/desktop-dark.jpg') center/cover no-repeat;
+  filter:blur(6px);
+}
