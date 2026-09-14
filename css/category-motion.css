@@ -7,7 +7,7 @@ html[data-theme] .explorer-sidebar a.gdock-item {
   display:inline-flex;
   align-items:center;
   gap:7px;
-  transform:translateX(calc(8px * var(--f, 0))) scale(calc(1 + .32 * var(--f, 0)));
+  transform:translateX(calc(3px * var(--f, 0))) scale(calc(1 + .10 * var(--f, 0)));
   transform-origin:0 50%;
   transition:transform 220ms cubic-bezier(.32,.72,.24,1);
   pointer-events:none;
