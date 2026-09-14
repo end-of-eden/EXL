@@ -111,3 +111,14 @@ html[data-theme="dark"]:not(:has(body > .archive-frame)) > body {
 .dark-desktop-background { display:none; }
 html[data-theme="dark"] body > .dark-desktop-background { display:block; }
 html[data-theme="dark"] { color-scheme:dark; }
+/* Agent dossiers: keep every tab readable against portraits and dark glass. */
+html[data-theme="dark"] body .wiki-wrap { color:#eee9f7; --profile-muted:#c1b7d3; }
+html[data-theme="dark"] body .wiki-wrap .wiki-panel { background:rgba(35,29,48,.90)!important; }
+html[data-theme="dark"] body .wiki-wrap :is(.desc-block,.log-block,.note-list li,.tmi-value,.member-desc,.ability-block) { color:#ddd6ea!important; }
+html[data-theme="dark"] body .wiki-wrap :is(.ability-block strong,.member-name,.info-value,strong,b) { color:#f4effb!important; }
+html[data-theme="dark"] body .wiki-wrap :is(.info-label,.tmi-label,.team-label,.profile-eyebrow,.agent-back,.char-codename) { color:#c1b7d3!important; }
+html[data-theme="dark"] body .wiki-wrap .profile-tabs button { color:#c7bdd8!important; }
+html[data-theme="dark"] body .wiki-wrap .profile-tabs button[aria-pressed="true"] { color:#dcc6ff!important; border-bottom-color:#b995ee; }
+html[data-theme="dark"] body .wiki-wrap :is(.profile-tags span,.attr-tag,.member-attr) { color:#e1d4f6!important; background:#55436d!important; border-color:#bfa6de40!important; }
+html[data-theme="dark"] body .wiki-wrap .wiki-title::after { color:#c1b7d3!important; }
+html[data-theme="dark"] body .wiki-wrap .team-nav button { color:#e1d4f6!important; border-color:#bfa6de55; }
