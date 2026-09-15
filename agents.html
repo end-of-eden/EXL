@@ -26,13 +26,13 @@
 .entry.leaving .art{pointer-events:none}
 .entry.leaving .entry-names{opacity:0;transition:opacity .3s}
 .entry.leaving .art img{transition:transform .3s ease-in,opacity .3s ease-in}
-.entry.leaving .art .portrait-base,.entry.leaving .art .portrait-layer{opacity:0}
+.entry.leaving/* Keep the same portraits visible through hover so names cannot flash through a crossfade. */
+.art .portrait-layer{opacity:1}
 .entry.leaving .art[data-active="eden"] .portrait-eden{transform:translateX(-90px) scale(1.08)}
 .entry.leaving .art[data-active="lilith"] .portrait-lilith{transform:translateX(90px) scale(1.08)}.entry.leaving .hint{opacity:0}
  .art .portrait-layer{opacity:0}
 .art .portrait-eden{transform-origin:35% 25%}
 .art .portrait-lilith{transform-origin:72% 25%}
-.art[data-active] .portrait-base{opacity:0}
 .art[data-active] .portrait-layer{opacity:1;filter:brightness(.82) blur(3px)}
 .art[data-active="eden"] .portrait-eden,
 .art[data-active="lilith"] .portrait-lilith{filter:none;transform:scale(1.08);z-index:2}
@@ -45,7 +45,6 @@
 <main class="entry" aria-label="캐릭터 선택">
  <div class="art">
   <div class="entry-names" aria-hidden="true"><span>EDEN</span><span>LILITH</span></div>
-  <img class="portrait-base" src="https://content.assured.love/media/gallery/images/agents-main-20260910.webp" width="2400" height="1642" alt="왼쪽의 에덴과 오른쪽의 릴리스">
   <img class="portrait-layer portrait-eden" src="https://content.assured.love/media/gallery/images/agents-eden-20260910.webp" width="2400" height="1642" alt="" aria-hidden="true">
   <img class="portrait-layer portrait-lilith" src="https://content.assured.love/media/gallery/images/agents-lilith-20260910.webp" width="2400" height="1642" alt="" aria-hidden="true">
   <button class="character eden" aria-label="에덴 프로필 열기" data-character="eden"></button>
