@@ -14,24 +14,17 @@
   function reset() {
     items.forEach(function (item) { item.style.setProperty('--f', '0'); });
   }
-  function update(y) {
+  function update(target) {
+    var active = target.closest('.gdock-item');
     items.forEach(function (item) {
-      var rect = item.getBoundingClientRect();
-      var d = Math.min(3, Math.abs(y - rect.top - rect.height / 2) / Math.max(24, rect.height));
-      item.style.setProperty('--d', d);
-      item.style.setProperty('--f', reduced.matches ? 0 : (1 + Math.cos(Math.PI * d / 3)) / 2);
+      item.style.setProperty('--f', !reduced.matches && item === active ? '1' : '0');
     });
   }
   nav.addEventListener('pointermove', function (event) {
-    if (event.pointerType !== 'touch') update(event.clientY);
+    if (event.pointerType !== 'touch') update(event.target);
   });
   nav.addEventListener('pointerleave', reset);
-  nav.addEventListener('focusin', function (event) {
-    var item = event.target.closest('.gdock-item');
-    if (!item) return;
-    var rect = item.getBoundingClientRect();
-    update(rect.top + rect.height / 2);
-  });
+  nav.addEventListener('focusin', function (event) { update(event.target); });
   nav.addEventListener('focusout', reset);
   reduced.addEventListener('change', reset);
 })();
