@@ -128,3 +128,17 @@ html[data-theme="dark"] body .entry {
 }
 html[data-theme="dark"] body .entry-names { color:rgba(218,207,238,.68); }
 html[data-theme="dark"] body .entry .character:focus-visible { outline-color:#c6a5f0; }
+
+/* SNS status and conversation retain their colors in dark mode. */
+html[data-theme="dark"] body .msg-online-dot { background:#6ddd9a!important; box-shadow:0 0 7px #6ddd9a66!important; }
+html[data-theme="dark"] body .msg-header-sub { color:#9be5b7!important; }
+html[data-theme="dark"] body .msg-header-title { color:#eee8f7!important; }
+html[data-theme="dark"] body > .arch-messenger-root .msg-footer { background:rgba(43,38,59,.76)!important; border-color:#b0a2d126!important; }
+html[data-theme="dark"] body > .arch-messenger-root .msg-row.eden .msg-bubble { background:#40374f!important; color:#eee8f7!important; }
+html[data-theme="dark"] body > .arch-messenger-root .msg-row.lilith .msg-bubble { background:#65517d!important; color:#faf5ff!important; }
+html[data-theme="dark"] body :is(.msg-time,.msg-divider span,.msg-footer-icon) { color:#bcb1ce!important; }
+html[data-theme="dark"] body .msg-input { background:#251f32!important; border-color:#b0a2d140!important; color:#c9bfd9!important; }
+html[data-theme="dark"] body .msg-send { background:#9374b8!important; color:#fff!important; }
+html[data-theme="dark"] body .msg-send:hover { background:#a58ac6!important; }
+html[data-theme="dark"] body .msg-body::-webkit-scrollbar-track { background:transparent; }
+html[data-theme="dark"] body .msg-body::-webkit-scrollbar-thumb { background:#776789; border-radius:8px; }
