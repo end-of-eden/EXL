@@ -26,11 +26,11 @@
 .entry.leaving .art{pointer-events:none}
 .entry.leaving .entry-names{opacity:0;transition:opacity .3s}
 .entry.leaving .art img{transition:transform .3s ease-in,opacity .3s ease-in}
-.entry.leaving/* Keep the same portraits visible through hover so names cannot flash through a crossfade. */
-.art .portrait-layer{opacity:1}
+.entry.leaving .art .portrait-layer{opacity:0}
 .entry.leaving .art[data-active="eden"] .portrait-eden{transform:translateX(-90px) scale(1.08)}
 .entry.leaving .art[data-active="lilith"] .portrait-lilith{transform:translateX(90px) scale(1.08)}.entry.leaving .hint{opacity:0}
- .art .portrait-layer{opacity:0}
+/* Hover changes transform and filter, never portrait opacity. */
+.art .portrait-layer{opacity:1;filter:brightness(1) blur(0px);will-change:transform,filter}
 .art .portrait-eden{transform-origin:35% 25%}
 .art .portrait-lilith{transform-origin:72% 25%}
 .art[data-active] .portrait-layer{opacity:1;filter:brightness(.82) blur(3px)}
