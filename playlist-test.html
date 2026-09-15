@@ -457,6 +457,14 @@ html[data-theme="light"] .player-window-button { border-color: #ffffff #7c7c7c #
 .banner-window__body { margin-top: 5px; padding: 12px 10px; border: 2px solid; border-color: #272727 #727272 #727272 #272727; background: #191919; }
 .banner-window__copy { margin: 0 0 9px; color: #c1c1c1; font: 9px/1.65 "Galmuri11", "Pretendard", sans-serif; }
 .banner-window__images { display: grid; gap: 7px; }
+.banner-window__friends { display:grid; gap:12px; }
+.banner-window__friend { position:relative; display:block; width:200px; max-width:100%; overflow:hidden; }
+.banner-window__friend img { transition:filter .22s ease; }
+.banner-window__friend span { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:4px; background:rgba(20,16,23,.32); color:#fff; font:600 11px/1.3 'Pretendard',sans-serif; letter-spacing:.02em; text-align:center; opacity:0; transition:opacity .22s ease; pointer-events:none; }
+.banner-window__friend:hover img,.banner-window__friend:focus-visible img { filter:blur(2px) brightness(.65); }
+.banner-window__friend:hover span,.banner-window__friend:focus-visible span { opacity:1; }
+@media(prefers-reduced-motion:reduce){.banner-window__friend img,.banner-window__friend span{transition:none}}
+
 .banner-window__images img { width: 200px; max-width: 100%; height: 40px; display: block; object-fit: cover; }
 .banner-window.is-collapsed .banner-window__body { display: none; }
 .banner-window__button[data-banner-toggle] { cursor: pointer; }
@@ -714,8 +722,8 @@ html body .desktop-taskbar,html body .start-menu{display:none!important}
       <img src="img/banner2.jpg" alt="END OF EDEN 배너 2">
       <div class="banner-window__friends">
         <p class="banner-window__copy" style="margin:8px 0;font-weight:700">FELLOW AGENTS</p>
-        <a href="https://luvlog.me/pure" target="_blank" rel="noopener noreferrer" aria-label="순백세계침식주의보 새 창에서 열기"><img src="img/banners/fellow-agent-001.jpg" alt="순백세계침식주의보" width="200" height="40"></a>
-        <a href="https://b2stsummer.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="I THROW SCISSORS 새 창에서 열기"><img src="img/banners/fellow-agent-002.png" alt="I THROW SCISSORS" width="200" height="40"></a>
+        <a class="banner-window__friend" href="https://luvlog.me/pure" target="_blank" rel="noopener noreferrer" aria-label="순백세계침식주의보 새 창에서 열기"><img src="img/banners/fellow-agent-001.jpg" alt="순백세계주의보" width="200" height="40"><span>순백세계주의보</span></a>
+        <a class="banner-window__friend" href="https://b2stsummer.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="RASPBERRY PLACE 새 창에서 열기"><img src="img/banners/fellow-agent-002.png" alt="RASPBERRY PLACE" width="200" height="40"><span>RASPBERRY PLACE</span></a>
       </div>
     </div>
   </div>
