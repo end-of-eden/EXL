@@ -71,11 +71,15 @@
         next.style.animation = 'none';
         next.contentWindow.startLogEntrance();
       }
+      if (route.path === 'wiki.html' && typeof next.contentWindow.startProfileEntrance === 'function') {
+        next.style.animation = 'none';
+        next.contentWindow.startProfileEntrance();
+      }
       slot.removeAttribute('aria-busy');
       selectRoute(route, historyMode);
     });
     var contentUrl = new URL(route.url.href);
-    if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260912-style-review');
+    if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260915-profile-entrance');
     if (route.path === 'gallery.html') contentUrl.searchParams.set('v', '20260912-thumbnails');
     if (route.path === 'log.html' || route.path.startsWith('Log/')) contentUrl.searchParams.set('v', '20260912-smooth-log');
     next.src = contentUrl.href;

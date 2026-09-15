@@ -573,7 +573,7 @@ document.querySelector('.agent-back').addEventListener('click',function(event){
   else location.href=url;
  },reduced?0:650);
 });
-if (params.has('entrance') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
   var portrait = document.querySelector('.standing-panel');
   var details = document.querySelector('.wiki-panel');
   var portraitImage = document.getElementById('standing-img-el');
@@ -589,7 +589,13 @@ if (params.has('entrance') && !matchMedia('(prefers-reduced-motion: reduce)').ma
       part.animate([{opacity:0},{opacity:1}],{duration:400,delay:350+index*60,easing:'ease-out',fill:'backwards'});
     });
   }
-  portraitImage.decode().catch(function(){}).then(enterProfile);
+  var profileEntranceStarted = false;
+  window.startProfileEntrance = function () {
+    if (profileEntranceStarted) return;
+    profileEntranceStarted = true;
+    portraitImage.decode().catch(function(){}).then(enterProfile);
+  };
+  if (window.name !== 'archive-content') window.startProfileEntrance();
 }
 </script>
 
