@@ -685,11 +685,7 @@ html body .desktop-taskbar,html body .start-menu{display:none!important}
 </head>
 <body>
 <div class="dark-desktop-background" aria-hidden="true"></div>
-<div class="entrance-screen" id="entrance-screen">
-  <img class="entrance-art" src="img/entrance-bg.jpg" alt="">
-  <button class="entrance-button" id="entrance-button" type="button" aria-label="상호확증파괴 입장"></button>
-  <span class="entrance-copy"><strong>相互確證破壊</strong><span>ENTER</span></span>
-</div>
+
 <iframe class="archive-frame" id="archive-frame" title="END OF EDEN archive" src="about:blank"></iframe>
 <aside class="desktop-document" id="desktop-document" aria-label="DOCUMENT">
   <div class="desktop-document__bar">
@@ -1417,18 +1413,7 @@ placeResizeZone();
 })();
 </script>
 <script src="js/desktop-dock.js?v=20260911-clear-background"></script>
-<script>
-(function () {
-  var screen = document.getElementById('entrance-screen');
-  var button = document.getElementById('entrance-button');
-  if (!screen || !button) return;
-  button.addEventListener('click', function () {
-    if (window.player && typeof window.player.playVideo === 'function') window.player.playVideo();
-    screen.classList.add('is-leaving');
-    window.setTimeout(function () { screen.remove(); }, 900);
-  }, { once: true });
-})();
-</script>
+
 
 </body>
 </html>
