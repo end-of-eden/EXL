@@ -67,6 +67,8 @@
   .msg-header-title { font-size: 11px; font-weight: 650; letter-spacing: 0.08em; color: var(--color-text-primary, #f2f2f2); }
   .msg-header-sub { display: flex; align-items: center; gap: 5px; margin-top: 3px; font-size: 9px; letter-spacing: 0.08em; color: var(--color-text-tertiary, #737373); }
   .msg-online-dot { width: 6px; height: 6px; border-radius: 50%; background: #a0a0a0; box-shadow: 0 0 7px rgba(160,160,160,0.85); }
+  html[data-theme="light"] body .msg-online-dot { background: #2eae68 !important; box-shadow: 0 0 6px rgba(46,174,104,0.3) !important; }
+  html[data-theme="light"] body .msg-header-sub { color: #237a49 !important; }
   .msg-close {
     position: absolute; top: 12px; right: 12px; width: 26px; height: 26px; border-radius: 50%; border: none; background: transparent;
     color: var(--color-text-tertiary, #737373); cursor: pointer; font-size: 15px;
