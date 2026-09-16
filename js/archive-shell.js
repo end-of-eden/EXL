@@ -33,9 +33,8 @@
     var label = category === 'wiki.html' ? 'AGENTS　›　' + (route.url.searchParams.get('char') || 'eden').toUpperCase() : category.replace('.html', '').toUpperCase();
     document.querySelector('.main-address').textContent = 'This PC　›　相互確證破壞　›　' + label;
     if (historyMode !== 'none') {
-      var address = new URL(window.parent.location.href);
-      address.searchParams.delete('char');
-      address.searchParams.set('page', route.key);
+      var address = new URL(base.href);
+      address.hash = archiveRoutes.hash(route.key);
       window.parent.history[historyMode === 'replace' ? 'replaceState' : 'pushState'](null, '', address.href);
     }
   }
@@ -95,8 +94,10 @@
   });
   var initial = new URLSearchParams(location.search).get('page') || 'main.html';
   if (!window.navigateArchive(initial, 'replace')) window.navigateArchive('main.html', 'replace');
-  window.parent.addEventListener('popstate', function () {
-    var route = new URLSearchParams(window.parent.location.search).get('page') || 'main.html';
+  function restoreRoute() {
+    var route = archiveRoutes.read(window.parent.location.href);
     window.navigateArchive(route, 'none');
-  });
+  }
+  window.parent.addEventListener('popstate', restoreRoute);
+  window.parent.addEventListener('hashchange', restoreRoute);
 })();
