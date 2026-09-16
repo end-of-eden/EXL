@@ -271,7 +271,7 @@
   });
 
   panel.innerHTML =
-    '<div class="msg-windowbar"><span>✉ SNS · AGENT EDEN</span><span class="msg-window-controls"><button type="button" class="msg-window-button archive-window-control msg-window-collapse" aria-label="SNS 접기">−</button><button class="msg-window-button msg-window-toggle archive-window-control" type="button" aria-label="SNS 펼치기" aria-expanded="false">□</button><button type="button" class="msg-window-button archive-window-control msg-title-close" aria-label="SNS 닫기">×</button></span></div>' +
+    '<div class="msg-windowbar"><span><span class="arch-icon" data-icon="mail" aria-hidden="true"></span> SNS · AGENT EDEN</span><span class="msg-window-controls"><button type="button" class="msg-window-button archive-window-control msg-window-collapse" aria-label="SNS 접기">−</button><button class="msg-window-button msg-window-toggle archive-window-control" type="button" aria-label="SNS 펼치기" aria-expanded="false">□</button><button type="button" class="msg-window-button archive-window-control msg-title-close" aria-label="SNS 닫기">×</button></span></div>' +
     '<div class="msg-header">' +
       '<div class="msg-contact"><img class="msg-contact-avatar" src="' + AVA.eden + '" alt="Eden">' +
       '<div class="msg-header-title">AGENT EDEN</div>' +

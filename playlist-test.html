@@ -678,6 +678,7 @@ html body .desktop-taskbar,html body .start-menu{display:none!important}
 <link rel="stylesheet" href="css/window-controls.css?v=20260911-clear-background">
 <link rel="stylesheet" href="css/glass-preview.css?v=20260911-clear-background"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700&amp;family=Poppins:wght@300;400;500;600&amp;display=swap">
 <link rel="stylesheet" href="css/zamza-dark.css?v=20260915-sns-colors">
+<link rel="stylesheet" href="css/lucide-icons.css?v=20260916">
 </head>
 <body>
 <div class="dark-desktop-background" aria-hidden="true"></div>
@@ -685,7 +686,7 @@ html body .desktop-taskbar,html body .start-menu{display:none!important}
 <iframe class="archive-frame" id="archive-frame" title="END OF EDEN archive" src="about:blank"></iframe>
 <aside class="desktop-document" id="desktop-document" aria-label="DOCUMENT">
   <div class="desktop-document__bar">
-    <span>▤ DOCUMENT</span>
+    <span><span class="arch-icon" data-icon="file-text" aria-hidden="true"></span> DOCUMENT</span>
     <span class="desktop-document__controls" aria-hidden="true">
       <span class="desktop-document__button archive-window-control">−</span><span class="desktop-document__button archive-window-control">□</span><span class="desktop-document__button archive-window-control">×</span>
     </span>
@@ -699,7 +700,7 @@ html body .desktop-taskbar,html body .start-menu{display:none!important}
 </aside>
 <aside class="dday-window" id="dday-window" aria-label="홍차 디데이">
   <div class="dday-window__bar">
-    <span>♥ D-DAY</span>
+    <span><span class="arch-icon" data-icon="heart" aria-hidden="true"></span> D-DAY</span>
 
   </div>
   <div class="dday-window__image">
@@ -709,7 +710,7 @@ html body .desktop-taskbar,html body .start-menu{display:none!important}
 </aside>
 <aside class="banner-window" id="banner-window" hidden aria-label="배너">
   <div class="banner-window__bar">
-    <span><svg width="12" height="12" viewBox="0 0 24 24" fill="#242424" aria-hidden="true" focusable="false" style="display:inline-block;vertical-align:-1px;flex-shrink:0"><path d="M12 21S2 15 2 8a5 5 0 0 1 10-1A5 5 0 0 1 22 8c0 7-10 13-10 13Z"/></svg> BANNER</span>
+    <span><span class="arch-icon" data-icon="heart" aria-hidden="true"></span> BANNER</span>
     <span class="banner-window__controls"><button type="button" class="banner-window__button archive-window-control" data-banner-collapse aria-label="배너 접기">−</button><button class="banner-window__button archive-window-control" type="button" data-banner-toggle aria-label="배너 펼치기" aria-expanded="true">□</button><button type="button" class="banner-window__button archive-window-control" data-banner-close aria-label="배너 닫기">×</button></span>
   </div>
   <div class="banner-window__body">
@@ -728,19 +729,19 @@ html body .desktop-taskbar,html body .start-menu{display:none!important}
 <nav class="start-menu" id="start-menu" aria-label="시작 메뉴">
   <div class="start-menu__rail">相互確證破壞</div>
   <div class="start-menu__items">
-    <button class="start-menu__item" type="button" data-start-page="main.html"><span class="start-menu__icon">⌂</span>MAIN</button>
-    <button class="start-menu__item" type="button" data-start-page="wiki.html?char=eden"><span class="start-menu__icon">♙</span>EDEN</button>
-    <button class="start-menu__item" type="button" data-start-page="wiki.html?char=lilith"><span class="start-menu__icon">♙</span>LILITH</button>
-    <button class="start-menu__item" type="button" data-start-page="gallery.html"><span class="start-menu__icon">▧</span>GALLERY</button>
-    <button class="start-menu__item" type="button" data-start-page="log.html"><span class="start-menu__icon">▤</span>LOG</button>
+    <button class="start-menu__item" type="button" data-start-page="main.html"><span class="start-menu__icon"><span class="arch-icon" data-icon="house" aria-hidden="true"></span></span>MAIN</button>
+    <button class="start-menu__item" type="button" data-start-page="wiki.html?char=eden"><span class="start-menu__icon"><span class="arch-icon" data-icon="users" aria-hidden="true"></span></span>EDEN</button>
+    <button class="start-menu__item" type="button" data-start-page="wiki.html?char=lilith"><span class="start-menu__icon"><span class="arch-icon" data-icon="users" aria-hidden="true"></span></span>LILITH</button>
+    <button class="start-menu__item" type="button" data-start-page="gallery.html"><span class="start-menu__icon"><span class="arch-icon" data-icon="image" aria-hidden="true"></span></span>GALLERY</button>
+    <button class="start-menu__item" type="button" data-start-page="log.html"><span class="start-menu__icon"><span class="arch-icon" data-icon="file-text" aria-hidden="true"></span></span>LOG</button>
   </div>
 </nav>
 <footer class="desktop-taskbar" aria-label="작업 표시줄">
   <button class="start-button" id="start-button" type="button" aria-expanded="false" aria-controls="start-menu"><span class="start-button__mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>시작</button>
   <div class="taskbar-tasks">
     <button class="task-button is-active" type="button" data-task-target="archive-frame">相互確證破壞</button>
-    <button class="task-button" type="button" data-task-target="playlist-window">♫ MUSIC PLAYER</button>
-    <button class="task-button" type="button" data-task-target="dday-window">♥ D-DAY</button>
+    <button class="task-button" type="button" data-task-target="playlist-window"><span class="arch-icon" data-icon="music" aria-hidden="true"></span> MUSIC PLAYER</button>
+    <button class="task-button" type="button" data-task-target="dday-window"><span class="arch-icon" data-icon="heart" aria-hidden="true"></span> D-DAY</button>
   </div>
   <div class="taskbar-tray"><span class="taskbar-tray__status">♥</span><time id="taskbar-clock">--:--</time></div>
 </footer>
@@ -908,7 +909,7 @@ html body .desktop-taskbar,html body .start-menu{display:none!important}
 </script>
 <aside class="playlist-window" aria-label="플레이리스트">
   <div class="player-windowbar" aria-hidden="true">
-    <span>♫ MUSIC PLAYER</span>
+    <span><span class="arch-icon" data-icon="music" aria-hidden="true"></span> MUSIC PLAYER</span>
     <span aria-hidden="true">♫</span>
   </div>
   <div class="player-head">
