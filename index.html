@@ -688,20 +688,7 @@ html body .desktop-taskbar,html body .start-menu{display:none!important}
 <div class="dark-desktop-background" aria-hidden="true"></div>
 
 <iframe class="archive-frame" id="archive-frame" title="END OF EDEN archive" src="about:blank"></iframe>
-<aside class="desktop-document" id="desktop-document" aria-label="DOCUMENT">
-  <div class="desktop-document__bar">
-    <span><span class="arch-icon" data-icon="file-text" aria-hidden="true"></span> DOCUMENT</span>
-    <span class="desktop-document__controls" aria-hidden="true">
-      <span class="desktop-document__button archive-window-control">−</span><span class="desktop-document__button archive-window-control">□</span><span class="desktop-document__button archive-window-control">×</span>
-    </span>
-  </div>
-  <div class="desktop-document__body">
-    <section class="desktop-document__panel active" data-doc-panel="notice">
-      <div class="desktop-document__heading">NOTICE.TXT</div>
-      <div class="notice-columns"><section><h3>비이입 오픈드림</h3><p>트위터 기능 적극 사용합니다<br>피곤한 이슈 안 끌고 옵니다<br>탐복 X 알림 OFF / 좁은 탐라에서 깊은 교류 합니다</p><p>1T 1D 배려해주시면 맞배려 해드려요</p></section><section><h3>NG</h3><p>앵챗 양지 끌올 비선호<br>드림 지우기 / 허공 저격 / 카피캣 / 성인물 공계 발언<br>겹드 견제 / 모방 동의 없는 불펌<br>이별은 블락 (재연결x)</p></section></div>
-    </section>
-  </div>
-</aside>
+
 <aside class="dday-window" id="dday-window" aria-label="홍차 디데이">
   <div class="dday-window__bar">
     <span><span class="arch-icon" data-icon="heart" aria-hidden="true"></span> D-DAY</span>
@@ -753,7 +740,7 @@ html body .desktop-taskbar,html body .start-menu{display:none!important}
 (function () {
   var initialPage = archiveRoutes.read(location.href);
   var frame = document.getElementById('archive-frame');
-  frame.src = 'main.html?v=20260917-notice&page=' + encodeURIComponent(initialPage);
+  frame.src = 'main.html?v=20260917-notice-inline&page=' + encodeURIComponent(initialPage);
 })();
 </script>
 <script>
@@ -789,6 +776,7 @@ html body .desktop-taskbar,html body .start-menu{display:none!important}
 <script>
 (function () {
   var doc = document.getElementById('desktop-document');
+  if (!doc) return;
   var tabs = Array.prototype.slice.call(doc.querySelectorAll('[data-doc-tab]'));
   var panels = Array.prototype.slice.call(doc.querySelectorAll('[data-doc-panel]'));
   tabs.forEach(function (tab) {
