@@ -44,12 +44,12 @@
 .entry{display:block;height:100%}.entry>.art{display:none}
 .mobile-agents{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
 .mobile-agent{position:relative;flex:0 0 100%;min-width:0;height:100%;scroll-snap-align:start;display:flex;flex-direction:column;overflow:hidden}
-.mobile-agent-art{position:relative;flex:1;min-height:180px;overflow:hidden}
+.mobile-agent-art{display:block;color:inherit;position:relative;flex:1;min-height:180px;overflow:hidden}
 .mobile-agent-art img{position:absolute;height:100%;width:auto;max-width:none;left:50%;transform:translateX(-35%)}
 .mobile-agent[data-agent="lilith"] img{transform:translateX(-72%)}
-.mobile-agent-footer{flex-shrink:0;padding:14px 20px 24px;text-align:center;color:#49404f}
+.mobile-agent-footer{flex-shrink:0;padding:14px 20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;color:#49404f}
 html[data-theme="dark"] .mobile-agent-footer{color:#eee7f5}
-.mobile-agent-footer h2{margin:0 0 8px;font:600 26px Pretendard,sans-serif}
+.mobile-agent-footer h2{margin:0;font:600 26px Pretendard,sans-serif}
 .mobile-agent-footer a{display:inline-block;color:inherit;padding:10px 18px;text-underline-offset:5px;font:14px Pretendard,sans-serif}
 .mobile-agent-footer button{border:0;background:transparent;color:inherit;padding:10px;font:12px Pretendard,sans-serif}
 }
@@ -57,7 +57,7 @@ html[data-theme="dark"] .mobile-agent-footer{color:#eee7f5}
 <link rel="stylesheet" href="css/zamza-dark.css?v=20260914-agent-names">
 </head>
 <body>
-<main class="entry" aria-label="캐릭터 선택"><div class="mobile-agents" aria-label="좌우로 넘겨 캐릭터 선택"><section class="mobile-agent" data-agent="eden" aria-label="에덴"><div class="mobile-agent-art"><img src="https://content.assured.love/media/gallery/images/agents-eden-20260910.webp" alt="에덴"></div><div class="mobile-agent-footer"><h2>EDEN</h2><a href="wiki.html?char=eden&entrance=left">프로필 보기</a><button type="button" data-slide="1">릴리스 보기 →</button></div></section><section class="mobile-agent" data-agent="lilith" aria-label="릴리스"><div class="mobile-agent-art"><img src="https://content.assured.love/media/gallery/images/agents-lilith-20260910.webp" alt="릴리스"></div><div class="mobile-agent-footer"><h2>LILITH</h2><a href="wiki.html?char=lilith&entrance=left">프로필 보기</a><button type="button" data-slide="0">← 에덴 보기</button></div></section></div>
+<main class="entry" aria-label="캐릭터 선택"><div class="mobile-agents" aria-label="좌우로 넘겨 캐릭터 선택"><section class="mobile-agent" data-agent="eden" aria-label="에덴"><a class="mobile-agent-art" href="wiki.html?char=eden&entrance=left" aria-label="에덴 프로필 열기"><img src="https://content.assured.love/media/gallery/images/agents-eden-20260910.webp" alt="에덴" draggable="false"></a><div class="mobile-agent-footer"><h2>EDEN</h2><button type="button" data-slide="1">릴리스 ›</button></div></section><section class="mobile-agent" data-agent="lilith" aria-label="릴리스"><a class="mobile-agent-art" href="wiki.html?char=lilith&entrance=left" aria-label="릴리스 프로필 열기"><img src="https://content.assured.love/media/gallery/images/agents-lilith-20260910.webp" alt="릴리스" draggable="false"></a><div class="mobile-agent-footer"><h2>LILITH</h2><button type="button" data-slide="0">‹ 에덴</button></div></section></div>
  <div class="art">
   <div class="entry-names" aria-hidden="true"><span>EDEN</span><span>LILITH</span></div>
   <img class="portrait-layer portrait-eden" src="https://content.assured.love/media/gallery/images/agents-eden-20260910.webp" width="2400" height="1642" alt="" aria-hidden="true">
