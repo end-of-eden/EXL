@@ -22,7 +22,7 @@
   function selectRoute(route, historyMode) {
     currentRoute = route.key;
     var category = route.path.startsWith('Log/') ? 'log.html' : route.path;
-    document.querySelectorAll('.explorer-tree a').forEach(function (link) {
+    document.querySelectorAll('.explorer-tree a, .mobile-navigation a').forEach(function (link) {
       var item = routeFor(link.href);
       var active = item && item.path === category && (category !== 'wiki.html' ||
         item.url.searchParams.get('char') === (route.url.searchParams.get('char') || 'eden'));
@@ -78,7 +78,7 @@
       selectRoute(route, historyMode);
     });
     var contentUrl = new URL(route.url.href);
-    if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260915-profile-entrance');
+    if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260917-mobile-agents');
     if (route.path === 'gallery.html') contentUrl.searchParams.set('v', '20260912-thumbnails');
     if (route.path === 'log.html' || route.path.startsWith('Log/')) contentUrl.searchParams.set('v', '20260912-smooth-log');
     next.src = contentUrl.href;

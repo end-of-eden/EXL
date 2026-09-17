@@ -366,7 +366,7 @@
   var dockedToPlayer = portalDocument !== document;
 
   function dockBelowPlayer() {
-    if (!dockedToPlayer) return;
+    if (!dockedToPlayer || portalDocument.defaultView.matchMedia('(max-width:820px)').matches) return;
     var playerWindow = portalDocument.querySelector('.playlist-window');
     if (!playerWindow) return;
     var rect = playerWindow.getBoundingClientRect();

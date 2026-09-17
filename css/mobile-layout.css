@@ -1,0 +1,24 @@
+
+.mobile-navigation{display:none}
+@media(max-width:820px){
+html body{padding:8px!important;justify-content:flex-start!important}
+html body .site-shell{height:calc(100dvh - 16px)!important;width:100%!important;min-width:0!important}
+html body .main-wrap{height:100%!important;display:flex!important;flex-direction:column!important;overflow:hidden!important}
+html body .main-windowbar,html body .main-toolbar{flex-shrink:0}
+html body .main-toolbar{min-width:0;overflow:hidden}
+html body .main-address{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html body .main-window-controls{display:none}
+html body .mobile-navigation{display:flex;flex-wrap:wrap;gap:2px;padding:6px 2px;flex-shrink:0}
+.mobile-navigation a{display:flex;align-items:center;justify-content:center;min-height:40px;padding:0 10px;color:inherit;text-decoration:none;font:500 12px/1.2 Pretendard,sans-serif}
+.mobile-navigation a[aria-current=page]{font-weight:700;text-decoration:underline;text-underline-offset:6px}
+html body .mini-home{display:flex!important;flex:1;min-height:0!important;overflow:hidden}
+html body .sidebar-stack{display:none!important}
+html body .archive-content-slot{flex:1;min-width:0;min-height:0}
+html body .home-content{padding:10px!important;overflow:auto}
+html body>.arch-messenger-root,html body .playlist-window,html body .desktop-document,html body .dday-window,html body .banner-window{display:none!important}
+html body .theme-toggle-fixed{top:12px!important;right:12px!important}
+}
+
+.view-mode-toggle{position:fixed;bottom:8px;right:12px;z-index:20000;border:0;border-radius:12px;padding:8px 12px;background:#eee8f2;color:#45394f;font:12px Pretendard,sans-serif}
+@media(min-width:821px){html:not([data-view-mode="desktop"]) .view-mode-toggle{display:none}}
+html[data-view-mode="desktop"]{min-width:1280px}html[data-view-mode="desktop"] body{min-width:1280px;padding:0!important}html[data-view-mode="desktop"] .archive-frame{width:1280px!important}html[data-view-mode="desktop"] body>.arch-messenger-root,html[data-view-mode="desktop"] body .playlist-window,html[data-view-mode="desktop"] body .desktop-document,html[data-view-mode="desktop"] body .dday-window{display:block!important}
