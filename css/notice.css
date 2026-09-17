@@ -9,3 +9,5 @@ html[data-theme="dark"] .home-notice{color:#e5ddec}
 
 .notice-columns section:first-child h3{font-weight:400}
 @media(min-width:821px){html body .home-content{display:grid!important;grid-template-rows:minmax(0,1fr) auto;gap:16px;overflow:hidden!important}html body .room-media{height:100%;min-height:0;aspect-ratio:auto;background:transparent}html body .room-media video{object-fit:contain}.home-notice{padding:0 12px 8px}.home-notice h2{margin-bottom:12px}.notice-columns{font-size:12px;line-height:1.75}.notice-columns p{margin-bottom:10px}}
+
+@media(min-width:821px){html body .home-content{grid-template-rows:var(--home-media-height,minmax(0,1fr)) auto;align-content:start;justify-items:center}html body .room-media{width:var(--home-media-width,100%);height:var(--home-media-height,100%)}.home-notice{box-sizing:border-box;width:var(--home-media-width,100%);padding-inline:0}}
