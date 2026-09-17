@@ -19,6 +19,3 @@ html body>.arch-messenger-root,html body .playlist-window,html body .desktop-doc
 html body .theme-toggle-fixed{top:12px!important;right:12px!important}
 }
 
-.view-mode-toggle{position:fixed;bottom:8px;right:12px;z-index:20000;border:0;border-radius:12px;padding:8px 12px;background:#eee8f2;color:#45394f;font:12px Pretendard,sans-serif}
-@media(min-width:821px){html:not([data-view-mode="desktop"]) .view-mode-toggle{display:none}}
-html[data-view-mode="desktop"]{min-width:1280px}html[data-view-mode="desktop"] body{min-width:1280px;padding:0!important}html[data-view-mode="desktop"] .archive-frame{width:1280px!important}html[data-view-mode="desktop"] body>.arch-messenger-root,html[data-view-mode="desktop"] body .playlist-window,html[data-view-mode="desktop"] body .desktop-document,html[data-view-mode="desktop"] body .dday-window{display:block!important}
