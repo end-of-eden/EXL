@@ -1,0 +1,12 @@
+@media(max-width:820px){
+html body .wiki-wrap:is(.theme-eden,.theme-lilith){display:flex;flex-direction:column;overflow-x:hidden;overflow-y:auto;height:100%;padding:36px 0 12px;--profile-inset:20px}
+html body .wiki-wrap:is(.theme-eden,.theme-lilith) .standing-panel{flex:0 0 clamp(260px,48vh,400px);height:clamp(260px,48vh,400px);width:100%;min-height:0;overflow:hidden}
+html body .wiki-wrap:is(.theme-eden,.theme-lilith) .standing-img{position:absolute;inset:0;overflow:hidden}
+html body .wiki-wrap:is(.theme-eden,.theme-lilith) .standing-img img{top:0;bottom:auto;left:50%;height:100%!important;width:auto!important;max-width:none;transform:translateX(-50%);object-fit:contain!important}
+html body .wiki-wrap:is(.theme-eden,.theme-lilith) .wiki-panel{flex:none;width:calc(100% - 16px);height:auto;min-height:0;margin:0 8px;overflow:visible}
+html body .wiki-wrap .wiki-header{padding:24px 20px 16px}
+html body .wiki-wrap .profile-tabs{display:flex;flex-wrap:nowrap;margin:8px 20px 22px}
+html body .wiki-wrap .profile-tabs button{min-width:0;font-size:11px;white-space:nowrap}
+html body .wiki-wrap .scroll-area{flex:none;height:auto;max-height:none;overflow:visible;padding:0 20px 24px}
+html body .wiki-wrap .info-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}

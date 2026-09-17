@@ -78,7 +78,7 @@
       selectRoute(route, historyMode);
     });
     var contentUrl = new URL(route.url.href);
-    if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260917-mobile-agents-tap');
+    if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260917-mobile-profile');
     if (route.path === 'gallery.html') contentUrl.searchParams.set('v', '20260912-thumbnails');
     if (route.path === 'log.html' || route.path.startsWith('Log/')) contentUrl.searchParams.set('v', '20260912-smooth-log');
     next.src = contentUrl.href;
