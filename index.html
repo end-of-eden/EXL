@@ -830,6 +830,7 @@ html body .desktop-taskbar,html body .start-menu{display:none!important}
   var drag = null;
   bar.addEventListener('pointerdown', function (event) {
     if (event.button !== 0 || win.dataset.positionLocked === 'true') return;
+    win.dataset.userPositioned = 'true';
     var rect = win.getBoundingClientRect();
     drag = { x: event.clientX, y: event.clientY, left: rect.left, top: rect.top };
     win.style.left = rect.left + 'px'; win.style.top = rect.top + 'px';
@@ -1413,7 +1414,7 @@ if (!window.matchMedia || !window.matchMedia('(max-width: 820px), (hover: none) 
   });
 })();
 </script>
-<script src="js/desktop-dock.js?v=20260917-dday-position"></script>
+<script src="js/desktop-dock.js?v=20260920-dday-drag"></script>
 
 
 <script src="js/player-motion.js?v=20260914-still"></script>
