@@ -60,3 +60,15 @@ html[data-theme="light"] .explorer-sidebar .explorer-branch-title { color: #8c8c
   #wiki-content > *, .gallery-item, .log-item { animation: none; }
 }
 @media (max-width: 760px) { .explorer-sidebar.topnav { display: none !important; } }
+
+/* Keep linked and plain category titles on the same baseline and indent. */
+.explorer-sidebar .explorer-branch-title { gap:7px; }
+.explorer-sidebar .explorer-chevron { flex:0 0 14px; width:14px; display:flex; align-items:center; }
+.explorer-sidebar.topnav .explorer-branch-title > .explorer-drive {
+  margin:0; padding:0!important; font:inherit; letter-spacing:0;
+  text-transform:none; text-decoration:none; min-width:0;
+}
+.explorer-sidebar .explorer-other-links {
+  display:flex; flex-direction:column; gap:5px; margin-left:21px;
+}
+.explorer-sidebar.topnav .explorer-other-links > .explorer-root { margin:0; }
