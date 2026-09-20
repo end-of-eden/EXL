@@ -459,3 +459,8 @@ html[data-theme] body #banner-window .banner-window__body {
   border-color:transparent!important;
   box-shadow:none!important;
 }
+
+html[data-theme] body #care-list-window {width:300px!important;left:40px;top:280px;}
+html[data-theme] body #care-list-window[hidden] {display:none!important;}
+html[data-theme] body #care-list-window .banner-window__body {min-height:160px;background:transparent!important;border-color:transparent!important;box-shadow:none!important;}
+@media(max-width:700px){html[data-theme] body #care-list-window:not([hidden]){display:block!important;}}

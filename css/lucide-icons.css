@@ -64,3 +64,6 @@ html body :is(.main-window-button,.desktop-document__button,.dday-window__button
 html body :is(.desktop-document__bar,.dday-window__bar,.banner-window__bar,.msg-windowbar)>span:first-child{display:inline-flex;align-items:center;gap:5px;line-height:1}
 .explorer-sidebar .explorer-chevron{display:inline-flex;align-items:center;justify-content:center}
 .explorer-sidebar .explorer-branch-title>span:last-child{display:inline-flex;align-items:center;justify-content:center}
+
+[data-icon="heart-filled"]{--arch-icon:url("../img/icons/lucide/heart-filled.svg")}
+html body .care-list-heart{color:#171717!important}
