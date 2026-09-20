@@ -238,6 +238,8 @@ body {
 <link rel="stylesheet" href="css/glass-preview.css?v=20260911-clear-background"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&amp;display=swap"><link rel="stylesheet" href="css/archive-surfaces.css?v=20260912-style-review">
 <link rel="preconnect" href="https://content.assured.love">
 <link rel="stylesheet" href="css/zamza-dark.css?v=20260914-agent-text">
+<link rel="stylesheet" href="css/lucide-icons.css?v=20260920-list">
+<link rel="stylesheet" href="css/gallery-pages.css?v=20260920">
 </head>
 <body class="pc-page-body">
 <main class="pc-page-window">
@@ -261,6 +263,11 @@ body {
 <div class="gallery-wrap">
   <div class="gallery-scroll" id="gallery-scroll">
     <div class="gallery-grid" id="gallery-grid"></div>
+    <nav class="gallery-pagination" aria-label="갤러리 페이지">
+      <button type="button" id="gallery-prev" aria-label="이전 사진 네 장" disabled><span class="arch-icon" data-icon="chevron-left" aria-hidden="true"></span></button>
+      <span id="gallery-page" role="status" aria-live="polite"></span>
+      <button type="button" id="gallery-next" aria-label="다음 사진 네 장" disabled><span class="arch-icon" data-icon="chevron-right" aria-hidden="true"></span></button>
+    </nav>
   </div>
 </div>
 </div>
@@ -277,6 +284,8 @@ body {
 <script>
 // Gallery entries come from the upload service.
 var images = [];
+var galleryPage = 0;
+var pageSize = 4;
 
 var popupTrigger = null;
 
@@ -297,9 +306,14 @@ function escapeHtml(value) {
 function render() {
   var grid = document.getElementById('gallery-grid');
   if (!images.length) { grid.innerHTML = '<p class="gallery-status" role="status">사진을 불러오는 중…</p>'; return; }
-  grid.innerHTML = images.map(function(img, i) {
+  galleryPage = Math.min(galleryPage, Math.ceil(images.length / pageSize) - 1);
+  document.getElementById('gallery-prev').disabled = galleryPage === 0;
+  document.getElementById('gallery-next').disabled = (galleryPage + 1) * pageSize >= images.length;
+  document.getElementById('gallery-page').textContent = (galleryPage + 1) + ' / ' + Math.ceil(images.length / pageSize);
+  grid.innerHTML = images.slice(galleryPage * pageSize, (galleryPage + 1) * pageSize).map(function(img, offset) {
+    var i = galleryPage * pageSize + offset;
     return '<div class="gallery-item" role="button" tabindex="0" onclick="openPopup(' + i + ')">' +
-      '<img src="' + escapeHtml(thumbnailUrl(img)) + '" alt="' + escapeHtml(img.title) + '" width="600" height="600" loading="' + (i < 4 ? 'eager' : 'lazy') + '" decoding="async">' +
+      '<img src="' + escapeHtml(thumbnailUrl(img)) + '" alt="' + escapeHtml(img.title) + '" width="600" height="600" loading="' + 'eager' + '" decoding="async">' +
       '<div class="gallery-item-overlay">' +
       '<div class="gallery-item-title">' + escapeHtml(img.title) + '</div>' +
       (img.lyrics ? '<div class="gallery-item-lyrics">' + escapeHtml(img.lyrics) + '</div>' : '') +
@@ -310,7 +324,7 @@ function render() {
 function openPopup(i) {
   var img = images[i];
   if (!img) return;
-  popupTrigger = document.querySelectorAll('.gallery-item')[i];
+  popupTrigger = document.querySelectorAll('.gallery-item')[i % pageSize];
   document.getElementById('gallery-scroll').inert = true;
   document.getElementById('popup-img').src = imageUrl(img);
   document.getElementById('popup-img').alt = img.title;
@@ -353,6 +367,34 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape' && document.getElementById('popup-bg').classList.contains('open')) closePopup();
   if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.gallery-item')) { e.preventDefault(); e.target.click(); }
 });
+
+function changeGalleryPage(delta) {
+  var next = galleryPage + delta;
+  if (next < 0 || next >= Math.ceil(images.length / pageSize)) return;
+  galleryPage = next;
+  render();
+}
+document.getElementById('gallery-prev').addEventListener('click', function () { changeGalleryPage(-1); });
+document.getElementById('gallery-next').addEventListener('click', function () { changeGalleryPage(1); });
+var touchStart = null;
+var suppressClickUntil = 0;
+var galleryGrid = document.getElementById('gallery-grid');
+galleryGrid.addEventListener('touchstart', function (event) {
+  touchStart = event.touches.length === 1 ? { x:event.touches[0].clientX, y:event.touches[0].clientY } : null;
+}, { passive:true });
+galleryGrid.addEventListener('touchend', function (event) {
+  if (!touchStart || !event.changedTouches.length) return;
+  var dx = event.changedTouches[0].clientX - touchStart.x;
+  var dy = event.changedTouches[0].clientY - touchStart.y;
+  touchStart = null;
+  if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+  suppressClickUntil = Date.now() + 500;
+  changeGalleryPage(dx < 0 ? 1 : -1);
+}, { passive:true });
+galleryGrid.addEventListener('touchcancel', function () { touchStart = null; });
+galleryGrid.addEventListener('click', function (event) {
+  if (Date.now() < suppressClickUntil) { event.preventDefault(); event.stopImmediatePropagation(); }
+}, true);
 
 try { var cached=JSON.parse(sessionStorage.getItem('eden-gallery-list-v2')||'null'); if(Array.isArray(cached))images=cached; } catch (_) {}
 render();
