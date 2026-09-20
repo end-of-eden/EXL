@@ -35,7 +35,7 @@
       win.hidden = false;
       win.style.zIndex = '20001';
       collapse(false);
-      close.focus();
+      win.focus({ preventScroll: true });
     }, true);
   }
   win.querySelector('[data-list-collapse]').addEventListener('click', function () { collapse(true); });
