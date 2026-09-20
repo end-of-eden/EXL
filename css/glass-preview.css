@@ -467,4 +467,5 @@ html[data-theme] body #care-list-window .banner-window__body {min-height:160px;b
 
 #care-list-body .care-list-entry {font-size:12px;line-height:1.7;}
 #care-list-body .care-list-entry strong {font-weight:700;}
-#care-list-body .care-list-entry p {margin:1.7em 0 0;}
+#care-list-body .care-list-entry p {margin:0; padding-left:1em;}
+#care-list-body .care-list-notice {margin:0 0 20px; font-size:12px; line-height:1.7; word-break:keep-all;}
