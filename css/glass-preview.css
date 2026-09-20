@@ -452,3 +452,10 @@ html[data-theme="light"] .agent-window,
 html[data-theme="light"] .wiki-wrap {
   background:transparent!important;
 }
+
+/* Let the banner window's existing glass surface show through its content. */
+html[data-theme] body #banner-window .banner-window__body {
+  background:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+}
