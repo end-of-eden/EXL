@@ -4,16 +4,20 @@
 .gallery-heading p {margin:4px auto 0;max-width:680px;font-size:11px;line-height:1.5;white-space:pre-line;}
 .gallery-heading p:empty {display:none;}
 .gallery-grid {display:block;flex:1;min-height:0;touch-action:pan-y pinch-zoom;}
-.gallery-featured {display:block;width:100%;height:100%;padding:0;border:0;background:transparent;cursor:zoom-in;}
+.gallery-featured {display:block;width:100%;height:100%;padding:0;border:0;background:transparent;cursor:grab;user-select:none;transition:transform .2s ease;}
 .gallery-featured img {display:block;width:100%;height:100%;object-fit:contain;}
 .gallery-pagination {display:flex;justify-content:center;align-items:center;gap:12px;flex:none;}
 .gallery-pagination > button {display:grid;place-items:center;width:30px;height:30px;flex:none;padding:0;border:1px solid #8885;border-radius:50%;background:#ffffff30;color:inherit;cursor:pointer;}
 .gallery-pagination > button:disabled {opacity:.3;cursor:default;}
-#gallery-thumbnails {display:flex;gap:6px;min-width:0;}
-.gallery-thumbnail {width:52px;height:52px;flex:0 1 52px;min-width:0;padding:2px;border:1px solid transparent;border-radius:7px;background:transparent;cursor:pointer;}
+#gallery-thumbnails {display:flex;gap:4px;min-width:0;flex-wrap:wrap;justify-content:center;}
+.gallery-thumbnail {width:36px;height:40px;flex:0 0 36px;min-width:0;padding:2px;border:1px solid transparent;border-radius:7px;background:transparent;cursor:pointer;}
 .gallery-thumbnail img {width:100%;height:100%;display:block;object-fit:cover;border-radius:4px;opacity:.65;}
 .gallery-thumbnail[aria-pressed="true"] {border-color:currentColor;}
 .gallery-thumbnail[aria-pressed="true"] img,.gallery-thumbnail:hover img {opacity:1;}
 .gallery-scroll button:focus-visible {outline:2px solid currentColor;outline-offset:2px;}
 #gallery-page {flex:none;text-align:center;font-size:10px;line-height:1;opacity:.65;}
-@media(max-width:640px){.gallery-scroll{gap:8px;padding:10px}.gallery-heading h1{font-size:14px}.gallery-pagination{gap:8px}.gallery-thumbnail{width:42px;height:42px;flex-basis:42px}#gallery-thumbnails{gap:3px}}
+@media(max-width:640px){.gallery-scroll{gap:8px;padding:10px}.gallery-heading h1{font-size:14px}.gallery-pagination{gap:8px}.gallery-thumbnail{width:25px;height:32px;flex-basis:25px}#gallery-thumbnails{gap:3px}}
+
+.gallery-grid{overflow:hidden;}
+.is-dragging .gallery-featured{cursor:grabbing;transition:none;}
+@media(prefers-reduced-motion:reduce){.gallery-featured{transition:none;}}

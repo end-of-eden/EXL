@@ -163,72 +163,12 @@ body {
   .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 }
 
-/* 팝업 */
-.popup-bg {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: transparent;
-  z-index: 1000;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(4px);
-}
-.popup-bg.open { display: flex; }
-
-.popup-inner {
-  position: relative;
-  max-width: 800px;
-  width: 90%;
-  border-radius: var(--border-radius-lg);
-  overflow: hidden;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.5);
-}
-
-.popup-inner img {
-  width: 100%;
-  display: block;
-  max-height: 85vh;
-  object-fit: contain;
-  background: #050505;
-}
-
-.popup-title {
-  position: absolute;
-  bottom: 0;
-  left: 0; right: 0;
-  padding: 12px 16px;
-  background: linear-gradient(to top, rgba(5,5,5,0.85) 0%, transparent 100%);
-  font-size: 13px;
-  font-weight: 700;
-  color: rgba(255,255,255,0.9);
-  letter-spacing: 0.03em;
-}
-.popup-song { font-weight: 700; }
-.popup-lyrics { margin-top: 4px; font-size: 12px; font-weight: 300; line-height: 1.6; }
-
-.popup-close {
-  position: absolute;
-  top: 12px; right: 12px;
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  border: none;
-  cursor: pointer;
-  color: #ffffff;
-  font-size: 14px;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.15s;
-}
-.popup-close:hover { background: rgba(255,255,255,0.3); }
 .gallery-wrap { width:100%; max-width:none; height:100%; border:0; border-radius:0; box-shadow:none; background:#ffffff; }
 .gallery-scroll { padding:22px; }
 .gallery-scroll::-webkit-scrollbar { width:12px; }.gallery-scroll::-webkit-scrollbar-track{background:#ececec}.gallery-scroll::-webkit-scrollbar-thumb{border:2px solid #ececec;border-radius:0;background:#b7b7b7}
 .gallery-grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
 .gallery-item { border:1px solid #c9c9c9; border-radius:0; background:#ececec; box-shadow:2px 2px 0 rgba(0,0,0,.07); }
 .gallery-item:hover { border-color:#898989; }
-.popup-inner { padding:5px; border:2px solid; border-color:#ffffff #757575 #757575 #ffffff; border-radius:0; background:#d2d2d2; }
-.popup-close { top:9px; right:9px; width:22px; height:22px; border:2px solid; border-color:#ffffff #7c7c7c #7c7c7c #ffffff; border-radius:0; background:#d2d2d2; color:#565656; }
 @media(max-width:980px){.gallery-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:640px){.gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 <script src="js/theme.js?v=20260911-clear-background"></script>
@@ -239,7 +179,7 @@ body {
 <link rel="preconnect" href="https://content.assured.love">
 <link rel="stylesheet" href="css/zamza-dark.css?v=20260914-agent-text">
 <link rel="stylesheet" href="css/lucide-icons.css?v=20260920-list">
-<link rel="stylesheet" href="css/gallery-pages.css?v=20260921-viewer">
+<link rel="stylesheet" href="css/gallery-pages.css?v=20260921-drag">
 </head>
 <body class="pc-page-body">
 <main class="pc-page-window">
@@ -275,21 +215,13 @@ body {
 </div>
 </main>
 
-<!-- 팝업 -->
-<div class="popup-bg" id="popup-bg" role="dialog" aria-modal="true" aria-labelledby="popup-title" tabindex="-1" onclick="closePopup(event)">
-  <div class="popup-inner">
-    <img id="popup-img" src="" alt="">
-    <div class="popup-title" id="popup-title"></div>
-  </div>
-</div>
-
 <script>
 // Gallery entries come from the upload service.
 var images = [];
 var galleryPage = 0;
 
 
-var popupTrigger = null;
+
 
 function imageUrl(img) {
   return window.EDEN_CONTENT_API + img.imagePath;
@@ -315,60 +247,11 @@ function render() {
   document.getElementById('gallery-prev').disabled = galleryPage === 0;
   document.getElementById('gallery-next').disabled = galleryPage === images.length - 1;
   document.getElementById('gallery-page').textContent = (galleryPage + 1) + ' / ' + images.length;
-  grid.innerHTML = '<button class="gallery-featured" type="button" aria-label="사진 크게 보기" onclick="openPopup(' + galleryPage + ')"><img src="' + escapeHtml(imageUrl(selected)) + '" alt="' + escapeHtml(selected.title) + '" decoding="async"></button>';
-  var first = Math.max(0, Math.min(galleryPage - 2, images.length - 5));
-  document.getElementById('gallery-thumbnails').innerHTML = images.slice(first, first + 5).map(function(img, offset) {
-    var i = first + offset;
+  grid.innerHTML = '<div class="gallery-featured"><img draggable="false" src="' + escapeHtml(imageUrl(selected)) + '" alt="' + escapeHtml(selected.title) + '" decoding="async"></div>';
+  document.getElementById('gallery-thumbnails').innerHTML = images.map(function(img, i) {
     return '<button type="button" class="gallery-thumbnail" aria-label="' + escapeHtml(img.title) + '" aria-pressed="' + (i === galleryPage) + '" onclick="selectGalleryImage(' + i + ')"><img src="' + escapeHtml(thumbnailUrl(img)) + '" alt="" decoding="async"></button>';
   }).join('');
 }
-
-function openPopup(i) {
-  var img = images[i];
-  if (!img) return;
-  popupTrigger = document.querySelector('.gallery-featured');
-  document.getElementById('gallery-scroll').inert = true;
-  document.getElementById('popup-img').src = imageUrl(img);
-  document.getElementById('popup-img').alt = img.title;
-  var popupTitle = document.getElementById('popup-title');
-  popupTitle.textContent = '';
-  if (img.song) {
-    var song = document.createElement('div');
-    song.className = 'popup-song';
-    song.textContent = img.song;
-    popupTitle.appendChild(song);
-
-    var lyrics = document.createElement('div');
-    lyrics.className = 'popup-lyrics';
-    lyrics.textContent = img.lyrics;
-    popupTitle.appendChild(lyrics);
-  } else {
-    popupTitle.textContent = img.title;
-  }
-  document.getElementById('popup-bg').classList.add('open');
-  setPhotoViewing(true);
-  document.getElementById('popup-bg').focus();
-}
-
-function setPhotoViewing(open) {
-  try {
-    window.parent.document.documentElement.classList.toggle('gallery-photo-open', open);
-  } catch (_) {}
-}
-window.addEventListener('pagehide', function () { setPhotoViewing(false); });
-function closePopup(e) {
-  if (!e || e.target === document.getElementById('popup-bg')) {
-    document.getElementById('popup-bg').classList.remove('open');
-    setPhotoViewing(false);
-    document.getElementById('gallery-scroll').inert = false;
-    if (popupTrigger && popupTrigger.isConnected) popupTrigger.focus();
-  }
-}
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape' && document.getElementById('popup-bg').classList.contains('open')) closePopup();
-  if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.gallery-item')) { e.preventDefault(); e.target.click(); }
-});
 
 function selectGalleryImage(index) {
   galleryPage = index;
@@ -384,25 +267,33 @@ function changeGalleryPage(delta) {
 }
 document.getElementById('gallery-prev').addEventListener('click', function () { changeGalleryPage(-1); });
 document.getElementById('gallery-next').addEventListener('click', function () { changeGalleryPage(1); });
-var touchStart = null;
-var suppressClickUntil = 0;
 var galleryGrid = document.getElementById('gallery-grid');
-galleryGrid.addEventListener('touchstart', function (event) {
-  touchStart = event.touches.length === 1 ? { x:event.touches[0].clientX, y:event.touches[0].clientY } : null;
-}, { passive:true });
-galleryGrid.addEventListener('touchend', function (event) {
-  if (!touchStart || !event.changedTouches.length) return;
-  var dx = event.changedTouches[0].clientX - touchStart.x;
-  var dy = event.changedTouches[0].clientY - touchStart.y;
-  touchStart = null;
-  if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
-  suppressClickUntil = Date.now() + 500;
-  changeGalleryPage(dx < 0 ? 1 : -1);
-}, { passive:true });
-galleryGrid.addEventListener('touchcancel', function () { touchStart = null; });
-galleryGrid.addEventListener('click', function (event) {
-  if (Date.now() < suppressClickUntil) { event.preventDefault(); event.stopImmediatePropagation(); }
-}, true);
+var drag = null;
+galleryGrid.addEventListener('pointerdown', function (event) {
+  if (!event.isPrimary || event.button !== 0) return;
+  drag = { id:event.pointerId, x:event.clientX, y:event.clientY };
+  galleryGrid.setPointerCapture(event.pointerId);
+  galleryGrid.classList.add('is-dragging');
+});
+galleryGrid.addEventListener('pointermove', function (event) {
+  if (!drag || event.pointerId !== drag.id) return;
+  var photo = galleryGrid.querySelector('.gallery-featured');
+  if (photo) photo.style.transform = 'translateX(' + Math.max(-120, Math.min(120, event.clientX - drag.x)) + 'px)';
+});
+function endDrag(event) {
+  if (!drag || event.pointerId !== drag.id) return;
+  var dx = event.clientX - drag.x;
+  var dy = event.clientY - drag.y;
+  drag = null;
+  galleryGrid.classList.remove('is-dragging');
+  if (galleryGrid.hasPointerCapture(event.pointerId)) galleryGrid.releasePointerCapture(event.pointerId);
+  var photo = galleryGrid.querySelector('.gallery-featured');
+  if (photo) photo.style.transform = '';
+  if (event.type === 'pointerup' && Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) changeGalleryPage(dx < 0 ? 1 : -1);
+}
+galleryGrid.addEventListener('pointerup', endDrag);
+galleryGrid.addEventListener('pointercancel', endDrag);
+galleryGrid.addEventListener('lostpointercapture', endDrag);
 
 try { var cached=JSON.parse(sessionStorage.getItem('eden-gallery-list-v2')||'null'); if(Array.isArray(cached))images=cached; } catch (_) {}
 render();
