@@ -21,3 +21,5 @@
 .gallery-grid{overflow:hidden;}
 .is-dragging .gallery-featured{cursor:grabbing;transition:none;}
 @media(prefers-reduced-motion:reduce){.gallery-featured{transition:none;}}
+
+@media(max-width:820px){.gallery-featured img{object-position:center top}.gallery-scroll{gap:6px}.gallery-heading p{margin-top:2px}}

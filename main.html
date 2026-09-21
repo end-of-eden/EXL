@@ -303,7 +303,7 @@ html[data-theme="light"] .main-wrap {
 <link rel="stylesheet" href="css/category-motion.css?v=20260914-subtle">
 <link rel="stylesheet" href="css/zamza-dark.css?v=20260915-sns-colors">
 <link rel="stylesheet" href="css/lucide-icons.css?v=20260920-list">
-<link rel="stylesheet" href="css/mobile-layout.css?v=20260917-auto">
+<link rel="stylesheet" href="css/mobile-layout.css?v=20260921-popup">
 <link rel="stylesheet" href="css/notice.css?v=20260917-headings">
 </head>
 <body>
@@ -317,7 +317,7 @@ html[data-theme="light"] .main-wrap {
     <span class="main-toolbar-nav"><span class="arch-icon" data-icon="chevron-left" aria-hidden="true"></span><span class="arch-icon" data-icon="chevron-right" aria-hidden="true"></span><span class="arch-icon" data-icon="house" aria-hidden="true"></span></span>
     <span class="main-address">This PC　›　相互確證破壞　›　MAIN</span>
   </div>
-  <nav class="mobile-navigation" aria-label="페이지 메뉴"><a href="main.html">MAIN</a><a href="agents.html">AGENTS</a><a href="gallery.html">GALLERY</a><a href="log.html">LOG</a></nav>
+  <nav class="mobile-navigation" aria-label="페이지 메뉴"><a href="main.html">MAIN</a><a href="agents.html">AGENTS</a><a href="gallery.html">GALLERY</a><a href="log.html">LOG</a><button type="button" data-mobile-popup="care-list-window">LIST</button><button type="button" data-mobile-popup="banner-window">BANNER</button></nav>
   <div class="mini-home">
     <aside class="sidebar-stack">
       <nav class="topnav explorer-sidebar side-card category-card" aria-label="Categories">
@@ -454,5 +454,6 @@ html[data-theme="light"] .main-wrap {
 <script src="js/messenger.js?v=mobile-20260916-lucide"></script>
 <script src="js/category-motion.js?v=20260915-single-item"></script>
 <script src="js/home-layout.js?v=20260917"></script>
+<script>document.querySelectorAll('[data-mobile-popup]').forEach(function(button){button.addEventListener('click',function(){parent.postMessage({type:'archive-mobile-popup',id:button.dataset.mobilePopup},location.origin)})});</script>
 </body>
 </html>
