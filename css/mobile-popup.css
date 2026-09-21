@@ -3,3 +3,5 @@
 .mobile-popup .banner-window__images{display:flex;flex-direction:column;align-items:center;gap:10px}.mobile-popup .banner-window__friends{width:200px;max-width:100%}
 
 .care-list-divider{border:0;border-top:1px solid currentColor;opacity:.2;margin:0 0 16px}#care-list-body .care-list-notice,.mobile-popup .care-list-notice{margin:0 0 12px}
+
+html[data-theme] body #care-list-window .banner-window__body{padding:18px 24px 22px}.mobile-popup-body:has(.care-list-entry){padding-inline:8px}
