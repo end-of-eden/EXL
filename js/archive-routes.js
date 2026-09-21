@@ -5,8 +5,12 @@
       var url = new URL(address);
       var hash = url.hash.slice(1);
       if (pages[hash]) return pages[hash];
-      var detail = /^log\/(00[1-5])$/.exec(hash);
-      if (detail) return detail[1] === '005' ? 'Log/view.html?id=005' : 'Log/' + detail[1] + '.html';
+      var detail = /^log\/([^/]+)$/.exec(hash);
+      if (detail) {
+        var id;
+        try { id = decodeURIComponent(detail[1]); } catch (_) { return 'log.html'; }
+        return /^00[1-4]$/.test(id) ? 'Log/' + id + '.html' : 'Log/view.html?id=' + encodeURIComponent(id);
+      }
       return url.searchParams.get('page') || (pages[url.searchParams.get('char')] || 'main.html');
     },
     hash: function (route) {

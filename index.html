@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<script src="js/archive-routes.js?v=20260917-clean"></script>
+<script src="js/archive-routes.js?v=20260921-route-fix"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>END OF EDEN · Archive</title>
@@ -743,7 +743,7 @@ html body .desktop-taskbar,html body .start-menu{display:none!important}
 (function () {
   var initialPage = archiveRoutes.read(location.href);
   var frame = document.getElementById('archive-frame');
-  frame.src = 'main.html?v=20260921-popup&page=' + encodeURIComponent(initialPage);
+  frame.src = 'main.html?v=20260921-review&page=' + encodeURIComponent(initialPage);
 })();
 </script>
 <script>
@@ -1369,52 +1369,7 @@ if (!window.matchMedia || !window.matchMedia('(max-width: 820px), (hover: none) 
 .playlist-window .player-windowbar { min-height:22px; }
 
 </style>
-<script>
-(function () {
-  [
-    { selector: '.desktop-document', bar: '.desktop-document__bar', name: 'DOCUMENT' }
-  ].forEach(function (config) {
-    var win = document.querySelector(config.selector);
-    var bar = win.querySelector(config.bar);
-    var controls = bar.querySelector('[class$="__controls"]');
-    var baseClass = controls ? controls.children[0].className : 'player-window-button archive-window-control';
-    if (!controls) {
-      controls = document.createElement('span');
-      controls.className = 'player-window-controls';
-      controls.style.cssText = 'display:flex;gap:4px';
-      var closeMark = document.createElement('span');
-      closeMark.className = 'player-window-button archive-window-control';
-      closeMark.setAttribute('aria-hidden', 'true');
-      controls.appendChild(closeMark);
-      bar.lastElementChild.replaceWith(controls);
-    } else {
-      controls.removeAttribute('aria-hidden');
-      controls.children[0].remove();
-      controls.children[0].remove();
-    }
-    var buttons = [true, false].map(function (collapsed, index) {
-      var button = document.createElement('button');
-      button.type = 'button';
-      button.className = baseClass;
-      button.dataset.windowToggle = '';
-      button.textContent = collapsed ? '−' : '□';
-      button.setAttribute('aria-label', config.name + (collapsed ? ' 접기' : ' 펼치기'));
-      button.title = button.getAttribute('aria-label');
-      controls.insertBefore(button, controls.children[index] || null);
-      button.addEventListener('pointerdown', function (event) { event.stopPropagation(); });
-      button.addEventListener('click', function () {
-        win.classList.toggle('is-collapsed', collapsed);
-        update();
-      });
-      return button;
-    });
-    function update() {
-      buttons[1].setAttribute('aria-expanded', String(!win.classList.contains('is-collapsed')));
-    }
-    update();
-  });
-})();
-</script>
+
 <script src="js/desktop-dock.js?v=20260921-dday-document"></script>
 
 
