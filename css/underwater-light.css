@@ -1,4 +1,4 @@
-/* Silver sparkles behind white glass, scoped to light mode. */
+/* Silver sparkles behind translucent glass, scoped to light mode. */
 html[data-theme="light"] {
   --glass-ink:#414141;
   --glass-edge:rgba(255,255,255,.85);
@@ -14,16 +14,24 @@ html[data-theme="light"]:has(body > .archive-frame) > body::before {
 }
 html[data-theme="light"] .archive-frame {background:rgba(255,255,255,.06)!important}
 html[data-theme="light"] body .main-wrap {
-  background:linear-gradient(135deg,rgba(255,255,255,.76),rgba(248,250,252,.60))!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.32),rgba(239,242,247,.18))!important;
 }
 html[data-theme="light"] body :is(.playlist-window,.dday-window,.banner-window),
 html[data-theme="light"] body > .arch-messenger-root > .msg-panel {
-  background:linear-gradient(135deg,rgba(255,255,255,.78),rgba(249,250,252,.56))!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.40),rgba(239,242,247,.22))!important;
+}
+/* Keep the desktop visible through each glass surface. */
+html[data-theme="light"] body :is(.main-wrap,.playlist-window,.dday-window,.banner-window),
+html[data-theme="light"] body > .arch-messenger-root > .msg-panel {
+  backdrop-filter:blur(8px) saturate(105%)!important;
+  -webkit-backdrop-filter:blur(8px) saturate(105%)!important;
+  border-color:rgba(255,255,255,.55)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.65),0 8px 28px rgba(48,54,66,.10)!important;
 }
 html[data-theme="light"] .playlist-window:has(#queue-toggle[aria-expanded="true"]) {
-  background:linear-gradient(135deg,rgba(255,255,255,.86),rgba(249,250,252,.76))!important;
+  background:linear-gradient(135deg,rgba(255,255,255,.56),rgba(239,242,247,.40))!important;
 }
-html[data-theme="light"] body :is(.explorer-sidebar,.sidebar-stack) {background:rgba(255,255,255,.12)!important}
+html[data-theme="light"] body :is(.explorer-sidebar,.sidebar-stack) {background:rgba(255,255,255,.04)!important}
 html[data-theme="light"] body :is(.gallery-scroll,.log-scroll) {
   background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(247,249,251,.12));
 }
