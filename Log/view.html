@@ -12,9 +12,9 @@
 </style>
 <script src="../js/theme.js?v=20260911-clear-background"></script>
 <script src="../js/content-api.js?v=20260911-clear-background"></script>
-<script src="../js/log-catalog.js?v=20260923-absence"></script>
+<script src="../js/log-catalog.js?v=20260923-plain-dialogue"></script>
 <script src="../js/archive-content.js?v=20260922-worlds"></script>
-<link rel="stylesheet" href="../css/archive-surfaces.css?v=20260912-style-review">
+<link rel="stylesheet" href="../css/archive-surfaces.css?v=20260923-plain-dialogue">
 <link rel="stylesheet" href="../css/zamza-dark.css?v=20260914-agent-text">
 <link rel="icon" type="image/svg+xml" href="../img/favicon-apple.svg?v=20260922-white-filled">
 <link rel="stylesheet" href="../css/underwater-light.css?v=20260922-profile-glass">
@@ -40,7 +40,7 @@ fetch(source)
     content.appendChild(title); content.appendChild(meta);
     if(log.quote){var quote=document.createElement('div');quote.className='detail-quote';quote.textContent='“ '+log.quote+' ”';content.appendChild(quote);}
     if(log.imagePath){var img=document.createElement('img');img.className='detail-img';img.src=window.EDEN_CONTENT_API+log.imagePath;img.alt=log.title;content.appendChild(img);}
-    var body=document.createElement('div');body.className='detail-body'+(log.id==='005'||log.glass?' detail-body-glass':'');body.textContent=log.body;content.appendChild(body);if(window.formatLogText)window.formatLogText(body);
+    var body=document.createElement('div');body.className='detail-body'+(log.id==='005'||log.glass?' detail-body-glass':'');if(log.plainDialogue)body.classList.add('plain-dialogue');body.textContent=log.body;content.appendChild(body);if(window.formatLogText)window.formatLogText(body);
     document.title='END OF EDEN — '+log.title;
     window.setLogContext({ world: log.world || new URLSearchParams(location.search).get('world') || 'arch', title: log.title });
   })

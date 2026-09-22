@@ -6,6 +6,7 @@ window.ARCHIVE_LOCAL_LOGS = [
     title: '不在',
     date: '2026.09.23',
     bodyPath: 'Log/text/parallel-i-001.txt',
-    glass: true
+    glass: true,
+    plainDialogue: true
   }
 ];
