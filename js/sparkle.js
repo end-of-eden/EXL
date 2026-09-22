@@ -43,7 +43,7 @@
       frame = last = 0;
     }
     function spawn(now) {
-      if (!pointer || particles.length >= 66) return;
+      if (!pointer || particles.length >= 12) return;
       var el = doc.createElement('span'), colors = palettes[serial++ % palettes.length];
       el.className = 'cursor-bubble';
       el.innerHTML = '<i></i><i></i><i></i>';
@@ -56,18 +56,18 @@
       if (!allowed()) { clear(); return; }
       if (!last || now-last >= 40) {
         last = now;
-        if (moved || held && now-lastSpawn >= 100) {
+        if ((moved || held) && now-lastSpawn >= (held ? 280 : 180)) {
           spawn(now); lastSpawn = now; moved = false;
         }
         particles = particles.filter(function(p) {
           p.y -= p.size/2 + p.odd;
           p.x += p.drift;
           var age = now-p.born;
-          if (p.y < -10 || p.x < -10 || p.x > host.innerWidth+10 || age > 6000) { p.el.remove(); return false; }
-          p.size = Math.min(8,3+Math.floor(age/650));
+          if (p.y < -10 || p.x < -10 || p.x > host.innerWidth+10 || age > 1800) { p.el.remove(); return false; }
+          p.size = Math.min(4,3+Math.floor(age/900));
           p.el.style.width = p.el.style.height = p.size+'px';
           p.el.style.transform = 'translate('+p.x+'px,'+p.y+'px)';
-          p.el.style.opacity = String(Math.min(1,(6000-age)/600));
+          p.el.style.opacity = String(Math.min(1,(1800-age)/600));
           return true;
         });
       }
