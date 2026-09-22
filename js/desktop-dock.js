@@ -26,7 +26,7 @@
       if (doc) {
         place(day, Math.max(8, docLeft - 64), Math.max(8, docTop - day.offsetHeight - 12));
       } else {
-        place(day, Math.max(8, Math.min(74, window.innerWidth - day.offsetWidth - 8)), Math.max(8, window.innerHeight - bottomGap - day.offsetHeight));
+        place(day, Math.max(8, Math.min(74, window.innerWidth - day.offsetWidth - 8)), Math.max(8, window.innerHeight - bottomGap - day.offsetHeight - 24));
       }
     }
   }
