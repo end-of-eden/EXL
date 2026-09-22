@@ -79,9 +79,9 @@
       selectRoute(route, historyMode);
     });
     var contentUrl = new URL(route.url.href);
-    if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260922-mobile-audit');
-    if (route.path === 'gallery.html') contentUrl.searchParams.set('v', '20260912-thumbnails');
-    if (route.path === 'log.html' || route.path.startsWith('Log/')) contentUrl.searchParams.set('v', '20260922-log-links');
+    if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260922-bubbles');
+    if (route.path === 'gallery.html') contentUrl.searchParams.set('v', '20260922-bubbles');
+    if (route.path === 'log.html' || route.path.startsWith('Log/')) contentUrl.searchParams.set('v', '20260922-bubbles');
     next.src = contentUrl.href;
     slot.appendChild(next);
     return true;
