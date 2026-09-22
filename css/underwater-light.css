@@ -17,11 +17,13 @@ html[data-theme="light"] body .main-wrap {
   background:linear-gradient(135deg,rgba(255,255,255,.32),rgba(239,242,247,.18))!important;
 }
 html[data-theme="light"] body :is(.playlist-window,.dday-window,.banner-window),
+html[data-theme="light"] body .wiki-wrap .wiki-panel,
 html[data-theme="light"] body > .arch-messenger-root > .msg-panel {
   background:linear-gradient(135deg,rgba(255,255,255,.40),rgba(239,242,247,.22))!important;
 }
 /* Keep the desktop visible through each glass surface. */
 html[data-theme="light"] body :is(.main-wrap,.playlist-window,.dday-window,.banner-window),
+html[data-theme="light"] body .wiki-wrap .wiki-panel,
 html[data-theme="light"] body > .arch-messenger-root > .msg-panel {
   backdrop-filter:blur(8px) saturate(105%)!important;
   -webkit-backdrop-filter:blur(8px) saturate(105%)!important;
@@ -37,9 +39,6 @@ html[data-theme="light"] body :is(.gallery-scroll,.log-scroll) {
 }
 html[data-theme="light"] body .log-item {background:rgba(255,255,255,.35)}
 html[data-theme="light"] body .log-item:hover {background:rgba(255,255,255,.65)}
-html[data-theme="light"] body .wiki-wrap .wiki-panel {
-  background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(247,249,251,.80))!important;
-}
 html[data-theme="light"] body .entry {
   background:radial-gradient(ellipse at 25% 35%,#ffffff28,transparent 65%),radial-gradient(ellipse at 75% 65%,#f4f7f928,transparent 65%);
 }
