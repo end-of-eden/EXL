@@ -78,7 +78,7 @@ html[data-theme] .log-world-cover { font-family: 'Poppins', 'Archive Han', 'Pret
   pointer-events: none;
 }
 .log-world-cover:hover .log-world-copy, .log-world-cover:focus-visible .log-world-copy { opacity: 1; }
-.log-world-cover[data-world="arch"] .log-world-copy { top: -20px; bottom: 20px; }
+.log-world-cover .log-world-copy { top: -32px; bottom: 32px; }
 .log-world-label { font-family: 'Poppins', 'Pretendard', sans-serif; font-size: 10px; letter-spacing: .12em; }
 .log-world-name { display: block; margin: 8px 0; font-size: 28px; font-weight: 500; line-height: 1.6; }
 .log-world-description { position: absolute; top: calc(50% + 48px); left: 16px; right: 16px; font-size: 12px; line-height: 1.6; word-break: keep-all; text-wrap: balance; }
