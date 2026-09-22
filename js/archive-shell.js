@@ -24,7 +24,8 @@
     var category = route.path.startsWith('Log/') ? 'log.html' : route.path;
     document.querySelectorAll('.explorer-tree a, .mobile-navigation a').forEach(function (link) {
       var item = routeFor(link.href);
-      var active = item && item.path === category && (category !== 'wiki.html' ||
+      var menuCategory = category === 'wiki.html' && link.closest('.mobile-navigation') ? 'agents.html' : category;
+      var active = item && item.path === menuCategory && (menuCategory !== 'wiki.html' ||
         item.url.searchParams.get('char') === (route.url.searchParams.get('char') || 'eden'));
       link.classList.toggle('active', active);
       if (active) link.setAttribute('aria-current', 'page');
@@ -78,9 +79,9 @@
       selectRoute(route, historyMode);
     });
     var contentUrl = new URL(route.url.href);
-    if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260917-mobile-profile');
+    if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260922-mobile-audit');
     if (route.path === 'gallery.html') contentUrl.searchParams.set('v', '20260912-thumbnails');
-    if (route.path === 'log.html' || route.path.startsWith('Log/')) contentUrl.searchParams.set('v', '20260912-smooth-log');
+    if (route.path === 'log.html' || route.path.startsWith('Log/')) contentUrl.searchParams.set('v', '20260922-log-links');
     next.src = contentUrl.href;
     slot.appendChild(next);
     return true;

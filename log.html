@@ -96,6 +96,8 @@ body {
 .log-scroll::-webkit-scrollbar-thumb { background: var(--color-border-secondary); border-radius: 99px; }
 
 .log-item {
+  color:inherit;
+  text-decoration:none;
   display: flex;
   gap: 1.25rem;
   align-items: flex-start;
@@ -107,6 +109,7 @@ body {
 .log-item:first-child { padding-top: 0; }
 .log-item:last-child { border-bottom: none; }
 .log-item:hover { opacity: 0.75; }
+.log-item:focus-visible { outline:2px solid currentColor; outline-offset:2px; }
 
 .log-item-text { flex: 1; min-width: 0; }
 .log-item-title {
@@ -241,20 +244,17 @@ function render() {
     var href = log.remote
       ? 'Log/view.html?id=' + encodeURIComponent(log.id) + '&v=20260911-log-body-blur'
       : 'Log/' + encodeURIComponent(log.id) + '.html?v=20260911-log-body-blur';
-    return '<div class="log-item" data-enter-pending data-enter-index="' + (startIndex + index) + '" style="opacity:0" data-href="' + escapeHtml(href) + '">' +
+    return '<a class="log-item" data-enter-pending data-enter-index="' + (startIndex + index) + '" style="opacity:0" href="' + escapeHtml(href) + '">' +
       '<div class="log-item-text">' +
       '<div class="log-item-title">' + escapeHtml(log.title) + '</div>' +
       '<div class="log-item-date">' + escapeHtml(log.date) + '</div>' +
       '<div class="log-item-preview">' + escapeHtml(log.preview) + '</div>' +
       '</div>' +
       '<img class="log-item-thumb" src="' + escapeHtml(log.thumbUrl || (base + log.thumb)) + '" alt="' + escapeHtml(log.title) + '" loading="lazy">' +
-      '</div>';
+      '</a>';
   }).join(''));
   newLogs.forEach(function(log) { renderedLogIds.add(log.id); });
 
-  Array.prototype.slice.call(list.querySelectorAll('.log-item'), startIndex).forEach(function(item) {
-    item.addEventListener('click', function() { location.href = item.dataset.href; });
-  });
   animateLogItems();
 }
 

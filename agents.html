@@ -41,8 +41,8 @@
 
 .mobile-agents{display:none}
 @media(max-width:820px){
-.entry{display:block;height:100%}.entry>.art{display:none}
-.mobile-agents{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
+.entry{display:block;height:100%;justify-items:normal}.entry>.art{display:none}
+.mobile-agents{display:flex;width:100%;min-width:0;height:100%;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
 .mobile-agent{position:relative;flex:0 0 100%;min-width:0;height:100%;scroll-snap-align:start;display:flex;flex-direction:column;overflow:hidden}
 .mobile-agent-art{display:block;color:inherit;position:relative;flex:1;min-height:180px;overflow:hidden}
 .mobile-agent-art img{position:absolute;height:100%;width:auto;max-width:none;left:50%;transform:translateX(-35%)}
