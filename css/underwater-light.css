@@ -1,16 +1,16 @@
-/* Blue water behind white glass, scoped to light mode. */
+/* Silver sparkles behind white glass, scoped to light mode. */
 html[data-theme="light"] {
   --glass-ink:#414141;
   --glass-edge:rgba(255,255,255,.85);
 }
 html[data-theme="light"]:has(body > .archive-frame),
 html[data-theme="light"]:has(body > .archive-frame) > body {
-  background:#dcecf5!important;
+  background:#e4e4e8!important;
 }
 html[data-theme="light"]:has(body > .archive-frame) > body::before {
-  background:url('../img/underwater-bg.jpg') center/cover no-repeat;
-  inset:-6px;
-  filter:blur(2px) saturate(.72);
+  background:url('../img/silver-sparkle-bg.jpg') center/cover no-repeat;
+  inset:0;
+  filter:none;
 }
 html[data-theme="light"] .archive-frame {background:rgba(255,255,255,.06)!important}
 html[data-theme="light"] body .main-wrap {
