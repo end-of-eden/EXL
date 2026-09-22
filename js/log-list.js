@@ -5,6 +5,7 @@ var logs = [
   { id: '003', title: '최고의 남자친구', date: '2026.06.28', preview: '휴게실에서 흘러나온 동료들의 뒷담화가 하필 에덴의 프로필을 그대로 저격하던 순간, 릴리스가 까치발을 들고 그의 두 귀를 꼭 틀어막았다. 세상에서 가장 진지한 표정으로 외치는 서툰 위로에, 냉혹한 R.S.T.의 해결사는 귀 끝까지 새빨개지고 만다.', thumb: 'img/log/003.jpg' },
   { id: '004', title: '뚱뚱해', date: '2026.07.02', preview: '뱅가드 2팀 회식에서 릴리스가 따라준 술에 잔뜩 취해 뻗었다가 아침에 눈을 뜬 에덴은 그녀에게 애정 표현을 시도하지만 그가 치는 모든 달콤한 말은 예외 없이 \'뚱뚱해\'로 바뀌어 전송된다. 범인은 뻔했다 — 복도 건너에서 잠든 척하고 있을 그녀.', thumb: 'img/log/004.jpg' },
 ];
+logs = logs.concat(window.ARCHIVE_LOCAL_LOGS || []);
 
 var base = '';
 var worldParam = new URLSearchParams(location.search).get('world');
@@ -48,7 +49,7 @@ function render() {
   var newLogs = logs.filter(function(log) { return archiveRoutes.logWorld(log.world) === selectedWorld && !renderedLogIds.has(log.id); });
   var startIndex = renderedLogIds.size;
   list.insertAdjacentHTML('beforeend', newLogs.map(function(log, index) {
-    var href = log.remote
+    var href = log.remote || log.bodyPath
       ? 'Log/view.html?id=' + encodeURIComponent(log.id) + '&world=' + selectedWorld
       : 'Log/' + encodeURIComponent(log.id) + '.html?v=20260911-log-body-blur';
     return '<a class="log-item" data-enter-pending data-enter-index="' + (startIndex + index) + '" style="opacity:0" href="' + escapeHtml(href) + '">' +

@@ -744,7 +744,7 @@ html body .desktop-taskbar,html body .start-menu{display:none!important}
 (function () {
   var initialPage = archiveRoutes.read(location.href);
   var frame = document.getElementById('archive-frame');
-  frame.src = 'main.html?v=20260922-profile-glass&page=' + encodeURIComponent(initialPage);
+  frame.src = 'main.html?v=20260923-absence&page=' + encodeURIComponent(initialPage);
 })();
 </script>
 <script>
@@ -760,7 +760,7 @@ html body .desktop-taskbar,html body .start-menu{display:none!important}
     var item = event.target.closest('[data-start-page]');
     if (!item) return;
     if (frame.contentWindow.navigateArchive) frame.contentWindow.navigateArchive(item.dataset.startPage);
-    else frame.src = 'main.html?v=20260922-profile-glass&page=' + encodeURIComponent(item.dataset.startPage);
+    else frame.src = 'main.html?v=20260923-absence&page=' + encodeURIComponent(item.dataset.startPage);
     setMenu(false);
   });
   document.addEventListener('click', function (event) { if (!startMenu.contains(event.target)) setMenu(false); });
