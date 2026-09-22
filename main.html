@@ -304,7 +304,7 @@ html[data-theme="light"] .main-wrap {
 <link rel="stylesheet" href="css/zamza-dark.css?v=20260915-sns-colors">
 <link rel="stylesheet" href="css/lucide-icons.css?v=20260920-list">
 <link rel="stylesheet" href="css/mobile-layout.css?v=20260922-small-menu">
-<link rel="stylesheet" href="css/notice.css?v=20260921-fit">
+<link rel="stylesheet" href="css/notice.css?v=20260922-video-ratio">
 </head>
 <body>
 <div class="site-shell">
@@ -358,8 +358,8 @@ html[data-theme="light"] .main-wrap {
       </nav>
     </aside>
     <section class="home-content">
-      <figure class="room-media">
-        <video id="room-video" src="img/video/main-hero.mp4" preload="metadata" muted playsinline loop></video>
+      <figure class="room-media" style="--room-aspect:1052/720">
+        <video id="room-video" src="img/video/main-briarshot-20260921.mp4" poster="img/video/main-briarshot-20260921.jpg" preload="metadata" muted playsinline loop></video>
         <div class="room-video-controls">
           <input class="room-seek" id="room-seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="영상 재생 위치">
           <div class="room-control-row">

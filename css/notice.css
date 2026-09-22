@@ -1,5 +1,5 @@
 html body .home-content{display:block!important;height:100%;overflow-y:auto!important}
-html body .room-media{margin:0;width:100%;aspect-ratio:16/9}
+html body .room-media{margin:0;width:100%;aspect-ratio:var(--room-aspect,16/9)}
 .home-notice{display:block;padding:28px 12px 32px;color:#49404f}
 .home-notice h2{margin:0 0 20px;font:700 11px Pretendard,sans-serif;letter-spacing:.12em}
 .notice-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;color:inherit;font:13px/1.9 Pretendard,sans-serif;overflow-wrap:break-word;word-break:keep-all}
