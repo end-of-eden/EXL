@@ -43,7 +43,7 @@
       frame = last = 0;
     }
     function spawn(now) {
-      if (!pointer || particles.length >= 12) return;
+      if (!pointer || particles.length >= 40) return;
       var el = doc.createElement('span'), colors = palettes[serial++ % palettes.length];
       el.className = 'cursor-bubble';
       el.innerHTML = '<i></i><i></i><i></i>';
@@ -56,7 +56,7 @@
       if (!allowed()) { clear(); return; }
       if (!last || now-last >= 40) {
         last = now;
-        if ((moved || held) && now-lastSpawn >= (held ? 280 : 180)) {
+        if ((moved || held) && now-lastSpawn >= 40) {
           spawn(now); lastSpawn = now; moved = false;
         }
         particles = particles.filter(function(p) {
