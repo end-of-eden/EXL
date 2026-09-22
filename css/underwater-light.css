@@ -9,6 +9,8 @@ html[data-theme="light"]:has(body > .archive-frame) > body {
 }
 html[data-theme="light"]:has(body > .archive-frame) > body::before {
   background:url('../img/underwater-bg.jpg') center/cover no-repeat;
+  inset:-6px;
+  filter:blur(2px) saturate(.72);
 }
 html[data-theme="light"] .archive-frame {background:rgba(255,255,255,.06)!important}
 html[data-theme="light"] body .main-wrap {
