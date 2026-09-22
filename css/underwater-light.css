@@ -1,0 +1,42 @@
+/* Blue water behind white glass, scoped to light mode. */
+html[data-theme="light"] {
+  --glass-ink:#414141;
+  --glass-edge:rgba(255,255,255,.85);
+}
+html[data-theme="light"]:has(body > .archive-frame),
+html[data-theme="light"]:has(body > .archive-frame) > body {
+  background:#dcecf5!important;
+}
+html[data-theme="light"]:has(body > .archive-frame) > body::before {
+  background:url('../img/underwater-bg.jpg') center/cover no-repeat;
+}
+html[data-theme="light"] .archive-frame {background:rgba(255,255,255,.06)!important}
+html[data-theme="light"] body .main-wrap {
+  background:linear-gradient(135deg,rgba(255,255,255,.76),rgba(248,250,252,.60))!important;
+}
+html[data-theme="light"] body :is(.playlist-window,.dday-window,.banner-window),
+html[data-theme="light"] body > .arch-messenger-root > .msg-panel {
+  background:linear-gradient(135deg,rgba(255,255,255,.78),rgba(249,250,252,.56))!important;
+}
+html[data-theme="light"] .playlist-window:has(#queue-toggle[aria-expanded="true"]) {
+  background:linear-gradient(135deg,rgba(255,255,255,.86),rgba(249,250,252,.76))!important;
+}
+html[data-theme="light"] body :is(.explorer-sidebar,.sidebar-stack) {background:rgba(255,255,255,.12)!important}
+html[data-theme="light"] body :is(.gallery-scroll,.log-scroll) {
+  background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(247,249,251,.12));
+}
+html[data-theme="light"] body .log-item {background:rgba(255,255,255,.35)}
+html[data-theme="light"] body .log-item:hover {background:rgba(255,255,255,.65)}
+html[data-theme="light"] body .wiki-wrap .wiki-panel {
+  background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(247,249,251,.80))!important;
+}
+html[data-theme="light"] body .entry {
+  background:radial-gradient(ellipse at 25% 35%,#ffffff28,transparent 65%),radial-gradient(ellipse at 75% 65%,#f4f7f928,transparent 65%);
+}
+html[data-theme="light"] .mobile-popup {background:#f7fafc;color:#414141;border-color:#ffffff}
+html[data-theme="light"] .theme-toggle-fixed {background:rgba(255,255,255,.8)}
+@media(prefers-reduced-transparency:reduce){
+  html[data-theme="light"] body :is(.main-wrap,.playlist-window,.dday-window,.banner-window),
+  html[data-theme="light"] body > .arch-messenger-root > .msg-panel {background:#f5f7f9!important}
+  html[data-theme="light"] body .wiki-wrap .wiki-panel {background:#f8fafc!important}
+}

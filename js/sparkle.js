@@ -63,11 +63,11 @@
           p.y -= p.size/2 + p.odd;
           p.x += p.drift;
           var age = now-p.born;
-          if (p.y < -10 || p.x < -10 || p.x > host.innerWidth+10 || age > 1800) { p.el.remove(); return false; }
+          if (p.y < -10 || p.x < -10 || p.x > host.innerWidth+10 || age > 6000) { p.el.remove(); return false; }
           p.size = Math.min(4,3+Math.floor(age/900));
           p.el.style.width = p.el.style.height = p.size+'px';
           p.el.style.transform = 'translate('+p.x+'px,'+p.y+'px)';
-          p.el.style.opacity = String(Math.min(1,(1800-age)/600));
+          p.el.style.opacity = String(Math.min(1,(6000-age)/600));
           return true;
         });
       }
