@@ -116,7 +116,11 @@
     });
     seek.addEventListener('input', function () {
       if (!ready) return;
-      player.seekTo(Number(seek.value), true); update();
+      var position = Number(seek.value), length = Number(seek.max);
+      player.seekTo(position, true);
+      elapsed.textContent = time(position);
+      seek.style.setProperty('--progress', (length ? position / length * 100 : 0) + '%');
+      seek.setAttribute('aria-valuetext', time(position) + ' / ' + time(length));
     });
     window.addEventListener('pagehide', function () {
       disposed = true; clearInterval(timer); clearTimeout(readyTimeout);
