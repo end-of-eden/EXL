@@ -52,12 +52,8 @@ function render() {
       ? 'Log/view.html?id=' + encodeURIComponent(log.id) + '&world=' + selectedWorld
       : 'Log/' + encodeURIComponent(log.id) + '.html?v=20260911-log-body-blur';
     return '<a class="log-item" data-enter-pending data-enter-index="' + (startIndex + index) + '" style="opacity:0" href="' + escapeHtml(href) + '">' +
-      '<div class="log-item-text">' +
-      '<div class="log-item-title">' + escapeHtml(log.title) + '</div>' +
-      '<div class="log-item-date">' + escapeHtml(log.date) + '</div>' +
-      '<div class="log-item-preview">' + escapeHtml(log.preview) + '</div>' +
-      '</div>' +
-      '<img class="log-item-thumb" src="' + escapeHtml(log.thumbUrl || (base + log.thumb)) + '" alt="' + escapeHtml(log.title) + '" loading="lazy">' +
+      '<span class="log-item-title">' + escapeHtml(log.title) + '</span>' +
+      '<time class="log-item-date" datetime="' + escapeHtml(String(log.date || '').replace(/\./g, '-')) + '">' + escapeHtml(log.date) + '</time>' +
       '</a>';
   }).join(''));
   newLogs.forEach(function(log) { renderedLogIds.add(log.id); });

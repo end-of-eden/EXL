@@ -88,6 +88,30 @@ html[data-theme="light"] .log-world-heading { color: #383c43; }
 .log-list-status { padding: 48px 16px; text-align: center; color: #676d77; font-size: 13px; }
 .log-list-status:empty { display: none; }
 html[data-theme="dark"] .log-list-status { color: #b9bec7; }
+/* A quiet title/date index, without thumbnail cards. */
+html[data-theme] body .log-list-view .log-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  min-height: 52px;
+  margin: 0;
+  padding: 14px 8px;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(90,90,90,.16) !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+html[data-theme] body .log-list-view .log-item:hover { background: rgba(255,255,255,.16) !important; }
+html[data-theme="dark"] body .log-list-view .log-item { border-bottom-color: rgba(210,210,220,.16) !important; }
+html[data-theme="dark"] body .log-list-view .log-item:hover { background: rgba(255,255,255,.05) !important; }
+.log-list-view .log-item-title { margin: 0; font-size: 14px; line-height: 1.6; font-weight: 500; word-break: keep-all; overflow-wrap: anywhere; }
+.log-list-view .log-item-title::before { content: none; }
+.log-list-view .log-item-date { margin: 0; font: 400 11px/1.6 'Pretendard',sans-serif; white-space: nowrap; font-variant-numeric: tabular-nums; }
+@media(max-width: 420px) {
+  html[data-theme] body .log-list-view .log-item { gap: 12px; padding-inline: 0; }
+}
 @media (max-width: 600px) {
   .log-scroll.is-world-picker { display: block; padding: 20px; container-type: normal; }
   .log-worlds { grid-template-columns: minmax(0, 240px); gap: 12px; }
