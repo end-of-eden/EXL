@@ -12,14 +12,17 @@
 </style>
 <script src="../js/theme.js?v=20260911-clear-background"></script>
 <script src="../js/content-api.js?v=20260911-clear-background"></script>
-<script src="../js/log-catalog.js?v=20260923-strawberry-court"></script>
+<script src="../js/log-catalog.js?v=20260923-ooc-music"></script>
 <script src="../js/log-emphasis.js?v=20260923-strawberry-court"></script>
+<script src="../js/log-extras.js?v=20260923-ooc-music"></script>
 <script src="../js/log-text.js?v=20260911-clear-background"></script>
 <script src="../js/archive-content.js?v=20260922-worlds"></script>
 <link rel="stylesheet" href="../css/archive-surfaces.css?v=20260923-strawberry-court">
 <link rel="stylesheet" href="../css/zamza-dark.css?v=20260914-agent-text">
 <link rel="icon" type="image/svg+xml" href="../img/favicon-apple.svg?v=20260922-white-filled">
 <link rel="stylesheet" href="../css/underwater-light.css?v=20260922-profile-glass">
+<link rel="stylesheet" href="../css/lucide-icons.css?v=20260923-ooc-music">
+<link rel="stylesheet" href="../css/log-extras.css?v=20260923-ooc-music">
 </head>
 <body>
 <div class="detail-wrap"><div class="detail-scroll"><a class="back-btn" href="../log.html">← Back</a><div id="content" class="loading">기록을 불러오는 중…</div></div></div>
@@ -40,6 +43,7 @@ fetch(source)
     var title=document.createElement('div'); title.className='detail-title'; title.textContent=log.title;
     var meta=document.createElement('div'); meta.className='detail-meta'; meta.textContent=log.date+' · Daily Log';
     content.appendChild(title); content.appendChild(meta);
+    if(window.appendLogExtras)window.appendLogExtras(content,log);
     if(log.quote){var quote=document.createElement('div');quote.className='detail-quote';quote.textContent='“ '+log.quote+' ”';content.appendChild(quote);}
     if(log.imagePath){var img=document.createElement('img');img.className='detail-img';img.src=window.EDEN_CONTENT_API+log.imagePath;img.alt=log.title;content.appendChild(img);}
     var body=document.createElement('div');body.className='detail-body'+(log.id==='005'||log.glass?' detail-body-glass':'');if(log.plainDialogue)body.classList.add('plain-dialogue');body.textContent=log.body;content.appendChild(body);if(window.formatLogText)window.formatLogText(body);
