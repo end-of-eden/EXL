@@ -71,6 +71,7 @@
     function fail(error) {
       root.dataset.error = error && (error.data || error.message) || 'Player readiness timeout';
       clearTimeout(readyTimeout); loading = false; button.disabled = false; setPlaying(false);
+      button.removeAttribute('aria-busy');
       status.textContent = '음악을 불러오지 못했어요.'; fallback.hidden = false;
       if (player && player.destroy) player.destroy();
       var engine = root.querySelector('.log-music-engine');
@@ -84,7 +85,8 @@
         else { status.textContent = ''; pauseBackgroundMusic(); player.playVideo(); }
         return;
       }
-      loading = true; button.disabled = true; fallback.hidden = true; status.textContent = '음악을 불러오는 중…';
+      loading = true; button.disabled = true; fallback.hidden = true; status.textContent = '';
+      button.setAttribute('aria-busy', 'true'); button.setAttribute('aria-label', '로그 음악 준비 중');
       delete root.dataset.error;
       pauseBackgroundMusic();
       youtubeAPI().then(function (YT) {
@@ -100,6 +102,7 @@
             onReady: function (event) {
               clearTimeout(readyTimeout); if (disposed) return;
               ready = true; loading = false; button.disabled = false; status.textContent = '';
+              button.removeAttribute('aria-busy'); button.setAttribute('aria-label', '로그 음악 재생');
               var frame = event.target.getIframe(); frame.tabIndex = -1; frame.title = music.title || '로그 음악';
               event.target.setVolume(35); update(); event.target.playVideo();
             },

@@ -1,12 +1,14 @@
 .log-ooc{margin:0 0 14px;border:0;background:transparent;color:#875169;font-size:12px;line-height:1.8}
-.log-ooc summary{display:flex;align-items:center;justify-content:center;min-height:38px;padding:8px 13px;background:transparent;cursor:pointer;list-style:none;font-weight:600;user-select:none}
+.log-ooc summary{display:flex;align-items:center;justify-content:center;width:fit-content;max-width:100%;margin-inline:auto;min-height:38px;padding:8px 13px;background:transparent;cursor:pointer;list-style:none;font-weight:600;user-select:none;transition:color .28s ease,text-shadow .28s ease}
+.log-ooc summary:hover,.log-ooc summary:focus-visible{color:#c05b88;text-shadow:0 0 12px #d98caf33}
 .log-ooc summary::-webkit-details-marker{display:none}
 .log-ooc-copy{padding:13px 16px 16px;white-space:pre-wrap;word-break:keep-all;overflow-wrap:anywhere;text-align:justify}
 .log-ooc summary:focus-visible,.log-music button:focus-visible,.log-music input:focus-visible{outline:2px solid #9a456b;outline-offset:-3px}
-.log-music{margin:0 0 26px;color:#875169}
+.log-music{width:320px;max-width:100%;margin:0 auto 26px;color:#875169}
 .log-music-bar{display:flex;align-items:center;gap:10px;min-height:28px;padding:0;border:0;background:transparent}
 .log-music-play{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;flex:0 0 28px;border:0;background:transparent;color:#a44f73;cursor:pointer}
-.log-music-play:disabled{opacity:.45;cursor:wait}
+.log-music-play:disabled{opacity:.45;cursor:wait;animation:log-music-loading 1s ease-in-out infinite alternate}
+@keyframes log-music-loading{from{opacity:.3}to{opacity:.75}}
 .log-music-time{display:none}
 .log-music-seek{--progress:0%;appearance:none;-webkit-appearance:none;min-width:0;flex:1;height:18px;background:transparent;cursor:pointer;accent-color:#c26b90}
 .log-music-seek::-webkit-slider-runnable-track{height:2px;border-radius:2px;background:linear-gradient(to right,#c26b90 var(--progress),#dfb6c8 var(--progress))}
@@ -21,6 +23,8 @@
 .log-music-fallback[hidden]{display:none}
 .log-music-engine{position:fixed;left:-10000px;top:-10000px;width:200px;height:200px;pointer-events:none}
 html[data-theme="dark"] .log-ooc{color:#efdae3}
+html[data-theme="dark"] .log-ooc summary:hover,html[data-theme="dark"] .log-ooc summary:focus-visible{color:#ffa5cf}
 html[data-theme="dark"] .log-music{color:#e4bace}
 html[data-theme="dark"] .log-music-play{color:#e5a0bf}
 @media(max-width:540px){.log-music-bar{gap:6px}.log-ooc-copy{padding:12px}}
+@media(prefers-reduced-motion:reduce){.log-ooc summary{transition:none}.log-music-play:disabled{animation:none}}
