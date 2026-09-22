@@ -31,3 +31,4 @@ html.archive-content-document body {
 .archive-content-document #wiki-content > *,
 .archive-content-document .gallery-item,
 .archive-content-document .log-item { animation: none; }
+.archive-log-detail .back-btn { display: none; }

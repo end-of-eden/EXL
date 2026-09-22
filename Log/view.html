@@ -12,7 +12,7 @@
 </style>
 <script src="../js/theme.js?v=20260911-clear-background"></script>
 <script src="../js/content-api.js?v=20260911-clear-background"></script>
-<script src="../js/archive-content.js?v=20260911-clear-background"></script>
+<script src="../js/archive-content.js?v=20260922-worlds"></script>
 <link rel="stylesheet" href="../css/archive-surfaces.css?v=20260912-style-review">
 <link rel="stylesheet" href="../css/zamza-dark.css?v=20260914-agent-text">
 <link rel="icon" type="image/svg+xml" href="../img/favicon-apple.svg?v=20260922">
@@ -34,6 +34,7 @@ fetch(window.EDEN_CONTENT_API + '/api/logs/' + encodeURIComponent(id || ''))
     if(log.imagePath){var img=document.createElement('img');img.className='detail-img';img.src=window.EDEN_CONTENT_API+log.imagePath;img.alt=log.title;content.appendChild(img);}
     var body=document.createElement('div');body.className='detail-body'+(log.id==='005'?' detail-body-glass':'');body.textContent=log.body;content.appendChild(body);if(window.formatLogText)window.formatLogText(body);
     document.title='END OF EDEN — '+log.title;
+    window.setLogContext({ world: log.world || new URLSearchParams(location.search).get('world') || 'arch', title: log.title });
   })
   .catch(function(){content.textContent='기록을 불러오지 못했어.';});
 </script>

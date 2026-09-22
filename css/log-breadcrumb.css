@@ -1,0 +1,15 @@
+html[data-theme] body .main-address.is-log-breadcrumb {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: 8px;
+}
+.is-log-breadcrumb > a, .is-log-breadcrumb > span { flex-shrink: 0; }
+.is-log-breadcrumb > a { color: inherit; text-decoration: none; }
+.is-log-breadcrumb > a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.is-log-breadcrumb > a:focus-visible { outline: 1px solid currentColor; outline-offset: 2px; }
+html body .is-log-breadcrumb > .arch-icon { width: 12px; height: 12px; }
+.is-log-breadcrumb > .archive-breadcrumb-title { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 600px) {
+  .is-log-breadcrumb > :nth-child(-n+4) { display: none; }
+}

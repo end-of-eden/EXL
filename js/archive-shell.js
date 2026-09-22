@@ -8,6 +8,43 @@
   var pendingFrame = null;
   var currentRoute = '';
   var base = new URL('../', document.currentScript.src);
+  var logContext = null;
+
+  function showLogBreadcrumb(route) {
+    var address = document.querySelector('.main-address');
+    var isDetail = route.path.startsWith('Log/');
+    var worldKey = archiveRoutes.logWorld(logContext && logContext.world || route.url.searchParams.get('world'));
+    var world = archiveRoutes.logWorlds[worldKey];
+    var hasWorld = isDetail || route.url.searchParams.has('world');
+    address.textContent = '';
+    function part(text, href) {
+      if (address.childNodes.length) {
+        var separator = document.createElement('span');
+        separator.className = 'arch-icon'; separator.dataset.icon = 'chevron-right'; separator.setAttribute('aria-hidden', 'true');
+        address.appendChild(separator);
+      }
+      var item = document.createElement(href ? 'a' : 'span');
+      item.textContent = text;
+      if (href) item.href = new URL(href, base).href;
+      address.appendChild(item);
+      return item;
+    }
+    part('This PC', 'main.html');
+    part('相互確證破壞', 'main.html');
+    var current = part('LOG', hasWorld ? 'log.html' : null);
+    if (hasWorld) current = part(world.title, isDetail ? 'log.html?world=' + worldKey : null);
+    if (isDetail) {
+      current = part(logContext && logContext.title || '기록');
+      current.className = 'archive-breadcrumb-title';
+    }
+    current.setAttribute('aria-current', 'page');
+  }
+  window.updateLogBreadcrumb = function (source, context) {
+    if (!currentFrame || currentFrame.contentWindow !== source) return;
+    logContext = context;
+    var route = routeFor(currentRoute);
+    if (route && (route.path === 'log.html' || route.path.startsWith('Log/'))) showLogBreadcrumb(route);
+  };
 
   function routeFor(value) {
     var url;
@@ -33,6 +70,8 @@
     });
     var label = category === 'wiki.html' ? 'AGENTS　›　' + (route.url.searchParams.get('char') || 'eden').toUpperCase() : category.replace('.html', '').toUpperCase();
     document.querySelector('.main-address').textContent = 'This PC　›　相互確證破壞　›　' + label;
+    document.querySelector('.main-address').classList.toggle('is-log-breadcrumb', category === 'log.html');
+    if (category === 'log.html') showLogBreadcrumb(route);
     if (historyMode !== 'none') {
       var address = new URL(base.href);
       address.hash = archiveRoutes.hash(route.key);
@@ -49,6 +88,7 @@
     if (route.path === 'main.html') {
       if (currentFrame) { currentFrame.remove(); currentFrame = null; }
       home.hidden = false;
+      logContext = null;
       selectRoute(route, historyMode);
       return true;
     }
@@ -65,6 +105,7 @@
       if (video) video.pause();
       home.hidden = true;
       currentFrame = next;
+      logContext = next.contentWindow.archiveLogContext || null;
       pendingFrame = null;
       next.className = 'archive-content-frame is-ready';
       if (route.path === 'log.html' && typeof next.contentWindow.startLogEntrance === 'function') {
@@ -81,7 +122,7 @@
     var contentUrl = new URL(route.url.href);
     if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260922-silver');
     if (route.path === 'gallery.html') contentUrl.searchParams.set('v', '20260922-silver');
-    if (route.path === 'log.html' || route.path.startsWith('Log/')) contentUrl.searchParams.set('v', '20260922-silver');
+    if (route.path === 'log.html' || route.path.startsWith('Log/')) contentUrl.searchParams.set('v', '20260922-worlds');
     next.src = contentUrl.href;
     slot.appendChild(next);
     return true;

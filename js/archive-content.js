@@ -1,4 +1,10 @@
 (function () {
+  window.setLogContext = function (context) {
+    window.archiveLogContext = context;
+    if (window.name === 'archive-content' && window.parent.updateLogBreadcrumb) {
+      window.parent.updateLogBreadcrumb(window, context);
+    }
+  };
   // Content documents keep their own scripts and CSS inside the persistent shell.
   if (window.name !== 'archive-content') {
     if (window.top === window.self) {
@@ -12,8 +18,16 @@
   var script = document.currentScript;
   var css = document.createElement('link');
   css.rel = 'stylesheet';
-  css.href = new URL('../css/archive-content.css', script.src).href;
+  css.href = new URL('../css/archive-content.css?v=20260922-worlds', script.src).href;
   document.head.appendChild(css);
+  if (/\/Log\//.test(location.pathname)) {
+    document.documentElement.classList.add('archive-log-detail');
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!/\/00[1-4]\.html$/.test(location.pathname)) return;
+      var title = document.querySelector('.detail-title');
+      if (title) window.setLogContext({ world: 'arch', title: title.textContent.trim() });
+    });
+  }
   try {
     var host = window.parent;
     function syncTheme() {

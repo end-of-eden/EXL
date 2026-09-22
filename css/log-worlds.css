@@ -1,0 +1,80 @@
+/* Log covers share the content frame; only the photograph blurs on hover. */
+html[data-theme] .log-scroll { background: transparent; }
+.log-worlds[hidden], .log-list-view[hidden] { display: none; }
+.log-scroll.is-world-picker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  container-type: size;
+}
+.log-worlds {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 240px));
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 740px;
+}
+@supports (height: 1cqh) {
+  .log-worlds { grid-template-columns: repeat(3, minmax(0, min(240px, calc(100cqh * 4 / 9)))); }
+}
+.log-world-cover {
+  position: relative;
+  display: block;
+  min-width: 0;
+  aspect-ratio: 4 / 9;
+  overflow: hidden;
+  isolation: isolate;
+  border: 0;
+  border-radius: 12px;
+  padding: 0;
+  background: #e7e7e7;
+  color: #35383c;
+  font: inherit;
+  text-decoration: none;
+  text-align: center;
+}
+.log-world-cover:disabled { opacity: 1; color: #35383c; cursor: default; }
+html[data-theme] .log-world-cover { font-family: 'Poppins', 'Archive Han', 'Pretendard', 'Meiryo', sans-serif; }
+.log-world-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: filter .35s ease;
+}
+.log-world-cover:hover img, .log-world-cover:focus-visible img { filter: blur(3px); }
+.log-world-copy {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  opacity: 0;
+  transition: opacity .3s ease;
+  pointer-events: none;
+}
+.log-world-cover:hover .log-world-copy, .log-world-cover:focus-visible .log-world-copy { opacity: 1; }
+.log-world-label { font-family: 'Poppins', 'Pretendard', sans-serif; font-size: 10px; letter-spacing: .12em; }
+.log-world-name { display: block; margin: 8px 0; font-size: 28px; font-weight: 500; line-height: 1.6; }
+.log-world-description { position: absolute; top: calc(50% + 48px); left: 16px; right: 16px; font-size: 12px; line-height: 1.6; word-break: keep-all; text-wrap: balance; }
+.log-world-cover:focus-visible { outline: 2px solid #555; outline-offset: 4px; }
+.log-world-heading { font-size: 22px; font-weight: 500; margin: 0 0 24px; color: var(--color-text-primary); }
+html[data-theme="light"] .log-world-heading { color: #383c43; }
+.log-list-status { padding: 48px 16px; text-align: center; color: #676d77; font-size: 13px; }
+.log-list-status:empty { display: none; }
+html[data-theme="dark"] .log-list-status { color: #b9bec7; }
+@media (max-width: 600px) {
+  .log-scroll.is-world-picker { display: block; padding: 20px; container-type: normal; }
+  .log-worlds { grid-template-columns: minmax(0, 240px); gap: 12px; }
+}
+@media (hover: none) {
+  .log-world-copy { opacity: 1; }
+  .log-world-cover img { filter: blur(3px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .log-world-cover img, .log-world-copy { transition: none; }
+}
