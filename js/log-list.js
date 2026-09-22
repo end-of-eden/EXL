@@ -73,6 +73,8 @@ if (!selectedWorld) {
     var world = archiveRoutes.logWorlds[key];
     var cover = document.createElement(world.disabled ? 'button' : 'a');
     cover.className = 'log-world-cover';
+    cover.dataset.world = key;
+    cover.style.backgroundImage = 'url("' + world.image + '")';
     if (world.disabled) { cover.type = 'button'; cover.disabled = true; }
     else cover.href = 'log.html?world=' + key;
     cover.setAttribute('aria-label', world.label + ' · ' + world.title + (world.disabled ? ' · 준비 중' : ' 로그 목록 열기'));

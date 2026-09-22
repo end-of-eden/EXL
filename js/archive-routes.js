@@ -1,7 +1,7 @@
 (function () {
   var pages = {main:'main.html', agents:'agents.html', gallery:'gallery.html', log:'log.html', eden:'wiki.html?char=eden', lilith:'wiki.html?char=lilith'};
   var logWorlds = {
-    arch: { title: '磨滅', label: 'ARCH', description: '도망칠 수 없는 겨울의 한가운데였다.', image: 'img/log-worlds/bullet.webp' },
+    arch: { title: '磨滅', label: 'ARCH', description: '도망칠 수 없는 겨울의 한가운데였다.', image: 'img/log-worlds/bullet.webp?v=20260922-neutral' },
     'parallel-i': { title: '交點', label: 'PARALLEL I', description: '네 앞에서만 더 아무 말도 못 하게 됐어.', image: 'img/log-worlds/apple.webp' },
     'parallel-ii': { title: '未完', label: 'PARALLEL II', description: '', image: 'img/log-worlds/thorn.webp', disabled: true }
   };

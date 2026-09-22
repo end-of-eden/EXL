@@ -122,7 +122,7 @@
     var contentUrl = new URL(route.url.href);
     if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260922-silver');
     if (route.path === 'gallery.html') contentUrl.searchParams.set('v', '20260922-silver');
-    if (route.path === 'log.html' || route.path.startsWith('Log/')) contentUrl.searchParams.set('v', '20260922-worlds');
+    if (route.path === 'log.html' || route.path.startsWith('Log/')) contentUrl.searchParams.set('v', '20260922-cover-polish');
     next.src = contentUrl.href;
     slot.appendChild(next);
     return true;

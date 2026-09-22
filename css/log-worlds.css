@@ -30,6 +30,10 @@ html[data-theme] .log-scroll { background: transparent; }
   border-radius: 12px;
   padding: 0;
   background: #e7e7e7;
+  /* Reuse the artwork for the fixed-size blur layer. */
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   color: #35383c;
   font: inherit;
   text-decoration: none;
@@ -42,12 +46,28 @@ html[data-theme] .log-world-cover { font-family: 'Poppins', 'Archive Han', 'Pret
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: filter .35s ease;
 }
-.log-world-cover:hover img, .log-world-cover:focus-visible img { filter: blur(3px); }
+.log-world-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: inherit;
+  filter: blur(3px);
+  /* Fade the blur inside the artwork, leaving its outer edge stationary. */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12px, #000 calc(100% - 12px), transparent), linear-gradient(to bottom, transparent, #000 12px, #000 calc(100% - 12px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12px, #000 calc(100% - 12px), transparent), linear-gradient(to bottom, transparent, #000 12px, #000 calc(100% - 12px), transparent);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+.log-world-cover:hover::before, .log-world-cover:focus-visible::before { opacity: 1; }
 .log-world-copy {
   position: absolute;
   inset: 0;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,6 +78,7 @@ html[data-theme] .log-world-cover { font-family: 'Poppins', 'Archive Han', 'Pret
   pointer-events: none;
 }
 .log-world-cover:hover .log-world-copy, .log-world-cover:focus-visible .log-world-copy { opacity: 1; }
+.log-world-cover[data-world="arch"] .log-world-copy { top: -20px; bottom: 20px; }
 .log-world-label { font-family: 'Poppins', 'Pretendard', sans-serif; font-size: 10px; letter-spacing: .12em; }
 .log-world-name { display: block; margin: 8px 0; font-size: 28px; font-weight: 500; line-height: 1.6; }
 .log-world-description { position: absolute; top: calc(50% + 48px); left: 16px; right: 16px; font-size: 12px; line-height: 1.6; word-break: keep-all; text-wrap: balance; }
@@ -73,8 +94,8 @@ html[data-theme="dark"] .log-list-status { color: #b9bec7; }
 }
 @media (hover: none) {
   .log-world-copy { opacity: 1; }
-  .log-world-cover img { filter: blur(3px); }
+  .log-world-cover::before { opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .log-world-cover img, .log-world-copy { transition: none; }
+  .log-world-cover::before, .log-world-copy { transition: none; }
 }
