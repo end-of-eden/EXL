@@ -90,6 +90,8 @@ html[data-theme="light"] .detail-title{color:#2d2d2d}
 .detail-body .log-dialogue{display:inline;color:#535353;font-weight:700}
 .detail-body .log-dialogue-block{padding:.18em .5em;border-left:3px solid #7f7f7f;background:#f0f0f0;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 html[data-theme] body .detail-body.plain-dialogue .log-dialogue{padding:0;border:0;background:transparent!important;color:inherit!important;font-weight:700}
+html[data-theme] body .detail-body mark.log-keyword{padding:.08em .3em;border:0;border-radius:3px;background:#f5d8e4!important;color:#74364f!important;font-weight:700;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+html[data-theme="dark"] body .detail-body mark.log-keyword{background:#61394d!important;color:#ffe4ee!important}
 .detail-body .log-code{padding:.1em .35em;border:1px solid #dcdcdc;background:#f3f3f3;color:#5f5f5f;font-size:.9em}
 @media(hover:hover){.detail-body .log-thought:hover{color:#343434}.detail-body .log-dialogue:hover{border-left-color:#5f5f5f}}
 

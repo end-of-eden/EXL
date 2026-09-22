@@ -58,6 +58,12 @@ function render() {
       '</a>';
   }).join(''));
   newLogs.forEach(function(log) { renderedLogIds.add(log.id); });
+  // Remote records may arrive after local ones; keep the visible dates in order.
+  Array.from(list.children).sort(function(a, b) {
+    return a.querySelector('time').dateTime.localeCompare(b.querySelector('time').dateTime);
+  }).forEach(function(item, index) {
+    if (list.children[index] !== item) list.insertBefore(item, list.children[index] || null);
+  });
 
   animateLogItems();
 }
