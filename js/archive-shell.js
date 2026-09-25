@@ -120,7 +120,7 @@
       selectRoute(route, historyMode);
     });
     var contentUrl = new URL(route.url.href);
-    if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260922-profile-glass');
+    if (route.path === 'agents.html' || route.path === 'wiki.html') contentUrl.searchParams.set('v', '20260925-lilith-age');
     if (route.path === 'gallery.html') contentUrl.searchParams.set('v', '20260922-silver');
     if (route.path === 'log.html' || route.path.startsWith('Log/')) contentUrl.searchParams.set('v', '20260923-court-music-2');
     next.src = contentUrl.href;
