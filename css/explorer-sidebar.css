@@ -7,16 +7,16 @@
   display: block !important;
   border-right: 1px solid #535353 !important;
   background: #272727 !important;
-  font-family: "Galmuri11", "Pretendard", sans-serif !important;
+  font-family: "Poppins", "Archive Han", "Pretendard", sans-serif !important;
 }
 .explorer-sidebar.topnav::before { display: none !important; content: none !important; }
 .explorer-sidebar .topnav-links { display: flex !important; flex-direction: column !important; align-items: stretch !important; gap: 0 !important; }
 .explorer-sidebar .explorer-group + .explorer-group { margin-top: 19px; }
-.explorer-sidebar .explorer-label { margin: 0 0 8px; color: #929292; font: 400 10px/1.2 "Galmuri11", "Pretendard", sans-serif; letter-spacing: .04em; }
+.explorer-sidebar .explorer-label { margin: 0 0 8px; color: #929292; font: 400 10px/1.2 "Poppins", "Archive Han", "Pretendard", sans-serif; letter-spacing: .04em; }
 .explorer-sidebar .explorer-root { min-height: 25px; display: flex; align-items: center; gap: 7px; margin: 0; padding: 0 !important; color: #b4b4b4 !important; font-size: 11px !important; text-decoration: none; transition: color .16s ease, transform .16s ease; }
 .explorer-sidebar .explorer-root::before { content: none !important; display: none !important; }
 .explorer-sidebar.topnav a.explorer-root {
-  font: 400 11px/1.2 "Galmuri11", "Pretendard", sans-serif;
+  font: 400 11px/1.2 "Poppins", "Archive Han", "Pretendard", sans-serif;
   letter-spacing: 0;
   text-transform: none;
   border-radius: 0;
@@ -30,7 +30,7 @@
 .explorer-sidebar .explorer-chevron { width: 11px; color: #929292; font-size: 9px; }
 .explorer-sidebar .explorer-drive { flex: 1; }
 .explorer-sidebar .explorer-tree { margin-left: 26px; padding-left: 8px; border-left: 1px dotted rgba(146,146,146,.38); }
-.explorer-sidebar .explorer-tree a { position: relative; display: block; margin: 0; padding: 5px 4px 5px 12px !important; background: transparent !important; color: #737373 !important; font: italic 400 10px/1.2 "Galmuri11", "Pretendard", sans-serif !important; letter-spacing: .02em; text-transform: none !important; text-decoration: none; transition: color .16s ease, transform .16s ease; }
+.explorer-sidebar .explorer-tree a { position: relative; display: block; margin: 0; padding: 5px 4px 5px 12px !important; background: transparent !important; color: #737373 !important; font: italic 400 10px/1.2 "Poppins", "Archive Han", "Pretendard", sans-serif !important; letter-spacing: .02em; text-transform: none !important; text-decoration: none; transition: color .16s ease, transform .16s ease; }
 .explorer-sidebar .explorer-tree a::before { content: '·' !important; position: absolute; left: 2px; margin: 0 !important; color: #a6a6a6; }
 .explorer-sidebar .explorer-root:hover,
 .explorer-sidebar .explorer-tree a:hover { color: #c1c1c1 !important; transform: translateX(3px); }

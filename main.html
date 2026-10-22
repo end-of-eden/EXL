@@ -15,10 +15,9 @@ if (window.top === window.self) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@700&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="css/style.css?v=20260914-angel-cursor">
-<link rel="stylesheet" href="css/explorer-sidebar.css?v=20260920-aligned">
+<link rel="stylesheet" href="css/explorer-sidebar.css?v=20261022-poppins">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -61,7 +60,7 @@ body {
 .topnav-links { display: flex; flex-direction: column; align-items: stretch; gap: 3px; margin-left: 0 !important; }
 .topnav-links::before { display: none; }
 .explorer-group + .explorer-group { margin-top: 19px; }
-.explorer-label { margin: 0 0 8px; color: #929292; font: 400 10px/1.2 "Galmuri11", "Pretendard", sans-serif; letter-spacing: .04em; }
+.explorer-label { margin: 0 0 8px; color: #929292; font: 400 10px/1.2 "Poppins", "Archive Han", "Pretendard", sans-serif; letter-spacing: .04em; }
 .explorer-root { min-height: 25px; display: flex; align-items: center; gap: 7px; color: var(--text-2); font-size: 11px; transition: color .16s ease, transform .16s ease; }
 .explorer-root.explorer-social { margin: 5px 0 0; padding: 0; text-decoration: none; }
 .explorer-root i { width: 14px; color: #909090; font-size: 14px; }
@@ -70,7 +69,7 @@ body {
 .explorer-chevron { width: 11px; color: #929292; font-size: 9px; }
 .explorer-drive { flex: 1; }
 .explorer-tree { margin-left: 26px; padding-left: 8px; border-left: 1px dotted rgba(146,146,146,.38); }
-.topnav .explorer-tree a { position: relative; display: block; padding: 5px 4px 5px 12px; font-family: "Galmuri11", "Pretendard", sans-serif; font-size: 10px; font-style: italic; letter-spacing: .02em; text-transform: none; transition: color .16s ease, transform .16s ease; }
+.topnav .explorer-tree a { position: relative; display: block; padding: 5px 4px 5px 12px; font-family: "Poppins", "Archive Han", "Pretendard", sans-serif; font-size: 10px; font-style: italic; letter-spacing: .02em; text-transform: none; transition: color .16s ease, transform .16s ease; }
 .topnav .explorer-tree a::before { content: '·'; position: absolute; left: 2px; color: #a6a6a6; }
 .explorer-root:hover, .topnav .explorer-tree a:hover { color: var(--pink); transform: translateX(3px); }
 .explorer-tag { margin-top: 5px; }
@@ -107,7 +106,7 @@ body {
   background: #3d3d3d; box-shadow: inset -1px -1px 0 #272727, 3px 3px 12px rgba(0,0,0,.3);
   overflow: hidden;
 }
-.main-windowbar { padding: 0 5px 0 9px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #a3a3a3; background: #b5b5b5; color: #424242; box-shadow: inset 0 1px 0 rgba(255,255,255,.48); font: 400 11px/1 "Galmuri11", "Pretendard", sans-serif; }
+.main-windowbar { padding: 0 5px 0 9px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #a3a3a3; background: #b5b5b5; color: #424242; box-shadow: inset 0 1px 0 rgba(255,255,255,.48); font: 400 11px/1 "Poppins", "Archive Han", "Pretendard", sans-serif; }
 .main-window-controls { display: flex; gap: 4px; }
 .main-window-button { width: 20px; height: 20px; display: grid; place-items: center; border: 2px solid; border-color: #757575 #292929 #292929 #757575; background: #484848; color: #dedede; font: 12px/1 Arial, sans-serif; }
 .main-window-button { position: relative; flex: 0 0 20px; padding: 0; font-size: 0; line-height: 0; }
@@ -118,8 +117,8 @@ body {
 .main-window-button:nth-child(3)::before { transform: rotate(45deg); }
 .main-window-button:nth-child(3)::after { transform: rotate(-45deg); }
 .main-toolbar { padding: 4px 7px; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 8px; background: #333333; border-bottom: 1px solid #262626; }
-.main-toolbar-nav { color: #aeaeae; font: 400 11px/1 "Galmuri11", "Pretendard", sans-serif; white-space: nowrap; }
-.main-address { height: 21px; padding: 3px 9px; overflow: hidden; border: 2px solid; border-color: #262626 #727272 #727272 #262626; background: #191919; color: #b1b1b1; font: 400 9px/1.3 "Galmuri11", "Pretendard", sans-serif; white-space: nowrap; text-overflow: ellipsis; }
+.main-toolbar-nav { color: #aeaeae; font: 400 11px/1 "Poppins", "Archive Han", "Pretendard", sans-serif; white-space: nowrap; }
+.main-address { height: 21px; padding: 3px 9px; overflow: hidden; border: 2px solid; border-color: #262626 #727272 #727272 #262626; background: #191919; color: #b1b1b1; font: 400 9px/1.3 "Poppins", "Archive Han", "Pretendard", sans-serif; white-space: nowrap; text-overflow: ellipsis; }
 .mini-home { min-height: 0; padding: 0; display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 0; border: 2px solid; border-color: #282828 #797979 #797979 #282828; background: #191919; }
 html[data-theme="light"] .main-wrap { border-color: #ffffff #757575 #757575 #ffffff; background: #d2d2d2; box-shadow: inset -1px -1px 0 #a8a8a8, 3px 3px 14px rgba(56,56,56,.14); }
 html[data-theme="light"] .main-windowbar { border-color: #bcbcbc; background: #d1d1d1; color: #565656; }
@@ -453,7 +452,7 @@ html[data-theme="light"] .main-wrap {
 <script src="js/archive-routes.js?v=20260922-cover-polish"></script>
 <script src="js/archive-shell.js?v=20260925-lilith-age"></script>
 <script src="js/sparkle.js?v=20260922-bubbles-6s"></script>
-<script src="js/messenger.js?v=mobile-20260916-lucide"></script>
+<script src="js/messenger.js?v=mobile-20261022-poppins"></script>
 <script src="js/category-motion.js?v=20260915-single-item"></script>
 <script src="js/home-layout.js?v=20260921-fit"></script>
 <script>document.querySelectorAll('[data-mobile-popup]').forEach(function(button){button.addEventListener('click',function(){parent.postMessage({type:'archive-mobile-popup',id:button.dataset.mobilePopup},location.origin)})});</script>

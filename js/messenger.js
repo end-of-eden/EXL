@@ -49,7 +49,7 @@
     opacity: 1; transform: none; pointer-events: auto; transition: height .18s ease;
   }
   body > .arch-messenger-root > .msg-panel.open { height: min(520px, calc(100vh - 36px)); }
-  .msg-windowbar { flex: 0 0 30px; height: 30px; padding: 0 5px 0 9px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #a3a3a3; background: #b5b5b5; color: #424242; box-shadow: inset 0 1px 0 rgba(255,255,255,.48); font: 400 11px/1 "Galmuri11", "Pretendard", sans-serif; cursor: grab; user-select: none; touch-action: none; }
+  .msg-windowbar { flex: 0 0 30px; height: 30px; padding: 0 5px 0 9px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #a3a3a3; background: #b5b5b5; color: #424242; box-shadow: inset 0 1px 0 rgba(255,255,255,.48); font: 400 11px/1 "Poppins", "Archive Han", "Pretendard", sans-serif; cursor: grab; user-select: none; touch-action: none; }
   .msg-windowbar { box-sizing: border-box; }
   .msg-windowbar.dragging { cursor: grabbing; }
   .msg-window-controls { display: flex; gap: 4px; }
