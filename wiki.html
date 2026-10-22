@@ -8,10 +8,9 @@
 <link rel="icon" type="image/svg+xml" href="img/favicon-apple.svg?v=20260922-white-filled"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>END OF EDEN</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="css/style.css?v=20260914-angel-cursor">
-<link rel="stylesheet" href="css/explorer-sidebar.css?v=20260911-clear-background">
+<link rel="stylesheet" href="css/explorer-sidebar.css?v=20261022-poppins">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -202,7 +201,7 @@ body {
 /* PC window + wiki document */
 body { min-height: 100vh; padding: 2rem; display: flex; align-items: center; justify-content: center; background: transparent; overflow: hidden; }
 .agent-window { width: 100%; max-width: 1280px; height: min(820px, calc(100vh - 96px)); display: grid; grid-template-rows: 30px 30px minmax(0, 1fr); padding: 5px; border: 2px solid; border-color: #717171 #282828 #282828 #717171; background: #3d3d3d; box-shadow: inset -1px -1px 0 #272727, 3px 3px 12px rgba(0,0,0,.3); }
-.agent-windowbar { padding: 0 5px 0 9px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #a3a3a3; background: #b5b5b5; color: #424242; box-shadow: inset 0 1px rgba(255,255,255,.48); font: 400 11px/1 "Galmuri11", "Pretendard", sans-serif; }
+.agent-windowbar { padding: 0 5px 0 9px; display: flex; align-items: center; justify-content: space-between; border: 1px solid #a3a3a3; background: #b5b5b5; color: #424242; box-shadow: inset 0 1px rgba(255,255,255,.48); font: 400 11px/1 "Poppins", "Archive Han", "Pretendard", sans-serif; }
 .agent-window-controls { display: flex; gap: 4px; }
 .agent-window-button { position: relative; width: 20px; height: 20px; border: 2px solid; border-color: #757575 #292929 #292929 #757575; background: #484848; color: #dedede; }
 .agent-window-button::before, .agent-window-button::after { content: ''; position: absolute; display: block; }
@@ -211,14 +210,14 @@ body { min-height: 100vh; padding: 2rem; display: flex; align-items: center; jus
 .agent-window-button:nth-child(3)::before, .agent-window-button:nth-child(3)::after { left: 7.5px; top: 3px; width: 1px; height: 10px; background: currentColor; transform-origin: center; }
 .agent-window-button:nth-child(3)::before { transform: rotate(45deg); }
 .agent-window-button:nth-child(3)::after { transform: rotate(-45deg); }
-.agent-toolbar { padding: 4px 7px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #262626; background: #333333; color: #aeaeae; font: 400 10px/1 "Galmuri11", "Pretendard", sans-serif; }
+.agent-toolbar { padding: 4px 7px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #262626; background: #333333; color: #aeaeae; font: 400 10px/1 "Poppins", "Archive Han", "Pretendard", sans-serif; }
 .agent-address { flex: 1; height: 21px; padding: 3px 9px; overflow: hidden; border: 2px solid; border-color: #262626 #727272 #727272 #262626; background: #191919; color: #b1b1b1; white-space: nowrap; text-overflow: ellipsis; }
 .agent-workspace { min-height: 0; display: grid; grid-template-columns: 230px minmax(0, 1fr); border: 2px solid; border-color: #282828 #797979 #797979 #282828; background: #191919; }
 .topnav { width: auto; max-width: none; min-height: 0; margin: 0; padding: 18px 14px; display: block; border-right: 1px solid #535353; background: #272727; }
-.topnav::before { content: '목차'; display: block; margin-bottom: 10px; color: #838383; font: 400 9px/1 "Galmuri11", "Pretendard", sans-serif; }
+.topnav::before { content: '목차'; display: block; margin-bottom: 10px; color: #838383; font: 400 9px/1 "Poppins", "Archive Han", "Pretendard", sans-serif; }
 .topnav-links { display: grid; align-content: start; gap: 3px; }
 .topnav-divider { display: none; }
-.topnav a { padding: 7px 9px; border-radius: 0; font: 400 10px/1.2 "Galmuri11", "Pretendard", sans-serif; text-transform: uppercase; }
+.topnav a { padding: 7px 9px; border-radius: 0; font: 400 10px/1.2 "Poppins", "Archive Han", "Pretendard", sans-serif; text-transform: uppercase; }
 .topnav a::before { content: '·'; margin-right: 7px; color: #7b7b7b; }
 .topnav a:hover, .topnav a.active { background: rgba(255,255,255,.045); color: #cbcbcb; }
 .wiki-wrap { width: 100%; max-width: none; height: 100%; min-height: 0; border: 0; border-radius: 0; box-shadow: none; background: #f7f7f7; color: #272727; }
@@ -261,7 +260,7 @@ body { min-height: 100vh; padding: 2rem; display: flex; align-items: center; jus
   /* Use 90% of Eden's fitted height, including when width limits the fit. */
   height: min(81cqh, 131.538461cqw) !important;
 }
-.char-badge { color: #606060 !important; background: #e2e2e2 !important; font: 400 9px/1.2 "Galmuri11", "Pretendard", sans-serif; }
+.char-badge { color: #606060 !important; background: #e2e2e2 !important; font: 400 9px/1.2 "Poppins", "Archive Han", "Pretendard", sans-serif; }
 .char-name-panel { color: #232323; font-size: 22px; font-weight: 700; }
 .char-codename { color: #737373; }
 .wiki-panel { background: #ffffff; }
@@ -602,6 +601,6 @@ if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
 </script>
 
 <script src="js/sparkle.js?v=20260922-bubbles-6s"></script>
-<script src="js/messenger.js?v=20260911-clear-background"></script>
+<script src="js/messenger.js?v=20261022-poppins"></script>
 </body>
 </html>
