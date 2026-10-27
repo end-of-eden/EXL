@@ -55,7 +55,8 @@
     var w = window.innerWidth, h = window.innerHeight;
     stages.forEach(function (stage) {
       var mobile = stage.classList.contains('stage--mobile');
-      stage.style.setProperty('--s', Math.min(w / (mobile ? 390 : 1440), h / (mobile ? 844 : 900)));
+      var fitScale = Math.min(w / (mobile ? 390 : 1440), h / (mobile ? 844 : 900));
+      stage.style.setProperty('--s', mobile ? fitScale : Math.min(1, fitScale));
     });
   }
   window.addEventListener('resize', fit);

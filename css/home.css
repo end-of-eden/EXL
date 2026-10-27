@@ -43,11 +43,11 @@ button { font: inherit; color: inherit; }
 .mad-title ins { position: absolute; text-decoration: none; font-family: 'Caveat', cursive; font-weight: 600; letter-spacing: 0; color: var(--red); transform: rotate(-6deg); white-space: nowrap; }
 .stage--pc .mad-title { top: 52px; }
 .stage--pc .mad-title > span { font-size: 11px; }
-.stage--pc .mad-title ins { left: 36px; top: 18px; font-size: 30px; }
+.stage--pc .mad-title ins { left: 36px; top: 8px; font-size: 30px; }
 .stage--mobile .mad-title { top: 60px; }
 .stage--mobile .mad-title > span { font-size: 9px; letter-spacing: .18em; }
 .stage--mobile .mad-title .strike i { left: -3px; }
-.stage--mobile .mad-title ins { left: 26px; top: 14px; font-size: 26px; }
+.stage--mobile .mad-title ins { left: 26px; top: 6px; font-size: 26px; }
 
 /* 창 */
 .win { position: absolute; width: 300px; background: var(--paper); border: 1px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); }
