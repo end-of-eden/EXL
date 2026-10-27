@@ -89,15 +89,6 @@ button { font: inherit; color: inherit; }
 .scrim { position: absolute; inset: 0; z-index: 4; border: 0; padding: 0; background: rgba(254, 254, 254, .55); cursor: pointer; }
 .scrim[hidden] { display: none; }
 
-/* 모바일 리스트 폴더 탭 */
-.folder { position: absolute; left: 45px; top: 200px; width: 300px; z-index: 5; }
-.folder[hidden] { display: none; }
-.folder__tabs { position: absolute; left: -1px; bottom: 100%; display: flex; gap: 4px; }
-.folder__tabs button { height: 28px; padding: 0 14px; border: 1px solid var(--ink); border-bottom: 0; font-size: 10px; letter-spacing: .16em; cursor: pointer; background: #e7e8ea; color: var(--sub); }
-.folder__tabs button[aria-selected="true"] { position: relative; top: 1px; z-index: 1; background: var(--paper); color: var(--ink); }
-.folder__panel { background: var(--paper); border: 1px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); }
-.folder__panel > div[hidden] { display: none; }
-
 /* 플레이어 */
 .player { position: absolute; font-family: 'Noto Sans KR', sans-serif; }
 .stage--pc .player { left: 530px; bottom: 28px; width: 380px; }

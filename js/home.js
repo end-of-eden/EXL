@@ -201,35 +201,23 @@
     return { close: stop };
   }
 
-  // LIST / BANNER 창
+  // LIST / BANNER 창: 라벨 하나로 두 창이 겹쳐 뜬다
   function boards(stage) {
-    var toggles = stage.querySelectorAll('[data-board-toggle]');
-    var tabs = stage.querySelectorAll('[data-board-tab]');
+    var toggle = stage.querySelector('[data-board-toggle]');
     var panels = stage.querySelectorAll('[data-board]');
-    var folder = stage.querySelector('[data-folder]');
     var scrim = stage.querySelector('[data-board-close]');
-    var current = null;
+    var open = false;
 
-    function show(name) {
-      current = name;
-      scrim.hidden = !name;
-      if (folder) folder.hidden = !name;
-      panels.forEach(function (panel) { panel.hidden = panel.dataset.board !== name; });
-      toggles.forEach(function (button) { button.setAttribute('aria-expanded', String(!!name && (folder ? true : button.dataset.boardToggle === name))); });
-      tabs.forEach(function (tab) { tab.setAttribute('aria-selected', String(tab.dataset.boardTab === name)); });
+    function show(next) {
+      open = next;
+      scrim.hidden = !open;
+      panels.forEach(function (panel) { panel.hidden = !open; });
+      toggle.setAttribute('aria-expanded', String(open));
     }
 
-    toggles.forEach(function (button) {
-      button.addEventListener('click', function () {
-        var name = button.dataset.boardToggle;
-        show(current && (folder || current === name) ? null : name);
-      });
-    });
-    tabs.forEach(function (tab) {
-      tab.addEventListener('click', function () { show(tab.dataset.boardTab); });
-    });
-    scrim.addEventListener('click', function () { show(null); });
-    return { close: function () { show(null); } };
+    toggle.addEventListener('click', function () { show(!open); });
+    scrim.addEventListener('click', function () { show(false); });
+    return { close: function () { show(false); } };
   }
 
   var closers = [];
