@@ -4,7 +4,7 @@
     ['OPEN · 비이입, CBC\n'],
     ['MAIN', 'tag'], ['ARCH', 'b'], [' ', 'gap'], ['EDEN\n'],
     ['SUB', 'tag'], ['FEARLESS', 'b'], [' ', 'gap'], ['DIVE\n'],
-    ['', 'tag'], ['VESTAL', 'b'], [' ', 'gap'], ['린쉬한\n'],
+    ['', 'tag'], ['VESTAL', 'b'], [' ', 'gap'], ['BINDER / COSMOS\n'],
     ['탐복 X 비팔알림 / 리트윗 OFF\n1T 1D 지향\n배려 리스트는 상호기재로 진행합니다']
   ];
   var NOTICE = NOTICE_PARTS.map(function (part) { return part[0]; }).join('');
