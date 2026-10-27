@@ -66,11 +66,11 @@ button { font: inherit; color: inherit; }
 .care-entry { display: flex; flex-direction: column; gap: 1px; }
 .care-entry b { font-size: 11px; letter-spacing: .08em; }
 .care-entry span { padding-left: 12px; font-size: 12px; }
-.win__scroll::-webkit-scrollbar { width: 3px; }
-.win__scroll::-webkit-scrollbar-track { background: transparent; }
-.win__scroll::-webkit-scrollbar-thumb { background: var(--ink); }
+.win__scroll::-webkit-scrollbar { width: 9px; }
+.win__scroll::-webkit-scrollbar-track { background: transparent; margin-block: 6px; }
+.win__scroll::-webkit-scrollbar-thumb { background: #b9bcc0; background-clip: padding-box; border: 3px solid transparent; }
 .win__scroll::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
-@supports not selector(::-webkit-scrollbar) { .win__scroll { scrollbar-width: thin; scrollbar-color: var(--ink) transparent; } }
+@supports not selector(::-webkit-scrollbar) { .win__scroll { scrollbar-width: thin; scrollbar-color: #b9bcc0 transparent; } }
 .win__scroll--banner { padding: 12px; align-items: flex-start; gap: 8px; font-family: inherit; }
 .win__scroll--banner img { display: block; width: 200px; height: 40px; object-fit: cover; }
 .win__scroll--banner a { display: block; width: 200px; height: 40px; }
