@@ -211,7 +211,14 @@
     function show(next) {
       open = next;
       scrim.hidden = !open;
-      panels.forEach(function (panel) { panel.hidden = !open; });
+      panels.forEach(function (panel, i) {
+        panel.hidden = !open;
+        panel.classList.remove('is-glitching');
+        if (!open) return;
+        void panel.offsetWidth;
+        panel.style.animationDelay = (i * 0.14) + 's';
+        panel.classList.add('is-glitching');
+      });
       toggle.setAttribute('aria-expanded', String(open));
     }
 

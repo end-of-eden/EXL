@@ -86,6 +86,17 @@ button { font: inherit; color: inherit; }
 .win__scroll--banner a:focus-visible { outline: 1px solid var(--ink); outline-offset: 2px; }
 .banner-head { margin-top: 6px; font-size: 10px; letter-spacing: .16em; font-weight: 700; }
 
+/* LIST·BANNER 창이 뜰 때 치직 */
+.win.is-glitching { animation: win-glitch-in .34s steps(1, end) both; }
+@keyframes win-glitch-in {
+  0% { opacity: 0; clip-path: inset(0 -8px 100% -8px); transform: translateX(-6px); }
+  12% { opacity: 1; clip-path: inset(8% -8px 62% -8px); transform: translateX(6px); box-shadow: -3px 0 0 #ff0000, 3px 0 0 #00ffff, 4px 4px 0 var(--ink); }
+  26% { clip-path: inset(54% -8px 18% -8px); transform: translateX(-4px); }
+  40% { opacity: .5; clip-path: inset(0 -8px 46% -8px); transform: translateX(3px); box-shadow: 3px 0 0 #ff0000, -3px 0 0 #00ffff, 4px 4px 0 var(--ink); }
+  56% { opacity: 1; clip-path: inset(28% -8px -8px -8px); transform: translateX(-2px); }
+  72% { clip-path: inset(0 -8px -8px -8px); transform: translateX(1px); box-shadow: 4px 4px 0 var(--ink); }
+  100% { clip-path: inset(0 -8px -8px -8px); transform: none; box-shadow: 4px 4px 0 var(--ink); }
+}
 .scrim { position: absolute; inset: 0; z-index: 4; border: 0; padding: 0; background: rgba(254, 254, 254, .55); cursor: pointer; }
 .scrim[hidden] { display: none; }
 
@@ -115,4 +126,5 @@ button { font: inherit; color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .caret.is-blink { animation: none; }
   .hud-label > b, .hud-label > small, .hud-num { transition: none; }
+  .win.is-glitching { animation: none; }
 }
