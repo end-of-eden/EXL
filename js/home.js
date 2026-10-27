@@ -1,4 +1,5 @@
 (function () {
+  var NOTICE_BOLD = /(ARCH|FEARLESS|VESTAL)/;
   var NOTICE = 'OPEN · 비이입, CBC\nMAIN - ARCH / EDEN\nSUB - FEARLESS / DIVE, VESTAL / 린쉬한\n탐복 X 알림 OFF / 좁은 탐라에서 깊은 교류\n1T 1D 지향\n배려 리스트는 상호기재로 진행합니다';
   var NG = '앵챗 양지 끌올 비선호\n드림 지우기 / 허공 저격 / 성인물 공계 발언\n겹드 견제 / 모방 동의 없는 불펌\n이별은 블락 (재연결x)\n';
   var NG_LAST = '저에게서 어떤 영향도 받지 말아주세요';
@@ -130,6 +131,17 @@
   }
   if (!calm) document.querySelectorAll('[data-apple]').forEach(glitch);
 
+  // 앞에서부터 count 글자까지 쓰고, bold에 걸리는 단어는 굵게
+  function typeInto(box, text, count, bold) {
+    box.textContent = '';
+    text.split(bold).forEach(function (part, i) {
+      if (count <= 0 || !part) return;
+      var shown = part.slice(0, count);
+      count -= part.length;
+      box.append(i % 2 ? el('b', {}, [shown]) : shown);
+    });
+  }
+
   // NOTICE → NG 타자 효과
   function notice(stage) {
     var trigger = stage.querySelector('[data-notice-trigger]');
@@ -141,7 +153,7 @@
 
     function paint() {
       var n1 = Math.min(n, t1), n2 = Math.max(0, n - t1);
-      noticeWin.querySelector('[data-typed]').textContent = NOTICE.slice(0, n1);
+      typeInto(noticeWin.querySelector('[data-typed]'), NOTICE, n1, NOTICE_BOLD);
       noticeWin.querySelector('[data-progress]').textContent = Math.round(n1 / t1 * 100) + '%';
       noticeWin.querySelector('[data-caret]').hidden = n >= t1;
       ngWin.hidden = !open || n < t1;
