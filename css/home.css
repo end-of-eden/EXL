@@ -106,8 +106,7 @@ button { font: inherit; color: inherit; }
 .stage--mobile .player__controls { gap: 12px; margin-top: 6px; }
 .player__controls button { width: 44px; height: 44px; border: 0; padding: 0; background: transparent; color: #2a2b2e; display: flex; align-items: center; justify-content: center; cursor: pointer; }
 .stage--mobile .player__controls button { width: 48px; height: 48px; }
-.stage--mobile .player__controls svg { width: 18px; height: 18px; }
-.stage--mobile .player__controls [data-play] svg { width: 22px; height: 22px; }
+.stage--mobile .player__controls svg { width: 20px; height: 20px; }
 .player__controls button:focus-visible, .player__bar:focus-visible { outline: 1px solid var(--ink); outline-offset: 2px; }
 .player [data-icon-pause] { display: none; }
 .player.is-playing [data-icon-play] { display: none; }
