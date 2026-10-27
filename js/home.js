@@ -1,6 +1,6 @@
 (function () {
   var NOTICE = 'OPEN · 비이입, CBC\nMAIN - ARCH / EDEN\nSUB - FEARLESS / DIVE, VESTAL / 린쉬한\n탐복 X 알림 OFF / 좁은 탐라에서 깊은 교류\n1T 1D 지향\n배려 리스트는 상호기재로 진행합니다';
-  var NG = '앵챗 양지 끌올 비선호\n드림 지우기 / 허공 저격 / 카피캣 / 성인물 공계 발언\n겹드 견제 / 모방 동의 없는 불펌\n이별은 블락 (재연결x)\n';
+  var NG = '앵챗 양지 끌올 비선호\n드림 지우기 / 허공 저격 / 성인물 공계 발언\n겹드 견제 / 모방 동의 없는 불펌\n이별은 블락 (재연결x)\n';
   var NG_LAST = '저에게서 어떤 영향도 받지 말아주세요';
   var TYPE_MS = 28;
 
