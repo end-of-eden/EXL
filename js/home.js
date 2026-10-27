@@ -17,7 +17,6 @@
     ['img/banner2.jpg', 'END OF EDEN 배너 2']
   ];
   var FELLOW_AGENTS = [
-    ['https://luvlog.me/pure', 'img/banners/fellow-agent-001.jpg', '순백세계주의보'],
     ['https://b2stsummer.vercel.app/', 'img/banners/fellow-agent-002.png', 'RASPBERRY PLACE'],
     ['https://luvlog.me/nova', 'img/banners/fellow-agent-nova.jpg', 'NOVA'],
     ['https://luvlog.me/aiden', 'img/banners/fellow-agent-aiden.jpg', 'AIDEN']
