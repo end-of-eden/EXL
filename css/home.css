@@ -89,7 +89,7 @@ button { font: inherit; color: inherit; }
 .banner-head { margin-top: 6px; font-size: 10px; letter-spacing: .16em; font-weight: 700; }
 
 /* LIST·BANNER 창이 뜰 때 치직 */
-.win.is-glitching { animation: win-glitch-in .34s steps(1, end) both; }
+.win.is-glitching { animation: win-glitch-in .2s steps(1, end) both; }
 @keyframes win-glitch-in {
   0% { opacity: 0; clip-path: inset(0 -8px 100% -8px); transform: translateX(-6px); }
   12% { opacity: 1; clip-path: inset(8% -8px 62% -8px); transform: translateX(6px); box-shadow: -3px 0 0 #ff0000, 3px 0 0 #00ffff, 4px 4px 0 var(--ink); }

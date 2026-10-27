@@ -226,7 +226,7 @@
         panel.classList.remove('is-glitching');
         if (!open) return;
         void panel.offsetWidth;
-        panel.style.animationDelay = (i * 0.14) + 's';
+        panel.style.animationDelay = (i * 0.06) + 's';
         panel.classList.add('is-glitching');
       });
       toggle.setAttribute('aria-expanded', String(open));
