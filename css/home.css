@@ -64,6 +64,8 @@ button { font: inherit; color: inherit; }
 .win__bar.is-red { color: var(--red); }
 .win__heart { display: inline-block; margin-right: .6em; vertical-align: -1px; }
 .win__text { margin: 0; padding: 12px 12px 14px; font-family: 'Noto Sans KR', sans-serif; font-size: 12px; line-height: 1.85; white-space: pre-line; min-height: 40px; }
+.notice-tag { display: inline-block; width: 44px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .12em; color: var(--sub); }
+.notice-gap { display: inline-block; width: .7em; }
 .caret { display: inline-block; width: 7px; height: 13px; margin-left: 2px; vertical-align: -2px; background: var(--red); }
 .caret[hidden] { display: none; }
 .caret.is-blink { animation: caret-blink 1s steps(1, end) infinite; }

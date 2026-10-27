@@ -1,6 +1,13 @@
 (function () {
-  var NOTICE_BOLD = /(ARCH|FEARLESS|VESTAL)/;
-  var NOTICE = 'OPEN · 비이입, CBC\nMAIN - ARCH / EDEN\nSUB - FEARLESS / DIVE, VESTAL / 린쉬한\n탐복 X 알림 OFF / 좁은 탐라에서 깊은 교류\n1T 1D 지향\n배려 리스트는 상호기재로 진행합니다';
+  // [글자, 모양] — tag: MAIN/SUB 칸, b: 장르, gap: 장르와 캐릭 사이
+  var NOTICE_PARTS = [
+    ['OPEN · 비이입, CBC\n'],
+    ['MAIN', 'tag'], ['ARCH', 'b'], [' ', 'gap'], ['EDEN\n'],
+    ['SUB', 'tag'], ['FEARLESS', 'b'], [' ', 'gap'], ['DIVE\n'],
+    ['', 'tag'], ['VESTAL', 'b'], [' ', 'gap'], ['린쉬한\n'],
+    ['탐복 X 비팔알림 / 리트윗 OFF\n1T 1D 지향\n배려 리스트는 상호기재로 진행합니다']
+  ];
+  var NOTICE = NOTICE_PARTS.map(function (part) { return part[0]; }).join('');
   var NG = '앵챗 양지 끌올 비선호\n드림 지우기 / 허공 저격 / 성인물 공계 발언\n겹드 견제 / 모방 동의 없는 불펌\n이별은 블락 (재연결x)\n';
   var NG_LAST = '저에게서 어떤 영향도 받지 말아주세요';
   var TYPE_MS = 28;
@@ -131,14 +138,17 @@
   }
   if (!calm) document.querySelectorAll('[data-apple]').forEach(glitch);
 
-  // 앞에서부터 count 글자까지 쓰고, bold에 걸리는 단어는 굵게
-  function typeInto(box, text, count, bold) {
+  // 앞에서부터 count 글자까지 모양대로 쓴다
+  function typeInto(box, parts, count) {
     box.textContent = '';
-    text.split(bold).forEach(function (part, i) {
-      if (count <= 0 || !part) return;
-      var shown = part.slice(0, count);
-      count -= part.length;
-      box.append(i % 2 ? el('b', {}, [shown]) : shown);
+    parts.forEach(function (part) {
+      var text = part[0], kind = part[1];
+      if (count < 0 || (count === 0 && (text || kind !== 'tag'))) return;
+      var shown = text.slice(0, count);
+      count -= text.length;
+      if (!kind) box.append(shown);
+      else if (kind === 'b') box.append(el('b', {}, [shown]));
+      else box.append(el('span', { class: 'notice-' + kind }, [kind === 'gap' ? '' : shown]));
     });
   }
 
@@ -153,7 +163,7 @@
 
     function paint() {
       var n1 = Math.min(n, t1), n2 = Math.max(0, n - t1);
-      typeInto(noticeWin.querySelector('[data-typed]'), NOTICE, n1, NOTICE_BOLD);
+      typeInto(noticeWin.querySelector('[data-typed]'), NOTICE_PARTS, n1);
       noticeWin.querySelector('[data-progress]').textContent = Math.round(n1 / t1 * 100) + '%';
       noticeWin.querySelector('[data-caret]').hidden = n >= t1;
       ngWin.hidden = !open || n < t1;
