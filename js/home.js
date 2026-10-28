@@ -135,7 +135,7 @@
     function burst(frames) {
       if (frames <= 0) {
         reset();
-        setTimeout(function () { burst(2 + Math.floor(Math.random() * 4)); }, Math.random() < 0.25 ? rand(90, 180) : rand(2600, 8000));
+        setTimeout(function () { burst(2 + Math.floor(Math.random() * 4)); }, Math.random() < 0.25 ? rand(90, 180) : rand(1200, 3500));
         return;
       }
       var power = rand(0.4, 1);
@@ -154,7 +154,7 @@
       setTimeout(function () { burst(frames - 1); }, rand(40, 110));
     }
 
-    setTimeout(function () { burst(2 + Math.floor(Math.random() * 4)); }, 1800 + Math.random() * 2500);
+    setTimeout(function () { burst(2 + Math.floor(Math.random() * 4)); }, 800 + Math.random() * 1200);
   }
   if (!calm) document.querySelectorAll('[data-apple]').forEach(glitch);
 
