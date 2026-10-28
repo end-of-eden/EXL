@@ -69,6 +69,26 @@
   window.addEventListener('resize', fit);
   fit();
 
+  // PC 라벨 작은 글씨를 번호 뒤 단어 시작선에 맞춘다
+  function indentLabels() {
+    document.querySelectorAll('.stage--pc .hud-label').forEach(function (label) {
+      var num = label.querySelector('.hud-num'), small = label.querySelector('small');
+      var word = num && num.nextSibling;
+      if (!small || !word || word.nodeType !== 3) return;
+      var range = document.createRange();
+      range.setStart(word, 1);
+      range.setEnd(word, 2);
+      var box = label.getBoundingClientRect();
+      var scale = box.width / label.offsetWidth || 1;
+      var indent = ((range.getBoundingClientRect().left - box.left) / scale) + 'px';
+      small.style.paddingLeft = indent;
+      var bars = label.querySelector('svg');
+      if (bars) bars.style.left = indent;
+    });
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(indentLabels);
+  indentLabels();
+
   // D-day
   var dday = 'D+' + (Math.floor((Date.now() - Date.UTC(2026, 0, 1)) / 86400000) + 1);
   document.querySelectorAll('[data-dday]').forEach(function (node) { node.textContent = dday; });

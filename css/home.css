@@ -1,7 +1,7 @@
 :root { --ink: #141517; --sub: #55585c; --paper: #fefefe; --red: #b8222a; }
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; }
-body { overflow: hidden; background: var(--paper); color: var(--ink); font-family: 'IBM Plex Mono', monospace; }
+body { overflow: hidden; background: var(--paper); color: var(--ink); font-family: 'Poppins', 'Noto Sans KR', sans-serif; }
 button { font: inherit; color: inherit; }
 
 .stage { position: absolute; left: 50%; top: 50%; background: var(--paper); overflow: hidden; transform: translate(-50%, -50%) scale(var(--s, 1)); }
@@ -63,8 +63,8 @@ button { font: inherit; color: inherit; }
 .win__bar span + span { margin-right: -.16em; color: var(--sub); }
 .win__bar.is-red { color: var(--red); }
 .win__heart { display: inline-block; margin-right: .6em; vertical-align: -1px; }
-.win__text { margin: 0; padding: 12px 12px 14px; font-family: 'Noto Sans KR', sans-serif; font-size: 12px; line-height: 1.85; white-space: pre-line; min-height: 40px; }
-.notice-tag { display: inline-block; width: 44px; font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: .12em; color: var(--sub); }
+.win__text { margin: 0; padding: 12px 12px 14px; font-family: 'Poppins', 'Noto Sans KR', sans-serif; font-size: 12px; line-height: 1.85; white-space: pre-line; min-height: 40px; }
+.notice-tag { display: inline-block; width: 44px; font-family: 'Poppins', 'Noto Sans KR', sans-serif; font-size: 9px; letter-spacing: .12em; color: var(--sub); }
 .notice-gap { display: inline-block; width: .7em; }
 .caret { display: inline-block; width: 7px; height: 13px; margin-left: 2px; vertical-align: -2px; background: var(--red); }
 .caret[hidden] { display: none; }
@@ -72,7 +72,7 @@ button { font: inherit; color: inherit; }
 @keyframes caret-blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
 
 /* 스크롤바(9px)는 오른쪽 여백 12px 안에 들어간다 */
-.win__scroll { max-height: 283px; overflow-x: hidden; overflow-y: auto; padding: 12px 3px 12px 12px; display: flex; flex-direction: column; gap: 10px; font-family: 'Noto Sans KR', sans-serif; }
+.win__scroll { max-height: 283px; overflow-x: hidden; overflow-y: auto; padding: 12px 3px 12px 12px; display: flex; flex-direction: column; gap: 10px; font-family: 'Poppins', 'Noto Sans KR', sans-serif; }
 .care-note { margin: 0; font-size: 11px; color: var(--sub); }
 .care-entry { display: flex; flex-direction: column; gap: 1px; }
 .care-entry b { font-size: 11px; letter-spacing: .08em; }
@@ -103,14 +103,14 @@ button { font: inherit; color: inherit; }
 .scrim[hidden] { display: none; }
 
 /* 플레이어 */
-.player { position: absolute; font-family: 'Noto Sans KR', sans-serif; }
+.player { position: absolute; font-family: 'Poppins', 'Noto Sans KR', sans-serif; }
 .stage--pc .player { left: 530px; bottom: 28px; width: 380px; }
 .stage--mobile .player { left: 24px; right: 24px; bottom: 45px; }
 .player__meta { display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .player__title { font-size: 14px; font-weight: 700; color: #1c1c1e; }
 .player__artist { font-size: 11px; color: #6b6e72; }
-.player__time { display: flex; align-items: center; gap: 22px; margin-top: 14px; font-family: 'Poppins', 'IBM Plex Mono', sans-serif; font-size: 10px; color: var(--sub); }
-.stage--mobile .player__time { gap: 16px; font-family: 'IBM Plex Mono', monospace; }
+.player__time { display: flex; align-items: center; gap: 22px; margin-top: 14px; font-family: 'Poppins', 'Noto Sans KR', sans-serif; font-size: 10px; color: var(--sub); }
+.stage--mobile .player__time { gap: 16px; font-family: 'Poppins', 'Noto Sans KR', sans-serif; }
 .player__bar { position: relative; flex: 1; height: 11px; padding: 0; border: 0; background: none; cursor: pointer; }
 .player__bar::before { content: ''; position: absolute; left: 0; right: 0; top: 5px; height: 1px; background: #b9bcc0; }
 .player__bar i { position: absolute; left: 0; top: 0; width: 3px; height: 11px; background: var(--red); }

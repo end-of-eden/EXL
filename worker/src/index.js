@@ -15,10 +15,12 @@ export default {
       if (request.method === 'GET' && url.pathname.startsWith('/media/')) return withCors(await getMedia(env.CONTENT, decodeURIComponent(url.pathname.slice(7))), cors);
 
       if (request.method === 'POST' && url.pathname === '/api/admin/logs') {
+        await limitUploads(request, env.UPLOAD_LIMITER);
         await authorize(request, env.UPLOAD_TOKEN);
         return withCors(await uploadLog(request, env.CONTENT), cors);
       }
       if (request.method === 'POST' && url.pathname === '/api/admin/gallery') {
+        await limitUploads(request, env.UPLOAD_LIMITER);
         await authorize(request, env.UPLOAD_TOKEN);
         return withCors(await uploadGallery(request, env.CONTENT), cors);
       }
@@ -46,6 +48,12 @@ function responseJson(value, status = 200) { return new Response(JSON.stringify(
 function fail(message, status) { const error = new Error(message); error.status = status; throw error; }
 function safeId(value) { if (!/^[a-zA-Z0-9-]+$/.test(value || '')) fail('Invalid id', 400); return value; }
 function clean(value, max, required = true) { const result = String(value || '').trim(); if (required && !result) fail('필수 항목을 확인해줘.', 400); if (result.length > max) fail('입력 내용이 너무 길어.', 400); return result; }
+// 같은 IP에서 1분에 5번까지만 업로드·토큰 시도를 받는다
+async function limitUploads(request, limiter) {
+  if (!limiter) return;
+  const { success } = await limiter.limit({ key: request.headers.get('CF-Connecting-IP') || 'unknown' });
+  if (!success) fail('시도가 너무 많아. 1분 뒤에 다시 해줘.', 429);
+}
 async function authorize(request, token) {
   if (!token) fail('업로드 비밀값이 설정되지 않았어.', 500);
   const encoder = new TextEncoder();
