@@ -18,7 +18,8 @@
     ['BASTION', 'VICE'],
     ['PRISM', 'NOVA'],
     ['이리와 내 사랑', 'Dietrich'],
-    ['@WOOYA', 'Felix']
+    ['@WOOYA', 'Felix'],
+    ['@XCHU2', 'Aiden']
   ];
   var OWN_BANNERS = [
     ['img/banner.jpg', 'END OF EDEN 배너 1'],
@@ -27,7 +28,7 @@
   var FELLOW_AGENTS = [
     ['https://b2stsummer.vercel.app/', 'img/banners/fellow-agent-002.png', 'RASPBERRY PLACE'],
     ['https://luvlog.me/nova', 'img/banners/fellow-agent-nova.jpg', 'NOVA'],
-    ['https://luvlog.me/aiden', 'img/banners/fellow-agent-aiden.jpg', 'AIDEN']
+    ['https://luvinfo.me/aiden', 'img/banners/fellow-agent-aiden-2.jpg', 'AIDEN']
   ];
   var TRACKS = [
     { videoId: 'gj_94e-fxlY', title: 'ザムザ (INST)', artist: 'てにをは', duration: 212 },
