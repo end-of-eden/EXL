@@ -111,9 +111,12 @@ button { font: inherit; color: inherit; }
 .player__artist { font-size: 11px; color: #6b6e72; }
 .player__time { display: flex; align-items: center; gap: 22px; margin-top: 14px; font-family: 'Poppins', 'Noto Sans KR', sans-serif; font-size: 10px; color: var(--sub); }
 .stage--mobile .player__time { gap: 16px; font-family: 'Poppins', 'Noto Sans KR', sans-serif; }
+/* 숫자 폭이 바뀌어도 막대가 안 흔들리게 시간 칸 폭 고정 */
+.player__time > span { flex: none; width: 30px; font-variant-numeric: tabular-nums; }
+.player__time > span:last-child { text-align: right; }
 .player__bar { position: relative; flex: 1; height: 11px; padding: 0; border: 0; background: none; cursor: pointer; }
 .player__bar::before { content: ''; position: absolute; left: 0; right: 0; top: 5px; height: 1px; background: #b9bcc0; }
-.player__bar i { position: absolute; left: 0; top: 0; width: 3px; height: 11px; background: var(--red); }
+.player__bar i { position: absolute; left: 0; top: 0; width: 3px; height: 11px; background: var(--red); will-change: transform; }
 .player__controls { display: flex; align-items: center; justify-content: center; gap: 4px; margin-top: 4px; }
 .stage--mobile .player__controls { gap: 12px; margin-top: 6px; }
 .player__controls button { width: 44px; height: 44px; border: 0; padding: 0; background: transparent; color: #2a2b2e; display: flex; align-items: center; justify-content: center; cursor: pointer; }

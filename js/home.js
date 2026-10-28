@@ -293,7 +293,12 @@
     var ratio = total ? Math.min(1, current / total) : 0;
     all('[data-time-current]', function (node) { node.textContent = formatTime(current); });
     all('[data-time-total]', function (node) { node.textContent = formatTime(total); });
-    all('[data-seek-mark]', function (node) { node.style.left = 'calc(' + (ratio * 100) + '% - ' + (ratio * 3) + 'px)'; });
+    all('[data-seek-mark]', function (node) {
+      // 화면 픽셀 단위로 반올림해서 빨간 막대 굵기가 흔들리지 않게
+      var bar = node.parentNode, scale = bar.getBoundingClientRect().width / bar.offsetWidth || 1;
+      var x = Math.round(ratio * (bar.offsetWidth - 3) * scale) / scale;
+      node.style.transform = 'translateX(' + x + 'px)';
+    });
   }
 
   function paintPlaying() {
