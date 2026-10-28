@@ -33,6 +33,8 @@ button { font: inherit; color: inherit; }
 .hud-label.is-locked { cursor: default; }
 .hud-label > b, .hud-label > small { transition: transform .15s ease; }
 .hud-num { transition: color .15s ease; }
+/* Poppins 숫자는 폭이 제각각이라 칸을 고정해 [01] [00] 대괄호 간격을 맞춘다 */
+.hud-digit { display: inline-block; width: .66em; margin-right: .14em; letter-spacing: 0; text-align: center; }
 .hud-label:not(.is-locked):hover > b, .hud-label:not(.is-locked):hover > small,
 .hud-label:not(.is-locked):focus-visible > b, .hud-label:not(.is-locked):focus-visible > small { transform: translateX(4px); }
 .hud-label:not(.is-locked):hover .hud-num, .hud-label:not(.is-locked):focus-visible .hud-num { color: var(--red); }
