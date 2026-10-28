@@ -18,7 +18,8 @@
     ['BASTION', 'VICE'],
     ['PRISM', 'NOVA'],
     ['이리와 내 사랑', 'Dietrich'],
-    ['@WOOYA', 'Felix']
+    ['@WOOYA', 'Felix'],
+    ['@XCHU2', 'Aiden']
   ];
   var OWN_BANNERS = [
     ['img/banner.jpg', 'END OF EDEN 배너 1'],
@@ -27,7 +28,7 @@
   var FELLOW_AGENTS = [
     ['https://b2stsummer.vercel.app/', 'img/banners/fellow-agent-002.png', 'RASPBERRY PLACE'],
     ['https://luvlog.me/nova', 'img/banners/fellow-agent-nova.jpg', 'NOVA'],
-    ['https://luvlog.me/aiden', 'img/banners/fellow-agent-aiden.jpg', 'AIDEN']
+    ['https://luvinfo.me/aiden', 'img/banners/fellow-agent-aiden-2.jpg', 'AIDEN']
   ];
   var TRACKS = [
     { videoId: 'gj_94e-fxlY', title: 'ザムザ (INST)', artist: 'てにをは', duration: 212 },
@@ -135,7 +136,7 @@
     function burst(frames) {
       if (frames <= 0) {
         reset();
-        setTimeout(function () { burst(2 + Math.floor(Math.random() * 4)); }, Math.random() < 0.25 ? rand(90, 180) : rand(2600, 8000));
+        setTimeout(function () { burst(2 + Math.floor(Math.random() * 4)); }, Math.random() < 0.25 ? rand(90, 180) : rand(1200, 3500));
         return;
       }
       var power = rand(0.4, 1);
@@ -154,7 +155,7 @@
       setTimeout(function () { burst(frames - 1); }, rand(40, 110));
     }
 
-    setTimeout(function () { burst(2 + Math.floor(Math.random() * 4)); }, 1800 + Math.random() * 2500);
+    setTimeout(function () { burst(2 + Math.floor(Math.random() * 4)); }, 800 + Math.random() * 1200);
   }
   if (!calm) document.querySelectorAll('[data-apple]').forEach(glitch);
 
