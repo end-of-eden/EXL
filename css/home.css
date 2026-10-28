@@ -37,7 +37,7 @@ button { font: inherit; color: inherit; }
 .hud-digit { display: inline-block; width: .66em; margin-right: .14em; letter-spacing: 0; text-align: center; }
 /* [00] 자리의 ∞: 숫자 두 칸과 같은 폭 */
 .hud-glyph { display: inline-flex; justify-content: center; width: 1.46em; margin-right: .14em; vertical-align: -.28em; }
-.hud-glyph svg { width: 1.3em; height: 1.3em; margin-block: -.15em; }
+.hud-glyph svg { width: 1.3em; height: 1.3em; margin-block: -.15em; overflow: visible; }
 .hud-label:not(.is-locked):hover > b, .hud-label:not(.is-locked):hover > small,
 .hud-label:not(.is-locked):focus-visible > b, .hud-label:not(.is-locked):focus-visible > small { transform: translateX(4px); }
 .hud-label:not(.is-locked):hover .hud-num, .hud-label:not(.is-locked):focus-visible .hud-num { color: var(--red); }
