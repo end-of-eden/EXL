@@ -16,10 +16,10 @@
   var CARE_LIST = [
     ['THEMIS', 'David Hart / VEIN / N'],
     ['BASTION', 'VICE'],
-    ['PRISM', 'NOVA'],
     ['이리와 내 사랑', 'Dietrich'],
     ['@WOOYA', 'Felix'],
-    ['THE GENESIS', 'Drei']
+    ['THE GENESIS', 'Drei'],
+    ['FULCRUM', 'Kyle']
   ];
   var OWN_BANNERS = [
     ['img/banner.jpg', 'END OF EDEN 배너 1'],
