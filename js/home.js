@@ -19,7 +19,8 @@
     ['PRISM', 'NOVA'],
     ['이리와 내 사랑', 'Dietrich'],
     ['@WOOYA', 'Felix'],
-    ['@XCHU2', 'Aiden']
+    ['@XCHU2', 'Aiden'],
+    ['THE GENESIS', 'Drei']
   ];
   var OWN_BANNERS = [
     ['img/banner.jpg', 'END OF EDEN 배너 1'],
