@@ -14,12 +14,12 @@
 
   var CARE_NOTE = '소중한 인연이 있어 더이상 모시지 않습니다';
   var CARE_LIST = [
-    ['THEMIS', 'David Hart / VEIN / N'],
+    ['THEMIS', 'DAVID HART / VEIN / N'],
     ['BASTION', 'VICE'],
-    ['이리와 내 사랑', 'Dietrich'],
-    ['@WOOYA', 'Felix'],
-    ['THE GENESIS', 'Drei'],
-    ['FULCRUM', 'Kyle']
+    ['이리와 내 사랑', 'DIETRICH'],
+    ['@WOOYA', 'FELIX'],
+    ['THE GENESIS', 'DREI'],
+    ['FULCRUM', 'KYLE / LUCA']
   ];
   var OWN_BANNERS = [
     ['img/banner.jpg', 'END OF EDEN 배너 1'],
