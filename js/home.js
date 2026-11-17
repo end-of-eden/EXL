@@ -19,7 +19,6 @@
     ['PRISM', 'NOVA'],
     ['이리와 내 사랑', 'Dietrich'],
     ['@WOOYA', 'Felix'],
-    ['@XCHU2', 'Aiden'],
     ['THE GENESIS', 'Drei']
   ];
   var OWN_BANNERS = [
