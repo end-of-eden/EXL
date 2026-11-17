@@ -16,7 +16,6 @@
   var CARE_LIST = [
     ['THEMIS', 'David Hart / VEIN / N'],
     ['BASTION', 'VICE'],
-    ['PRISM', 'NOVA'],
     ['이리와 내 사랑', 'Dietrich'],
     ['@WOOYA', 'Felix'],
     ['THE GENESIS', 'Drei'],
